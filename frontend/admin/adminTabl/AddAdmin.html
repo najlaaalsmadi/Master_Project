@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>لوحة التحكم</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/frontend/admin/css/dashboardadmin.css" />
+    <link rel="stylesheet" href="/frontend/admin/css/addcategory.css" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style></style>
+  </head>
+  <body class="light">
+    <!-- Toggle Sidebar Button for Mobile -->
+    <button class="btn toggle-sidebar-btn" onclick="toggleSidebar()">
+      <i class="fas fa-bars"></i>
+    </button>
+
+    <!-- Sidebar -->
+    <div class="sidebar" id="sidebar">
+      <h2>لوحة التحكم</h2>
+      <a href="/frontend/admin/dashboardadmin.html"> لوحة التحكم </a>
+      <div class="dropdown">
+        <a href="#" class="dropdown-toggle" data-bs-toggle="dropdown"
+          >إدارة تصنيفات</a
+        >
+        <ul class="dropdown-menu">
+          <li>
+            <a
+              class="dropdown-item"
+              href="/frontend/admin/category/addcategory.html"
+              >إضافة تصنيف جديد</a
+            >
+          </li>
+          <li>
+            <a
+              class="dropdown-item"
+              href="/frontend/admin/category/viewcategory.html"
+              >عرض تصنيفات</a
+            >
+          </li>
+        </ul>
+      </div>
+      <div class="dropdown">
+        <a href="#" class="dropdown-toggle" data-bs-toggle="dropdown"
+          >إدارة المسارات</a
+        >
+        <ul class="dropdown-menu">
+          <li>
+            <a class="dropdown-item" href="/frontend/admin/masaralmhne/add.html"
+              >إضافة مسار
+            </a>
+          </li>
+          <li>
+            <a
+              class="dropdown-item"
+              href="/frontend/admin/masaralmhne/view.html"
+              >عرض المسارات</a
+            >
+          </li>
+        </ul>
+      </div>
+      <div class="dropdown">
+        <a href="#" class="dropdown-toggle" data-bs-toggle="dropdown"
+          >إدارة المعدات</a
+        >
+        <ul class="dropdown-menu">
+          <li>
+            <a
+              class="dropdown-item"
+              href="/frontend/admin/equipments/addequipments.html"
+              >إضافة معدات جديد</a
+            >
+          </li>
+          <li>
+            <a
+              class="dropdown-item"
+              href="/frontend/admin/equipments/viewequipments.html"
+              >عرض المعدات</a
+            >
+          </li>
+        </ul>
+      </div>
+      <div class="dropdown">
+        <a href="#" class="dropdown-toggle" data-bs-toggle="dropdown"
+          >إدارة المشرفين</a
+        >
+        <ul class="dropdown-menu">
+          <li>
+            <a
+              class="dropdown-item"
+              href="/frontend/admin/adminTabl/AddAdmin.html"
+              >إضافة مشرف جديد</a
+            >
+          </li>
+          <li>
+            <a
+              class="dropdown-item"
+              href="/frontend/admin/adminTabl/viewAdmin.html"
+              >عرض المشرفين</a
+            >
+          </li>
+        </ul>
+      </div>
+      <a href="#"><i class="fas fa-tags"></i> الكوبونات</a>
+      <a href="#"><i class="fas fa-coins"></i> نقاط الأرباح</a>
+      <a href="#"><i class="fas fa-gift"></i> استبدال النقاط</a>
+      <a href="#"><i class="fas fa-comments"></i> المحادثات</a>
+      <a href="/frontend/admin/user.html"
+        ><i class="fas fa-users"></i> المستخدمون</a
+      >
+      <button class="btn btn-danger mt-4">خروج</button>
+    </div>
+
+    <!-- Main Dashboard Content -->
+    <div class="dashboard-content">
+      <!-- Header -->
+      <header
+        class="d-flex flex-column flex-md-row justify-content-between align-items-center p-3 bg-white shadow-sm"
+      >
+        <a href="#" class="btn btn-primary my-3">تقرير شهري جديد</a>
+        <div class="search-bar w-100 w-md-50 mx-md-3">
+          <form class="d-flex align-items-center border">
+            <input
+              type="email"
+              class="form-control rounded-0"
+              placeholder="ابحث هنا "
+              style="border: none; box-shadow: none; flex-grow: 1"
+              required
+            />
+            <button
+              type="submit"
+              class="btn"
+              style="
+                background-color: #ffaa33;
+                border: none;
+                padding: 0.5rem 1.5rem;
+              "
+            >
+              ابحث
+            </button>
+          </form>
+        </div>
+        <div class="profile-section">
+          <img src="/backend/image/نجلاء.jpg" alt="Profile" />
+          <span class="online-status"></span>
+          <div class="theme-switcher ms-3">
+            <select id="theme-selector" onchange="changeTheme()">
+              <option value="light">فاتح ☀️</option>
+              <option value="dark">داكن 🌙</option>
+            </select>
+          </div>
+        </div>
+      </header>
+      <main class="p-3">
+        <div class="row mb-3">
+          <div class="container mt-5">
+            <div
+              class="container d-flex justify-content-center align-items-center min-vh-95"
+            >
+              <div class="col-md-6 form-container">
+                <h2 class="text-center mb-4">نموذج إضافة مشرف</h2>
+                <form>
+                  <!-- الاسم الأول -->
+                  <div class="mb-3">
+                    <label for="firstName" class="form-label"
+                      >الاسم الأول</label
+                    >
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="firstName"
+                      placeholder="أدخل الاسم الأول"
+                      required
+                    />
+                  </div>
+
+                  <!-- الاسم الأخير -->
+                  <div class="mb-3">
+                    <label for="lastName" class="form-label"
+                      >الاسم الأخير</label
+                    >
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="lastName"
+                      placeholder="أدخل الاسم الأخير"
+                      required
+                    />
+                  </div>
+
+                  <!-- الصلاحيات -->
+                  <div class="mb-3">
+                    <label for="adminRole" class="form-label">الصلاحيات</label>
+                    <select class="form-select" id="adminRole" required>
+                      <option value="" disabled selected>اختر الصلاحيات</option>
+                      <option value="admin">مدير</option>
+                      <option value="editor">محرر</option>
+                      <option value="viewer">مشاهد</option>
+                      <!-- يمكنك إضافة المزيد من الصلاحيات هنا -->
+                    </select>
+                  </div>
+
+                  <!-- تاريخ التعديل -->
+                  <div class="mb-3">
+                    <label for="modificationDate" class="form-label"
+                      >تاريخ التعديل</label
+                    >
+                    <input
+                      type="date"
+                      class="form-control"
+                      id="modificationDate"
+                      required
+                    />
+                  </div>
+                  <div class="d-grid">
+                    <button type="submit" class="btn btn-primary">اضافة</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+    <script>
+      // Function to toggle sidebar visibility
+      function toggleSidebar() {
+        const sidebar = document.getElementById("sidebar");
+        sidebar.classList.toggle("show");
+      }
+
+      // Function to change theme
+      function changeTheme() {
+        const theme = document.getElementById("theme-selector").value;
+        document.body.className = theme;
+      }
+
+      // Chart.js code
+      const salesCtx = document.getElementById("salesChart").getContext("2d");
+      const salesChart = new Chart(salesCtx, {
+        type: "bar",
+        data: {
+          labels: ["يناير", "فبراير", "مارس", "أبريل", "مايو", "يونيو"],
+          datasets: [
+            {
+              label: "إجمالي المبيعات",
+              data: [5000, 7000, 8000, 6000, 9000, 10000],
+              backgroundColor: "rgba(54, 162, 235, 0.2)",
+              borderColor: "rgba(54, 162, 235, 1)",
+              borderWidth: 1,
+            },
+          ],
+        },
+        options: {
+          scales: {
+            y: {
+              beginAtZero: true,
+            },
+          },
+        },
+      });
+
+      const customersCtx = document
+        .getElementById("customersChart")
+        .getContext("2d");
+      const customersChart = new Chart(customersCtx, {
+        type: "pie",
+        data: {
+          labels: ["عملاء نشطون", "عملاء غير نشطين"],
+          datasets: [
+            {
+              label: "تحليل العملاء",
+              data: [300, 150],
+              backgroundColor: ["#36a2eb", "#ff6384"],
+              borderColor: "#fff",
+              borderWidth: 1,
+            },
+          ],
+        },
+      });
+    </script>
+
+    <script>
+      // Function to change theme
+      function changeTheme() {
+        const theme = document.getElementById("theme-selector").value;
+        document.body.className = theme;
+
+        // Save the selected theme to localStorage
+        localStorage.setItem("theme", theme);
+      }
+
+      // Load the theme from localStorage when the page loads
+      window.onload = function () {
+        const savedTheme = localStorage.getItem("theme") || "light"; // Default to 'light' if nothing is saved
+        document.body.className = savedTheme;
+        document.getElementById("theme-selector").value = savedTheme;
+      };
+    </script>
+  </body>
+</html>

@@ -1,0 +1,44 @@
+.card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-10px);
+  /* Moves the card up by 10px on hover */
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  /* Adds a shadow on hover */
+}
+
+.social-icons img {
+  width: 24px;
+  height: 24px;
+}
+.social-icons i {
+  font-size: 24px;
+  margin: 0 10px;
+  transition: color 0.3s ease;
+}
+
+.social-icons i {
+  color: #333; /* Default color for icons */
+}
+
+.social-icons .fa-facebook-f {
+  color: #3b5998; /* Facebook blue */
+}
+
+.social-icons .fa-twitter {
+  color: #1da1f2; /* Twitter blue */
+}
+
+.social-icons .fa-whatsapp {
+  color: #25d366; /* WhatsApp green */
+}
+
+.social-icons .fa-instagram {
+  color: #e1306c; /* Instagram pink */
+}
+
+.social-icons i:hover {
+  color: #007bff; /* Changes color on hover */
+}

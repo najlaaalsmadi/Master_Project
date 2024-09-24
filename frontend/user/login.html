@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="ar">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>أيديا ميديا - تسجيل الدخول</title>
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="/frontend/user/css/AllEvents.css" />
+    <link rel="stylesheet" href="/frontend/user/css/index.css" />
+    <link rel="stylesheet" href="/frontend/user/css/loginAndSingup.css" />
+  </head>
+  <body>
+    <div class="top-bar">
+      <div class="container d-flex justify-content-between flex-wrap">
+        <div class="top-bar-left">
+          <i class="fas fa-map-marker-alt"></i> الأردن، عجلون
+          <i class="fas fa-envelope ms-3"></i> Ideamedia@gmail.com
+        </div>
+        <div class="top-bar-right d-flex align-items-center">
+          <i class="fas fa-phone"></i>
+          <a href="tel:+962791234567" class="text-ligth text-decoration-none"
+            >0777956583</a
+          >
+          <span class="ms-3">تابعنا على:</span>
+          <a href="#"><i class="fab fa-facebook-f"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-whatsapp"></i></a>
+          <a href="#"><i class="fab fa-linkedin-in"></i></a>
+          <a href="#"><i class="fab fa-youtube"></i></a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg">
+      <div class="container">
+        <a class="navbar-brand" href="#">
+          <span class="idea">أيديا</span>
+          <span class="media">ميديا</span>
+        </a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span><i class="fas fa-bars" style="color: orange"></i></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="/frontend/user/Index.html">الرئيسية</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a
+                class="nav-link dropdown-toggle"
+                href="#"
+                id="coursesDropdown"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                أقسام الدورات
+              </a>
+              <ul
+                id="categoriesDropdown"
+                class="dropdown-menu"
+                aria-labelledby="coursesDropdown"
+              >
+                <!-- سيتم إضافة الأقسام هنا -->
+              </ul>
+            </li>
+            <li class="nav-item dropdown">
+              <a
+                class="nav-link dropdown-toggle"
+                href="#"
+                id="storeDropdown"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                أقسام المتجر
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="storeDropdown">
+                <li>
+                  <a
+                    class="dropdown-item"
+                    href="/frontend/user/equipmentshop.html"
+                    >متجر معدات</a
+                  >
+                </li>
+                <li>
+                  <a
+                    class="dropdown-item"
+                    href="/frontend/user/HandmadeShop.html"
+                    >متجر منتجات يدوية</a
+                  >
+                </li>
+              </ul>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/frontend/user/AllEvents.html"
+                >كل الأحداث</a
+              >
+            </li>
+            <li class="nav-item dropdown">
+              <a
+                class="nav-link dropdown-toggle"
+                href="#"
+                id="storeDropdown"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                أقسام المدربين
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="storeDropdown">
+                <li>
+                  <a
+                    class="dropdown-item"
+                    href="/frontend/user/singupInstructors.html"
+                  >
+                    تسجيل كمدرب</a
+                  >
+                </li>
+                <li>
+                  <a
+                    class="dropdown-item"
+                    href="/frontend/user/ALLInstructors.html"
+                    >كل المدربين</a
+                  >
+                </li>
+              </ul>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link" href="/frontend/user/Contact.html"
+                >اتصل بنا</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/frontend/user/about.html">من نحن</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/frontend/admin/loginAdmin.html"
+                >لوحة الإدارة</a
+              >
+            </li>
+          </ul>
+          <div class="icon-buttons d-flex align-items-center">
+            <!-- زر تسجيل الدخول أو تسجيل الخروج بناءً على حالة تسجيل الدخول -->
+            <div id="authLinks"></div>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <ol class="breadcrumb">
+      <li><a href="/frontend/user/Index.html">الصفحة الرئيسية</a></li>
+      <li>&#10229;</li>
+      <li class="active">تسجيل الدخول</li>
+    </ol>
+    <div
+      class="container d-flex justify-content-center align-items-center"
+      style="min-height: 100vh"
+    >
+      <div
+        class="w-100"
+        style="max-width: 400px"
+        style="background-color: grey"
+      >
+        <!-- Login Section -->
+        <div class="login-container p-4 bg-light shadow rounded">
+          <h2 class="text-center mb-4">مرحباً بعودتك!</h2>
+          <p class="text-center">
+            أدخل اسم المستخدم وكلمة المرور أدناه لتسجيل الدخول.
+          </p>
+          <form id="loginForm" method="post" action="">
+            <div class="form-group mb-3">
+              <label for="Email">البريد الإلكتروني</label>
+              <input
+                type="email"
+                id="Email"
+                name="Email"
+                class="form-control"
+                required
+              />
+            </div>
+            <div class="form-group mb-3">
+              <label for="Password">كلمة المرور</label>
+              <input
+                type="password"
+                id="Password"
+                name="Password"
+                class="form-control"
+                required
+              />
+            </div>
+
+            <div class="form-group text-end mb-3">
+              <a href="/frontend/user/ForgotPassword.html">نسيت كلمة المرور؟</a>
+            </div>
+            <button type="submit" class="btn btn-warning w-100">
+              تسجيل الدخول
+            </button>
+          </form>
+
+          <p class="text-center mt-3">
+            ليس لديك حساب؟ <a href="/frontend/user/singup.html">تسجيل حساب</a>
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-4 footer-column">
+            <h5>معلومات عنا</h5>
+            <ul>
+              <li><a href="#">قصتنا</a></li>
+              <li><a href="#">الرؤية والرسالة</a></li>
+              <li><a href="#">فريق العمل</a></li>
+              <li><a href="#">الوظائف</a></li>
+            </ul>
+          </div>
+          <div class="col-md-4 footer-column">
+            <h5>روابط سريعة</h5>
+            <ul>
+              <li><a href="#">الرئيسية</a></li>
+              <li><a href="#">المتجر</a></li>
+              <li><a href="#">الأحداث</a></li>
+              <li><a href="#">المدربون</a></li>
+            </ul>
+          </div>
+          <div class="col-md-4 footer-column">
+            <h5>تواصل معنا</h5>
+            <ul>
+              <li><a href="#">اتصل بنا</a></li>
+              <li><a href="#">الأسئلة الشائعة</a></li>
+              <li><a href="#">الدعم الفني</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="footer-bottom text-center py-3">
+          <p>&copy; 2023 أيديا ميديا. جميع الحقوق محفوظة.</p>
+        </div>
+      </div>
+    </footer>
+    <!-- تضمين SweetAlert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script>
+      document
+        .getElementById("loginForm")
+        .addEventListener("submit", function (event) {
+          event.preventDefault(); // منع إرسال النموذج بشكل افتراضي
+
+          // الحصول على بيانات الإدخال
+          const email = document.getElementById("Email").value;
+          const password = document.getElementById("Password").value;
+
+          // استرجاع بيانات التسجيل المخزنة في localStorage
+          let storedData = localStorage.getItem("signupData");
+          console.log(storedData);
+
+          if (storedData) {
+            // تحويل البيانات من JSON إلى مصفوفة
+            let signupData = JSON.parse(storedData);
+            console.log(signupData);
+
+            // التحقق من مطابقة البريد الإلكتروني وكلمة المرور
+            if (signupData[2] === email && signupData[3] === password) {
+              // التحقق من دور المستخدم (طالب أو معلم)
+              let userRole = signupData[4]; // نفترض أن الدور مخزن في المؤشر الرابع
+
+              if (userRole === "طالب") {
+                // إذا كان المستخدم طالبًا
+                Swal.fire({
+                  title: "نجاح!",
+                  text: "تم تسجيل الدخول بنجاح كطالب",
+                  icon: "success",
+                  confirmButtonText: "موافق",
+                }).then(() => {
+                  window.location.href = "/frontend/student/Index.html"; // إعادة توجيه الطالب
+                });
+              } else if (userRole === "معلم") {
+                // إذا كان المستخدم معلمًا
+                Swal.fire({
+                  title: "نجاح!",
+                  text: "تم تسجيل الدخول بنجاح كمعلم",
+                  icon: "success",
+                  confirmButtonText: "موافق",
+                }).then(() => {
+                  window.location.href = "/frontend/teacher/Index.html"; // إعادة توجيه المعلم
+                });
+              }
+            } else {
+              // إذا كانت البيانات غير مطابقة، عرض رسالة خطأ
+              Swal.fire({
+                title: "خطأ!",
+                text: "البريد الإلكتروني أو كلمة المرور غير صحيحة",
+                icon: "error",
+                confirmButtonText: "حاول مجددًا",
+              });
+            }
+          } else {
+            // إذا لم يتم العثور على بيانات التسجيل
+            Swal.fire({
+              title: "خطأ!",
+              text: "لا توجد بيانات مستخدم مسجلة",
+              icon: "error",
+              confirmButtonText: "حاول مجددًا",
+            });
+          }
+        });
+    </script>
+
+    <!-- تضمين SweetAlert2 (إذا أردت استخدامه لعرض التنبيهات) -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="/frontend/user/ALLCategories.js"></script>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/frontend/user/javascript/ordelogin.js"></script>
+  </body>
+</html>

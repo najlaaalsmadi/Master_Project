@@ -1,0 +1,29 @@
+.course-thumbnail {
+  width: 100%;
+  max-width: 600px;
+  height: auto;
+}
+
+.btn-group-center .btn {
+  margin: 0 auto;
+  display: block;
+}
+
+.card-number {
+  width: 30px;
+  height: 30px;
+}
+.course-number {
+  position: absolute;
+  bottom: 10px;
+  right: 50%;
+  transform: translateX(50%);
+  background-color: #007bff;
+  color: white;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

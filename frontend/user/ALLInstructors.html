@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="ar">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>أيديا ميديا</title>
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+
+    <link rel="stylesheet" href="/frontend/user/css/AllInstructors.css" />
+    <link rel="stylesheet" href="/frontend/user/css/index.css" />
+  </head>
+  <body>
+    <div class="top-bar">
+      <div class="container d-flex justify-content-between flex-wrap">
+        <div class="top-bar-left">
+          <i class="fas fa-map-marker-alt"></i> الأردن، عجلون
+          <i class="fas fa-envelope ms-3"></i> Ideamedia@gmail.com
+        </div>
+        <div class="top-bar-right d-flex align-items-center">
+          <i class="fas fa-phone"></i>
+          <a href="tel:+962791234567" class="text-ligth text-decoration-none"
+            >0777956583</a
+          >
+          <span class="ms-3">تابعنا على:</span>
+          <a href="#"><i class="fab fa-facebook-f"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-whatsapp"></i></a>
+          <a href="#"><i class="fab fa-linkedin-in"></i></a>
+          <a href="#"><i class="fab fa-youtube"></i></a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg">
+      <div class="container">
+        <a class="navbar-brand" href="#">
+          <span class="idea">أيديا</span>
+          <span class="media">ميديا</span>
+        </a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span><i class="fas fa-bars" style="color: orange"></i></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="/frontend/user/Index.html">الرئيسية</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a
+                class="nav-link dropdown-toggle"
+                href="#"
+                id="coursesDropdown"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                أقسام الدورات
+              </a>
+              <ul
+                id="categoriesDropdown"
+                class="dropdown-menu"
+                aria-labelledby="coursesDropdown"
+              >
+                <!-- سيتم إضافة الأقسام هنا -->
+              </ul>
+            </li>
+            <li class="nav-item dropdown">
+              <a
+                class="nav-link dropdown-toggle"
+                href="#"
+                id="storeDropdown"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                أقسام المتجر
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="storeDropdown">
+                <li>
+                  <a
+                    class="dropdown-item"
+                    href="/frontend/user/equipmentshop.html"
+                    >متجر معدات</a
+                  >
+                </li>
+                <li>
+                  <a
+                    class="dropdown-item"
+                    href="/frontend/user/HandmadeShop.html"
+                    >متجر منتجات يدوية</a
+                  >
+                </li>
+              </ul>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/frontend/user/AllEvents.html"
+                >كل الأحداث</a
+              >
+            </li>
+            <li class="nav-item dropdown">
+              <a
+                class="nav-link dropdown-toggle"
+                href="#"
+                id="storeDropdown"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                أقسام المدربين
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="storeDropdown">
+                <li>
+                  <a
+                    class="dropdown-item"
+                    href="/frontend/user/singupInstructors.html"
+                  >
+                    تسجيل كمدرب</a
+                  >
+                </li>
+                <li>
+                  <a
+                    class="dropdown-item"
+                    href="/frontend/user/ALLInstructors.html"
+                    >كل المدربين</a
+                  >
+                </li>
+              </ul>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link" href="/frontend/user/Contact.html"
+                >اتصل بنا</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/frontend/user/about.html">من نحن</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/frontend/admin/loginAdmin.html"
+                >لوحة الإدارة</a
+              >
+            </li>
+          </ul>
+          <div class="icon-buttons d-flex align-items-center">
+            <!-- زر تسجيل الدخول أو تسجيل الخروج بناءً على حالة تسجيل الدخول -->
+            <div id="authLinks"></div>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <ol class="breadcrumb">
+      <li><a href="/">الصفحة الرئيسية</a></li>
+      <li>&#10229;</li>
+      <li class="active">جميع المدربين</li>
+    </ol>
+    <!-- Instructors Section -->
+    <div class="container py-5">
+      <div class="row">
+        <!-- Instructor Card 1 - خياطة -->
+        <div class="col-md-4 mb-4">
+          <a
+            href="/frontend/user/Instructors.html"
+            class="text-decoration-none"
+          >
+            <div class="card">
+              <img
+                src="/backend/image/instructor1.png"
+                class="card-img-top"
+                alt="أمينة الخياط"
+              />
+              <div class="card-body text-center">
+                <h5 class="card-title">أمين الخياط</h5>
+                <p class="card-text">مدرب خياطة</p>
+                <div class="rating mb-3">⭐⭐⭐⭐⭐ (4.8 تقييم)</div>
+                <div class="social-icons">
+                  <a href="#"><i class="fab fa-facebook-f"></i></a>
+                  <a href="#"><i class="fab fa-twitter"></i></a>
+                  <a href="#"><i class="fab fa-whatsapp"></i></a>
+                  <a href="#"><i class="fab fa-instagram"></i></a>
+                </div>
+              </div>
+            </div>
+          </a>
+        </div>
+
+        <!-- Instructor Card 2 - تجميل -->
+        <div class="col-md-4 mb-4">
+          <div class="card">
+            <img
+              src="/backend/image/instructor2.png"
+              class="card-img-top"
+              alt="فاطمة الجمالي"
+            />
+            <div class="card-body text-center">
+              <h5 class="card-title">فاطمة الجمالي</h5>
+              <p class="card-text">خبيرة تجميل</p>
+              <div class="rating mb-3">⭐⭐⭐⭐⭐ (4.8 تقييم)</div>
+              <div class="social-icons">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-whatsapp"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Instructor Card 3 - صناعة الفخار -->
+        <div class="col-md-4 mb-4">
+          <div class="card">
+            <img
+              src="/backend/image/instructor6.png"
+              class="card-img-top"
+              alt="عمر الفخاري"
+            />
+            <div class="card-body text-center">
+              <h5 class="card-title">رافت الجمالي</h5>
+              <p class="card-text">حرفي في صناعة الفخار</p>
+              <div class="rating mb-3">⭐⭐⭐⭐⭐ (4.8 تقييم)</div>
+              <div class="social-icons">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-whatsapp"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Instructor Card 4 - صناعة الخرز -->
+        <div class="col-md-4 mb-4">
+          <div class="card">
+            <img
+              src="/backend/image/instructor4.png"
+              class="card-img-top"
+              alt="فتحي الخراز"
+            />
+            <div class="card-body text-center">
+              <h5 class="card-title">فتحي الخراز</h5>
+              <p class="card-text">متخصصة في صناعة الخرز</p>
+              <div class="rating mb-3">⭐⭐⭐⭐⭐ (4.8 تقييم)</div>
+              <div class="social-icons">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-whatsapp"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Instructor Card 5 - خياطة -->
+        <div class="col-md-4 mb-4">
+          <div class="card">
+            <img
+              src="/backend/image/instructor5.png"
+              class="card-img-top"
+              alt="حامد الشقيرات"
+            />
+            <div class="card-body text-center">
+              <h5 class="card-title">حامد الشقيرات</h5>
+              <p class="card-text">مدرب خياطة</p>
+              <div class="rating mb-3">⭐⭐⭐⭐⭐ (4.8 تقييم)</div>
+              <div class="social-icons">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-whatsapp"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Instructor Card 6 - تجميل -->
+        <div class="col-md-4 mb-4">
+          <div class="card">
+            <img
+              src="/backend/image/instructor3.png"
+              class="card-img-top"
+              alt="  فرح الخراز"
+            />
+            <div class="card-body text-center">
+              <h5 class="card-title">فرح الخراز</h5>
+              <p class="card-text">خبيرة تجميل</p>
+              <div class="rating mb-3">⭐⭐⭐⭐⭐ (4.8 تقييم)</div>
+              <div class="social-icons">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-whatsapp"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Instructor Card 7 - صناعة الفخار -->
+        <div class="col-md-4 mb-4">
+          <div class="card">
+            <img
+              src="/backend/image/instructor7.png"
+              class="card-img-top"
+              alt="يوسف الفخاري"
+            />
+            <div class="card-body text-center">
+              <h5 class="card-title">يوسف الفخاري</h5>
+              <p class="card-text">حرفي في صناعة الفخار</p>
+              <div class="rating mb-3">⭐⭐⭐⭐⭐ (4.8 تقييم)</div>
+              <div class="social-icons">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-whatsapp"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Instructor Card 8 - صناعة الخرز -->
+        <div class="col-md-4 mb-4">
+          <div class="card">
+            <img
+              src="/backend/image/instructor8.png"
+              class="card-img-top"
+              alt="نادية الخراز"
+            />
+            <div class="card-body text-center">
+              <h5 class="card-title">نادية الخراز</h5>
+              <p class="card-text">متخصصة في صناعة الخرز</p>
+              <div class="rating mb-3">⭐⭐⭐⭐⭐ (4.8 تقييم)</div>
+              <div class="social-icons">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-whatsapp"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Instructor Card 9 - خياطة -->
+        <div class="col-md-4 mb-4">
+          <div class="card">
+            <img
+              src="/backend/image/instructor9.png"
+              class="card-img-top"
+              alt="رجاء الخياطة"
+            />
+            <div class="card-body text-center">
+              <h5 class="card-title">رجاء الخياطة</h5>
+              <p class="card-text">مدربة خياطة</p>
+              <div class="rating mb-3">⭐⭐⭐⭐⭐ (4.8 تقييم)</div>
+              <div class="social-icons">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-whatsapp"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-4 footer-column">
+            <h5>معلومات عنا</h5>
+            <ul>
+              <li><a href="#">قصتنا</a></li>
+              <li><a href="#">الرؤية والرسالة</a></li>
+              <li><a href="#">فريق العمل</a></li>
+              <li><a href="#">الوظائف</a></li>
+            </ul>
+          </div>
+          <div class="col-md-4 footer-column">
+            <h5>روابط سريعة</h5>
+            <ul>
+              <li><a href="#">الرئيسية</a></li>
+              <li><a href="#">المتجر</a></li>
+              <li><a href="#">الأحداث</a></li>
+              <li><a href="#">المدربون</a></li>
+            </ul>
+          </div>
+          <div class="col-md-4 footer-column">
+            <h5>تواصل معنا</h5>
+            <ul>
+              <li><a href="#">اتصل بنا</a></li>
+              <li><a href="#">الأسئلة الشائعة</a></li>
+              <li><a href="#">الدعم الفني</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p>&copy; 2023 أيديا ميديا. جميع الحقوق محفوظة.</p>
+        </div>
+      </div>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/frontend/user/javascript/ordelogin.js"></script>
+    <script src="/frontend/user/ALLCategories.js"></script>
+  </body>
+</html>

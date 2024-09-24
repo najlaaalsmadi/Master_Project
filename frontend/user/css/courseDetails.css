@@ -1,0 +1,12 @@
+.star-rating {
+  font-size: 2rem;
+  color: #ccc;
+}
+
+.star-rating .fa-star {
+  cursor: pointer;
+}
+
+.star-rating .checked {
+  color: gold;
+}

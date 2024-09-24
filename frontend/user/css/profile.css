@@ -1,0 +1,93 @@
+.profile-header {
+  background-color: #2c2c6c;
+  color: white;
+}
+
+.profile-header img {
+  border-radius: 50%;
+}
+
+.card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+}
+/* الشريط الجانبي */
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 250px;
+  height: 100%;
+  background-color: #343a40;
+  padding: 20px;
+  color: white;
+  z-index: 1000;
+}
+
+.sidebar a {
+  display: block;
+  color: white;
+  padding: 10px;
+  text-decoration: none;
+}
+
+.sidebar a:hover {
+  background-color: #495057;
+}
+
+/* تعديل محتويات الصفحة لتناسب الشريط الجانبي */
+.container {
+  margin-left: 260px; /* تفادي تداخل المحتوى مع الشريط الجانبي */
+}
+
+.section {
+  margin-bottom: 20px;
+}
+.section {
+  background-color: #f9f9f9;
+  padding: 20px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+
+.card-img-top {
+  max-height: 200px;
+  object-fit: cover;
+}
+
+.card-title {
+  font-size: 1.2rem;
+}
+
+.form-group label {
+  font-weight: bold;
+}
+
+.form-control-file {
+  margin-top: 10px;
+}
+
+.btn-primary,
+.btn-warning {
+  width: 100%;
+}
+
+.product-card {
+  margin-bottom: 20px;
+}
+
+.rating {
+  color: gold;
+}
+
+.contact-form {
+  margin-top: 40px;
+}
+#submitBtn {
+  font-size: 70px; /* حجم الخط */
+  padding: 70px 50px; /* التحكم في الحواف الداخلية للزر */
+}

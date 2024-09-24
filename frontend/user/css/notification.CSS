@@ -1,0 +1,15 @@
+.notification-icon {
+  position: relative;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.dropdown-menu {
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.no-notifications {
+  text-align: center;
+  padding: 10px;
+}

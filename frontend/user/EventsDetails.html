@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="ar">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>تفاصيل الحدث</title>
+    <!-- Bootstrap 5 -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <!-- Font Awesome -->
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="css/index.css" />
+    <link rel="stylesheet" href="css/about.css" />
+  </head>
+  <body dir="rtl">
+    <div class="top-bar">
+      <div class="container d-flex justify-content-between flex-wrap">
+        <div class="top-bar-left">
+          <i class="fas fa-map-marker-alt"></i> الأردن، عجلون
+          <i class="fas fa-envelope ms-3"></i> Ideamedia@gmail.com
+        </div>
+        <div class="top-bar-right d-flex align-items-center">
+          <i class="fas fa-phone"></i>
+          <a href="tel:+962791234567" class="text-ligth text-decoration-none"
+            >0777956583</a
+          >
+          <span class="ms-3">تابعنا على:</span>
+          <a href="#"><i class="fab fa-facebook-f"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-whatsapp"></i></a>
+          <a href="#"><i class="fab fa-linkedin-in"></i></a>
+          <a href="#"><i class="fab fa-youtube"></i></a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg">
+      <div class="container">
+        <a class="navbar-brand" href="#">
+          <span class="idea">أيديا</span>
+          <span class="media">ميديا</span>
+        </a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span><i class="fas fa-bars" style="color: orange"></i></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="/frontend/user/Index.html">الرئيسية</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a
+                class="nav-link dropdown-toggle"
+                href="#"
+                id="coursesDropdown"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                أقسام الدورات
+              </a>
+              <ul
+                id="categoriesDropdown"
+                class="dropdown-menu"
+                aria-labelledby="coursesDropdown"
+              >
+                <!-- سيتم إضافة الأقسام هنا -->
+              </ul>
+            </li>
+            <li class="nav-item dropdown">
+              <a
+                class="nav-link dropdown-toggle"
+                href="#"
+                id="storeDropdown"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                أقسام المتجر
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="storeDropdown">
+                <li>
+                  <a
+                    class="dropdown-item"
+                    href="/frontend/user/equipmentshop.html"
+                    >متجر معدات</a
+                  >
+                </li>
+                <li>
+                  <a
+                    class="dropdown-item"
+                    href="/frontend/user/HandmadeShop.html"
+                    >متجر منتجات يدوية</a
+                  >
+                </li>
+              </ul>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/frontend/user/AllEvents.html"
+                >كل الأحداث</a
+              >
+            </li>
+            <li class="nav-item dropdown">
+              <a
+                class="nav-link dropdown-toggle"
+                href="#"
+                id="storeDropdown"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                أقسام المدربين
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="storeDropdown">
+                <li>
+                  <a
+                    class="dropdown-item"
+                    href="/frontend/user/singupInstructors.html"
+                  >
+                    تسجيل كمدرب</a
+                  >
+                </li>
+                <li>
+                  <a
+                    class="dropdown-item"
+                    href="/frontend/user/ALLInstructors.html"
+                    >كل المدربين</a
+                  >
+                </li>
+              </ul>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link" href="/frontend/user/Contact.html"
+                >اتصل بنا</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/frontend/user/about.html">من نحن</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/frontend/admin/loginAdmin.html"
+                >لوحة الإدارة</a
+              >
+            </li>
+          </ul>
+          <div class="icon-buttons d-flex align-items-center">
+            <!-- زر تسجيل الدخول أو تسجيل الخروج بناءً على حالة تسجيل الدخول -->
+            <div id="authLinks"></div>
+          </div>
+        </div>
+      </div>
+    </nav>
+  
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+          <a href="index.html">الصفحة الرئيسية</a>
+        </li>
+        <li class="breadcrumb-item">
+          <a href="allevents.html">جميع الأحداث</a>
+        </li>
+        <li class="breadcrumb-item active" aria-current="page">
+          ندوة فنون الخياطة الأساسية والتقنيات المتقدمة مع محترفي الصناعة
+        </li>
+      </ol>
+    </nav>
+    <div class="row">
+        <div class="col-lg-8">
+          <div class="card mb-3">
+            <img src="/backend/image/ندوة فنون الخياطة الأساسية والتقنيات المتقدمة مع محترفي الصناعة.png" class="card-img-top" alt="صورة الحدث" />
+            <div class="card-body">
+              <h2 class="card-title">
+                ندوة فنون الخياطة الأساسية والتقنيات المتقدمة مع محترفي الصناعة
+              </h2>
+              <p>
+                <i class="fas fa-calendar-alt"></i> 26/07/2024 |
+                <i class="fas fa-map-marker-alt"></i> واشنطن دي سي، MI 27218 |
+                <i class="fas fa-users"></i> 2,329 مشارك
+              </p>
+              <p>بواسطة أحمد الخياط</p>
+              <p>ملخص الحدث</p>
+              <p>
+                في هذه الندوة، ستتعلم أساسيات الخياطة بالإضافة إلى تقنيات متقدمة
+                من محترفين في هذا المجال. ستتعرف على كيفية العمل على تصميمات
+                معقدة وتنفيذها بدقة وجودة عالية.
+              </p>
+              <h3>ما الذي ستتعلمه في هذا الحدث:</h3>
+              <ul>
+                <li>أساسيات الخياطة للمبتدئين</li>
+                <li>تقنيات الخياطة المتقدمة</li>
+                <li>تصميم وتفصيل الملابس</li>
+                <li>كيف تتعامل مع أنواع الأقمشة المختلفة</li>
+              </ul>
+              <h3>أربع مميزات رئيسية نقدمها في هذا الحدث:</h3>
+              <p>
+                إتقان العمل بدون قيود. جميع الاختصارات المفيدة. أفكار إبداعية
+                لتصميم الأزياء والملابس. كيفية التعامل مع الأقمشة والنصوص
+                المختلفة في التصميم.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4">
+          <div class="card">
+            <div class="card-body">
+              <h4>رسوم الحدث</h4>
+              <button
+                id="joinButton"
+                class="btn btn-warning btn-block"
+                onclick="toggleJoin()"
+              >
+                انضم إلى هذا الحدث
+              </button>
+              <ul class="list-group list-group-flush mt-4">
+                <li class="list-group-item">
+                  <strong>التاريخ:</strong> 26/07/2024
+                </li>
+                <li class="list-group-item">
+                  <strong>وقت البدء:</strong> 10:00 صباحًا
+                </li>
+                <li class="list-group-item"><strong>عدد المواضيع:</strong> 12</li>
+                <li class="list-group-item"><strong>عدد الاختبارات:</strong> 12</li>
+                <li class="list-group-item"><strong>المقالات:</strong> 145</li>
+                <li class="list-group-item">
+                  <strong>الشهادات:</strong> 50
+                </li>
+                <li class="list-group-item">
+                  <strong>عدد المقاعد:</strong> 300
+                </li>
+              </ul>
+              <div class="map mt-4">
+                <iframe
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3151.835434509274!2d144.9537363153154!3d-37.81627917975171!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6ad642af0f11fd81%3A0xf0727a0e5f9d7e0!2sMarvel%20Stadium!5e0!3m2!1sar!2sar!4v1603335078455!5m2!1sar!2sar"
+                  width="100%"
+                  height="200"
+                  frameborder="0"
+                  style="border: 0"
+                  allowfullscreen=""
+                  aria-hidden="false"
+                  tabindex="0"
+                ></iframe>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+    </footer>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/js/all.min.js"></script>
+    <script>
+      function toggleJoin() {
+        var button = document.getElementById("joinButton");
+        if (button.classList.contains("btn-warning")) {
+          button.classList.remove("btn-warning");
+          button.classList.add("btn-success");
+          button.textContent = "تم الانضمام";
+        } else {
+          button.classList.remove("btn-success");
+          button.classList.add("btn-warning");
+          button.textContent = "انضم لهذا الحدث";
+        }
+      }
+    </script>
+    <!-- Bootstrap 5 Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"></script>
+    <script src="/frontend/user/javascript/ordelogin.js"></script>
+    <script src="/frontend/user/ALLCategories.js"></script>
+
+
+  </body>
+</html>

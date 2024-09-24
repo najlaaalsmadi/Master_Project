@@ -1,0 +1,19 @@
+body {
+  direction: rtl;
+}
+.card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+}
+.pagination .page-link {
+  background-color: #ffc107;
+  border-color: #ffc107;
+  color: white;
+}
+.pagination .page-item.active .page-link {
+  background-color: #e0a800;
+  border-color: #e0a800;
+}

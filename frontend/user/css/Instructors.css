@@ -1,0 +1,14 @@
+     .profile-header {
+            background-color: #2c2c6c;
+            color: white;
+        }
+        .profile-header img {
+            border-radius: 50%;
+        }
+        .card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+        }

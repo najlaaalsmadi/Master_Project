@@ -1,0 +1,8 @@
+.card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-10px); /* رفع البطاقة بمقدار 10px عند التحويم */
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* إضافة ظل عند التحويم */
+}

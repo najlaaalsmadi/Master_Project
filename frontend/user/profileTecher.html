@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<html lang="ar">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>صفحة شخصيه</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+    <script
+      src="https://kit.fontawesome.com/a076d05399.js"
+      crossorigin="anonymous"
+    ></script>
+    <!-- Bootstrap 5 -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <!-- Font Awesome -->
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="css/index.css" />
+    <link rel="stylesheet" href="css/about.css" />
+    <link rel="stylesheet" href="css/Instructors.css" />
+  </head>
+  <body dir="rtl">
+    <div class="top-bar">
+      <div class="container d-flex justify-content-between flex-wrap">
+        <div class="top-bar-left">
+          <i class="fas fa-map-marker-alt"></i> الأردن، عجلون
+          <i class="fas fa-envelope ms-3"></i> Ideamedia@gmail.com
+        </div>
+        <div class="top-bar-right d-flex align-items-center">
+          <i class="fas fa-phone"></i>
+          <a href="tel:+962791234567" class="text-ligth text-decoration-none"
+            >0777956583</a
+          >
+          <span class="ms-3">تابعنا على:</span>
+          <a href="#"><i class="fab fa-facebook-f"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-whatsapp"></i></a>
+          <a href="#"><i class="fab fa-linkedin-in"></i></a>
+          <a href="#"><i class="fab fa-youtube"></i></a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg">
+      <div class="container">
+        <a class="navbar-brand" href="#">
+          <span class="idea">أيديا</span>
+          <span class="media">ميديا</span>
+        </a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span><i class="fas fa-bars" style="color: orange"></i></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="/frontend/user/Index.html">الرئيسية</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a
+                class="nav-link dropdown-toggle"
+                href="#"
+                id="coursesDropdown"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                أقسام الدورات
+              </a>
+              <ul
+                id="categoriesDropdown"
+                class="dropdown-menu"
+                aria-labelledby="coursesDropdown"
+              >
+                <!-- سيتم إضافة الأقسام هنا -->
+              </ul>
+            </li>
+            <li class="nav-item dropdown">
+              <a
+                class="nav-link dropdown-toggle"
+                href="#"
+                id="storeDropdown"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                أقسام المتجر
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="storeDropdown">
+                <li>
+                  <a
+                    class="dropdown-item"
+                    href="/frontend/user/equipmentshop.html"
+                    >متجر معدات</a
+                  >
+                </li>
+                <li>
+                  <a
+                    class="dropdown-item"
+                    href="/frontend/user/HandmadeShop.html"
+                    >متجر منتجات يدوية</a
+                  >
+                </li>
+              </ul>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/frontend/user/AllEvents.html"
+                >كل الأحداث</a
+              >
+            </li>
+            <li class="nav-item dropdown">
+              <a
+                class="nav-link dropdown-toggle"
+                href="#"
+                id="storeDropdown"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                أقسام المدربين
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="storeDropdown">
+                <li>
+                  <a
+                    class="dropdown-item"
+                    href="/frontend/user/singupInstructors.html"
+                  >
+                    تسجيل كمدرب</a
+                  >
+                </li>
+                <li>
+                  <a
+                    class="dropdown-item"
+                    href="/frontend/user/ALLInstructors.html"
+                    >كل المدربين</a
+                  >
+                </li>
+              </ul>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link" href="/frontend/user/Contact.html"
+                >اتصل بنا</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/frontend/user/about.html">من نحن</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/frontend/admin/loginAdmin.html"
+                >لوحة الإدارة</a
+              >
+            </li>
+          </ul>
+          <div class="icon-buttons d-flex align-items-center">
+            <!-- زر تسجيل الدخول أو تسجيل الخروج بناءً على حالة تسجيل الدخول -->
+            <div id="authLinks"></div>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- استخدام Bootstrap Grid لعرض الشريط الجانبي والمحتوى بشكل متجاوب -->
+    <div class="container mt-5">
+      <div class="row">
+        <!-- الشريط الجانبي -->
+        <div class="col-md-3">
+          <div class="text-center p-4 mb-4 bg-dark rounded">
+            <img
+              src="/backend/image/نجلاء.jpg"
+              alt="صورة المدرب"
+              class="mb-3 rounded-circle"
+              style="width: 150px; height: 150px"
+            />
+            <h2 class="text-light">نجلاء الصمادي</h2>
+            <p class="text-light">مدربة خياطة و تطريز</p>
+            <p class="text-light">
+              <i class="fas fa-envelope text-light"></i> najlaa@gmail.com <br />
+              <i class="fas fa-phone text-light"></i> 0777956583
+            </p>
+            <div class="d-flex justify-content-center">
+              <a href="#" class="text-light mx-2"
+                ><i class="fab fa-facebook"></i
+              ></a>
+              <a href="#" class="text-light mx-2"
+                ><i class="fab fa-twitter"></i
+              ></a>
+              <a href="#" class="text-light mx-2"
+                ><i class="fab fa-instagram"></i
+              ></a>
+              <a href="#" class="text-light mx-2"
+                ><i class="fab fa-linkedin"></i
+              ></a>
+            </div>
+            <hr />
+            <!-- القائمة الجانبية -->
+            <ul class="list-unstyled mt-3">
+              <li class="mb-2">
+                <a
+                  href="#one"
+                  class="text-light d-flex align-items-center"
+                  style="text-decoration: none"
+                >
+                  <i class="fas fa-user me-2"></i> السيرة الذاتية
+                </a>
+              </li>
+              <li class="mb-2">
+                <a
+                  href="#two"
+                  class="text-light d-flex align-items-center"
+                  style="text-decoration: none"
+                >
+                  <i class="fas fa-graduation-cap me-2"></i> الدورات
+                </a>
+              </li>
+              <li class="mb-2">
+                <a
+                  href="#tree"
+                  class="text-light d-flex align-items-center"
+                  style="text-decoration: none"
+                >
+                  <i class="fas fa-box-open me-2"></i> المنتجات
+                </a>
+              </li>
+
+              <br />
+              <!-- زر النشر -->
+              <li class="mt-3">
+                <button
+                  type="button"
+                  class="btn btn-warning btn-lg w-100"
+                  id="submitBtn"
+                  style="font-size: 18px; padding: 12px 0"
+                >
+                  نشر منتج
+                </button>
+                <br />
+                <br />
+
+                <button
+                  type="button"
+                  class="btn btn-success btn-lg w-100"
+                  id="submitBtn2"
+                  style="font-size: 18px; padding: 12px 0"
+                >
+                  نشر كورس
+                </button>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- المحتوى الرئيسي -->
+        <div class="col-md-9">
+          <!-- السيرة الذاتية -->
+          <div class="bg-light p-4 rounded section">
+            <h4 id="one">السيرة الذاتية</h4>
+            <p>
+              أنا معلمة متخصصة في الخياطة والتطريز، ولدي سنوات من الخبرة في
+              تعليم تصميم الأزياء وصناعة الملابس المطرزة.
+            </p>
+          </div>
+
+          <!-- الدورات التدريبية -->
+          <div class="section mt-4">
+            <h4 id="two">دوراتي</h4>
+            <div class="row">
+              <!-- دورة 1 -->
+              <div class="col-lg-3 col-md-6 mb-4">
+                <div class="card h-100 text-center">
+                  <img
+                    src="/backend/image/sewing-clothes.png"
+                    class="card-img-top"
+                    alt="صورة الدورة"
+                  />
+                  <div class="card-body">
+                    <h5 class="card-title">خياطة الملابس</h5>
+                    <p class="card-text">نجلاء الصمادي</p>
+                  </div>
+                  <div class="card-footer">
+                    <p class="font-weight-bold">$15.00</p>
+                    <a href="view-course.html" class="btn btn-warning"
+                      >عرض الدورة</a
+                    >
+                  </div>
+                </div>
+              </div>
+
+              <!-- دورة 2 -->
+              <div class="col-lg-3 col-md-6 mb-4">
+                <div class="card h-100 text-center">
+                  <img
+                    src="/backend/image/التطريز.png"
+                    class="card-img-top"
+                    alt="صورة الدورة"
+                  />
+                  <div class="card-body">
+                    <h5 class="card-title">تطريز</h5>
+                    <p class="card-text">نجلاء الصمادي</p>
+                  </div>
+                  <div class="card-footer">
+                    <p class="font-weight-bold">$18.00</p>
+                    <a href="view-course.html" class="btn btn-warning"
+                      >عرض الدورة</a
+                    >
+                  </div>
+                </div>
+              </div>
+
+              <!-- دورة 3 -->
+              <div class="col-lg-3 col-md-6 mb-4">
+                <div class="card h-100 text-center">
+                  <img
+                    src="/backend/image/_تصميم الأزياء.png"
+                    class="card-img-top"
+                    alt="صورة الدورة"
+                  />
+                  <div class="card-body">
+                    <h5 class="card-title">تصميم الأزياء</h5>
+                    <p class="card-text">نجلاء الصمادي</p>
+                  </div>
+                  <div class="card-footer">
+                    <p class="font-weight-bold">$24.00</p>
+                    <a href="view-course.html" class="btn btn-warning"
+                      >عرض الدورة</a
+                    >
+                  </div>
+                </div>
+              </div>
+
+              <!-- دورة 4 -->
+              <div class="col-lg-3 col-md-6 mb-4">
+                <div class="card h-100 text-center">
+                  <img
+                    src="/backend/image/Pink Brush Feminine  Logo (4).png"
+                    class="card-img-top"
+                    alt="صورة الدورة"
+                  />
+                  <div class="card-body">
+                    <h5 class="card-title">حقائب، مجوهرات وملابس مطرزة</h5>
+                    <p class="card-text">نجلاء الصمادي</p>
+                  </div>
+                  <div class="card-footer">
+                    <p class="font-weight-bold">$12.00</p>
+                    <a href="view-course.html" class="btn btn-warning"
+                      >عرض الدورة</a
+                    >
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- المنتجات -->
+          <div class="section mt-4">
+            <h4 id="tree">منتجاتي ومنشوراتي</h4>
+            <div class="row">
+              <div class="col-md-4 mb-4">
+                <a
+                  href="/frontend/user/HandmadeShopdetils.html"
+                  class="card text-decoration-none text-dark"
+                >
+                  <img
+                    src="/backend/image/شمع.jfif"
+                    class="card-img-top"
+                    alt="شمع يدوي"
+                  />
+                  <div class="card-body text-center">
+                    <h5 class="card-title">شمع يدوي</h5>
+                    <p class="card-text">$150.00</p>
+                    <p class="card-text">⭐⭐⭐⭐⭐</p>
+                  </div>
+                </a>
+              </div>
+
+              <div class="col-md-4 mb-4">
+                <a
+                  href="/frontend/user/equipmentshopdetails.html"
+                  class="card text-decoration-none text-dark"
+                >
+                  <img
+                    src="/backend/image/طاقية.jpg"
+                    class="card-img-top"
+                    alt="طاقية"
+                  />
+                  <div class="card-body text-center">
+                    <h5 class="card-title">طاقية</h5>
+                    <p class="card-text">$150.00</p>
+                    <p class="card-text">⭐⭐⭐⭐⭐</p>
+                  </div>
+                </a>
+              </div>
+
+              <!-- حبات الكريستال -->
+              <div class="col-md-4 mb-4">
+                <a href="#" class="card text-decoration-none text-dark">
+                  <img
+                    src="/backend/image/شماغ مهدب.jpg"
+                    class="card-img-top"
+                    alt="شماغ مهدب يدوي"
+                  />
+                  <div class="card-body text-center">
+                    <h5 class="card-title">شماغ مهدب يدوي</h5>
+                    <p class="card-text">$5.00</p>
+                    <p class="card-text">⭐⭐⭐⭐⭐</p>
+                  </div>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <br />
+    <footer>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-4 footer-column">
+            <h5>معلومات عنا</h5>
+            <ul>
+              <li><a href="#">قصتنا</a></li>
+              <li><a href="#">الرؤية والرسالة</a></li>
+              <li><a href="#">فريق العمل</a></li>
+              <li><a href="#">الوظائف</a></li>
+            </ul>
+          </div>
+          <div class="col-md-4 footer-column">
+            <h5>روابط سريعة</h5>
+            <ul>
+              <li><a href="#">الرئيسية</a></li>
+              <li><a href="#">المتجر</a></li>
+              <li><a href="#">الأحداث</a></li>
+              <li><a href="#">المدربون</a></li>
+            </ul>
+          </div>
+          <div class="col-md-4 footer-column">
+            <h5>تواصل معنا</h5>
+            <ul>
+              <li><a href="#">اتصل بنا</a></li>
+              <li><a href="#">الأسئلة الشائعة</a></li>
+              <li><a href="#">الدعم الفني</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p>&copy; 2023 أيديا ميديا. جميع الحقوق محفوظة.</p>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Bootstrap 5 Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"></script>
+    <script src="/frontend/user/javascript/ordelogin.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+      document
+        .getElementById("submitBtn")
+        .addEventListener("click", function (e) {
+          Swal.fire({
+            title: "إضافة المنتج",
+            html: `
+            <p style="color:#004080; background-color:orange"> 
+              ملاحظه المره الاولى لبيع المنتج الخاص فيك مجانا بعدها يجب  عمل اشتراك لتكون هذه الميزه فعله وايضا المنتج في هذه الحالة سوف يعرض بصفحة المنتجات 
+
+</p>
+              <form id="swal-form" enctype="multipart/form-data">
+                <div class="form-group">
+                  <label for="swalPostTitle">اسم المنتج</label>
+                  <input type="text" id="swalPostTitle" class="form-control" placeholder="أدخل اسم المنتج" required />
+                </div>
+                <div class="form-group">
+                  <label for="swalPostContent">تفاصيل المنتج</label>
+                  <textarea id="swalPostContent" class="form-control" rows="4" placeholder="اكتب تفاصيل المنتج هنا" required></textarea>
+                </div>
+                <div class="form-group">
+                  <label for="swalCategoryDropdown">اختر الفئة</label>
+                  <select id="swalCategoryDropdown" class="form-control" required>
+                    <option value="">اختر الفئة</option>
+                    <option value="crafts">الحرف اليدوية</option>
+                    <option value="arts">الفنون اليدوية</option>
+                    <option value="fashion">الأزياء والتصميم</option>
+                    <option value="visual">الفنون البصرية</option>
+                  </select>
+                </div>
+                  <div class="form-group">
+                  <label for="swalCategoryDropdown">اختر مكان العرض</label>
+                  <select id="swalCategoryDropdown" class="form-control" required>
+                    <option value="">اختر مكان العرض</option>
+                    <option value="tree">صفحه المنتجات </option>
+                    <option value="one">صفحة الرئيسية</option>
+                    <option value="two">صفحه المنتجات باعلى</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="swalPostImage">إضافة صورة</label>
+                  <input type="file" id="swalPostImage" class="form-control-file" required />
+                </div>
+              </form>
+            `,
+            focusConfirm: false,
+            showCancelButton: true,
+            confirmButtonText: "نشر",
+            cancelButtonText: "إلغاء",
+            preConfirm: () => {
+              const postTitle = document.getElementById("swalPostTitle").value;
+              const postContent =
+                document.getElementById("swalPostContent").value;
+              const categoryDropdown = document.getElementById(
+                "swalCategoryDropdown"
+              ).value;
+              const postImage =
+                document.getElementById("swalPostImage").files[0];
+
+              if (
+                !postTitle ||
+                !postContent ||
+                !categoryDropdown ||
+                !postImage
+              ) {
+                Swal.showValidationMessage("يرجى تعبئة جميع الحقول");
+                return false;
+              }
+
+              // إعداد البيانات لإرسالها للنموذج الرئيسي
+              const formData = new FormData();
+              formData.append("postTitle", postTitle);
+              formData.append("postContent", postContent);
+              formData.append("category", categoryDropdown);
+              formData.append("postImage", postImage);
+
+              // إرسال البيانات عبر النموذج الرئيسي
+              return formData;
+            },
+          }).then((result) => {
+            if (result.isConfirmed) {
+              // قم بإرسال البيانات عبر النموذج الحقيقي
+              const form = document.createElement("form");
+              form.method = "POST";
+              form.action = "/submit-post";
+              form.enctype = "multipart/form-data";
+
+              const formData = result.value;
+              formData.forEach((value, key) => {
+                const input = document.createElement("input");
+                input.type = "hidden";
+                input.name = key;
+                input.value = value;
+                form.appendChild(input);
+              });
+
+              document.body.appendChild(form);
+              form.submit();
+            }
+          });
+        });
+    </script>
+
+    <!-- تضمين SweetAlert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <!-- JavaScript لتفعيل SweetAlert عند الضغط على زر النشر -->
+    <script>
+      document
+        .getElementById("submitBtn2")
+        .addEventListener("click", function () {
+          Swal.fire({
+            title: "إضافة كورس",
+            html: `
+              <!-- نموذج إنشاء كورس جديد داخل SweetAlert -->
+              <div id="createCourseForm" class="section mt-4">
+                <h4>إنشاء كورس جديد</h4>
+                <form id="swalCourseForm">
+                  <!-- حقل اسم الكورس -->
+                  <div class="form-group">
+                    <label for="swalCourseName">اسم الكورس</label>
+                    <input type="text" class="form-control" id="swalCourseName" placeholder="أدخل اسم الكورس" required />
+                  </div>
+      
+                  <!-- حقل فئة الكورس -->
+                  <div class="form-group">
+                    <label for="swalCourseCategory">الفئة</label>
+                    <select class="form-control" id="swalCourseCategory" required>
+                      <option value="" disabled selected>اختر فئة الكورس</option>
+                      <option value="Handicrafts">حرف يدوية</option>
+                      <option value="Arts">فنون يدوية</option>
+                      <option value="Fashion">الموضة والتنسيق</option>
+                      <option value="TechRepair">إصلاح التكنولوجيا</option>
+                      <option value="VisualArts">الفنون البصرية</option>
+                      <option value="BeautyMakeup">الجمال والمكياج</option>
+                      <option value="CulinaryArts">فن الطهي</option>
+                      <option value="HomeGarden">المنزل والحديقة</option>
+                    </select>
+                  </div>
+      
+                  <!-- حقل عدد الدروس -->
+                  <div class="form-group">
+                    <label for="swalCourseLessonsCount">عدد الدروس</label>
+                    <input type="number" class="form-control" id="swalCourseLessonsCount" placeholder="أدخل عدد الدروس" required />
+                  </div>
+      
+                  <!-- روابط الدروس أو رفع فيديو -->
+                  <div id="swalCourseLessonsLinks" class="form-group mt-3">
+                    <label>إدخال رابط أو رفع فيديو</label>
+                    <button type="button" id="toggleLinkVideoBtn" class="btn btn-secondary mb-2">إدخال رابط</button>
+                    <div id="lessonLinkContainer">
+                      <input type="text" class="form-control mb-2 lesson-link" id="lessonLinkInput" placeholder="أدخل رابط الدرس" />
+                    </div>
+                    <div id="videoUploadContainer" style="display: none;">
+                      <input type="file" class="form-control mb-2 video-upload" id="videoUploadInput" accept="video/*" />
+                    </div>
+                  </div>
+                  <button type="button" class="btn btn-info" id="swalAddLessonLinkBtn">إضافة درس</button>
+      
+                  <!-- حقل اسم المدرب -->
+                  <div class="form-group">
+                    <label for="swalTrainerName">اسم المدرب</label>
+                    <input type="text" class="form-control" id="swalTrainerName" placeholder="أدخل اسم المدرب" required />
+                  </div>
+      
+                  <!-- حقل سعر الكورس -->
+                  <div class="form-group">
+                    <label for="swalCoursePrice">سعر الكورس</label>
+                    <input type="number" class="form-control" id="swalCoursePrice" placeholder="أدخل سعر الكورس (بالدولار)" required />
+                  </div>
+      
+                  <!-- حقل وصف الكورس -->
+                  <div class="form-group">
+                    <label for="swalCourseDescription">وصف الكورس</label>
+                    <textarea class="form-control" id="swalCourseDescription" rows="3" placeholder="أدخل وصف الكورس" required></textarea>
+                  </div>
+      
+                  <!-- حقل تاريخ بدء الكورس -->
+                  <div class="form-group">
+                    <label for="swalCourseStartDate">تاريخ بدء الكورس</label>
+                    <input type="date" class="form-control" id="swalCourseStartDate" required />
+                  </div>
+                </form>
+              </div>
+              `,
+            focusConfirm: false,
+            showCancelButton: true,
+            confirmButtonText: "نشر",
+            cancelButtonText: "إلغاء",
+            preConfirm: () => {
+              const courseName =
+                document.getElementById("swalCourseName").value;
+              const courseCategory =
+                document.getElementById("swalCourseCategory").value;
+              const courseLessonsCount = document.getElementById(
+                "swalCourseLessonsCount"
+              ).value;
+
+              const lessonLinkInput =
+                document.getElementById("lessonLinkInput").value;
+              const videoUploadInput =
+                document.getElementById("videoUploadInput").files[0];
+
+              const trainerName =
+                document.getElementById("swalTrainerName").value;
+              const coursePrice =
+                document.getElementById("swalCoursePrice").value;
+              const courseDescription = document.getElementById(
+                "swalCourseDescription"
+              ).value;
+              const courseStartDate = document.getElementById(
+                "swalCourseStartDate"
+              ).value;
+
+              // التحقق من إدخال أحد الخيارين (الرابط أو الفيديو)
+              if (
+                !courseName ||
+                !courseCategory ||
+                !courseLessonsCount ||
+                !trainerName ||
+                !coursePrice ||
+                !courseDescription ||
+                !courseStartDate ||
+                (!lessonLinkInput && !videoUploadInput)
+              ) {
+                Swal.showValidationMessage(
+                  "يرجى تعبئة جميع الحقول واختيار إما رابط أو فيديو"
+                );
+                return false;
+              }
+
+              // إعداد البيانات لإرسالها عبر النموذج الرئيسي
+              const formData = new FormData();
+              formData.append("courseName", courseName);
+              formData.append("courseCategory", courseCategory);
+              formData.append("courseLessonsCount", courseLessonsCount);
+              formData.append("trainerName", trainerName);
+              formData.append("coursePrice", coursePrice);
+              formData.append("courseDescription", courseDescription);
+              formData.append("courseStartDate", courseStartDate);
+              if (lessonLinkInput) {
+                formData.append("lessonLink", lessonLinkInput);
+              } else if (videoUploadInput) {
+                formData.append("videoUpload", videoUploadInput);
+              }
+
+              return formData;
+            },
+          }).then((result) => {
+            if (result.isConfirmed) {
+              // إنشاء وإرسال النموذج الفعلي
+              const form = document.createElement("form");
+              form.method = "POST";
+              form.action = "/submit-course";
+              form.enctype = "multipart/form-data";
+
+              const formData = result.value;
+              formData.forEach((value, key) => {
+                const input = document.createElement("input");
+                input.type = "hidden";
+                input.name = key;
+                input.value = value;
+                form.appendChild(input);
+              });
+
+              document.body.appendChild(form);
+              form.submit();
+            }
+          });
+
+          // وظيفة تبديل الحقل بين الرابط والفيديو
+          document
+            .getElementById("toggleLinkVideoBtn")
+            .addEventListener("click", function () {
+              const linkContainer = document.getElementById(
+                "lessonLinkContainer"
+              );
+              const videoContainer = document.getElementById(
+                "videoUploadContainer"
+              );
+
+              if (linkContainer.style.display === "none") {
+                linkContainer.style.display = "block";
+                videoContainer.style.display = "none";
+                this.textContent = "إدخال فيديو";
+              } else {
+                linkContainer.style.display = "none";
+                videoContainer.style.display = "block";
+                this.textContent = "إدخال رابط";
+              }
+            });
+        });
+    </script>
+    <script src="/frontend/user/ALLCategories.js"></script>
+  </body>
+</html>

@@ -1,0 +1,30 @@
+.event-img {
+  height: 200px;
+  object-fit: cover;
+}
+.event-card {
+  margin-bottom: 30px;
+}
+.event-date {
+  font-weight: bold;
+  color: #6c757d;
+}
+.event-title {
+  font-size: 1.1rem;
+  font-weight: bold;
+}
+.mreadcrumb.active {
+  color: #ffa500;
+}
+.mreadcrumb + .mreadcrumb::before {
+  margin: 0 5px;
+  color: #6c757d;
+}
+.mreadcrumb a:hover {
+  color: orange;
+  text-decoration: underline;
+}
+
+.one {
+  justify-content: center;
+}

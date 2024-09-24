@@ -1,0 +1,10 @@
+.about-section {
+  padding: 60px 0;
+}
+.about-section img {
+  max-width: 100%;
+  border-radius: 5px;
+}
+.about-section .text-content {
+  padding: 20px;
+}

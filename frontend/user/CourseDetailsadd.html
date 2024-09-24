@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="ar">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>تفاصيل الدورة - خياطة الملابس</title>
+    <!-- Bootstrap 5 -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <!-- Font Awesome -->
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="css/index.css" />
+    <link rel="stylesheet" href="css/about.css" />
+  </head>
+  <body dir="rtl">
+    <div class="top-bar">
+      <div class="container d-flex justify-content-between flex-wrap">
+        <div class="top-bar-left">
+          <i class="fas fa-map-marker-alt"></i> الأردن، عجلون
+          <i class="fas fa-envelope ms-3"></i> Ideamedia@gmail.com
+        </div>
+        <div class="top-bar-right d-flex align-items-center">
+          <i class="fas fa-phone"></i>
+          <a href="tel:+962791234567" class="text-ligth text-decoration-none"
+            >0777956583</a
+          >
+          <span class="ms-3">تابعنا على:</span>
+          <a href="#"><i class="fab fa-facebook-f"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-whatsapp"></i></a>
+          <a href="#"><i class="fab fa-linkedin-in"></i></a>
+          <a href="#"><i class="fab fa-youtube"></i></a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg">
+      <div class="container">
+        <a class="navbar-brand" href="#">
+          <span class="idea">أيديا</span>
+          <span class="media">ميديا</span>
+        </a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span><i class="fas fa-bars" style="color: orange"></i></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="/frontend/user/Index.html">الرئيسية</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a
+                class="nav-link dropdown-toggle"
+                href="#"
+                id="coursesDropdown"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                أقسام الدورات
+              </a>
+              <ul
+                id="categoriesDropdown"
+                class="dropdown-menu"
+                aria-labelledby="coursesDropdown"
+              >
+                <!-- سيتم إضافة الأقسام هنا -->
+              </ul>
+            </li>
+            <li class="nav-item dropdown">
+              <a
+                class="nav-link dropdown-toggle"
+                href="#"
+                id="storeDropdown"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                أقسام المتجر
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="storeDropdown">
+                <li>
+                  <a
+                    class="dropdown-item"
+                    href="/frontend/user/equipmentshop.html"
+                    >متجر معدات</a
+                  >
+                </li>
+                <li>
+                  <a
+                    class="dropdown-item"
+                    href="/frontend/user/HandmadeShop.html"
+                    >متجر منتجات يدوية</a
+                  >
+                </li>
+              </ul>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/frontend/user/AllEvents.html"
+                >كل الأحداث</a
+              >
+            </li>
+            <li class="nav-item dropdown">
+              <a
+                class="nav-link dropdown-toggle"
+                href="#"
+                id="storeDropdown"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                أقسام المدربين
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="storeDropdown">
+                <li>
+                  <a
+                    class="dropdown-item"
+                    href="/frontend/user/singupInstructors.html"
+                  >
+                    تسجيل كمدرب</a
+                  >
+                </li>
+                <li>
+                  <a
+                    class="dropdown-item"
+                    href="/frontend/user/ALLInstructors.html"
+                    >كل المدربين</a
+                  >
+                </li>
+              </ul>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link" href="/frontend/user/Contact.html"
+                >اتصل بنا</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/frontend/user/about.html">من نحن</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/frontend/admin/loginAdmin.html"
+                >لوحة الإدارة</a
+              >
+            </li>
+          </ul>
+          <div class="icon-buttons d-flex align-items-center">
+            <!-- زر تسجيل الدخول أو تسجيل الخروج بناءً على حالة تسجيل الدخول -->
+            <div id="authLinks"></div>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- التنقل عبر الفتات (Breadcrumb Navigation) -->
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+          <a href="/frontend/user/Index.html">الرئيسية</a>
+        </li>
+        <li class="breadcrumb-item">
+          <a href="/frontend/user/Courses.html">الدورات</a>
+        </li>
+        <li class="breadcrumb-item active" aria-current="page">
+          خياطة الملابس
+        </li>
+      </ol>
+    </nav>
+
+    <div class="container my-5">
+      <div class="row">
+        <!-- صورة الدورة -->
+        <div class="col-lg-6 mb-2">
+          <div class="text-center mb-3">
+            <img
+              src="/backend/image/sewing-clothes.png"
+              class="img-fluid"
+              alt="صورة الدورة"
+            />
+          </div>
+        </div>
+
+        <!-- تفاصيل الدورة وجزء السعر والدفع -->
+        <div class="col-lg-6">
+          <div class="course-details">
+            <h1>خياط الملابس</h1>
+            <div class="d-flex flex-column mb-4">
+              <span><strong>بواسط أمين الخياط</strong></span>
+              <span>10/08/2023</span>
+              <span>2,035 طالبًا</span>
+            </div>
+            <!-- تبويب الدورة -->
+            <ul class="nav nav-tabs mb-4" id="courseTabs" role="tablist">
+              <li class="nav-item" role="presentation">
+                <button
+                  class="nav-link active"
+                  id="overview-tab"
+                  data-bs-toggle="tab"
+                  data-bs-target="#Overview"
+                  type="button"
+                  role="tab"
+                  aria-controls="Overview"
+                  aria-selected="true"
+                >
+                  نظرة عامة
+                </button>
+              </li>
+              <li class="nav-item" role="presentation">
+                <button
+                  class="nav-link"
+                  id="curriculum-tab"
+                  data-bs-toggle="tab"
+                  data-bs-target="#Curriculum"
+                  type="button"
+                  role="tab"
+                  aria-controls="Curriculum"
+                  aria-selected="false"
+                >
+                  المنهج
+                </button>
+              </li>
+              <li class="nav-item" role="presentation">
+                <button
+                  class="nav-link"
+                  id="tools-tab"
+                  data-bs-toggle="tab"
+                  data-bs-target="#Tools"
+                  type="button"
+                  role="tab"
+                  aria-controls="Tools"
+                  aria-selected="false"
+                >
+                  الأدوات
+                </button>
+              </li>
+              <li class="nav-item" role="presentation">
+                <button
+                  class="nav-link"
+                  id="reviews-tab"
+                  data-bs-toggle="tab"
+                  data-bs-target="#Reviews"
+                  type="button"
+                  role="tab"
+                  aria-controls="Reviews"
+                  aria-selected="false"
+                >
+                  التقييمات
+                </button>
+              </li>
+            </ul>
+
+            <div class="tab-content" id="courseTabsContent">
+              <div
+                class="tab-pane fade show active"
+                id="Overview"
+                role="tabpanel"
+                aria-labelledby="overview-tab"
+              >
+                <h2>وصف الدورة</h2>
+                <p>
+                  تعلم كيفية خياطة الملابس من الصفر، بدءًا من اختيار الأقمشة
+                  المناسبة إلى تصميم وخياطة القطع بأعلى مستويات الجودة. هذه
+                  الدورة موجهة للمبتدئين والمحترفين على حد سواء.
+                </p>
+                <h3>ماذا ستتعلم في هذه الدورة:</h3>
+                <ul>
+                  <li>اختيار الأقمشة المناسبة لكل نوع من الملابس</li>
+                  <li>تقنيات القياس والخياطة باستخدام ماكينة الخياطة</li>
+                  <li>تصميم الأنماط الأساسية والملابس</li>
+                  <li>تعديلات الأزياء واللمسات النهائية</li>
+                </ul>
+              </div>
+
+              <div
+                class="tab-pane fade"
+                id="Curriculum"
+                role="tabpanel"
+                aria-labelledby="curriculum-tab"
+              >
+                <h2>المنهج</h2>
+                <ul>
+                  <li>الدرس الأول: اختيار الأقمشة</li>
+                  <li>الدرس الثاني: استخدام ماكينة الخياطة</li>
+                  <li>الدرس الثالث: تصميم الأنماط</li>
+                  <li>الدرس الرابع: التعديلات النهائية</li>
+                </ul>
+              </div>
+
+              <div
+                class="tab-pane fade"
+                id="Tools"
+                role="tabpanel"
+                aria-labelledby="tools-tab"
+              >
+                <h2>الأدوات المستخدمة</h2>
+                <ul>
+                  <li>ماكينة خياطة</li>
+                  <li>أدوات قياس وتخطيط</li>
+                  <li>أقمشة مختلفة</li>
+                  <li>مقصات خياطة وإبر</li>
+                </ul>
+              </div>
+
+              <div
+                class="tab-pane fade"
+                id="Reviews"
+                role="tabpanel"
+                aria-labelledby="reviews-tab"
+              >
+                <h2>التقييمات</h2>
+                <!-- عرض التقييمات -->
+                <div class="reviews">
+                  <div class="review">
+                    <h5><strong>مريم حسين</strong></h5>
+                    <p>دورة ممتازة لتعلم أساسيات الخياطة. أنصح بها بشدة.</p>
+                    <div class="rating"><span>⭐⭐⭐⭐⭐</span></div>
+                  </div>
+                  <div class="review">
+                    <h5><strong>فاطمة علي</strong></h5>
+                    <p>استفدت كثيرًا من هذه الدورة، المحتوى مفصل وواضح.</p>
+                    <div class="rating"><span>⭐⭐⭐⭐</span></div>
+                  </div>
+                </div>
+
+                <!-- نموذج لإضافة تقييم جديد -->
+                <div class="add-review mt-4">
+                  <h4>أضف تقييمك</h4>
+                  <form action="#" method="POST">
+                    <div class="mb-3">
+                      <label for="reviewerName" class="form-label">اسمك</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="reviewerName"
+                        placeholder="أدخل اسمك"
+                      />
+                    </div>
+                    <div class="mb-3">
+                      <label for="reviewText" class="form-label">تقييمك</label>
+                      <textarea
+                        class="form-control"
+                        id="reviewText"
+                        rows="3"
+                        placeholder="أدخل رأيك"
+                      ></textarea>
+                    </div>
+                    <div class="mb-3">
+                      <label for="rating" class="form-label">التقييم</label>
+                      <select class="form-select" id="rating">
+                        <option value="5">⭐⭐⭐⭐⭐</option>
+                        <option value="4">⭐⭐⭐⭐</option>
+                        <option value="3">⭐⭐⭐</option>
+                        <option value="2">⭐⭐</option>
+                        <option value="1">⭐</option>
+                      </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary">
+                      إرسال التقييم
+                    </button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- سعر الدورة والمزيد من التفاصيل -->
+          <div class="card p-4 border-light bg-light mt-4">
+            <div class="card-body">
+              <div class="price-box mb-4">
+                <h3>25.00$ <del>35.00$</del></h3>
+              </div>
+              <h4>تشمل الدورة:</h4>
+              <ul class="list-unstyled">
+                <li>المدة: 18 ساعة</li>
+                <li>عدد المحاضرات: 20</li>
+                <li>الفيديوهات: 10</li>
+                <li>الشهادات: نعم</li>
+              </ul>
+              <div class="mt-4">
+                <h4>خيارات الدفع:</h4>
+                <div class="payment-button">
+                  <button class="btn btn-primary w-100 mb-2">
+                    <i class="fab fa-paypal"></i> PayPal
+                  </button>
+                  <button class="btn btn-secondary w-100">
+                    <i class="fas fa-credit-card"></i> Card
+                  </button>
+                </div>
+              </div>
+              <h4 class="mt-4">شارك هذه الدورة:</h4>
+              <p>أيقونات المشاركة على وسائل التواصل الاجتماعي</p>
+              <div class="social-icons">
+                <!-- أيقونة فيسبوك -->
+                <a
+                  href="https://www.facebook.com/sharer/sharer.php?u=https://example.com"
+                  target="_blank"
+                  class="btn btn-primary mx-1"
+                >
+                  <i class="fab fa-facebook-f"></i> فيسبوك
+                </a>
+
+                <!-- أيقونة واتساب -->
+                <a
+                  href="https://api.whatsapp.com/send?text=https://example.com"
+                  target="_blank"
+                  class="btn btn-success mx-1"
+                >
+                  <i class="fab fa-whatsapp"></i> واتساب
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-4 footer-column">
+            <h5>معلومات عنا</h5>
+            <ul>
+              <li><a href="#">قصتنا</a></li>
+              <li><a href="#">الرؤية والرسالة</a></li>
+              <li><a href="#">فريق العمل</a></li>
+              <li><a href="#">الوظائف</a></li>
+            </ul>
+          </div>
+          <div class="col-md-4 footer-column">
+            <h5>روابط سريعة</h5>
+            <ul>
+              <li><a href="#">الرئيسية</a></li>
+              <li><a href="#">المتجر</a></li>
+              <li><a href="#">الأحداث</a></li>
+              <li><a href="#">المدربون</a></li>
+            </ul>
+          </div>
+          <div class="col-md-4 footer-column">
+            <h5>تواصل معنا</h5>
+            <ul>
+              <li><a href="#">اتصل بنا</a></li>
+              <li><a href="#">الأسئلة الشائعة</a></li>
+              <li><a href="#">الدعم الفني</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p>&copy; 2023 أيديا ميديا. جميع الحقوق محفوظة.</p>
+        </div>
+      </div>
+    </footer>
+    <!-- Bootstrap JS and Dependencies -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/frontend/user/javascript/ordelogin.js"></script>
+    <script src="/frontend/user/ALLCategories.js"></script>
+
+    <script>
+      function enrollNow(button) {
+        alert("تم الالتحاق بالدورة بنجاح!");
+      }
+    </script>
+  </body>
+</html>
