@@ -20,7 +20,9 @@ document.addEventListener("DOMContentLoaded", function () {
         document.getElementById("courseName2").textContent = data.title;
 
         // صورة الدورة
-        document.getElementById("courseImage").src = data.imageUrl;
+        document.getElementById(
+          "courseImage"
+        ).src = `/backend/image/${data.imageUrl}`;
         document.getElementById("courseImage").alt = data.title;
 
         // تاريخ الدورة

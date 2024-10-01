@@ -190,11 +190,22 @@
             <div class="card-header">السعر</div>
             <ul class="list-group list-group-flush">
               <li class="list-group-item">
-                <input type="radio" name="price" value="under100" /> أقل من 99$
+                <input
+                  type="radio"
+                  name="price"
+                  value="under100"
+                  onclick="loadLearningEquipmentByPrice(0, 99)"
+                />
+                أقل من 99$
               </li>
               <li class="list-group-item">
-                <input type="radio" name="price" value="100to300" /> بين 100$ و
-                300$
+                <input
+                  type="radio"
+                  name="price"
+                  value="100to300"
+                  onclick="loadLearningEquipmentByPrice(100, 300)"
+                />
+                بين 100$ و 300$
               </li>
             </ul>
           </div>
@@ -257,134 +268,7 @@
         </aside>
         <!-- قسم المنتجات -->
         <section class="col-md-9">
-          <div class="row">
-            <!-- ماكينة الحياكة -->
-            <div class="col-md-4 mb-4">
-              <a
-                href="/frontend/user/equipmentshopdetails.html"
-                class="card text-decoration-none text-dark"
-              >
-                <img
-                  src="/backend/image/KnittingMachine.png"
-                  class="card-img-top"
-                  alt="ماكينة الحياكة"
-                />
-                <div class="card-body text-center">
-                  <h5 class="card-title">ماكينة الحياكة</h5>
-                  <p class="card-text">$150.00</p>
-                  <p class="card-text">⭐⭐⭐⭐⭐</p>
-                </div>
-              </a>
-            </div>
-            <!-- حبات الكريستال -->
-            <div class="col-md-4 mb-4">
-              <a href="#" class="card text-decoration-none text-dark">
-                <img
-                  src="/backend/image/CrystalBeads.png"
-                  class="card-img-top"
-                  alt="حبات الكريستال"
-                />
-                <div class="card-body text-center">
-                  <h5 class="card-title">حبات الكريستال</h5>
-                  <p class="card-text">$5.00 - $20.00</p>
-                  <p class="card-text">⭐⭐⭐⭐⭐</p>
-                </div>
-              </a>
-            </div>
-            <!-- الأسلاك النحاسية -->
-            <div class="col-md-4 mb-4">
-              <a href="#" class="card text-decoration-none text-dark">
-                <img
-                  src="/backend/image/CopperWire.png"
-                  class="card-img-top"
-                  alt="الأسلاك النحاسية"
-                />
-                <div class="card-body text-center">
-                  <h5 class="card-title">الأسلاك النحاسية</h5>
-                  <p class="card-text">$15.00</p>
-                  <p class="card-text">⭐⭐⭐⭐</p>
-                </div>
-              </a>
-            </div>
-
-            <!-- شرائط وشريط قياس ومقص -->
-            <div class="col-md-4 mb-4">
-              <a href="#" class="card text-decoration-none text-dark">
-                <img
-                  src="/backend/image/Soap making complete equipment.png"
-                  class="card-img-top"
-                  alt="شرائط وشريط قياس ومقص"
-                />
-                <div class="card-body text-center">
-                  <h5 class="card-title">خيوط صوف ومعدات الحياكة</h5>
-                  <p class="card-text">$20.00</p>
-                  <p class="card-text">⭐⭐⭐⭐</p>
-                </div>
-              </a>
-            </div>
-            <!-- باترون -->
-            <div class="col-md-4 mb-4">
-              <a href="#" class="card text-decoration-none text-dark">
-                <img
-                  src="/backend/image/Men'sTeddy.jpg"
-                  class="card-img-top"
-                  alt="باترون"
-                />
-                <div class="card-body text-center">
-                  <h5 class="card-title">باترون</h5>
-                  <p class="card-text">$10.00</p>
-                  <p class="card-text">⭐⭐⭐⭐</p>
-                </div>
-              </a>
-            </div>
-            <!-- صياغة الراتنج -->
-            <div class="col-md-4 mb-4">
-              <a href="#" class="card text-decoration-none text-dark">
-                <img
-                  src="/backend/image/Ribbons,measuring,tape, and,scissors.png"
-                  class="card-img-top"
-                  alt="خيوط ماكينه و مقص خياطه و ماسوره قياس "
-                />
-                <div class="card-body text-center">
-                  <h5 class="card-title">
-                    خيوط ماكينه و مقص خياطه و ماسوره قياس
-                  </h5>
-                  <p class="card-text">$50.00</p>
-                  <p class="card-text">⭐⭐⭐⭐⭐</p>
-                </div>
-              </a>
-            </div>
-            <!-- تلوينات صناعة الصابون -->
-            <div class="col-md-4 mb-4">
-              <a href="#" class="card text-decoration-none text-dark">
-                <img
-                  src="/backend/image/Resin Crafting Complete Equipment.jpg"
-                  class="card-img-top"
-                  alt="معدات صناعه ريزين قوالب و الوان  "
-                />
-                <div class="card-body text-center">
-                  <h5 class="card-title">معدات صناعه ريزين قوالب و الوان</h5>
-                  <p class="card-text">$30.00</p>
-                  <p class="card-text">⭐⭐⭐⭐</p>
-                </div>
-              </a>
-            </div>
-            <!-- معدات بيع فنون الماكياج -->
-            <div class="col-md-4 mb-4">
-              <a href="#" class="card text-decoration-none text-dark">
-                <img
-                  src="/backend/image/Makeup Artistry Vending Equipment.png"
-                  class="card-img-top"
-                  alt="معدات فنون الماكياج"
-                />
-                <div class="card-body text-center">
-                  <h5 class="card-title">معدات فنون الماكياج</h5>
-                  <p class="card-text">$80.00</p>
-                  <p class="card-text">⭐⭐⭐⭐⭐</p>
-                </div>
-              </a>
-            </div>
-          </div>
+          <div class="row" id="LearningEquipment"></div>
           <!-- الترقيم -->
           <nav aria-label="Page navigation">
             <ul class="pagination justify-content-center">
@@ -445,5 +329,6 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"></script>
     <script src="/frontend/user/javascript/ordelogin.js"></script>
     <script src="/frontend/user/ALLCategories.js"></script>
+    <script src="/frontend/user/equipmentshop.js"></script>
   </body>
 </html>

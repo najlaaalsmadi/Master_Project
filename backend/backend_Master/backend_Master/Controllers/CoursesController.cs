@@ -233,7 +233,7 @@ namespace backend_Master.Controllers
         {
             var randomCourses = await _context.Courses
                 .OrderBy(c => Guid.NewGuid()) // ترتيب عشوائي
-                .Take(4) // أخذ 4 دورات فقط
+                .Take(3) // أخذ 4 دورات فقط
                 .ToListAsync();
 
             return Ok(randomCourses);

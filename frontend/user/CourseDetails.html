@@ -191,26 +191,30 @@
 <!-- محتوى الصفحة -->
 <div class="container my-5">
   <div class="row">
-    <!-- صورة الدورة -->
+    <!-- Course Image -->
     <div class="col-lg-6 mb-2">
       <div class="text-center mb-3">
         <img id="courseImage" class="img-fluid" alt="صورة الدورة" />
       </div>
     </div>
 
-    <!-- تفاصيل الدورة وجزء السعر والدفع -->
+    <!-- Course Details and Pricing -->
     <div class="col-lg-6">
       <div class="course-details">
         <h1 id="courseName2">اسم الدورة</h1>
+
+        <!-- Price Box -->
         <div class="d-flex flex-column mb-4">
           <span><strong id="instructorName">اسم المدرس</strong></span>
           <span id="courseDate">تاريخ الدورة</span>
           <span id="studentCount">عدد الطلاب</span>
           <span id="courseDuration">مدة الدورة</span>
-          <span id="coursePrice">السعر</span>
+          <div class="price-box mb-3 text-success fw-bold">
+            <h4 id="coursePrice">السعر: 15.00$ <del class="text-muted fs-6">20.00$</del></h4>
+          </div>
         </div>
 
-        <!-- تبويب الدورة -->
+        <!-- Course Tabs -->
         <ul class="nav nav-tabs mb-4" id="courseTabs" role="tablist">
           <li class="nav-item" role="presentation">
             <button class="nav-link active" id="overview-tab" data-bs-toggle="tab" data-bs-target="#Overview" type="button" role="tab" aria-controls="Overview" aria-selected="true">نظرة عامة</button>
@@ -221,16 +225,22 @@
           <li class="nav-item" role="presentation">
             <button class="nav-link" id="tools-tab" data-bs-toggle="tab" data-bs-target="#Tools" type="button" role="tab" aria-controls="Tools" aria-selected="false">الأدوات</button>
           </li>
+          <li class="nav-item" role="presentation">
+            <button class="nav-link" id="payment-tab" data-bs-toggle="tab" data-bs-target="#Payment" type="button" role="tab" aria-controls="Payment" aria-selected="false">الدفع</button>
+          </li>
+          <li class="nav-item" role="presentation">
+            <button class="nav-link" id="comment-tab" data-bs-toggle="tab" data-bs-target="#Comments" type="button" role="tab" aria-controls="Comments" aria-selected="false">التعليقات</button>
+          </li>
         </ul>
 
         <div class="tab-content" id="courseTabsContent">
-          <!-- نظرة عامة -->
+          <!-- Overview -->
           <div class="tab-pane fade show active" id="Overview" role="tabpanel" aria-labelledby="overview-tab">
             <h2>وصف الدورة</h2>
             <p id="courseOverview">وصف الدورة من API</p>
           </div>
 
-          <!-- المنهج -->
+          <!-- Curriculum -->
           <div class="tab-pane fade" id="Curriculum" role="tabpanel" aria-labelledby="curriculum-tab">
             <h2>المنهج</h2>
             <ul id="curriculumList">
@@ -238,159 +248,77 @@
             </ul>
           </div>
 
-          <!-- الأدوات المستخدمة -->
+          <!-- Tools Used -->
           <div class="tab-pane fade" id="Tools" role="tabpanel" aria-labelledby="tools-tab">
             <h2>الأدوات المستخدمة</h2>
             <ul id="toolsList">
               <!-- سيتم تعبئة الأدوات هنا من API -->
             </ul>
           </div>
-        </div>
-      </div>
-    </div>
-  </div>
 
-    
-            <!-- قسم التعليقات -->
-<div class="col-lg-12 mt-4">
-  <h2>التعليقات</h2>
-  <div class="comments">
-    <!-- التعليق الأول -->
-    <div class="comment mb-3">
-      <strong>أحمد:</strong>
-      <p>دورة ممتازة، تعلمت الكثير عن الفخار.</p>
-
-      <!-- الردود على التعليق -->
-      <div class="replies ms-4 mt-2">
-        <!-- الرد الأول -->
-        <div class="reply mb-2">
-          <strong>محمد:</strong>
-          <p>نعم، بالفعل دورة مفيدة جدًا!</p>
-        </div>
-      </div>
-
-      <!-- زر لإظهار نموذج الرد -->
-      <button class="btn btn-link" onclick="toggleReplyForm(1)">الرد</button>
-
-      <!-- نموذج الرد على التعليق (مخفي) -->
-      <div id="replyForm1" class="reply-form mt-3" style="display: none;">
-        <form action="#" method="POST">
-          <div class="mb-2">
-            <label for="replyName1" class="form-label">اسمك</label>
-            <input type="text" class="form-control" id="replyName1" placeholder="أدخل اسمك" />
-          </div>
-          <div class="mb-2">
-            <label for="replyText1" class="form-label">ردك</label>
-            <textarea class="form-control" id="replyText1" rows="2" placeholder="أدخل ردك"></textarea>
-          </div>
-          <button type="submit" class="btn btn-secondary btn-sm">إرسال الرد</button>
-        </form>
-      </div>
-    </div>
-
-    <!-- التعليق الثاني -->
-    <div class="comment mb-3">
-      <strong>سارة:</strong>
-      <p>شرح رائع وسهل الفهم.</p>
-
-      <!-- الردود على التعليق -->
-      <div class="replies ms-4 mt-2">
-        <div class="reply mb-2">
-          <strong>مها:</strong>
-          <p>أحسنتِ في التوضيح.</p>
-        </div>
-      </div>
-
-      <!-- زر لإظهار نموذج الرد -->
-      <button class="btn btn-link" onclick="toggleReplyForm(2)">الرد</button>
-
-      <!-- نموذج الرد على التعليق (مخفي) -->
-      <div id="replyForm2" class="reply-form mt-3" style="display: none;">
-        <form action="#" method="POST">
-          <div class="mb-2">
-            <label for="replyName2" class="form-label">اسمك</label>
-            <input type="text" class="form-control" id="replyName2" placeholder="أدخل اسمك" />
-          </div>
-          <div class="mb-2">
-            <label for="replyText2" class="form-label">ردك</label>
-            <textarea class="form-control" id="replyText2" rows="2" placeholder="أدخل ردك"></textarea>
-          </div>
-          <button type="submit" class="btn btn-secondary btn-sm">إرسال الرد</button>
-        </form>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- نموذج لإضافة تعليق جديد -->
-<div class="col-lg-12 mt-4">
-  <h4>أضف تعليقك</h4>
-  <form action="#" method="POST">
-    <div class="mb-3">
-      <label for="reviewerName" class="form-label">اسمك</label>
-      <input type="text" class="form-control" id="reviewerName" placeholder="أدخل اسمك" />
-    </div>
-    <div class="mb-3">
-      <label for="commentText" class="form-label">تعليقك</label>
-      <textarea class="form-control" id="commentText" rows="3" placeholder="أدخل تعليقك"></textarea>
-    </div>
-    <button type="submit" class="btn btn-primary">إرسال</button>
-  </form>
-</div>
-</div>
-
-<script>
-  // دالة لإظهار أو إخفاء نموذج الرد
-  function toggleReplyForm(commentId) {
-    var form = document.getElementById('replyForm' + commentId);
-    if (form.style.display === 'none') {
-      form.style.display = 'block';
-    } else {
-      form.style.display = 'none';
-    }
-  }
-</script>
-
-    
-            <!-- سعر الدورة والمزيد من التفاصيل -->
-            <div class="card p-4 border-light bg-light mt-4">
+          <!-- Payment Options -->
+          <div class="tab-pane fade" id="Payment" role="tabpanel" aria-labelledby="payment-tab">
+            <div class="card p-3 border-light bg-light shadow-sm rounded-3 mt-3">
               <div class="card-body">
-                <div class="price-box mb-4">
-                  <h3>15.00$ <del>20.00$</del></h3>
+                <h5 class="mb-2">خيارات الدفع:</h5>
+                <div class="payment-button">
+                  <button class="btn btn-primary w-100 mb-2 btn-sm">
+                    <i class="fab fa-paypal"></i> PayPal
+                  </button>
+                  <button class="btn btn-outline-secondary w-100 btn-sm">
+                    <i class="fas fa-credit-card"></i> بطاقة
+                  </button>
                 </div>
-                <h4>تشمل الدورة:</h4>
-                <ul class="list-unstyled">
-                  <li>المدة: 12 ساعة</li>
-                  <li>عدد المحاضرات: 15</li>
-                  <li>الفيديوهات: 8</li>
-                  <li>الشهادات: نعم</li>
-                </ul>
-                <div class="mt-4">
-                  <h4>خيارات الدفع:</h4>
-                  <div class="payment-button">
-                    <button class="btn btn-primary w-100 mb-2">
-                      <i class="fab fa-paypal"></i> PayPal
-                    </button>
-                    <button class="btn btn-secondary w-100">
-                      <i class="fas fa-credit-card"></i> Card
-                    </button>
-                  </div>
-                </div>
-                <h4 class="mt-4">شارك هذه الدورة:</h4>
-                <p>أيقونات المشاركة على وسائل التواصل الاجتماعي</p>
-                <div class="social-icons">
-                  <!-- أيقونة فيسبوك -->
-                  <a href="https://www.facebook.com/sharer/sharer.php?u=https://example.com" target="_blank" class="btn btn-primary mx-1">
+                <h5 class="mt-3">شارك هذه الدورة:</h5>
+                <div class="social-icons d-flex justify-content-center mt-2">
+                  <a href="https://www.facebook.com/sharer/sharer.php?u=https://example.com" target="_blank" class="btn btn-primary mx-1 btn-sm">
                     <i class="fab fa-facebook-f"></i> فيسبوك
                   </a>
-    
-                  <!-- أيقونة واتساب -->
-                  <a href="https://api.whatsapp.com/send?text=https://example.com" target="_blank" class="btn btn-success mx-1">
+                  <a href="https://api.whatsapp.com/send?text=https://example.com" target="_blank" class="btn btn-success mx-1 btn-sm">
                     <i class="fab fa-whatsapp"></i> واتساب
                   </a>
                 </div>
               </div>
             </div>
+          </div>
+
+          <!-- Comments Section -->
+          <div class="tab-pane fade" id="Comments" role="tabpanel" aria-labelledby="comment-tab">
+            <h2>التعليقات</h2>
+            <div class="comments" id="commentsSection">
+              <!-- سيتم إضافة التعليقات هنا بشكل ديناميكي -->
+
+
+            </div>
+            <button class="btn btn-primary" onclick="showAllComments()">عرض كافة التعليقات</button>
+
+
+            <!-- New Comment Form -->
+            <h4 class="mt-4">أضف تعليقك</h4>
+            <form id="commentForm">
+              <div class="mb-3">
+                <label for="reviewerName" class="form-label">اسمك</label>
+                <input type="text" class="form-control" id="reviewerName" placeholder="أدخل اسمك" required />
+              </div>
+              <div class="mb-3">
+                <label for="commentText" class="form-label">تعليقك</label>
+                <textarea class="form-control" id="commentText" rows="3" placeholder="أدخل تعليقك" required></textarea>
+              </div>
+              <button type="submit" class="btn btn-primary">إرسال</button>
+            </form>
+            
+            
+            
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+       
+            
+            
           </div>
         </div>
       </div>
@@ -487,6 +415,40 @@ $(document).ready(function() {
               document.getElementById('ratingSummary').innerHTML = `مجموع التقييمات: ${stars} (${averageRating.toFixed(1)}/5)`;
             </script>
                 <script src="/frontend/user/ALLCategories.js"></script>
-
+                <script>
+                  function toggleReplyForm(commentId) {
+                    const replyForm = document.getElementById(`replyForm${commentId}`);
+                    replyForm.style.display = replyForm.style.display === 'none' ? 'block' : 'none';
+                  }
+                  </script>
+                  
+                  
+                  <script>
+                  function toggleReplyForm(commentId) {
+                    const replyForm = document.getElementById(`replyForm${commentId}`);
+                    replyForm.style.display = replyForm.style.display === 'none' ? 'block' : 'none';
+                  }
+                  </script>
+                  
+                  
+                  
+                  <script>
+                    // دالة لإظهار أو إخفاء نموذج الرد
+                    function toggleReplyForm(commentId) {
+                      var form = document.getElementById('replyForm' + commentId);
+                      if (form.style.display === 'none') {
+                        form.style.display = 'block';
+                      } else {
+                        form.style.display = 'none';
+                      }
+                    }
+                  </script>
+                  
+                      
+                  <script src="/frontend/user/comment.js">
+                    
+                  </script> 
+                  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+ 
   </body>
 </html>

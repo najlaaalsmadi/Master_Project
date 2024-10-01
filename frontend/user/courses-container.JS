@@ -420,7 +420,7 @@ function loadCourses() {
         const courseCard = `
           <div class="col-md-4 mb-4">
             <div class="card h-100">
-              <img src="${course.imageUrl}" class="card-img-top" alt="${course.title}" />
+              <img src="/backend/image/${course.imageUrl}" class="card-img-top" alt="${course.title}" />
               <div class="card-body">
                 <h5 class="card-title">${course.title}</h5>
                 <p class="card-text">${course.description}</p>
@@ -430,9 +430,10 @@ function loadCourses() {
                 <i class="fa fa-heart" style="color: #ff6b6b; font-size: 1.5em"></i>
               </button>
               <div class="card-footer btn btn-warning" style="background-color: orange">
-                <a href="javascript:void(0);" onclick="اذهب الى تفاصيل(${course.courseId})" style="text-decoration: none">
-                  <strong class="text-orange" style="color: white"></strong>
-                </a>اذهب الى تفاصيل
+              <a href="javascript:void(0);" onclick="goToDetails(${course.courseId})" style="text-decoration: none">
+                  <strong class="text-orange" style="color: white">اذهب الى التفاصيل</strong>
+                </a>
+              </div>
               </div>
             </div>
           </div>
@@ -464,7 +465,7 @@ function loadCoursesByCategories(categoryIds) {
         const courseCard = `
           <div class="col-md-4 mb-4">
             <div class="card h-100">
-              <img src="${course.imageUrl}" class="card-img-top" alt="${course.title}" />
+              <img src="/backend/image/${course.imageUrl}" class="card-img-top" alt="${course.title}" />
               <div class="card-body">
                 <h5 class="card-title">${course.title}</h5>
                 <p class="card-text">${course.description}</p>
@@ -474,8 +475,8 @@ function loadCoursesByCategories(categoryIds) {
                 <i class="fa fa-heart" style="color: #ff6b6b; font-size: 1.5em"></i>
               </button>
               <div class="card-footer btn btn-warning" style="background-color: orange">
-                <a href="javascript:void(0);" onclick="goToDetails(${course.courseId})" style="text-decoration: none">
-                  <strong class="text-orange" style="color: white">اذهب الى تفاصيل</strong>
+              <a href="javascript:void(0);" onclick="goToDetails(${course.courseId})" style="text-decoration: none">
+                  <strong class="text-orange" style="color: white">اذهب الى التفاصيل</strong>
                 </a>
               </div>
             </div>
@@ -629,7 +630,7 @@ function loadCoursesByRating(ratings) {
           const courseCard = `
             <div class="col-md-4 mb-4">
               <div class="card h-100">
-                <img src="${course.imageUrl}" class="card-img-top" alt="${course.title}" />
+                <img src="/backend/image/${course.imageUrl}" class="card-img-top" alt="${course.title}" />
                 <div class="card-body">
                   <h5 class="card-title">${course.title}</h5>
                   <p class="card-text">${course.description}</p>

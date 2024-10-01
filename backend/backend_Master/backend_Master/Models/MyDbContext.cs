@@ -17,11 +17,21 @@ public partial class MyDbContext : DbContext
 
     public virtual DbSet<Admin> Admins { get; set; }
 
+    public virtual DbSet<Booking> Bookings { get; set; }
+
+    public virtual DbSet<Card> Cards { get; set; }
+
+    public virtual DbSet<CardItem> CardItems { get; set; }
+
     public virtual DbSet<Category> Categories { get; set; }
 
     public virtual DbSet<Comment> Comments { get; set; }
 
+    public virtual DbSet<CommentsCoursesBefore> CommentsCoursesBefores { get; set; }
+
     public virtual DbSet<Course> Courses { get; set; }
+
+    public virtual DbSet<EmailMessage> EmailMessages { get; set; }
 
     public virtual DbSet<Event> Events { get; set; }
 
@@ -35,9 +45,15 @@ public partial class MyDbContext : DbContext
 
     public virtual DbSet<Order> Orders { get; set; }
 
+    public virtual DbSet<Payment> Payments { get; set; }
+
+    public virtual DbSet<ResponsesCommentsCoursesBefore> ResponsesCommentsCoursesBefores { get; set; }
+
     public virtual DbSet<Trainer> Trainers { get; set; }
 
     public virtual DbSet<User> Users { get; set; }
+
+    public virtual DbSet<UserCourse> UserCourses { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
@@ -62,6 +78,79 @@ public partial class MyDbContext : DbContext
             entity.HasOne(d => d.User).WithMany(p => p.Admins)
                 .HasForeignKey(d => d.UserId)
                 .HasConstraintName("FK__Admins__user_id__619B8048");
+        });
+
+        modelBuilder.Entity<Booking>(entity =>
+        {
+            entity.HasKey(e => e.BookingId).HasName("PK__Bookings__5DE3A5B1763F4CA4");
+
+            entity.Property(e => e.BookingId).HasColumnName("booking_id");
+            entity.Property(e => e.BookingDate)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnName("booking_date");
+            entity.Property(e => e.EventId).HasColumnName("EventID");
+            entity.Property(e => e.Status)
+                .HasMaxLength(50)
+                .HasDefaultValue("مؤكد")
+                .HasColumnName("status");
+            entity.Property(e => e.StudentId).HasColumnName("student_id");
+
+            entity.HasOne(d => d.Event).WithMany(p => p.Bookings)
+                .HasForeignKey(d => d.EventId)
+                .HasConstraintName("FK__Bookings__EventI__3A4CA8FD");
+
+            entity.HasOne(d => d.Student).WithMany(p => p.Bookings)
+                .HasForeignKey(d => d.StudentId)
+                .HasConstraintName("FK__Bookings__studen__395884C4");
+        });
+
+        modelBuilder.Entity<Card>(entity =>
+        {
+            entity.HasKey(e => e.CardId).HasName("PK__Card__55FECDAEAD266917");
+
+            entity.ToTable("Card");
+
+            entity.Property(e => e.CardId).ValueGeneratedNever();
+            entity.Property(e => e.CreatedAt)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime");
+            entity.Property(e => e.UpdatedAt)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime");
+
+            entity.HasOne(d => d.User).WithMany(p => p.Cards)
+                .HasForeignKey(d => d.UserId)
+                .HasConstraintName("FK__Card__UserId__4F47C5E3");
+        });
+
+        modelBuilder.Entity<CardItem>(entity =>
+        {
+            entity.HasKey(e => e.CardItemId).HasName("PK__CardItem__60AC9AAF7F6AFAD7");
+
+            entity.ToTable("CardItem");
+
+            entity.Property(e => e.AddedAt)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime");
+            entity.Property(e => e.EquipmentId).HasColumnName("equipmentID");
+            entity.Property(e => e.Price).HasColumnType("decimal(10, 2)");
+            entity.Property(e => e.ProductId).HasColumnName("productID");
+            entity.Property(e => e.Quantity).HasDefaultValue(1);
+
+            entity.HasOne(d => d.Card).WithMany(p => p.CardItems)
+                .HasForeignKey(d => d.CardId)
+                .OnDelete(DeleteBehavior.Cascade)
+                .HasConstraintName("FK__CardItem__CardId__0C50D423");
+
+            entity.HasOne(d => d.Equipment).WithMany(p => p.CardItems)
+                .HasForeignKey(d => d.EquipmentId)
+                .OnDelete(DeleteBehavior.Cascade)
+                .HasConstraintName("FK__CardItem__equipm__0E391C95");
+
+            entity.HasOne(d => d.Product).WithMany(p => p.CardItems)
+                .HasForeignKey(d => d.ProductId)
+                .OnDelete(DeleteBehavior.Cascade)
+                .HasConstraintName("FK__CardItem__produc__0D44F85C");
         });
 
         modelBuilder.Entity<Category>(entity =>
@@ -96,6 +185,21 @@ public partial class MyDbContext : DbContext
             entity.HasOne(d => d.User).WithMany(p => p.Comments)
                 .HasForeignKey(d => d.UserId)
                 .HasConstraintName("FK__Comments__user_i__656C112C");
+        });
+
+        modelBuilder.Entity<CommentsCoursesBefore>(entity =>
+        {
+            entity.HasKey(e => e.CommentId).HasName("PK__Comments__E7957687105CCE48");
+
+            entity.ToTable("Comments_Courses_before");
+
+            entity.Property(e => e.CommentId).HasColumnName("comment_id");
+            entity.Property(e => e.CommentText).HasColumnName("comment_text");
+            entity.Property(e => e.CreatedAt)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime")
+                .HasColumnName("created_at");
+            entity.Property(e => e.Name).HasMaxLength(255);
         });
 
         modelBuilder.Entity<Course>(entity =>
@@ -136,66 +240,115 @@ public partial class MyDbContext : DbContext
                 .HasConstraintName("FK__Courses__trainer__47DBAE45");
         });
 
+        modelBuilder.Entity<EmailMessage>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PK__EmailMes__3214EC07DDA8F63F");
+
+            entity.ToTable("EmailMessage");
+
+            entity.Property(e => e.DateSent)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime");
+            entity.Property(e => e.Email).HasMaxLength(100);
+            entity.Property(e => e.Name).HasMaxLength(100);
+        });
+
         modelBuilder.Entity<Event>(entity =>
         {
-            entity.HasKey(e => e.EventId).HasName("PK__Events__2370F7274759972C");
+            entity.HasKey(e => e.EventId).HasName("PK__Events__7944C87053C7EFCD");
 
-            entity.Property(e => e.EventId).HasColumnName("event_id");
-            entity.Property(e => e.Date).HasColumnName("date");
-            entity.Property(e => e.Description).HasColumnName("description");
-            entity.Property(e => e.Location)
-                .HasMaxLength(255)
-                .HasColumnName("location");
-            entity.Property(e => e.Title)
-                .HasMaxLength(255)
-                .HasColumnName("title");
+            entity.Property(e => e.EventId).HasColumnName("EventID");
+            entity.Property(e => e.EventTitle).HasMaxLength(255);
+            entity.Property(e => e.ImagePath).HasMaxLength(255);
+            entity.Property(e => e.Location).HasMaxLength(255);
+            entity.Property(e => e.MapUrl).HasColumnName("MapURL");
+            entity.Property(e => e.Speaker).HasMaxLength(255);
+            entity.Property(e => e.ZoomLink).HasMaxLength(255);
+            entity.Property(e => e.ZoomPassword).HasMaxLength(50);
         });
 
         modelBuilder.Entity<HandmadeProduct>(entity =>
         {
-            entity.HasKey(e => e.ProductId).HasName("PK__Handmade__47027DF5FF49C077");
+            entity.HasKey(e => e.ProductId).HasName("PK__Handmade__47027DF5997B6656");
 
             entity.ToTable("Handmade_Products");
 
             entity.Property(e => e.ProductId).HasColumnName("product_id");
+            entity.Property(e => e.CategoryId).HasColumnName("category_id");
             entity.Property(e => e.CreatedAt)
                 .HasDefaultValueSql("(getdate())")
                 .HasColumnType("datetime")
                 .HasColumnName("created_at");
             entity.Property(e => e.Description).HasColumnName("description");
+            entity.Property(e => e.ImageUrl1)
+                .HasMaxLength(255)
+                .HasColumnName("image_url_1");
+            entity.Property(e => e.ImageUrl2)
+                .HasMaxLength(255)
+                .HasColumnName("image_url_2");
+            entity.Property(e => e.ImageUrl3)
+                .HasMaxLength(255)
+                .HasColumnName("image_url_3");
             entity.Property(e => e.Name)
                 .HasMaxLength(255)
                 .HasColumnName("name");
             entity.Property(e => e.Price)
                 .HasColumnType("decimal(10, 2)")
                 .HasColumnName("price");
-            entity.Property(e => e.Stock).HasColumnName("stock");
+            entity.Property(e => e.Rating)
+                .HasColumnType("decimal(2, 1)")
+                .HasColumnName("rating");
+            entity.Property(e => e.UserId).HasColumnName("user_id");
+
+            entity.HasOne(d => d.Category).WithMany(p => p.HandmadeProducts)
+                .HasForeignKey(d => d.CategoryId)
+                .HasConstraintName("FK__Handmade___categ__03F0984C");
+
+            entity.HasOne(d => d.User).WithMany(p => p.HandmadeProducts)
+                .HasForeignKey(d => d.UserId)
+                .HasConstraintName("FK__Handmade___user___04E4BC85");
         });
 
         modelBuilder.Entity<LearningEquipment>(entity =>
         {
-            entity.HasKey(e => e.EquipmentId).HasName("PK__Learning__197068AFB2FFC079");
+            entity.HasKey(e => e.EquipmentId).HasName("PK__Learning__197068AF893B431B");
 
             entity.ToTable("Learning_Equipment");
 
             entity.Property(e => e.EquipmentId).HasColumnName("equipment_id");
+            entity.Property(e => e.CategoryId).HasColumnName("category_id");
             entity.Property(e => e.CourseId).HasColumnName("course_id");
             entity.Property(e => e.CreatedAt)
                 .HasDefaultValueSql("(getdate())")
                 .HasColumnType("datetime")
                 .HasColumnName("created_at");
             entity.Property(e => e.Description).HasColumnName("description");
+            entity.Property(e => e.ImageUrl1)
+                .HasMaxLength(255)
+                .HasColumnName("image_url_1");
+            entity.Property(e => e.ImageUrl2)
+                .HasMaxLength(255)
+                .HasColumnName("image_url_2");
+            entity.Property(e => e.ImageUrl3)
+                .HasMaxLength(255)
+                .HasColumnName("image_url_3");
             entity.Property(e => e.Name)
                 .HasMaxLength(255)
                 .HasColumnName("name");
             entity.Property(e => e.Price)
                 .HasColumnType("decimal(10, 2)")
                 .HasColumnName("price");
-            entity.Property(e => e.Stock).HasColumnName("stock");
+            entity.Property(e => e.Rating)
+                .HasColumnType("decimal(2, 1)")
+                .HasColumnName("rating");
+
+            entity.HasOne(d => d.Category).WithMany(p => p.LearningEquipments)
+                .HasForeignKey(d => d.CategoryId)
+                .HasConstraintName("FK__Learning___categ__5AB9788F");
 
             entity.HasOne(d => d.Course).WithMany(p => p.LearningEquipments)
                 .HasForeignKey(d => d.CourseId)
-                .HasConstraintName("FK__Learning___cours__52593CB8");
+                .HasConstraintName("FK__Learning___cours__59C55456");
         });
 
         modelBuilder.Entity<Lesson>(entity =>
@@ -220,17 +373,17 @@ public partial class MyDbContext : DbContext
 
         modelBuilder.Entity<Newsletter>(entity =>
         {
-            entity.HasKey(e => e.NewsletterId).HasName("PK__Newslett__57628D302A51D783");
+            entity.HasKey(e => e.NewsletterId).HasName("PK__Newslett__57628D305ACE1B8E");
 
             entity.ToTable("Newsletter");
 
-            entity.HasIndex(e => e.Email, "UQ__Newslett__AB6E61646C6C11FE").IsUnique();
+            entity.HasIndex(e => e.Email, "UQ__Newslett__AB6E616445B58B6A").IsUnique();
 
             entity.Property(e => e.NewsletterId).HasColumnName("newsletter_id");
             entity.Property(e => e.Email)
                 .HasMaxLength(100)
                 .HasColumnName("email");
-            entity.Property(e => e.EventId).HasColumnName("event_id");
+            entity.Property(e => e.EventId).HasColumnName("EventID");
             entity.Property(e => e.SubscribedAt)
                 .HasDefaultValueSql("(getdate())")
                 .HasColumnType("datetime")
@@ -238,7 +391,7 @@ public partial class MyDbContext : DbContext
 
             entity.HasOne(d => d.Event).WithMany(p => p.Newsletters)
                 .HasForeignKey(d => d.EventId)
-                .HasConstraintName("FK__Newslette__event__5DCAEF64");
+                .HasConstraintName("FK__Newslette__Event__3F115E1A");
         });
 
         modelBuilder.Entity<Order>(entity =>
@@ -261,6 +414,41 @@ public partial class MyDbContext : DbContext
             entity.HasOne(d => d.User).WithMany(p => p.Orders)
                 .HasForeignKey(d => d.UserId)
                 .HasConstraintName("FK__Orders__user_id__571DF1D5");
+        });
+
+        modelBuilder.Entity<Payment>(entity =>
+        {
+            entity.HasKey(e => e.PaymentId).HasName("PK__Payments__9B556A383B342142");
+
+            entity.Property(e => e.Amount).HasColumnType("decimal(18, 2)");
+            entity.Property(e => e.PayerId).HasMaxLength(100);
+            entity.Property(e => e.PaymentDate).HasColumnType("datetime");
+            entity.Property(e => e.PaymentMethod).HasMaxLength(50);
+            entity.Property(e => e.Status).HasMaxLength(50);
+
+            entity.HasOne(d => d.User).WithMany(p => p.Payments)
+                .HasForeignKey(d => d.UserId)
+                .HasConstraintName("FK__Payments__UserId__17F790F9");
+        });
+
+        modelBuilder.Entity<ResponsesCommentsCoursesBefore>(entity =>
+        {
+            entity.HasKey(e => e.ResponseId).HasName("PK__Response__EBECD896AB553EA1");
+
+            entity.ToTable("Responses_Comments_Courses_before");
+
+            entity.Property(e => e.ResponseId).HasColumnName("response_id");
+            entity.Property(e => e.CommentId).HasColumnName("comment_id");
+            entity.Property(e => e.CreatedAt)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime")
+                .HasColumnName("created_at");
+            entity.Property(e => e.Name).HasMaxLength(255);
+            entity.Property(e => e.ResponseText).HasColumnName("response_text");
+
+            entity.HasOne(d => d.Comment).WithMany(p => p.ResponsesCommentsCoursesBefores)
+                .HasForeignKey(d => d.CommentId)
+                .HasConstraintName("FK__Responses__comme__123EB7A3");
         });
 
         modelBuilder.Entity<Trainer>(entity =>
@@ -289,6 +477,7 @@ public partial class MyDbContext : DbContext
             entity.HasIndex(e => e.Email, "UQ__Users__AB6E616477D4B3D8").IsUnique();
 
             entity.Property(e => e.UserId).HasColumnName("user_id");
+            entity.Property(e => e.BiographicaldetailsCv).HasColumnName("biographicaldetailsCV");
             entity.Property(e => e.CreatedAt)
                 .HasDefaultValueSql("(getdate())")
                 .HasColumnType("datetime")
@@ -296,15 +485,52 @@ public partial class MyDbContext : DbContext
             entity.Property(e => e.Email)
                 .HasMaxLength(100)
                 .HasColumnName("email");
+            entity.Property(e => e.Imageprofile).HasColumnName("imageprofile");
+            entity.Property(e => e.JobTitle).HasMaxLength(50);
             entity.Property(e => e.Name)
                 .HasMaxLength(100)
                 .HasColumnName("name");
+            entity.Property(e => e.Otp).HasMaxLength(10);
             entity.Property(e => e.Password)
                 .HasMaxLength(255)
                 .HasColumnName("password");
+            entity.Property(e => e.PasswordHash).HasMaxLength(255);
+            entity.Property(e => e.PasswordSalt).HasMaxLength(255);
+            entity.Property(e => e.Phone)
+                .HasMaxLength(10)
+                .HasColumnName("phone");
             entity.Property(e => e.Role)
                 .HasMaxLength(20)
                 .HasColumnName("role");
+        });
+
+        modelBuilder.Entity<UserCourse>(entity =>
+        {
+            entity.HasKey(e => e.EnrollmentId).HasName("PK__user_cou__6D24AA7AE06712F9");
+
+            entity.ToTable("user_course");
+
+            entity.Property(e => e.EnrollmentId).HasColumnName("enrollment_id");
+            entity.Property(e => e.Completed)
+                .HasDefaultValue(false)
+                .HasColumnName("completed");
+            entity.Property(e => e.CourseId).HasColumnName("course_id");
+            entity.Property(e => e.EnrollmentDate)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime")
+                .HasColumnName("enrollment_date");
+            entity.Property(e => e.Progress)
+                .HasDefaultValue(0)
+                .HasColumnName("progress");
+            entity.Property(e => e.UserId).HasColumnName("user_id");
+
+            entity.HasOne(d => d.Course).WithMany(p => p.UserCourses)
+                .HasForeignKey(d => d.CourseId)
+                .HasConstraintName("FK__user_cour__cours__2CF2ADDF");
+
+            entity.HasOne(d => d.User).WithMany(p => p.UserCourses)
+                .HasForeignKey(d => d.UserId)
+                .HasConstraintName("FK__user_cour__user___2BFE89A6");
         });
 
         OnModelCreatingPartial(modelBuilder);

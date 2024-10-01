@@ -29,6 +29,7 @@ namespace backend_Master.Controllers
         [HttpGet("Categories/{id}")]
         public async Task<ActionResult<Category>> GetCategory(int id)
         {
+                 
             var category = await _context.Categories.FindAsync(id);
             if (category == null)
             {

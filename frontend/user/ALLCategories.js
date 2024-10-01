@@ -9,8 +9,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
   fetch(apiUrl)
     .then((response) => {
-      console.log("API response status:", response.status);
-
       if (!response.ok) {
         throw new Error("Network response was not ok");
       }
@@ -30,6 +28,9 @@ document.addEventListener("DOMContentLoaded", function () {
         const listItem = document.createElement("li");
         localStorage.setItem("categoryId123", category.categoryId);
         listItem.innerHTML = `<a class="dropdown-item" href="/frontend/user/CoursesCategories.html?categoryId=${category.categoryId}">${category.name}</a>`;
+        listItem.addEventListener("click", () => {
+          localStorage.setItem("categoryIdbATOOL123", category.categoryId);
+        });
         categoriesDropdown.appendChild(listItem);
       });
     })
@@ -115,102 +116,46 @@ function getSelectedCategories() {
 }
 
 // Function to load all courses
-function loadCourses() {
-  fetch("http://localhost:38146/api/Courses/all")
-    .then((response) => {
-      if (!response.ok) {
-        throw new Error("Network response was not ok " + response.statusText);
-      }
-      return response.json();
-    })
-    .then((data) => {
-      const coursesContainer = document.getElementById("courses-container");
-      coursesContainer.innerHTML = ""; // Clear the container before adding new content
+// function loadCourses() {
+//   fetch("http://localhost:38146/api/Courses/all")
+//     .then((response) => {
+//       if (!response.ok) {
+//         throw new Error("Network response was not ok " + response.statusText);
+//       }
+//       return response.json();
+//     })
+//     .then((data) => {
+//       const coursesContainer = document.getElementById("courses-container");
+//       coursesContainer.innerHTML = ""; // Clear the container before adding new content
 
-      // Create course cards
-      data.forEach((course) => {
-        const courseCard = `
-          <div class="col-md-4 mb-4">
-            <div class="card h-100">
-              <img src="${course.imageUrl}" class="card-img-top" alt="${course.title}" />
-              <div class="card-body">
-                <h5 class="card-title">${course.title}</h5>
-                <p class="card-text">${course.description}</p>
-                <p class="card-text">${course.price}دينار</p>
-              </div>
-              <button class="btn btn-light border-0 favorite-btn" style="background-color: transparent">
-                <i class="fa fa-heart" style="color: #ff6b6b; font-size: 1.5em"></i>
-              </button>
-              <div class="card-footer btn btn-warning" style="background-color: orange">
-                <a href="javascript:void(0);" onclick="اذهب الى تفاصيل(${course.courseId})" style="text-decoration: none">
-                  <strong class="text-orange" style="color: white"></strong>
-                </a>اذهب الى تفاصيل
-              </div>
-            </div>
-          </div>
-        `;
-        coursesContainer.innerHTML += courseCard;
-      });
-    })
-    .catch((error) => console.error("Error fetching courses:", error));
-}
+//       // Create course cards
+//       data.forEach((course) => {
+//         const courseCard = `
+//           <div class="col-md-4 mb-4">
+//             <div class="card h-100">
+//               <img src="${course.imageUrl}" class="card-img-top" alt="${course.title}" />
+//               <div class="card-body">
+//                 <h5 class="card-title">${course.title}</h5>
+//                 <p class="card-text">${course.description}</p>
+//                 <p class="card-text">${course.price}دينار</p>
+//               </div>
+//               <button class="btn btn-light border-0 favorite-btn" style="background-color: transparent">
+//                 <i class="fa fa-heart" style="color: #ff6b6b; font-size: 1.5em"></i>
+//               </button>
+//               <div class="card-footer btn btn-warning" style="background-color: orange">
+//                <a href="javascript:void(0);" onclick="goToDetails(${course.courseId})" style="text-decoration: none">
+//                   <strong class="text-orange" style="color: white">اذهب الى التفاصيل</strong>
+//                 </a>
+//               </div>
+//             </div>
+//           </div>
+//         `;
+//         coursesContainer.innerHTML += courseCard;
+//       });
+//     })
+//     .catch((error) => console.error("Error fetching courses:", error));
+// }
 // Function to load courses by selected category from localStorage
-function loadCoursesByCategory() {
-  debugger;
-  // Get the category ID from localStorage
-  const categoryId = localStorage.getItem("categoryId123");
-  console.log("categoryId123", categoryId);
-  if (!categoryId) {
-    console.error("No category ID found in localStorage");
-    return;
-  }
-
-  const url = `http://localhost:38146/api/Courses/categoryId/${categoryId}`;
-
-  fetch(url)
-    .then((response) => {
-      if (!response.ok) {
-        throw new Error("Network response was not ok " + response.statusText);
-      }
-      return response.json();
-    })
-    .then((data) => {
-      console.log("data123", data);
-      const coursesContainer = document.getElementById("courses-container");
-      coursesContainer.innerHTML = ""; // Clear the container before adding new content
-
-      // Create course cards based on selected category
-      data.forEach((course) => {
-        const courseCard = `
-          <div class="col-md-4 mb-4">
-            <div class="card h-100">
-              <img src="${course.imageUrl}" class="card-img-top" alt="${course.title}" />
-              <div class="card-body">
-                <h5 class="card-title">${course.title}</h5>
-                <p class="card-text">${course.description}</p>
-                <p class="card-text">$${course.price}</p>
-              </div>
-              <button class="btn btn-light border-0 favorite-btn" style="background-color: transparent">
-                <i class="fa fa-heart" style="color: #ff6b6b; font-size: 1.5em"></i>
-              </button>
-              <div class="card-footer btn btn-warning" style="background-color: orange">
-                <a href="javascript:void(0);" onclick="goToDetails(${course.courseId})" style="text-decoration: none">
-                  <strong class="text-orange" style="color: white">اذهب الى تفاصيل</strong>
-                </a>
-              </div>
-            </div>
-          </div>
-        `;
-        coursesContainer.innerHTML += courseCard;
-      });
-    })
-    .catch((error) =>
-      console.error("Error fetching courses by category:", error)
-    );
-}
-
-// Call the function to load courses when the page loads
-document.addEventListener("DOMContentLoaded", loadCoursesByCategory);
 
 // Function to go to the course details page
 function goToDetails(courseId) {
@@ -219,7 +164,7 @@ function goToDetails(courseId) {
 }
 
 // Load all courses when the page is opened
-window.onload = loadCourses;
+// window.onload = loadCourses;
 
 document.addEventListener("DOMContentLoaded", function () {
   // إضافة الأحداث لخيارات تصفية السعر
@@ -376,3 +321,61 @@ function loadCoursesByRating(ratings) {
     })
     .catch((error) => console.error("Error fetching courses:", error));
 }
+function loadCoursesByCategory() {
+  debugger;
+  // Get the category ID from localStorage
+  const categoryId = localStorage.getItem("categoryIdbATOOL123");
+  console.log("categoryId123", categoryId);
+  if (!categoryId) {
+    console.error("No category ID found in localStorage");
+    return;
+  }
+
+  const url = `http://localhost:38146/api/Courses/categoryId/${localStorage.getItem(
+    "categoryIdbATOOL123"
+  )}`;
+
+  fetch(url)
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("Network response was not ok " + response.statusText);
+      }
+      return response.json();
+    })
+    .then((data) => {
+      console.log("data123", data);
+      const coursesContainer = document.getElementById("courses-container");
+      coursesContainer.innerHTML = ""; // Clear the container before adding new content
+
+      // Create course cards based on selected category
+      data.forEach((course) => {
+        const courseCard = `
+          <div class="col-md-4 mb-4">
+            <div class="card h-100">
+              <img src="${course.imageUrl}" class="card-img-top" alt="${course.title}" />
+              <div class="card-body">
+                <h5 class="card-title">${course.title}</h5>
+                <p class="card-text">${course.description}</p>
+                <p class="card-text">$${course.price}</p>
+              </div>
+              <button class="btn btn-light border-0 favorite-btn" style="background-color: transparent">
+                <i class="fa fa-heart" style="color: #ff6b6b; font-size: 1.5em"></i>
+              </button>
+              <div class="card-footer btn btn-warning" style="background-color: orange">
+                <a href="javascript:void(0);" onclick="goToDetails(${course.courseId})" style="text-decoration: none">
+                  <strong class="text-orange" style="color: white">اذهب الى تفاصيل</strong>
+                </a>
+              </div>
+            </div>
+          </div>
+        `;
+        coursesContainer.innerHTML += courseCard;
+      });
+    })
+    .catch((error) =>
+      console.error("Error fetching courses by category:", error)
+    );
+}
+
+// Call the function to load courses when the page loads
+document.addEventListener("DOMContentLoaded", loadCoursesByCategory);

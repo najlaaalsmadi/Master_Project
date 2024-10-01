@@ -178,108 +178,59 @@
           <div class="flex-grow-1">
             <img
               id="mainImage"
-              src="/backend/image/Completesewingequipment1.png"
+              src=""
               class="img-fluid mb-2"
               alt="صورة المنتج الرئيسية"
+              style="width: 100%; height: auto; cursor: pointer"
             />
           </div>
 
           <!-- الصور المصغرة -->
           <div class="d-flex flex-column justify-content-between">
             <img
-              src="/backend/image/Completesewingequipment1.png"
+              id="thumbnail1"
+              src=""
               class="img-thumbnail mb-4 thumbnail"
               alt="صورة مصغرة 1"
-              style="width: 300px; height: auto; cursor: pointer"
+              style="width: 150px; height: auto; cursor: pointer"
             />
             <img
-              src="/backend/image/Completesewingequipment2.png"
+              id="thumbnail2"
+              src=""
               class="img-thumbnail mb-4 thumbnail"
               alt="صورة مصغرة 2"
-              style="width: 300px; height: auto; cursor: pointer"
+              style="width: 150px; height: auto; cursor: pointer"
             />
             <img
-              src="/backend/image/Completesewingequipment3.png"
+              id="thumbnail3"
+              src=""
               class="img-thumbnail mb-4 thumbnail"
               alt="صورة مصغرة 3"
-              style="width: 300px; height: auto; cursor: pointer"
+              style="width: 150px; height: auto; cursor: pointer"
             />
           </div>
         </div>
 
         <!-- معلومات المنتج -->
         <div class="col-md-6">
-          <h1 class="mb-3">معدات الحياكة الكاملة</h1>
-          <p class="h4 text-danger">13.00$</p>
-          <p class="text-warning">★★★★★ (5.0)</p>
-          <p>
-            آلات الخياطة، الإبر والخيوط، الأقمشة، المقصات، أدوات القياس، وأنماط
-            الخياطة. معدات خياطة كاملة.
-          </p>
-          <a
-            href="/frontend/user/card.html"
-            class="btn btn-warning btn-lg w-100 mb-3"
-            >شراء</a
-          >
-          <p><strong>التصنيفات:</strong> الأعمال والتسويق</p>
-          <p><strong>العلامات:</strong> التدريب، التعليم</p>
+          <h1 id="productName" class="mb-3"></h1>
+          <p id="productPrice" class="h4 text-danger"></p>
+          <p id="productRating" class="text-warning"></p>
+          <p id="productDescription"></p>
+          <div class="addcard">
+            <a
+              href="javascript:void(0);"
+              class="btn btn-warning btn-lg w-100 mb-3"
+              id="addToCartButton"
+              >شراء</a
+            >
+          </div>
         </div>
       </div>
 
       <!-- المنتجات ذات الصلة -->
-      <div class="row mt-4">
-        <div class="col-md-4 mb-4">
-          <a
-            href="crystal-beads.html"
-            class="card text-decoration-none text-dark"
-          >
-            <img
-              src="/backend/image/CrystalBeads.png"
-              class="card-img-top img-fluid"
-              alt="حبات الكريستال"
-            />
-            <div class="card-body text-center">
-              <h5 class="card-title">حبات الكريستال</h5>
-              <p class="card-text">5.00$ - 20.00$</p>
-              <p class="card-text">⭐⭐⭐⭐⭐</p>
-            </div>
-          </a>
-        </div>
-
-        <div class="col-md-4 mb-4">
-          <a
-            href="/backend/image/CopperWire.png"
-            class="card text-decoration-none text-dark"
-          >
-            <img
-              src="/backend/image/CopperWire.png"
-              class="card-img-top img-fluid"
-              alt="الأسلاك النحاسية"
-            />
-            <div class="card-body text-center">
-              <h5 class="card-title">الأسلاك النحاسية</h5>
-              <p class="card-text">15.00$</p>
-              <p class="card-text">⭐⭐⭐⭐</p>
-            </div>
-          </a>
-        </div>
-        <div class="col-md-4 mb-4">
-          <a
-            href="knitting-machine.html"
-            class="card text-decoration-none text-dark"
-          >
-            <img
-              src="/backend/image/KnittingMachine.png"
-              class="card-img-top img-fluid"
-              alt="ماكينة الحياكة"
-            />
-            <div class="card-body text-center">
-              <h5 class="card-title">ماكينة الحياكة</h5>
-              <p class="card-text">150.00$</p>
-              <p class="card-text">⭐⭐⭐⭐⭐</p>
-            </div>
-          </a>
-        </div>
+      <div class="row mt-4" id="relatedProducts">
+        <!-- سيتم إضافة المنتجات بشكل ديناميكي هنا -->
       </div>
     </div>
 
@@ -331,6 +282,10 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"></script>
     <script src="/frontend/user/javascript/ordelogin.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
     <script src="/frontend/user/ALLCategories.js"></script>
+    <script src="/frontend/user/equipmentshopdetails.js"></script>
   </body>
 </html>

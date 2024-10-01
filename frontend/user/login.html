@@ -198,6 +198,7 @@
                 name="Email"
                 class="form-control"
                 required
+                autocomplete="username"
               />
             </div>
             <div class="form-group mb-3">
@@ -208,9 +209,21 @@
                 name="Password"
                 class="form-control"
                 required
+                autocomplete="current-password"
               />
             </div>
-
+            <div class="form-group mb-3">
+              <label for="UserType">نوع المستخدم</label>
+              <select
+                id="UserType"
+                name="UserType"
+                class="form-control"
+                required
+              >
+                <option value="user">مستخدم</option>
+                <option value="trainer">مدرب</option>
+              </select>
+            </div>
             <div class="form-group text-end mb-3">
               <a href="/frontend/user/ForgotPassword.html">نسيت كلمة المرور؟</a>
             </div>
@@ -265,71 +278,7 @@
     <!-- تضمين SweetAlert2 -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-    <script>
-      document
-        .getElementById("loginForm")
-        .addEventListener("submit", function (event) {
-          event.preventDefault(); // منع إرسال النموذج بشكل افتراضي
-
-          // الحصول على بيانات الإدخال
-          const email = document.getElementById("Email").value;
-          const password = document.getElementById("Password").value;
-
-          // استرجاع بيانات التسجيل المخزنة في localStorage
-          let storedData = localStorage.getItem("signupData");
-          console.log(storedData);
-
-          if (storedData) {
-            // تحويل البيانات من JSON إلى مصفوفة
-            let signupData = JSON.parse(storedData);
-            console.log(signupData);
-
-            // التحقق من مطابقة البريد الإلكتروني وكلمة المرور
-            if (signupData[2] === email && signupData[3] === password) {
-              // التحقق من دور المستخدم (طالب أو معلم)
-              let userRole = signupData[4]; // نفترض أن الدور مخزن في المؤشر الرابع
-
-              if (userRole === "طالب") {
-                // إذا كان المستخدم طالبًا
-                Swal.fire({
-                  title: "نجاح!",
-                  text: "تم تسجيل الدخول بنجاح كطالب",
-                  icon: "success",
-                  confirmButtonText: "موافق",
-                }).then(() => {
-                  window.location.href = "/frontend/student/Index.html"; // إعادة توجيه الطالب
-                });
-              } else if (userRole === "معلم") {
-                // إذا كان المستخدم معلمًا
-                Swal.fire({
-                  title: "نجاح!",
-                  text: "تم تسجيل الدخول بنجاح كمعلم",
-                  icon: "success",
-                  confirmButtonText: "موافق",
-                }).then(() => {
-                  window.location.href = "/frontend/teacher/Index.html"; // إعادة توجيه المعلم
-                });
-              }
-            } else {
-              // إذا كانت البيانات غير مطابقة، عرض رسالة خطأ
-              Swal.fire({
-                title: "خطأ!",
-                text: "البريد الإلكتروني أو كلمة المرور غير صحيحة",
-                icon: "error",
-                confirmButtonText: "حاول مجددًا",
-              });
-            }
-          } else {
-            // إذا لم يتم العثور على بيانات التسجيل
-            Swal.fire({
-              title: "خطأ!",
-              text: "لا توجد بيانات مستخدم مسجلة",
-              icon: "error",
-              confirmButtonText: "حاول مجددًا",
-            });
-          }
-        });
-    </script>
+    <script src="/frontend/user/login.js"></script>
 
     <!-- تضمين SweetAlert2 (إذا أردت استخدامه لعرض التنبيهات) -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -338,5 +287,6 @@
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="/frontend/user/javascript/ordelogin.js"></script>
+    <script src="/frontend/equipmentshopdetails.js"></script>
   </body>
 </html>

@@ -169,7 +169,7 @@
         </div>
       </div>
     </nav>
-  
+
     <nav aria-label="breadcrumb">
       <ol class="breadcrumb">
         <li class="breadcrumb-item">
@@ -178,117 +178,421 @@
         <li class="breadcrumb-item">
           <a href="allevents.html">جميع الأحداث</a>
         </li>
-        <li class="breadcrumb-item active" aria-current="page">
+        <li
+          class="breadcrumb-item active"
+          aria-current="page"
+          id="title-event-nav"
+        >
           ندوة فنون الخياطة الأساسية والتقنيات المتقدمة مع محترفي الصناعة
         </li>
       </ol>
     </nav>
     <div class="row">
-        <div class="col-lg-8">
-          <div class="card mb-3">
-            <img src="/backend/image/ندوة فنون الخياطة الأساسية والتقنيات المتقدمة مع محترفي الصناعة.png" class="card-img-top" alt="صورة الحدث" />
-            <div class="card-body">
-              <h2 class="card-title">
-                ندوة فنون الخياطة الأساسية والتقنيات المتقدمة مع محترفي الصناعة
-              </h2>
-              <p>
-                <i class="fas fa-calendar-alt"></i> 26/07/2024 |
-                <i class="fas fa-map-marker-alt"></i> واشنطن دي سي، MI 27218 |
-                <i class="fas fa-users"></i> 2,329 مشارك
-              </p>
-              <p>بواسطة أحمد الخياط</p>
-              <p>ملخص الحدث</p>
-              <p>
-                في هذه الندوة، ستتعلم أساسيات الخياطة بالإضافة إلى تقنيات متقدمة
-                من محترفين في هذا المجال. ستتعرف على كيفية العمل على تصميمات
-                معقدة وتنفيذها بدقة وجودة عالية.
-              </p>
-              <h3>ما الذي ستتعلمه في هذا الحدث:</h3>
-              <ul>
-                <li>أساسيات الخياطة للمبتدئين</li>
-                <li>تقنيات الخياطة المتقدمة</li>
-                <li>تصميم وتفصيل الملابس</li>
-                <li>كيف تتعامل مع أنواع الأقمشة المختلفة</li>
-              </ul>
-              <h3>أربع مميزات رئيسية نقدمها في هذا الحدث:</h3>
-              <p>
-                إتقان العمل بدون قيود. جميع الاختصارات المفيدة. أفكار إبداعية
-                لتصميم الأزياء والملابس. كيفية التعامل مع الأقمشة والنصوص
-                المختلفة في التصميم.
-              </p>
-            </div>
+      <div class="col-lg-8">
+        <div class="card mb-3">
+          <img
+            id="eventImage"
+            src="/backend/image/default.png"
+            class="card-img-top"
+            alt="صورة الحدث"
+          />
+          <div class="card-body">
+            <h2 id="eventTitle" class="card-title"></h2>
+            <p>
+              <i class="fas fa-calendar-alt"></i> <span id="eventDate"></span> |
+              <i class="fas fa-map-marker-alt"></i>
+              <span id="eventLocation"></span> | <i class="fas fa-users"></i>
+              <span id="eventParticipants"></span>
+            </p>
+            <p>بواسطة <span id="eventSpeaker"></span></p>
+            <p id="eventSummary"></p>
+            <h3>ما الذي ستتعلمه في هذا الحدث:</h3>
+            <ul id="eventLearnings"></ul>
+            <h3>أربع مميزات رئيسية نقدمها في هذا الحدث:</h3>
+            <p id="eventFeatures"></p>
           </div>
         </div>
-        <div class="col-lg-4">
-          <div class="card">
-            <div class="card-body">
-              <h4>رسوم الحدث</h4>
-              <button
-                id="joinButton"
-                class="btn btn-warning btn-block"
-                onclick="toggleJoin()"
-              >
-                انضم إلى هذا الحدث
-              </button>
-              <ul class="list-group list-group-flush mt-4">
-                <li class="list-group-item">
-                  <strong>التاريخ:</strong> 26/07/2024
-                </li>
-                <li class="list-group-item">
-                  <strong>وقت البدء:</strong> 10:00 صباحًا
-                </li>
-                <li class="list-group-item"><strong>عدد المواضيع:</strong> 12</li>
-                <li class="list-group-item"><strong>عدد الاختبارات:</strong> 12</li>
-                <li class="list-group-item"><strong>المقالات:</strong> 145</li>
-                <li class="list-group-item">
-                  <strong>الشهادات:</strong> 50
-                </li>
-                <li class="list-group-item">
-                  <strong>عدد المقاعد:</strong> 300
-                </li>
-              </ul>
-              <div class="map mt-4">
-                <iframe
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3151.835434509274!2d144.9537363153154!3d-37.81627917975171!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6ad642af0f11fd81%3A0xf0727a0e5f9d7e0!2sMarvel%20Stadium!5e0!3m2!1sar!2sar!4v1603335078455!5m2!1sar!2sar"
-                  width="100%"
-                  height="200"
-                  frameborder="0"
-                  style="border: 0"
-                  allowfullscreen=""
-                  aria-hidden="false"
-                  tabindex="0"
-                ></iframe>
-              </div>
+      </div>
+
+      <div class="col-lg-4">
+        <div class="card">
+          <div class="card-body">
+            <button
+              id="joinButton"
+              class="btn btn-warning"
+              onclick="toggleJoin()"
+            >
+              انضم لهذا الحدث
+            </button>
+
+            <ul class="list-group list-group-flush mt-4">
+              <li id="eventDateList" class="list-group-item"></li>
+              <li id="eventTimeList" class="list-group-item"></li>
+              <li id="eventTopicsList" class="list-group-item"></li>
+              <li id="eventExamsList" class="list-group-item"></li>
+              <li id="eventArticlesList" class="list-group-item"></li>
+              <li id="eventCertificatesList" class="list-group-item"></li>
+              <li id="eventSeatsList" class="list-group-item"></li>
+            </ul>
+            <div class="map mt-4">
+              <iframe
+                id="eventMap"
+                width="100%"
+                height="200"
+                frameborder="0"
+                style="border: 0"
+                allowfullscreen=""
+                aria-hidden="false"
+                tabindex="0"
+              ></iframe>
             </div>
           </div>
         </div>
       </div>
-    
+    </div>
+
+    <footer>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-4 footer-column">
+            <h5>معلومات عنا</h5>
+            <ul>
+              <li><a href="#">قصتنا</a></li>
+              <li><a href="#">الرؤية والرسالة</a></li>
+              <li><a href="#">فريق العمل</a></li>
+              <li><a href="#">الوظائف</a></li>
+            </ul>
+          </div>
+          <div class="col-md-4 footer-column">
+            <h5>روابط سريعة</h5>
+            <ul>
+              <li><a href="#">الرئيسية</a></li>
+              <li><a href="#">المتجر</a></li>
+              <li><a href="#">الأحداث</a></li>
+              <li><a href="#">المدربون</a></li>
+            </ul>
+          </div>
+          <div class="col-md-4 footer-column">
+            <h5>تواصل معنا</h5>
+            <ul>
+              <li><a href="#">اتصل بنا</a></li>
+              <li><a href="#">الأسئلة الشائعة</a></li>
+              <li><a href="#">الدعم الفني</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p>&copy; 2023 أيديا ميديا. جميع الحقوق محفوظة.</p>
+        </div>
+      </div>
     </footer>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/js/all.min.js"></script>
-    <script>
-      function toggleJoin() {
-        var button = document.getElementById("joinButton");
-        if (button.classList.contains("btn-warning")) {
-          button.classList.remove("btn-warning");
-          button.classList.add("btn-success");
-          button.textContent = "تم الانضمام";
-        } else {
-          button.classList.remove("btn-success");
-          button.classList.add("btn-warning");
-          button.textContent = "انضم لهذا الحدث";
-        }
-      }
-    </script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
+
     <!-- Bootstrap 5 Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"></script>
     <script src="/frontend/user/javascript/ordelogin.js"></script>
     <script src="/frontend/user/ALLCategories.js"></script>
 
+    <script>
+      // جلب معرف الطالب من البريد الإلكتروني
+      async function getStudentIdByEmail(email) {
+        try {
+          const response = await fetch(
+            `http://localhost:38146/api/Users/api/Users/email/${encodeURIComponent(
+              email
+            )}`
+          );
 
+          if (!response.ok) {
+            throw new Error(
+              `فشل في جلب معرف الطالب، الحالة: ${response.status}`
+            );
+          }
+
+          const data = await response.json();
+          console.log("استجابة API:", data); // لعرض محتوى الاستجابة
+
+          if (!data.studentId) {
+            throw new Error("لم يتم العثور على معرف الطالب في استجابة API");
+          }
+
+          return data.studentId;
+        } catch (error) {
+          console.error("خطأ أثناء جلب معرف الطالب:", error);
+          throw error;
+        }
+      }
+      // وظيفة التبديل بين الانضمام وإلغاء الانضمام
+      // async function toggleJoin() {
+      //   debugger;
+      //   const email = localStorage.getItem("email"); // جلب البريد الإلكتروني من التخزين المحلي
+      //   const eventId = localStorage.getItem("EventID"); // جلب معرف الحدث من التخزين المحلي
+      //   const button = document.getElementById("joinButton");
+
+      //   console.log("البريد الإلكتروني:", email); // Debug: Check email value
+
+      //   if (email) {
+      //     try {
+      //       // جلب معرف الطالب باستخدام البريد الإلكتروني
+      //       const studentId = await getStudentIdByEmail(email);
+
+      //       if (!studentId) {
+      //         throw new Error("لم يتم العثور على معرف الطالب");
+      //       }
+
+      //       if (button.classList.contains("btn-warning")) {
+      //         // إزالة الكلاس الذي يخص اللون الأصفر
+      //         button.classList.remove("btn-warning");
+
+      //         // إضافة الكلاس الذي يخص اللون الأخضر
+      //         button.classList.add("btn-success");
+
+      //         // تغيير النص داخل الزر
+      //         button.textContent = "تم الانضمام";
+
+      //         // تعطيل الزر بعد الضغط عليه لمنعه من العمل مرة أخرى
+      //         button.disabled = true;
+      //         // حفظ حالة الانضمام في localStorage
+      //         localStorage.setItem("joined", "true");
+
+      //         swal({
+      //           title: "تم الانضمام!",
+      //           text: "لقد انضممت إلى هذا الحدث بنجاح.",
+      //           icon: "success",
+      //           button: "موافق",
+      //         });
+
+      //         // جلب التاريخ الحالي للحجز
+      //         const bookingDate = new Date().toISOString().split("T")[0];
+
+      //         // إنشاء بيانات الطلب
+      //         const bodyData = {
+      //           StudentId: studentId,
+      //           EventId: eventId,
+      //           BookingDate: bookingDate,
+      //           Status: "Confirmed",
+      //         };
+
+      //         // إرسال طلب POST
+      //         // إرسال POST request كـ JSON
+      //         const response = await fetch(
+      //           "http://localhost:38146/api/Booking/api/Booking",
+      //           {
+      //             method: "POST",
+      //             headers: {
+      //               "Content-Type": "application/json",
+      //             },
+      //             body: JSON.stringify(bodyData),
+      //           }
+      //         );
+
+      //         if (!response.ok) {
+      //           throw new Error("فشل في إنشاء الحجز");
+      //         }
+
+      //         const data = await response.json();
+      //         console.log("تم الحجز بنجاح:", data);
+      //       } else {
+      //       }
+      //     } catch (error) {
+      //       console.error("خطأ أثناء عملية الحجز:", error);
+      //       swal({
+      //         title: "خطأ",
+      //         text: "حدث خطأ أثناء الانضمام للحدث. حاول مرة أخرى.",
+      //         icon: "error",
+      //         button: "موافق",
+      //       });
+      //     }
+      //   } else {
+      //     swal({
+      //       title: "تسجيل الدخول مطلوب",
+      //       text: "يرجى تسجيل الدخول أولاً.",
+      //       icon: "warning",
+      //       button: "تسجيل الدخول",
+      //     }).then(() => {
+      //       window.location.href = "/frontend/user/login.html";
+      //     });
+      //   }
+      // }
+      async function toggleJoin() {
+        debugger;
+        const email = localStorage.getItem("email"); // جلب البريد الإلكتروني من التخزين المحلي
+        const eventId = localStorage.getItem("EventID"); // جلب معرف الحدث من التخزين المحلي
+        const button = document.getElementById("joinButton");
+
+        console.log("البريد الإلكتروني:", email); // Debug: Check email value
+
+        if (email) {
+          try {
+            // جلب معرف الطالب باستخدام البريد الإلكتروني
+            const studentId = await getStudentIdByEmail(email);
+
+            if (!studentId) {
+              throw new Error("لم يتم العثور على معرف الطالب");
+            }
+
+            if (button.classList.contains("btn-warning")) {
+              // إزالة الكلاس الذي يخص اللون الأصفر
+              button.classList.remove("btn-warning");
+
+              // إضافة الكلاس الذي يخص اللون الأخضر
+              button.classList.add("btn-success");
+
+              // تغيير النص داخل الزر
+              button.textContent = "تم الانضمام";
+
+              // تعطيل الزر بعد الضغط عليه لمنعه من العمل مرة أخرى
+              button.disabled = true;
+
+              // إخفاء الزر بعد الانضمام
+              button.style.display = "none";
+
+              // حفظ حالة الانضمام في localStorage
+              localStorage.setItem("joined", "true");
+
+              // رسالة نجاح باستخدام SweetAlert
+              swal({
+                title: "تم الانضمام!",
+                text: "لقد انضممت إلى هذا الحدث بنجاح.",
+                icon: "success",
+                button: "موافق",
+              });
+
+              // جلب التاريخ الحالي للحجز
+              const bookingDate = new Date().toISOString().split("T")[0];
+
+              // إنشاء بيانات الطلب
+              const bodyData = {
+                StudentId: studentId,
+                EventId: eventId,
+                BookingDate: bookingDate,
+                Status: "Confirmed",
+              };
+
+              // إرسال طلب POST
+              const response = await fetch(
+                "http://localhost:38146/api/Booking/api/Booking",
+                {
+                  method: "POST",
+                  headers: {
+                    "Content-Type": "application/json",
+                  },
+                  body: JSON.stringify(bodyData),
+                }
+              );
+
+              if (!response.ok) {
+                throw new Error("فشل في إنشاء الحجز");
+              }
+
+              const data = await response.json();
+              console.log("تم الحجز بنجاح:", data);
+            }
+          } catch (error) {
+            console.error("خطأ أثناء عملية الحجز:", error);
+            swal({
+              title: "خطأ",
+              text: "حدث خطأ أثناء الانضمام للحدث. حاول مرة أخرى.",
+              icon: "error",
+              button: "موافق",
+            });
+          }
+        } else {
+          swal({
+            title: "تسجيل الدخول مطلوب",
+            text: "يرجى تسجيل الدخول أولاً.",
+            icon: "warning",
+            button: "تسجيل الدخول",
+          }).then(() => {
+            window.location.href = "/frontend/user/login.html";
+          });
+        }
+      }
+
+      // جلب تفاصيل الحدث باستخدام EventID
+      const eventId = localStorage.getItem("EventID");
+
+      if (eventId) {
+        fetch(`http://localhost:38146/api/Event/${eventId}`)
+          .then((response) => response.json())
+          .then((event) => {
+            // تحديث العنوان والصورة
+            document.getElementById("eventTitle").textContent =
+              event.eventTitle;
+            document.getElementById("title-event-nav").textContent =
+              event.eventTitle;
+            document.getElementById("eventImage").src = `/backend/image/${
+              event.imagePath || "default.png"
+            }`;
+
+            // تحديث تفاصيل الحدث في الوصف
+            document.getElementById("eventDate").textContent = new Date(
+              event.eventDate
+            ).toLocaleDateString("ar-SA");
+            document.getElementById("eventLocation").textContent =
+              event.location;
+            document.getElementById(
+              "eventParticipants"
+            ).textContent = `${event.participants} مشارك`;
+            document.getElementById("eventSpeaker").textContent = event.speaker;
+            document.getElementById("eventSummary").textContent = event.summary;
+
+            // تحديث التعليمات والميزات
+            document.getElementById("eventLearnings").innerHTML =
+              event.learnings
+                .split(", ")
+                .map((item) => `<li>${item}</li>`)
+                .join("");
+            document.getElementById("eventFeatures").textContent =
+              event.features;
+
+            // تحديث العناصر التفصيلية
+            document.getElementById(
+              "eventDateList"
+            ).textContent = `التاريخ: ${new Date(
+              event.eventDate
+            ).toLocaleDateString("ar-SA")}`;
+            document.getElementById(
+              "eventTimeList"
+            ).textContent = `وقت البدء: ${event.eventTime}`;
+            document.getElementById(
+              "eventTopicsList"
+            ).textContent = `عدد المواضيع: ${event.topics}`;
+            document.getElementById(
+              "eventExamsList"
+            ).textContent = `عدد الاختبارات: ${event.exams}`;
+            document.getElementById(
+              "eventArticlesList"
+            ).textContent = `المقالات: ${event.articles}`;
+            document.getElementById(
+              "eventCertificatesList"
+            ).textContent = `الشهادات: ${event.certificates}`;
+            document.getElementById(
+              "eventSeatsList"
+            ).textContent = `عدد المقاعد: ${event.seatsAvailable}`;
+
+            // تحديث الموقع على الخريطة
+            document.getElementById(
+              "eventMap"
+            ).src = `https://www.google.com/maps?q=${encodeURIComponent(
+              event.location
+            )}&output=embed`;
+          })
+          .catch((error) => {
+            console.error("خطأ في جلب تفاصيل الحدث:", error);
+          });
+      } else {
+        console.error("لم يتم العثور على EventID في التخزين المحلي.");
+      }
+    </script>
   </body>
 </html>

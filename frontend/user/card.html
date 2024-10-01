@@ -198,91 +198,8 @@
                 <th scope="col">إغلاق</th>
               </tr>
             </thead>
-            <tbody>
-              <!-- منتج 1 -->
-              <tr>
-                <th scope="row">1</th>
-                <td>
-                  <input
-                    type="checkbox"
-                    name="product1"
-                    class="product-checkbox"
-                    data-price="50"
-                  />
-                </td>
-                <td>
-                  <img
-                    src="/backend/image/Ribbons,measuring,tape, and,scissors.png"
-                    alt="المنتج 1"
-                    style="width: 50px; height: auto"
-                  />
-                </td>
-                <td>معدات خياطة</td>
-                <td>50.00$</td>
-                <td>
-                  <div class="input-group">
-                    <button class="btn btn-light border">-</button>
-                    <input
-                      type="text"
-                      class="form-control text-center"
-                      value="1"
-                      style="width: 50px"
-                    />
-                    <button class="btn btn-light border">+</button>
-                  </div>
-                </td>
-                <td>
-                  <button class="btn btn-warning">أضف إلى السلة</button>
-                </td>
-                <td>
-                  <button class="btn btn-danger">
-                    <i class="fa fa-times"></i>
-                  </button>
-                </td>
-              </tr>
-
-              <!-- منتج 2 -->
-              <tr>
-                <th scope="row">2</th>
-                <td>
-                  <input
-                    type="checkbox"
-                    name="product2"
-                    class="product-checkbox"
-                    data-price="150"
-                  />
-                </td>
-                <td>
-                  <img
-                    src="/backend/image/Completesewingequipment1.png"
-                    alt="المنتج 2"
-                    style="width: 50px; height: auto"
-                  />
-                </td>
-                <td>ماكينة خياطة</td>
-                <td>150.00$</td>
-                <td>
-                  <div class="input-group">
-                    <button class="btn btn-light border">-</button>
-                    <input
-                      type="text"
-                      class="form-control text-center"
-                      value="1"
-                      style="width: 50px"
-                    />
-                    <button class="btn btn-light border">+</button>
-                  </div>
-                </td>
-                <td>
-                  <button class="btn btn-warning">أضف إلى السلة</button>
-                </td>
-                <td>
-                  <button class="btn btn-danger">
-                    <i class="fa fa-times"></i>
-                  </button>
-                </td>
-              </tr>
-              <!-- إضافة المزيد من المنتجات حسب الحاجة -->
+            <tbody id="product-table-body">
+              <!-- Dynamic Product Rows Go Here -->
             </tbody>
           </table>
         </div>
@@ -504,37 +421,168 @@
     </script>
     <!-- JavaScript للتحكم في المراحل -->
     <script>
+      let totalPrice = 0;
+
+      // Fetch userId using email from the API
+      async function fetchUserId() {
+        try {
+          const email = localStorage.getItem("email");
+          console.log("emailNajlaa", email); // Assuming the email is stored in localStorage
+          const response = await fetch(
+            `http://localhost:38146/api/Users/email/${encodeURIComponent(
+              email
+            )}`
+          );
+          const data = await response.json();
+          console.log("data147852", data);
+          return data.userId; // Assuming the API returns the user object with an "id" property
+        } catch (error) {
+          console.error("Error fetching user ID:", error);
+          return null;
+        }
+      }
+      debugger;
+      // Fetch products using productId (e.g., 5 or 2)
+      async function fetchProductById(productId) {
+        try {
+          const response = await fetch(
+            `http://localhost:38146/api/Handmade_Products/${productId}`
+          );
+          const product = await response.json();
+          return product;
+        } catch (error) {
+          console.error(`Error fetching product with ID ${productId}:`, error);
+          return null;
+        }
+      }
+      debugger;
+      // Fetch and display products
+      async function fetchProducts() {
+        try {
+          const userId = await fetchUserId();
+          if (!userId) {
+            console.error("User ID not found");
+            return;
+          }
+
+          const response = await fetch(
+            `http://localhost:38146/api/CardItem/user/${userId}`
+          );
+          const products = await response.json();
+          displayProducts(products);
+        } catch (error) {
+          console.error("Error fetching products:", error);
+        }
+      }
+
+      // Function to display products in the table
+      function displayProducts(products) {
+        const tbody = document.getElementById("product-table-body");
+        tbody.innerHTML = ""; // Clear existing rows
+
+        products.forEach(async (product, index) => {
+          const productDetails = await fetchProductById(product.productId);
+          if (!productDetails) return;
+
+          const row = `
+            <tr>
+                <th scope="row">${index + 1}</th>
+                <td><input type="checkbox" name="product${
+                  index + 1
+                }" class="product-checkbox" data-price="${
+            product.price
+          }" /></td>
+            <td>
+  <img src="/backend/image/${productDetails.imageUrl1}" 
+       alt="${productDetails.name}" 
+       class="product-image" 
+       style="width: 100%; max-width: 150px; height: auto;" />
+</td>
+
+                <td>${productDetails.name}</td>
+                <td>${product.price}$</td>
+                <td>
+                    <div class="input-group">
+                        <button class="btn btn-light border quantity-decrease" data-index="${index}">-</button>
+                        <input type="text" class="form-control text-center product-quantity" value="${
+                          product.quantity
+                        }" style="width: 50px" />
+                        <button class="btn btn-light border quantity-increase" data-index="${index}">+</button>
+                    </div>
+                </td>
+                <td><button class="btn btn-warning add-to-cart" data-price="${
+                  product.price
+                }">أضف إلى السلة</button></td>
+                <td><button class="btn btn-danger remove-product"><i class="fa fa-times"></i></button></td>
+            </tr>
+          `;
+          tbody.innerHTML += row;
+        });
+
+        setupEventListeners();
+      }
+
+      // Setup event listeners for buttons
+      function setupEventListeners() {
+        const addToCartButtons = document.querySelectorAll(".add-to-cart");
+        const quantityIncreaseButtons =
+          document.querySelectorAll(".quantity-increase");
+        const quantityDecreaseButtons =
+          document.querySelectorAll(".quantity-decrease");
+
+        addToCartButtons.forEach((button) => {
+          button.addEventListener("click", function () {
+            const price = parseFloat(this.getAttribute("data-price"));
+            addToCart(price);
+          });
+        });
+
+        quantityIncreaseButtons.forEach((button) => {
+          button.addEventListener("click", function () {
+            const input = this.previousElementSibling;
+            input.value = parseInt(input.value) + 1;
+          });
+        });
+
+        quantityDecreaseButtons.forEach((button) => {
+          button.addEventListener("click", function () {
+            const input = this.nextElementSibling;
+            if (parseInt(input.value) > 1) {
+              input.value = parseInt(input.value) - 1;
+            }
+          });
+        });
+      }
+
+      // Add item to cart and update total price
+      function addToCart(price) {
+        totalPrice += price;
+        document.getElementById(
+          "total-price"
+        ).innerText = `$${totalPrice.toFixed(2)}`;
+      }
+
+      // Coupon application logic
       document
         .getElementById("apply-coupon")
         .addEventListener("click", function () {
-          var couponCode = document.getElementById("coupon-code").value;
+          const couponCode = document.getElementById("coupon-code").value;
 
-          // تحقق من الكوبون (يمكنك تعديل الشرط كما تريد)
-          if (couponCode === "DISCOUNT2024") {
-            // إخفاء المرحلة 1
-            document.getElementById("step-1").style.display = "none";
-            // إظهار المرحلة 2
-            document.getElementById("step-2").style.display = "block";
+          if (couponCode === "DISCOUNT10") {
+            totalPrice *= 0.9; // Apply 10% discount
+            document.getElementById(
+              "total-price"
+            ).innerText = `$${totalPrice.toFixed(2)}`;
             document.getElementById("coupon-feedback").style.display = "none";
           } else {
             document.getElementById("coupon-feedback").style.display = "block";
           }
         });
 
-      // إضافة مستمعين للأزرار في المرحلة 2 لاختيار طريقة الدفع
-      document.querySelectorAll("#step-2 button").forEach(function (button) {
-        button.addEventListener("click", function () {
-          var paymentMethod = this.innerText.trim();
-          // إخفاء المرحلة 2
-          document.getElementById("step-2").style.display = "none";
-          // إظهار المرحلة 3
-          document.getElementById("step-3").style.display = "block";
-          // عرض طريقة الدفع المختارة
-          document.getElementById("selected-payment-method").innerText =
-            paymentMethod;
-        });
-      });
+      // Load products on page load
+      window.onload = fetchProducts;
     </script>
+
     <script src="/frontend/user/javascript/ordelogin.js"></script>
     <script src="/frontend/user/ALLCategories.js"></script>
   </body>

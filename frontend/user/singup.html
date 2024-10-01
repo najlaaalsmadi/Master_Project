@@ -185,62 +185,31 @@
           </p>
 
 
-<form id="signupForm" method="post" action="/frontend/user/Index.html">
-  <div class="row">
-    <div class="col-md-6 mb-3">
-      <label for="FirstName">الاسم الأول</label>
-      <input
-        type="text"
-        id="FirstName"
-        name="FirstName"
-        class="form-control"
-        required
-      />
-    </div>
-    <div class="col-md-6 mb-3">
-      <label for="LastName">الاسم الأخير</label>
-      <input
-        type="text"
-        id="LastName"
-        name="LastName"
-        class="form-control"
-        required
-      />
-    </div>
-  </div>
-  <div class="form-group mb-3">
-    <label for="Email">البريد الإلكتروني</label>
-    <input
-      type="email"
-      id="Email"
-      name="Email"
-      class="form-control"
-      required
-    />
-  </div>
-  <div class="form-group mb-3">
-    <label for="Password">كلمة المرور</label>
-    <input
-      type="password"
-      id="Password"
-      name="Password"
-      class="form-control"
-      required
-    />
-  </div>
-  <div class="form-group mb-4">
-    <label for="ConfirmPassword">تأكيد كلمة المرور</label>
-    <input
-      type="password"
-      id="ConfirmPassword"
-      name="ConfirmPassword"
-      class="form-control"
-      required
-    />
-  </div>
-  <button type="submit" class="btn btn-warning w-100">تسجيل الحساب</button>
-</form>
-
+          <form id="signupForm" method="post">
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label for="FirstName">الاسم الأول</label>
+                    <input type="text" id="FirstName" name="FirstName" class="form-control" required />
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label for="LastName">الاسم الأخير</label>
+                    <input type="text" id="LastName" name="LastName" class="form-control" required />
+                </div>
+            </div>
+            <div class="form-group mb-3">
+                <label for="Email">البريد الإلكتروني</label>
+                <input type="email" id="Email" name="Email" class="form-control" required />
+            </div>
+            <div class="form-group mb-3">
+                <label for="Password">كلمة المرور</label>
+                <input type="password" id="Password" name="Password" class="form-control" required autocomplete="new-password" />
+            </div>
+            <div class="form-group mb-4">
+                <label for="ConfirmPassword">تأكيد كلمة المرور</label>
+                <input type="password" id="ConfirmPassword" name="ConfirmPassword" class="form-control" required autocomplete="new-password" />
+            </div>
+            <button type="submit" class="btn btn-warning w-100">تسجيل الحساب</button>
+        </form>
           
         
           
@@ -289,45 +258,15 @@
       </div>
     </footer>
     
-<script>
-  document.getElementById('signupForm').addEventListener('submit', function (event) {
-    event.preventDefault(); // منع الإرسال الفوري للنموذج
 
-    // جمع البيانات في مصفوفة
-    let formData = [
-      document.getElementById('FirstName').value,
-      document.getElementById('LastName').value,
-      document.getElementById('Email').value,
-      document.getElementById('Password').value,
-      document.getElementById('ConfirmPassword').value
-    ];
-
-    // تخزين البيانات في localStorage
-    localStorage.setItem('signupData', JSON.stringify(formData));
-
-    // استخدام SweetAlert2 لعرض تنبيه نجاح
-    Swal.fire({
-      title: 'تم التسجيل بنجاح!',
-      text: 'تمت إضافة بياناتك بنجاح',
-      icon: 'success',
-      confirmButtonText: 'موافق'
-    }).then((result) => {
-      if (result.isConfirmed) {
-        // إعادة توجيه إلى صفحة الـ index بعد الضغط على موافق
-        window.location.href = '/frontend/user/Index.html'; // تعديل المسار إلى الصفحة المطلوبة
-      }
-    });
-  });
-</script>
-  
     <!-- SweetAlert2 CSS and JS CDN -->
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
+<script src="/frontend/user/singup.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.7/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"></script>
     <script src="/frontend/user/javascript/ordelogin.js"></script>
     <script src="/frontend/user/ALLCategories.js"></script>
-
+<script src="/frontend/equipmentshopdetails.js"></script>
 
   </body>
 </html>

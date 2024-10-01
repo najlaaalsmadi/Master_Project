@@ -176,142 +176,8 @@
       <div class="container">
         <h2 class="mb-4 text-center">أحدث الأحداث التعليمية لدينا</h2>
 
-        <div class="row">
-          <!-- Card 1 -->
-          <div class="col-md-3 col-sm-6 event-card">
-            <a
-              href="/frontend/user/EventsDetails.html"
-              class="text-decoration-none text-dark"
-            >
-              <div class="card">
-                <img
-                  src="/backend/image/ندوة فنون الخياطة الأساسية والتقنيات المتقدمة مع محترفي الصناعة.png"
-                  class="card-img-top event-img"
-                  alt="الحدث 1"
-                />
-                <div class="card-body">
-                  <div class="event-date">5 أكتوبر، 2024</div>
-                  <div class="event-title">
-                    ورشة عمل: فنون الخياطة الأساسية والتقنيات المتقدمة
-                  </div>
-                </div>
-              </div>
-            </a>
-          </div>
-
-          <!-- Card 2 -->
-          <div class="col-md-3 col-sm-6 event-card">
-            <div class="card text-decoration-none text-dark">
-              <img
-                src="/backend/image/دورة تدريبية أساسيات النجارة وبناء الأثاث.png"
-                class="card-img-top event-img"
-                alt="الحدث 2"
-              />
-              <div class="card-body">
-                <div class="event-date">12 أكتوبر، 2024</div>
-                <div class="event-title">
-                  دورة تدريبية: أساسيات النجارة وبناء الأثاث
-                </div>
-              </div>
-            </div>
-          </div>
-          <!-- Card 3 -->
-          <div class="col-md-3 col-sm-6 event-card">
-            <div class="card text-decoration-none text-dark">
-              <img
-                src="/backend/image/_                 ورشة عمل تقنيات التجميل والعناية بالبشرة.png"
-                class="card-img-top event-img"
-                alt="الحدث 3"
-              />
-              <div class="card-body">
-                <div class="event-date">20 أكتوبر، 2024</div>
-                <div class="event-title">
-                  ورشة عمل: تقنيات التجميل والعناية بالبشرة
-                </div>
-              </div>
-            </div>
-          </div>
-          <!-- Card 4 -->
-          <div class="col-md-3 col-sm-6 event-card">
-            <div class="card text-decoration-none text-dark">
-              <img
-                src="/backend/image/_ دورة تعليمية صناعة المجوهرات من الخرز.png"
-                class="card-img-top event-img"
-                alt="الحدث 4"
-              />
-              <div class="card-body">
-                <div class="event-date">28 أكتوبر، 2024</div>
-                <div class="event-title">
-                  دورة تعليمية: صناعة المجوهرات من الخرز
-                </div>
-              </div>
-            </div>
-          </div>
-          <!-- Card 5 -->
-          <div class="col-md-3 col-sm-6 event-card">
-            <div class="card text-decoration-none text-dark">
-              <img
-                src="/backend/image/orange.jpg"
-                class="card-img-top event-img"
-                alt="فنون صناعة الفخار والتشكيل"
-              />
-              <div class="card-body">
-                <div class="event-date">5 نوفمبر، 2024</div>
-                <div class="event-title">
-                  ورشة عمل: ورشة العمل المخصصة لشهر رمضان المبارك
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Card 6 -->
-          <div class="col-md-3 col-sm-6 event-card">
-            <div class="card text-decoration-none text-dark">
-              <img
-                src="/backend/image/مركز زها الثقافي.jpg"
-                class="card-img-top event-img"
-                alt="الحدث 6"
-              />
-              <div class="card-body">
-                <div class="event-date">12 نوفمبر، 2024</div>
-                <div class="event-title">
-                  برنامج تدريبي المنفذ في مركز زها الثقافي لتعليم مهنه الخياطة
-                </div>
-              </div>
-            </div>
-          </div>
-          <!-- Card 7 -->
-          <div class="col-md-3 col-sm-6 event-card">
-            <div class="card text-decoration-none text-dark">
-              <img
-                src="/backend/image/مركز زها2.jpg"
-                class="card-img-top event-img"
-                alt="الحدث 7"
-              />
-              <div class="card-body">
-                <div class="event-date">19 نوفمبر، 2024</div>
-                <div class="event-title">
-                  دورة متقدمة: تقنيات الفخار المتطورة في مركز زها الثقافي
-                </div>
-              </div>
-            </div>
-          </div>
-          <!-- Card 8 -->
-          <div class="col-md-3 col-sm-6 event-card">
-            <div class="card text-decoration-none text-dark">
-              <img
-                src="/backend/image/beauty_advanced.jpg"
-                class="card-img-top event-img"
-                alt="الحدث 8"
-              />
-              <div class="card-body">
-                <div class="event-date">25 نوفمبر، 2024</div>
-                <div class="event-title">
-                  ورشة عمل متقدمة: أحدث صيحات التجميل والعناية الشخصية
-                </div>
-              </div>
-            </div>
-          </div>
+        <div class="row" id="events-container">
+          <!-- سيتم إدراج الكروت هنا ديناميكيًا -->
         </div>
       </div>
     </section>
@@ -354,5 +220,6 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="/frontend/user/javascript/ordelogin.js"></script>
     <script src="/frontend/user/ALLCategories.js"></script>
+    <script src="/frontend/user/AllEvents.js"></script>
   </body>
 </html>

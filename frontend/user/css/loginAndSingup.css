@@ -4,3 +4,10 @@ body {
   background-size: cover; /* Ensures the image covers the entire background */
   background-position: center; /* Centers the background image */
 }
+
+.step {
+  display: none;
+}
+.step.active {
+  display: block;
+}

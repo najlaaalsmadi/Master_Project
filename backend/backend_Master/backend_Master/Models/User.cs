@@ -17,11 +17,35 @@ public partial class User
 
     public DateTime? CreatedAt { get; set; }
 
+    public string? PasswordHash { get; set; }
+
+    public string? PasswordSalt { get; set; }
+
+    public string? Otp { get; set; }
+
+    public string? BiographicaldetailsCv { get; set; }
+
+    public string? Phone { get; set; }
+
+    public string? JobTitle { get; set; }
+
+    public string? Imageprofile { get; set; }
+
     public virtual ICollection<Admin> Admins { get; set; } = new List<Admin>();
+
+    public virtual ICollection<Booking> Bookings { get; set; } = new List<Booking>();
+
+    public virtual ICollection<Card> Cards { get; set; } = new List<Card>();
 
     public virtual ICollection<Comment> Comments { get; set; } = new List<Comment>();
 
+    public virtual ICollection<HandmadeProduct> HandmadeProducts { get; set; } = new List<HandmadeProduct>();
+
     public virtual ICollection<Order> Orders { get; set; } = new List<Order>();
 
+    public virtual ICollection<Payment> Payments { get; set; } = new List<Payment>();
+
     public virtual ICollection<Trainer> Trainers { get; set; } = new List<Trainer>();
+
+    public virtual ICollection<UserCourse> UserCourses { get; set; } = new List<UserCourse>();
 }

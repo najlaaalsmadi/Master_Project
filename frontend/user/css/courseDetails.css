@@ -10,3 +10,7 @@
 .star-rating .checked {
   color: gold;
 }
+.scrollable-popup {
+  max-height: 60vh;
+  overflow-y: auto;
+}
