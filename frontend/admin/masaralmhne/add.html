@@ -198,10 +198,38 @@
                   />
                 </div>
                 <div class="mb-3">
+                  <label for="trainer" class="form-label">اختر المدرب</label>
+                  <select class="form-select" id="trainer" required>
+                    <option value="">اختر المدرب</option>
+                  </select>
+                </div>
+                <div class="mb-3">
                   <label for="category" class="form-label">الفئة</label>
                   <select class="form-select" id="category" required>
                     <option value="">اختر الفئة</option>
                   </select>
+                </div>
+                <div class="mb-3">
+                  <label for="duration" class="form-label">المدة</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="duration"
+                    placeholder="أدخل مدة المسار"
+                    required
+                  />
+                </div>
+                <div class="mb-3">
+                  <label for="allowedStudents" class="form-label"
+                    >عدد الطلاب المسموح بهم</label
+                  >
+                  <input
+                    type="number"
+                    class="form-control"
+                    id="allowedStudents"
+                    placeholder="أدخل عدد الطلاب المسموح بهم"
+                    required
+                  />
                 </div>
                 <div class="mb-3">
                   <label for="startDate" class="form-label">تاريخ البدء</label>
@@ -242,14 +270,14 @@
                   ></textarea>
                 </div>
                 <div class="mb-3">
-                  <label for="lessonsCount" class="form-label"
-                    >عدد الدروس</label
-                  >
+                  <label for="rating" class="form-label">التقييم</label>
                   <input
                     type="number"
                     class="form-control"
-                    id="lessonsCount"
-                    placeholder="أدخل عدد الدروس"
+                    id="rating"
+                    placeholder="أدخل التقييم (1-5)"
+                    min="1"
+                    max="5"
                     required
                   />
                 </div>
@@ -307,6 +335,29 @@
               alert("فشل في تحميل الفئات. حاول مرة أخرى.");
             });
 
+          // Fetch trainers from the API
+          fetch("http://localhost:38146/api/Trainer/all")
+            .then((response) => {
+              if (!response.ok) {
+                throw new Error("Failed to fetch trainers");
+              }
+              return response.json();
+            })
+            .then((data) => {
+              const trainerSelect = document.getElementById("trainer");
+              // Populate the dropdown with trainer names
+              data.forEach((trainer) => {
+                const option = document.createElement("option");
+                option.value = trainer.trainerId; // Use the trainer_id as value
+                option.text = trainer.name; // Display the trainer's name
+                trainerSelect.appendChild(option);
+              });
+            })
+            .catch((error) => {
+              console.error("Error fetching trainers:", error);
+              alert("فشل في تحميل المدربين. حاول مرة أخرى.");
+            });
+
           // Handle form submission
           document
             .getElementById("courseForm")
@@ -318,15 +369,18 @@
               const trackDescription =
                 document.getElementById("trackDescription").value;
               const trackCost = document.getElementById("trackCost").value;
+              const trainerId = document.getElementById("trainer").value; // Get selected trainer ID
+              const duration = document.getElementById("duration").value;
+              const allowedStudents =
+                document.getElementById("allowedStudents").value;
               const startDate = document.getElementById("startDate").value;
               const endDate = document.getElementById("endDate").value;
               const curriculum = document.getElementById("curriculum").value;
               const tools = document.getElementById("tools").value;
-              const lessonsCount =
-                document.getElementById("lessonsCount").value;
+              const rating = document.getElementById("rating").value;
               const certificate =
                 document.getElementById("certificate").value === "yes";
-              const categoryId = document.getElementById("category").value; // Get selected category ID
+              const categoryId = document.getElementById("category").value;
 
               // Image handling
               const imageInput = document.getElementById("image");
@@ -340,17 +394,19 @@
                 title: trackName,
                 description: trackDescription,
                 price: trackCost,
-                startDate: startDate,
-                endDate: endDate,
+                trainer_id: trainerId, // Include trainer_id
+                category_id: categoryId,
+                duration: duration,
+                allowed_students: allowedStudents,
                 syllabus: curriculum,
                 tools: tools,
-                allowedStudents: lessonsCount,
-                certificate: certificate,
-                categoryId: categoryId, // Include category ID
-                imageUrl: imageUrl, // Use uploaded image name or URL
+                startDate: startDate,
+                endDate: endDate,
+                imageUrl: imageUrl,
+                Rating: rating,
               };
 
-              console.log("Adding course with data:", courseData); // Log course data before submitting
+              console.log("Adding course with data:", courseData);
 
               // Send the POST request to add the course
               fetch("http://localhost:38146/api/Courses", {
@@ -373,7 +429,6 @@
                     title: "تم إضافة المسار بنجاح!",
                     text: "يمكنك مشاهدة المسار في القائمة.",
                   }).then(() => {
-                    // Redirect to view.html after closing the alert
                     window.location.href = "view.html"; // Adjust the path if necessary
                   });
                 })

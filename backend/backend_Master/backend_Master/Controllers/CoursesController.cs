@@ -115,53 +115,36 @@ namespace backend_Master.Controllers
         // PUT: api/Courses/{id}
         // تعديل دورة قائمة
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateCourse(int id, [FromBody] Course course)
+        public async Task<IActionResult> UpdateCourse(int id, [FromBody] Course updatedCourse)
         {
-            if (id != course.CourseId)
+            if (id != updatedCourse.CourseId)
             {
                 return BadRequest("Course ID mismatch.");
             }
 
+            // Check if the course exists
             var existingCourse = await _context.Courses.FindAsync(id);
             if (existingCourse == null)
             {
-                return NotFound();
+                return NotFound("Course not found.");
             }
 
-            // تعديل خصائص الدورة
-            existingCourse.Title = course.Title;
-            existingCourse.Description = course.Description;
-            existingCourse.Price = course.Price;
-            existingCourse.Rating = course.Rating;
-            existingCourse.Duration = course.Duration;
-            existingCourse.AllowedStudents = course.AllowedStudents;
-            existingCourse.Syllabus = course.Syllabus;
-            existingCourse.Tools = course.Tools;
-            existingCourse.StartDate = course.StartDate;
-            existingCourse.EndDate = course.EndDate;
-            existingCourse.ImageUrl = course.ImageUrl;
-            existingCourse.TrainerId = course.TrainerId;
-            existingCourse.CategoryId = course.CategoryId;
+            // Update course properties
+            existingCourse.Title = updatedCourse.Title;
+            existingCourse.Description = updatedCourse.Description;
+            existingCourse.Price = updatedCourse.Price;
+            existingCourse.StartDate = updatedCourse.StartDate;
+            existingCourse.EndDate = updatedCourse.EndDate;
+            existingCourse.Syllabus = updatedCourse.Syllabus;
+            existingCourse.Tools = updatedCourse.Tools;
+            existingCourse.AllowedStudents = updatedCourse.AllowedStudents;
+            existingCourse.CategoryId = updatedCourse.CategoryId;
+            existingCourse.ImageUrl = updatedCourse.ImageUrl; // Handle image URL
 
-            _context.Entry(existingCourse).State = EntityState.Modified;
+            // Save changes to the database
+            await _context.SaveChangesAsync();
 
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!CourseExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return NoContent();
+            return Ok(); // Return a 204 No Content response
         }
 
         // DELETE: api/Courses/{id}
