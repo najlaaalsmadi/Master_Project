@@ -22,13 +22,13 @@ document.addEventListener("DOMContentLoaded", function () {
           <li><a href="#" class="dropdown-item text-center py-3 text-primary">عرض جميع الإشعارات</a></li>
         </ul>
         <!-- أيقونة عربة التسوق -->
-        <a href="/frontend/user/wishlist.html" class="me-3 d-flex align-items-center" style="text-decoration: none;">
+         <!--  <a href="/frontend/user/wishlist.html" class="me-3 d-flex align-items-center" style="text-decoration: none;">
           <i class="fas fa-heart" style="color:white; font-size: 1rem;"></i>
-          <span class="badge bg-danger ms-1">2</span>
-        </a>
+          <span class="badge bg-danger ms-1"></span>
+        </a>-->
         <a href="/frontend/user/card.html" class="me-3">
           <i class="fas fa-shopping-cart" style="color:white; font-size: 1rem;"></i>
-          <span class="badge bg-danger">2</span>
+          <span class="badge bg-danger ms-1" id="productIndex"></span>
         </a>
         <!-- قائمة المستخدم -->
         <div class="dropdown">
@@ -45,13 +45,13 @@ document.addEventListener("DOMContentLoaded", function () {
   } else {
     authLinksContainer.innerHTML = `
       <div class="icon-buttons d-flex align-items-center justify-content-start">
-        <a href="/frontend/user/wishlist.html" class="me-3 d-flex align-items-center" style="text-decoration: none;">
+        <!--<a href="/frontend/user/wishlist.html" class="me-3 d-flex align-items-center" style="text-decoration: none;">
           <i class="fas fa-heart" style="color:white; font-size: 1rem;"></i>
           <span class="badge bg-danger ms-1">2</span>
-        </a>
+        </a>-->
         <a href="/frontend/user/card.html" class="me-3 d-flex align-items-center" style="text-decoration: none;">
           <i class="fas fa-shopping-cart" style="color:white; font-size: 1rem;"></i>
-          <span class="badge bg-danger ms-1">2</span>
+          <span class="badge bg-danger ms-1" id="productIndex"></span>
         </a>
         <a href="/frontend/user/login.html" class="btn btn-warning btn-sm">تسجيل دخول</a>
       </div>

@@ -51,6 +51,22 @@ namespace backend_Master.Controllers
 
             return HandmadeProduct;
         }
+        [HttpGet("user/{userId}")]
+        public async Task<ActionResult<IEnumerable<HandmadeProduct>>> GetByUserId(int userId)
+        {
+            // البحث عن جميع المنتجات اليدوية المتعلقة بـ userId
+            var handmadeProducts = await _context.HandmadeProducts
+                .Where(p => p.UserId == userId) // تصفية المنتجات بناءً على userId
+                .ToListAsync();
+
+            // تحقق إذا كانت بيانات المنتجات غير موجودة
+            if (handmadeProducts == null || !handmadeProducts.Any())
+            {
+                return NotFound(); // إرجاع 404 إذا لم يتم العثور على أي منتجات
+            }
+
+            return Ok(handmadeProducts); // إرجاع المنتجات مع حالة 200
+        }
 
         // GET: api/LearningEquipment/random
         [HttpGet("random")]

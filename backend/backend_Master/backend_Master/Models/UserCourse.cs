@@ -17,7 +17,13 @@ public partial class UserCourse
 
     public bool? Completed { get; set; }
 
+    public DateTime? EndDate { get; set; }
+
+    public int? TrainerId { get; set; }
+
     public virtual Course? Course { get; set; }
+
+    public virtual Trainer? Trainer { get; set; }
 
     public virtual User? User { get; set; }
 }

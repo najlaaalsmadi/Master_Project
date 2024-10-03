@@ -39,15 +39,20 @@ namespace backend_Master.Controllers
             return category;
         }
 
-        // POST: api/Courses/Categories
         [HttpPost("Categories")]
         public async Task<ActionResult<Category>> CreateCategory(Category category)
         {
-            _context.Categories.Add(category);
-            await _context.SaveChangesAsync();
+            if (category == null)
+            {
+                return BadRequest("Invalid data."); // التحقق من صحة البيانات
+            }
+
+            _context.Categories.Add(category); // إضافة الفئة
+            await _context.SaveChangesAsync(); // حفظ التغييرات
 
             return CreatedAtAction(nameof(GetCategory), new { id = category.CategoryId }, category);
         }
+
 
         // PUT: api/Courses/Categories/{id}
         [HttpPut("Categories/{id}")]
@@ -86,7 +91,7 @@ namespace backend_Master.Controllers
             var category = await _context.Categories.FindAsync(id);
             if (category == null)
             {
-                return NotFound();
+                return NotFound(new { message = "الفئة غير موجودة" });
             }
 
             _context.Categories.Remove(category);
@@ -94,5 +99,6 @@ namespace backend_Master.Controllers
 
             return NoContent();
         }
+
     }
 }

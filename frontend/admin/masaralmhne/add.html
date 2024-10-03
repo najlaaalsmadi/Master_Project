@@ -160,131 +160,236 @@
         </div>
       </header>
       <main class="p-3">
-        <div class="row mb-3">
-          <div class="container mt-5">
-            <div
-              class="container d-flex justify-content-center align-items-center min-vh-95"
-            >
-              <div class="col-md-6 form-container">
-                <h2 class="text-center mb-4">نموذج إضافة مسار</h2>
-                <form>
-                  <div class="mb-3">
-                    <label for="trackName" class="form-label">اسم المسار</label>
-                    <input
-                      type="text"
-                      class="form-control"
-                      id="trackName"
-                      placeholder="أدخل اسم المسار"
-                      required
-                    />
-                  </div>
-                  <div class="mb-3">
-                    <label for="trackDescription" class="form-label"
-                      >التفاصيل</label
-                    >
-                    <textarea
-                      class="form-control"
-                      id="trackDescription"
-                      rows="4"
-                      placeholder="أدخل تفاصيل المسار"
-                      required
-                    ></textarea>
-                  </div>
-                  <div class="mb-3">
-                    <label for="trackCost" class="form-label">التكلفة</label>
-                    <input
-                      type="number"
-                      class="form-control"
-                      id="trackCost"
-                      placeholder="أدخل تكلفة المسار"
-                      required
-                    />
-                  </div>
-                  <div class="mb-3">
-                    <label for="trackImage" class="form-label"
-                      >صورة الإعلان</label
-                    >
-                    <input
-                      type="file"
-                      class="form-control"
-                      id="trackImage"
-                      required
-                    />
-                  </div>
-                  <div class="mb-3">
-                    <label for="startDate" class="form-label"
-                      >تاريخ البدء</label
-                    >
-                    <input
-                      type="date"
-                      class="form-control"
-                      id="startDate"
-                      required
-                    />
-                  </div>
-                  <div class="mb-3">
-                    <label for="endDate" class="form-label"
-                      >تاريخ الانتهاء</label
-                    >
-                    <input
-                      type="date"
-                      class="form-control"
-                      id="endDate"
-                      required
-                    />
-                  </div>
-                  <div class="mb-3">
-                    <label for="curriculum" class="form-label">المنهج</label>
-                    <textarea
-                      class="form-control"
-                      id="curriculum"
-                      rows="3"
-                      placeholder="أدخل المنهج"
-                      required
-                    ></textarea>
-                  </div>
-                  <div class="mb-3">
-                    <label for="tools" class="form-label">الأدوات</label>
-                    <textarea
-                      class="form-control"
-                      id="tools"
-                      rows="3"
-                      placeholder="أدخل الأدوات المطلوبة"
-                      required
-                    ></textarea>
-                  </div>
-                  <div class="mb-3">
-                    <label for="lessonsCount" class="form-label"
-                      >عدد الدروس</label
-                    >
-                    <input
-                      type="number"
-                      class="form-control"
-                      id="lessonsCount"
-                      placeholder="أدخل عدد الدروس"
-                      required
-                    />
-                  </div>
-                  <div class="mb-3">
-                    <label for="certificate" class="form-label">شهادة</label>
-                    <select class="form-select" id="certificate" required>
-                      <option value="">اختر</option>
-                      <option value="yes">نعم</option>
-                      <option value="no">لا</option>
-                    </select>
-                  </div>
-                  <div class="d-grid">
-                    <button type="submit" class="btn btn-primary">
-                      إضافة المسار
-                    </button>
-                  </div>
-                </form>
-              </div>
+        <div class="container mt-5">
+          <div class="row justify-content-center">
+            <div class="col-md-6 form-container">
+              <h2 class="text-center mb-4">نموذج إضافة مسار</h2>
+              <form id="courseForm">
+                <div class="mb-3">
+                  <label for="trackName" class="form-label">اسم المسار</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="trackName"
+                    placeholder="أدخل اسم المسار"
+                    required
+                  />
+                </div>
+                <div class="mb-3">
+                  <label for="trackDescription" class="form-label"
+                    >التفاصيل</label
+                  >
+                  <textarea
+                    class="form-control"
+                    id="trackDescription"
+                    rows="4"
+                    placeholder="أدخل تفاصيل المسار"
+                    required
+                  ></textarea>
+                </div>
+                <div class="mb-3">
+                  <label for="trackCost" class="form-label">التكلفة</label>
+                  <input
+                    type="number"
+                    class="form-control"
+                    id="trackCost"
+                    placeholder="أدخل تكلفة المسار"
+                    required
+                  />
+                </div>
+                <div class="mb-3">
+                  <label for="category" class="form-label">الفئة</label>
+                  <select class="form-select" id="category" required>
+                    <option value="">اختر الفئة</option>
+                  </select>
+                </div>
+                <div class="mb-3">
+                  <label for="startDate" class="form-label">تاريخ البدء</label>
+                  <input
+                    type="date"
+                    class="form-control"
+                    id="startDate"
+                    required
+                  />
+                </div>
+                <div class="mb-3">
+                  <label for="endDate" class="form-label">تاريخ الانتهاء</label>
+                  <input
+                    type="date"
+                    class="form-control"
+                    id="endDate"
+                    required
+                  />
+                </div>
+                <div class="mb-3">
+                  <label for="curriculum" class="form-label">المنهج</label>
+                  <textarea
+                    class="form-control"
+                    id="curriculum"
+                    rows="3"
+                    placeholder="أدخل المنهج"
+                    required
+                  ></textarea>
+                </div>
+                <div class="mb-3">
+                  <label for="tools" class="form-label">الأدوات</label>
+                  <textarea
+                    class="form-control"
+                    id="tools"
+                    rows="3"
+                    placeholder="أدخل الأدوات المطلوبة"
+                    required
+                  ></textarea>
+                </div>
+                <div class="mb-3">
+                  <label for="lessonsCount" class="form-label"
+                    >عدد الدروس</label
+                  >
+                  <input
+                    type="number"
+                    class="form-control"
+                    id="lessonsCount"
+                    placeholder="أدخل عدد الدروس"
+                    required
+                  />
+                </div>
+                <div class="mb-3">
+                  <label for="certificate" class="form-label">شهادة</label>
+                  <select class="form-select" id="certificate" required>
+                    <option value="">اختر</option>
+                    <option value="yes">نعم</option>
+                    <option value="no">لا</option>
+                  </select>
+                </div>
+                <div class="mb-3">
+                  <label for="image" class="form-label">صورة المسار</label>
+                  <input
+                    type="file"
+                    class="form-control"
+                    id="image"
+                    accept="image/*"
+                  />
+                </div>
+                <div class="d-grid">
+                  <button type="submit" class="btn btn-primary">
+                    إضافة المسار
+                  </button>
+                </div>
+              </form>
             </div>
           </div>
         </div>
       </main>
+
+      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+      <script>
+        document.addEventListener("DOMContentLoaded", function () {
+          // Fetch categories from the API
+          fetch("http://localhost:38146/api/Category/Categories")
+            .then((response) => {
+              if (!response.ok) {
+                throw new Error("Failed to fetch categories");
+              }
+              return response.json();
+            })
+            .then((data) => {
+              const categorySelect = document.getElementById("category");
+              // Populate the dropdown with categories
+              data.forEach((category) => {
+                const option = document.createElement("option");
+                option.value = category.categoryId;
+                option.text = category.name;
+                categorySelect.appendChild(option);
+              });
+            })
+            .catch((error) => {
+              console.error("Error fetching categories:", error);
+              alert("فشل في تحميل الفئات. حاول مرة أخرى.");
+            });
+
+          // Handle form submission
+          document
+            .getElementById("courseForm")
+            .addEventListener("submit", function (event) {
+              event.preventDefault();
+
+              // Collect form data
+              const trackName = document.getElementById("trackName").value;
+              const trackDescription =
+                document.getElementById("trackDescription").value;
+              const trackCost = document.getElementById("trackCost").value;
+              const startDate = document.getElementById("startDate").value;
+              const endDate = document.getElementById("endDate").value;
+              const curriculum = document.getElementById("curriculum").value;
+              const tools = document.getElementById("tools").value;
+              const lessonsCount =
+                document.getElementById("lessonsCount").value;
+              const certificate =
+                document.getElementById("certificate").value === "yes";
+              const categoryId = document.getElementById("category").value; // Get selected category ID
+
+              // Image handling
+              const imageInput = document.getElementById("image");
+              const imageUrl =
+                imageInput.files.length > 0
+                  ? imageInput.files[0].name
+                  : "string"; // Placeholder for URL if needed
+
+              // Create an object to hold the data
+              const courseData = {
+                title: trackName,
+                description: trackDescription,
+                price: trackCost,
+                startDate: startDate,
+                endDate: endDate,
+                syllabus: curriculum,
+                tools: tools,
+                allowedStudents: lessonsCount,
+                certificate: certificate,
+                categoryId: categoryId, // Include category ID
+                imageUrl: imageUrl, // Use uploaded image name or URL
+              };
+
+              console.log("Adding course with data:", courseData); // Log course data before submitting
+
+              // Send the POST request to add the course
+              fetch("http://localhost:38146/api/Courses", {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify(courseData),
+              })
+                .then((response) => {
+                  if (!response.ok) {
+                    throw new Error("Network response was not ok");
+                  }
+                  return response.json();
+                })
+                .then((data) => {
+                  console.log("Course added successfully:", data);
+                  Swal.fire({
+                    icon: "success",
+                    title: "تم إضافة المسار بنجاح!",
+                    text: "يمكنك مشاهدة المسار في القائمة.",
+                  }).then(() => {
+                    // Redirect to view.html after closing the alert
+                    window.location.href = "view.html"; // Adjust the path if necessary
+                  });
+                })
+                .catch((error) => {
+                  console.error("Error adding course:", error);
+                  Swal.fire({
+                    icon: "error",
+                    title: "فشل!",
+                    text: "حدث خطأ أثناء إضافة المسار. حاول مرة أخرى.",
+                  });
+                });
+            });
+        });
+      </script>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>

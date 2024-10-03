@@ -160,43 +160,40 @@
         </div>
       </header>
       <main class="p-3">
-        <div class="row mb-3">
-          <div class="container mt-5">
-            <div
-              class="container d-flex justify-content-center align-items-center min-vh-95"
-            >
-              <div class="col-md-6 form-container">
-                <h2 class="text-center mb-4">نموذج تعديل الفئة</h2>
-                <form>
-                  <div class="mb-3">
-                    <label for="categoryName" class="form-label">الاسم</label>
-                    <input
-                      type="text"
-                      class="form-control"
-                      id="categoryName"
-                      placeholder="تعديل اسم الفئة"
-                      required
-                    />
-                  </div>
-                  <div class="mb-3">
-                    <label for="categoryDescription" class="form-label"
-                      >الشرح</label
-                    >
-                    <textarea
-                      class="form-control"
-                      id="categoryDescription"
-                      rows="4"
-                      placeholder="تعديل شرح الفئة"
-                      required
-                    ></textarea>
-                  </div>
-                  <div class="d-grid">
-                    <button type="submit" class="btn btn-primary">
-                      إضافة الفئة
-                    </button>
-                  </div>
-                </form>
-              </div>
+        <div class="container mt-5">
+          <div class="row justify-content-center">
+            <div class="col-md-6 form-container">
+              <h2 class="text-center mb-4">نموذج تعديل الفئة</h2>
+              <form id="updateCategoryForm">
+                <input type="hidden" id="categoryId" />
+                <div class="mb-3">
+                  <label for="categoryName" class="form-label">الاسم</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="categoryName"
+                    placeholder="تعديل اسم الفئة"
+                    required
+                  />
+                </div>
+                <div class="mb-3">
+                  <label for="categoryDescription" class="form-label"
+                    >الشرح</label
+                  >
+                  <textarea
+                    class="form-control"
+                    id="categoryDescription"
+                    rows="4"
+                    placeholder="تعديل شرح الفئة"
+                    required
+                  ></textarea>
+                </div>
+                <div class="d-grid">
+                  <button type="submit" class="btn btn-primary">
+                    تعديل الفئة
+                  </button>
+                </div>
+              </form>
             </div>
           </div>
         </div>
@@ -280,5 +277,11 @@
         document.getElementById("theme-selector").value = savedTheme;
       };
     </script>
+    <script src="/frontend/admin/category/viewcategory.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
   </body>
 </html>

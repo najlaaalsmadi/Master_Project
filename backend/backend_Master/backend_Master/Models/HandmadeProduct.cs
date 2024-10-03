@@ -27,7 +27,7 @@ public partial class HandmadeProduct
 
     public decimal? Rating { get; set; }
 
-    public virtual ICollection<CardItem> CardItems { get; set; } = new List<CardItem>();
+    public virtual ICollection<CardItemHandmadeProduct> CardItemHandmadeProducts { get; set; } = new List<CardItemHandmadeProduct>();
 
     public virtual Category? Category { get; set; }
 

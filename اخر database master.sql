@@ -96,6 +96,25 @@ CREATE TABLE Learning_Equipment (
     FOREIGN KEY (course_id) REFERENCES Courses(course_id),
     FOREIGN KEY (category_id) REFERENCES Categories(category_id)  -- علاقة مع جدول الفئات
 );
+drop table CardItem;
+-- إنشاء جدول CardItem
+CREATE TABLE CardItem (
+    CardItemId INT IDENTITY(1,1) PRIMARY KEY,  -- المعرف الفريد للعنصر
+    CardId INT,                                 -- معرف السلة المرتبط
+    productID INT,
+	equipmentID INT,-- معرف المنتج
+    Quantity INT DEFAULT 1,                     -- كمية المنتج المضاف
+    Price DECIMAL(10, 2),                       -- سعر المنتج وقت الإضافة
+    AddedAt DATETIME DEFAULT GETDATE(),         -- تاريخ إضافة العنصر للسلة
+    FOREIGN KEY (CardId) REFERENCES Card(CardId) ON DELETE CASCADE,  -- ربط العنصر بالسلة وحذف العناصر عند حذف السلة
+	FOREIGN KEY (productID) REFERENCES Handmade_Products(product_id) ON DELETE CASCADE,  -- ربط العنصر بالسلة وحذف العناصر عند حذف السلة
+   FOREIGN KEY (equipmentID) REFERENCES Learning_Equipment(equipment_id) ON DELETE CASCADE,  -- ربط العنصر بالسلة وحذف العناصر عند حذف السلة
+);
+
+INSERT INTO CardItem (CardId, productID, Quantity, Price, AddedAt)
+VALUES (15, 5, 2, 29.99, GETDATE());
+INSERT INTO CardItem (CardId, equipmentID, Quantity, Price, AddedAt)
+VALUES (15, 202, 1, 49.99, GETDATE());
 
 drop table Learning_Equipment;
 -- 7. Orders Table (الطلبات)
@@ -594,19 +613,4 @@ CREATE TABLE Card (
     FOREIGN KEY (UserId) REFERENCES Users(user_id) -- ربط السلة بالمستخدمين
 );
 
-
-drop table CardItem;
--- إنشاء جدول CardItem
-CREATE TABLE CardItem (
-    CardItemId INT IDENTITY(1,1) PRIMARY KEY,  -- المعرف الفريد للعنصر
-    CardId INT,                                 -- معرف السلة المرتبط
-    product_id INT,
-	equipment_id INT,-- معرف المنتج
-    Quantity INT DEFAULT 1,                     -- كمية المنتج المضاف
-    Price DECIMAL(10, 2),                       -- سعر المنتج وقت الإضافة
-    AddedAt DATETIME DEFAULT GETDATE(),         -- تاريخ إضافة العنصر للسلة
-    FOREIGN KEY (CardId) REFERENCES Card(CardId) ON DELETE CASCADE,  -- ربط العنصر بالسلة وحذف العناصر عند حذف السلة
-    FOREIGN KEY (product_id) REFERENCES Handmade_Products(product_id),
-	FOREIGN KEY (equipment_id) REFERENCES Learning_Equipment(equipment_id)
-);
 

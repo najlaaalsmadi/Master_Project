@@ -179,23 +179,26 @@
       </div>
     </nav>
 
-    <!-- استخدام Bootstrap Grid لعرض الشريط الجانبي والمحتوى بشكل متجاوب -->
     <div class="container mt-5">
       <div class="row">
         <!-- الشريط الجانبي -->
         <div class="col-md-3">
           <div class="text-center p-4 mb-4 bg-dark rounded">
             <img
-              src="/backend/image/نجلاء.jpg"
+              src=""
+              id="userImage"
               alt="صورة المدرب"
               class="mb-3 rounded-circle"
               style="width: 150px; height: 150px"
             />
-            <h2 class="text-light">نجلاء الصمادي</h2>
+
+            <h2 class="text-light" id="userName">نجلاء الصمادي</h2>
             <p class="text-light">متدربة خياطة و تطريز</p>
             <p class="text-light">
-              <i class="fas fa-envelope text-light"></i> najlaa@gmail.com <br />
-              <i class="fas fa-phone text-light"></i> 0777956583
+              <i class="fas fa-envelope text-light"></i>
+              <span id="userEmail">najlaa@gmail.com</span><br />
+              <i class="fas fa-phone text-light"></i>
+              <span id="userPhone">0777956583</span>
             </p>
             <div class="d-flex justify-content-center">
               <a href="#" class="text-light mx-2"
@@ -212,38 +215,32 @@
               ></a>
             </div>
             <hr />
-            <!-- القائمة الجانبية -->
             <ul class="list-unstyled mt-3">
               <li class="mb-2">
                 <a
                   href="#one"
                   class="text-light d-flex align-items-center"
                   style="text-decoration: none"
+                  ><i class="fas fa-user me-2"></i> السيرة الذاتية</a
                 >
-                  <i class="fas fa-user me-2"></i> السيرة الذاتية
-                </a>
               </li>
               <li class="mb-2">
                 <a
                   href="#two"
                   class="text-light d-flex align-items-center"
                   style="text-decoration: none"
+                  ><i class="fas fa-graduation-cap me-2"></i> الدورات</a
                 >
-                  <i class="fas fa-graduation-cap me-2"></i> الدورات
-                </a>
               </li>
               <li class="mb-2">
                 <a
-                  href="#tree"
+                  href="#three"
                   class="text-light d-flex align-items-center"
                   style="text-decoration: none"
+                  ><i class="fas fa-box-open me-2"></i> المنتجات</a
                 >
-                  <i class="fas fa-box-open me-2"></i> المنتجات
-                </a>
               </li>
-
               <br />
-              <!-- زر النشر -->
               <li class="mt-3">
                 <button
                   type="button"
@@ -253,8 +250,6 @@
                 >
                   نشر منتج
                 </button>
-                <br />
-                <br />
               </li>
             </ul>
           </div>
@@ -265,7 +260,7 @@
           <!-- السيرة الذاتية -->
           <div class="bg-light p-4 rounded section">
             <h4 id="one">السيرة الذاتية</h4>
-            <p>
+            <p id="userBio">
               أنا طالب متخصص في الخياطة والتطريز، وأملك سنوات من التدريب في
               تصميم الأزياء وصناعة الملابس المطرزة. أطمح إلى تطوير مهاراتي في
               هذا المجال وأتطلع إلى إنشاء تصاميم فريدة خاصة بي.
@@ -275,149 +270,13 @@
           <!-- الدورات التدريبية -->
           <div class="section mt-4">
             <h4 id="two">دوراتي</h4>
-            <div class="row">
-              <!-- دورة 1 -->
-              <div class="col-lg-3 col-md-6 mb-4">
-                <div class="card h-100 text-center">
-                  <img
-                    src="/backend/image/sewing-clothes.png"
-                    class="card-img-top"
-                    alt="صورة الدورة"
-                  />
-                  <div class="card-body">
-                    <h5 class="card-title">خياطة الملابس</h5>
-                    <p class="card-text">أمين الخياط</p>
-                  </div>
-                  <div class="card-footer">
-                    <p class="font-weight-bold">$15.00</p>
-                    <a href="view-course.html" class="btn btn-warning"
-                      >عرض الدورة</a
-                    >
-                  </div>
-                </div>
-              </div>
-
-              <!-- دورة 2 -->
-              <div class="col-lg-3 col-md-6 mb-4">
-                <div class="card h-100 text-center">
-                  <img
-                    src="/backend/image/التطريز.png"
-                    class="card-img-top"
-                    alt="صورة الدورة"
-                  />
-                  <div class="card-body">
-                    <h5 class="card-title">تطريز</h5>
-                    <p class="card-text">أمين الخياط</p>
-                  </div>
-                  <div class="card-footer">
-                    <p class="font-weight-bold">$18.00</p>
-                    <a href="view-course.html" class="btn btn-warning"
-                      >عرض الدورة</a
-                    >
-                  </div>
-                </div>
-              </div>
-
-              <!-- دورة 3 -->
-              <div class="col-lg-3 col-md-6 mb-4">
-                <div class="card h-100 text-center">
-                  <img
-                    src="/backend/image/_تصميم الأزياء.png"
-                    class="card-img-top"
-                    alt="صورة الدورة"
-                  />
-                  <div class="card-body">
-                    <h5 class="card-title">تصميم الأزياء</h5>
-                    <p class="card-text">أمين الخياط</p>
-                  </div>
-                  <div class="card-footer">
-                    <p class="font-weight-bold">$24.00</p>
-                    <a href="view-course.html" class="btn btn-warning"
-                      >عرض الدورة</a
-                    >
-                  </div>
-                </div>
-              </div>
-
-              <!-- دورة 4 -->
-              <div class="col-lg-3 col-md-6 mb-4">
-                <div class="card h-100 text-center">
-                  <img
-                    src="/backend/image/Pink Brush Feminine  Logo (4).png"
-                    class="card-img-top"
-                    alt="صورة الدورة"
-                  />
-                  <div class="card-body">
-                    <h5 class="card-title">حقائب، مجوهرات وملابس مطرزة</h5>
-                    <p class="card-text">أمين الخياط</p>
-                  </div>
-                  <div class="card-footer">
-                    <p class="font-weight-bold">$12.00</p>
-                    <a href="view-course.html" class="btn btn-warning"
-                      >عرض الدورة</a
-                    >
-                  </div>
-                </div>
-              </div>
-            </div>
+            <div class="row" id="userCourses"></div>
           </div>
 
           <!-- المنتجات -->
           <div class="section mt-4">
-            <h4 id="tree">منتجاتي ومنشوراتي</h4>
-            <div class="row">
-              <div class="col-md-4 mb-4">
-                <a
-                  href="/frontend/user/HandmadeShopdetils.html"
-                  class="card text-decoration-none text-dark"
-                >
-                  <img
-                    src="/backend/image/شمع.jfif"
-                    class="card-img-top"
-                    alt="شمع يدوي"
-                  />
-                  <div class="card-body text-center">
-                    <h5 class="card-title">شمع يدوي</h5>
-                    <p class="card-text">$150.00</p>
-                    <p class="card-text">⭐⭐⭐⭐⭐</p>
-                  </div>
-                </a>
-              </div>
-
-              <div class="col-md-4 mb-4">
-                <a
-                  href="/frontend/user/equipmentshopdetails.html"
-                  class="card text-decoration-none text-dark"
-                >
-                  <img
-                    src="/backend/image/طاقية.jpg"
-                    class="card-img-top"
-                    alt="طاقية"
-                  />
-                  <div class="card-body text-center">
-                    <h5 class="card-title">طاقية</h5>
-                    <p class="card-text">$150.00</p>
-                    <p class="card-text">⭐⭐⭐⭐⭐</p>
-                  </div>
-                </a>
-              </div>
-
-              <!-- حبات الكريستال -->
-              <div class="col-md-4 mb-4">
-                <a href="#" class="card text-decoration-none text-dark">
-                  <img
-                    src="/backend/image/شماغ مهدب.jpg"
-                    class="card-img-top"
-                    alt="شماغ مهدب يدوي"
-                  />
-                  <div class="card-body text-center">
-                    <h5 class="card-title">شماغ مهدب يدوي</h5>
-                    <p class="card-text">$5.00</p>
-                    <p class="card-text">⭐⭐⭐⭐⭐</p>
-                  </div>
-                </a>
-              </div>
-            </div>
+            <h4 id="three">منتجاتي ومنشوراتي</h4>
+            <div class="row" id="userProducts"></div>
           </div>
         </div>
       </div>
@@ -567,6 +426,138 @@
           });
         });
     </script>
+    <script>
+      document.addEventListener("DOMContentLoaded", async function () {
+        const email = localStorage.getItem("email");
+
+        if (email) {
+          console.log("البريد الإلكتروني المخزن: ", email); // تأكيد الحصول على البريد الإلكتروني من LocalStorage
+
+          try {
+            // استرجاع userId بناءً على البريد الإلكتروني
+            console.log("جارٍ استرجاع userId بناءً على البريد الإلكتروني...");
+            const userResponse = await fetch(
+              `http://localhost:38146/api/Users/api/Users/email/${encodeURIComponent(
+                email
+              )}`
+            );
+            const userData = await userResponse.json();
+            console.log("استجابة API للحصول على بيانات المستخدم:", userData); // طباعة بيانات المستخدم المسترجعة
+
+            if (userResponse.ok) {
+              const userId = userData.studentId; // الحصول على userId
+              console.log("userId المسترجع:", userId); // تأكيد userId
+
+              // استرجاع معلومات المستخدم
+              console.log("جارٍ استرجاع معلومات المستخدم...");
+              const userInfoResponse = await fetch(
+                `http://localhost:38146/api/Users/${userId}`
+              );
+              const userInfo = await userInfoResponse.json();
+              console.log("معلومات المستخدم المسترجعة:", userInfo); // طباعة معلومات المستخدم
+
+              // استرجاع الدورات الخاصة بالمستخدم
+              console.log("جارٍ استرجاع الدورات الخاصة بالمستخدم...");
+              const userCoursesResponse = await fetch(
+                `http://localhost:38146/api/UserCourses/user/${userId}`
+              );
+              const userCourses = await userCoursesResponse.json();
+              console.log("الدورات المسترجعة:", userCourses); // طباعة الدورات
+
+              // استرجاع المنتجات الخاصة بالمستخدم
+              console.log("جارٍ استرجاع المنتجات الخاصة بالمستخدم...");
+              const userProductsResponse = await fetch(
+                `http://localhost:38146/api/Handmade_Products/user/${userId}`
+              );
+              const userProducts = await userProductsResponse.json();
+              console.log("المنتجات المسترجعة:", userProducts); // طباعة المنتجات
+
+              // عرض المعلومات في الصفحة
+              displayUserInfo(userInfo);
+              displayUserCourses(userCourses);
+              displayUserProducts(userProducts);
+            } else {
+              console.error("فشل في استرجاع بيانات المستخدم:", userData); // طباعة رسالة خطأ في حال الفشل
+            }
+          } catch (error) {
+            console.error("حدث خطأ:", error); // طباعة الخطأ في حال حدوثه
+          }
+        } else {
+          console.log("لم يتم العثور على بريد إلكتروني في LocalStorage."); // في حالة عدم وجود البريد الإلكتروني
+        }
+      });
+
+      // دالة لعرض معلومات المستخدم
+      function displayUserInfo(user) {
+        document.getElementById("userImage").src =
+          user.imageProfile || "/backend/image/default-profile.jpg"; // استخدم صورة افتراضية إذا لم توجد
+
+        console.log("عرض معلومات المستخدم في الصفحة..."); // تتبع لعرض البيانات في الصفحة
+        document.getElementById("userName").innerText =
+          user.name || "اسم المستخدم غير متوفر";
+        document.getElementById("userEmail").innerText =
+          user.email || "البريد الإلكتروني غير متوفر";
+        document.getElementById("userPhone").innerText =
+          user.phone || "رقم الهاتف غير متوفر";
+        document.getElementById("userBio").innerText =
+          user.biographicaldetailsCv || "السيرة الذاتية غير متوفرة";
+      }
+
+      // دالة لعرض الدورات
+      function displayUserCourses(courses) {
+        console.log("عرض الدورات في الصفحة..."); // تتبع لعرض الدورات
+        const coursesSection = document.getElementById("userCourses");
+        coursesSection.innerHTML = ""; // مسح المحتوى الحالي
+
+        courses.forEach((course) => {
+          console.log("عرض الدورة:", course.courseName); // تتبع لكل دورة
+          const courseCard = `
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="card h-100 text-center">
+                        <img src="/backend/image/${course.img}" class="card-img-top" alt="صورة الدورة" />
+                        <div class="card-body">
+                            <h5 class="card-title">${course.courseName}</h5>
+                            <p class="card-text">مدرب: ${course.trainerName}</p>
+                        </div>
+                        <div class="card-footer">
+                            <p class="font-weight-bold">$${course.price}</p>
+                            <a href="view-course.html" class="btn btn-warning">عرض الدورة</a>
+                        </div>
+                    </div>
+                </div>
+            `;
+          coursesSection.innerHTML += courseCard;
+        });
+      }
+      function goToDetails15(productId) {
+        localStorage.setItem("product_id", productId);
+        window.location.href = `/frontend/user/HandmadeShopdetils.html?id=${productId}`;
+      }
+      // دالة لعرض المنتجات
+      function displayUserProducts(products) {
+        console.log("عرض المنتجات في الصفحة..."); // تتبع لعرض المنتجات
+        const productsSection = document.getElementById("userProducts");
+        productsSection.innerHTML = ""; // مسح المحتوى الحالي
+
+        products.forEach((product) => {
+          console.log("عرض المنتج:", product.name); // تتبع لكل منتج
+          const productCard = `
+                <div class="col-md-4 mb-4">
+          <a href="javascript:void(0);" onclick="goToDetails15(${product.productId})" class="card text-decoration-none text-dark">
+                        <img src="/backend/image/${product.imageUrl1}" class="card-img-top" alt="${product.name}" />
+                        <div class="card-body text-center">
+                            <h5 class="card-title">${product.name}</h5>
+                            <p class="card-text">$${product.price}</p>
+                            <p class="card-text">⭐⭐⭐⭐⭐</p>
+                        </div>
+                    </a>
+                </div>
+            `;
+          productsSection.innerHTML += productCard;
+        });
+      }
+    </script>
+
     <script src="/frontend/user/ALLCategories.js"></script>
 
     <!-- تضمين SweetAlert2 -->

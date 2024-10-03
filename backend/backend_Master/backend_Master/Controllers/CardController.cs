@@ -18,13 +18,13 @@ namespace backend_Master.Controllers
             _context = context;
         }
 
-       
         // إضافة سلة جديدة
         [HttpPost]
         public async Task<IActionResult> CreateCard([FromBody] Models.Card card)
         {
-            // تعيين CardId ليكون نفس UserId
-            card.CardId = (int)card.UserId; // تأكد من وجود UserId في الـ card
+            // تعيين CardId ليكون نفس UserId (اختياري حسب تصميم النظام)
+            // إذا كان CardId فريدًا، يمكنك إزالة هذا التعيين أو تعديله
+            card.CardId = (int)card.UserId;
 
             _context.Cards.Add(card);
             await _context.SaveChangesAsync();
@@ -35,9 +35,13 @@ namespace backend_Master.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetCard(int id)
         {
-            var card = await _context.Cards.Include(c => c.CardItems)
+            var card = await _context.Cards.Include(c => c.CardItemHandmadeProducts)
+                .Include(c => c.CardItemLearningEquipments)// تحميل العناصر المرتبطة بالسلة
                                             .FirstOrDefaultAsync(c => c.CardId == id);
-            if (card == null) return NotFound();
+
+            if (card == null)
+                return NotFound();
+
             return Ok(card);
         }
     }

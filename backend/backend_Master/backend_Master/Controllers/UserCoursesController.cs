@@ -1,4 +1,5 @@
-﻿using backend_Master.Models;
+﻿using backend_Master.DTO;
+using backend_Master.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -53,21 +54,26 @@ namespace backend_Master.Controllers
 
             return Ok(result); // إرجاع البيانات مع حالة 200
         }
-
         [HttpGet("user/{userId}")]
         public IActionResult GetUserCourses(int userId)
         {
             // استرجاع بيانات الدورات للمستخدم بناءً على UserId
             var userCourses = _context.UserCourses
                 .Include(uc => uc.Course) // تضمين معلومات الدورة
+                .Include(uc => uc.Trainer) // تضمين معلومات المدرب
                 .Where(uc => uc.UserId == userId) // تصفية الدورات بناءً على UserId
                 .Select(uc => new
                 {
                     uc.EnrollmentId,             // معرف التسجيل
                     CourseName = uc.Course.Title, // اسم الدورة
                     CourseId = uc.CourseId,       // رقم الدورة
+                    price = uc.Course.Price,       // رقم الدورة
+                    img = uc.Course.ImageUrl,
                     UserName = uc.User.Name,      // اسم المستخدم
-                    EnrollmentDate = uc.EnrollmentDate // تاريخ التسجيل
+                    EnrollmentDate = uc.EnrollmentDate, // تاريخ التسجيل
+                    TrainerId = uc.TrainerId,
+                    TrainerName = uc.Trainer.Name  // اسم المدرب
+                                                   // رقم المدرب
                 })
                 .ToList(); // تحويل النتيجة إلى قائمة
 
@@ -79,9 +85,28 @@ namespace backend_Master.Controllers
 
             return Ok(userCourses); // إرجاع البيانات مع حالة 200
         }
+        [HttpPost("CreateUserCourse")]
+        public IActionResult CreateUserCourse([FromBody] UserCourseDTO userCourseDto)
+        {
+            if (userCourseDto == null)
+            {
+                return BadRequest("بيانات غير صحيحة.");
+            }
 
+            var userCourse = new UserCourse
+            {
+                UserId = userCourseDto.UserId,
+                CourseId = userCourseDto.CourseId,
+                EnrollmentDate = DateTime.Now,
+                Progress = 0,
+                Completed = false,
+            };
 
+            _context.UserCourses.Add(userCourse);
+            _context.SaveChanges();
 
+            return CreatedAtAction(nameof(CreateUserCourse), new { id = userCourse.EnrollmentId }, userCourse);
+        }
 
         // POST: api/UserCourses
         [HttpPost]

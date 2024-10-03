@@ -13,7 +13,9 @@ public partial class Card
 
     public DateTime? UpdatedAt { get; set; }
 
-    public virtual ICollection<CardItem> CardItems { get; set; } = new List<CardItem>();
+    public virtual ICollection<CardItemHandmadeProduct> CardItemHandmadeProducts { get; set; } = new List<CardItemHandmadeProduct>();
+
+    public virtual ICollection<CardItemLearningEquipment> CardItemLearningEquipments { get; set; } = new List<CardItemLearningEquipment>();
 
     public virtual User? User { get; set; }
 }

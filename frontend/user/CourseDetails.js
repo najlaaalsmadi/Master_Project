@@ -96,3 +96,16 @@ document.addEventListener("DOMContentLoaded", function () {
     console.error("No courseId found in localStorage.");
   }
 });
+document
+  .getElementById("paypalButton")
+  .addEventListener("click", async function () {
+    const isLoggedIn = localStorage.getItem("email"); // افتراض وجود البريد الإلكتروني في الـ LocalStorage كدليل لتسجيل الدخول
+
+    if (!isLoggedIn) {
+      // توجيه المستخدم إلى صفحة تسجيل الدخول إذا لم يكن مسجلًا
+      window.location.href = "/frontend/user/login.html"; // استبدل هذا بالرابط الصحيح لصفحة تسجيل الدخول
+    } else {
+      // التحقق من تفاصيل تسجيل الدخول والانتقال إلى صفحة الدفع
+      window.location.href = "/frontend/user/payment.html"; // صفحة الدفع تشبه PayPal
+    }
+  });

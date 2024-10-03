@@ -166,7 +166,6 @@
               class="container d-flex justify-content-center align-items-center min-vh-60"
             >
               <div class="col-md-8 form-container">
-                <!-- زيادة عرض الجدول إلى 8 أعمدة -->
                 <h2 class="text-center my-4">جدول عرض الفئات</h2>
                 <table class="table category-table table-bordered">
                   <thead>
@@ -176,44 +175,8 @@
                       <th>العمليات</th>
                     </tr>
                   </thead>
-                  <tbody>
-                    <tr>
-                      <td>حرفة يدوية</td>
-                      <td>
-                        أنشطة تتعلق بصناعة منتجات يدوية باستخدام الأدوات
-                        البسيطة.
-                      </td>
-                      <td>
-                        <a
-                          class="btn btn-edit btn-sm"
-                          href="/frontend/admin/category/updatecategory.html"
-                          >تعديل</a
-                        >
-                        <br />
-                        <br />
-                        <br />
-                        <a class="btn btn-delete btn-sm">حذف</a>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>الفنون اليدوية</td>
-                      <td>
-                        إبداع وتصميم الأعمال الفنية باستخدام اليد مثل الرسم
-                        والنحت.
-                      </td>
-                      <td>
-                        <button
-                          class="btn btn-edit btn-sm"
-                          href="/frontend/admin/category/updatecategory.html"
-                        >
-                          تعديل
-                        </button>
-                        <br />
-                        <br />
-                        <br />
-                        <button class="btn btn-delete btn-sm">حذف</button>
-                      </td>
-                    </tr>
+                  <tbody id="categoryTableBody">
+                    <!-- Categories will be populated here -->
                   </tbody>
                 </table>
               </div>
@@ -300,5 +263,9 @@
         document.getElementById("theme-selector").value = savedTheme;
       };
     </script>
+    <script src="/frontend/admin/category/viewcategory.js"></script>
+    <!-- تضمين مكتبة SweetAlert2 -->
+    <!-- تضمين مكتبة SweetAlert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   </body>
 </html>

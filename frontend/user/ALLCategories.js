@@ -207,7 +207,7 @@ function loadCoursesByPrice(minPrice, maxPrice) {
         const courseCard = `
           <div class="col-md-4 mb-4">
             <div class="card h-100">
-              <img src="${course.imageUrl}" class="card-img-top" alt="${course.title}" />
+              <img src="/backend/image/${course.imageUrl}" class="card-img-top" alt="${course.title}" />
               <div class="card-body">
                 <h5 class="card-title">${course.title}</h5>
                 <p class="card-text">${course.description}</p>
@@ -297,7 +297,7 @@ function loadCoursesByRating(ratings) {
           const courseCard = `
             <div class="col-md-4 mb-4">
               <div class="card h-100">
-                <img src="${course.imageUrl}" class="card-img-top" alt="${course.title}" />
+                <img src="/backend/image/${course.imageUrl}" class="card-img-top" alt="${course.title}" />
                 <div class="card-body">
                   <h5 class="card-title">${course.title}</h5>
                   <p class="card-text">${course.description}</p>
@@ -352,7 +352,7 @@ function loadCoursesByCategory() {
         const courseCard = `
           <div class="col-md-4 mb-4">
             <div class="card h-100">
-              <img src="${course.imageUrl}" class="card-img-top" alt="${course.title}" />
+              <img src="/backend/image/${course.imageUrl}" class="card-img-top" alt="${course.title}" />
               <div class="card-body">
                 <h5 class="card-title">${course.title}</h5>
                 <p class="card-text">${course.description}</p>

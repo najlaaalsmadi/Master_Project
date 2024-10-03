@@ -400,13 +400,11 @@
         window.location.href = `/frontend/user/HandmadeShopdetils.html?id=${productId}`;
       }
 
-      // إضافة المنتج إلى السلة
       document
         .getElementById("addToCartButtonHandmadeShopdetils")
         .addEventListener("click", function (e) {
           e.preventDefault();
-          debugger;
-          const userEmail = localStorage.getItem("email");
+          const userEmail = localStorage.getItem("email"); // فحص ما إذا كان المستخدم قد قام بتسجيل الدخول
           const productId = id;
           const productName =
             document.getElementById("productName").textContent;
@@ -419,6 +417,7 @@
           const currentDate = new Date().toISOString();
 
           if (userEmail) {
+            // إذا كان مسجل دخول، أضف المنتج إلى قاعدة البيانات
             fetchUserIdAndAddToCart(
               userEmail,
               productId,
@@ -428,6 +427,7 @@
               currentDate
             );
           } else {
+            // إذا لم يكن مسجل دخول، أضف المنتج إلى localStorage
             addToLocalStorage(
               productId,
               productName,
@@ -458,9 +458,7 @@
         productImage
       ) {
         let cart = JSON.parse(localStorage.getItem("cart")) || [];
-        const userId = localStorage.getItem("userId") || 0; // Default to 0 if not logged in
         cart.push({
-          cardId: userId, // Use userId or 0 as cardId
           productId,
           productName,
           quantity: 1, // افتراض كمية واحدة عند إضافة المنتج للسلة
@@ -488,10 +486,8 @@
             return response.json();
           })
           .then((userData) => {
-            debugger;
             const userId = userData.id || userData.userId;
             const cart = JSON.parse(localStorage.getItem("cart")) || [];
-            console.log("cart", cart);
             if (cart.length > 0) {
               cart.forEach((product) => {
                 addToCartAPI(
@@ -504,7 +500,7 @@
                   userId
                 );
               });
-              localStorage.removeItem("cart");
+              localStorage.removeItem("cart"); // بعد النقل إلى الـ Database، احذف السلة من localStorage
             }
           })
           .catch((error) => {
@@ -553,21 +549,15 @@
         addedAt,
         userId
       ) {
-        // Construct the payload based on API requirements
         const payload = {
-          // Assuming 'cartId' is a separate entity. If not, adjust accordingly.
-          // Remove 'userId' if 'cartId' suffices
-          cartId: userId, // Replace with actual cart identifier if different
+          cardId: userId, // تأكد من استخدام الـ userId كـ CardId
           productId: productId,
           quantity: quantity,
           price: productPrice,
           addedAt: addedAt,
-          // Remove 'userId' if not required
         };
 
-        console.log("Payload being sent to API:", payload); // For debugging
-
-        fetch(`${API_BASE_URL}/CardItem`, {
+        fetch(`http://localhost:38146/api/CardItemHandmadeProduct`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -584,9 +574,13 @@
                 );
               });
             }
-            return response.json();
+
+            // تحقق مما إذا كانت الاستجابة تحتوي على محتوى JSON
+            return response.text().then((text) => {
+              return text ? JSON.parse(text) : {}; // إذا كان النص فارغًا، إرجاع كائن فارغ
+            });
           })
-          .then((cartItem) => {
+          .then(() => {
             Swal.fire({
               title: "تمت إضافة المنتج إلى السلة!",
               text: "يمكنك الذهاب إلى السلة لإتمام عملية الشراء أو مواصلة التسوق.",

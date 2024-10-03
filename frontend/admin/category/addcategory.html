@@ -167,7 +167,7 @@
             >
               <div class="col-md-6 form-container">
                 <h2 class="text-center mb-4">نموذج إضافة فئة</h2>
-                <form>
+                <form id="addCategoryForm">
                   <div class="mb-3">
                     <label for="categoryName" class="form-label">الاسم</label>
                     <input
@@ -280,5 +280,12 @@
         document.getElementById("theme-selector").value = savedTheme;
       };
     </script>
+
+    <script src="/frontend/admin/category/addcategory.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   </body>
 </html>

@@ -167,14 +167,13 @@
             >
               <div class="col-md-6 form-container">
                 <h2 class="text-center mb-4">تعديل إضافة مسار</h2>
-                <form>
+                <form id="courseForm">
                   <div class="mb-3">
                     <label for="trackName" class="form-label">اسم المسار</label>
                     <input
                       type="text"
                       class="form-control"
                       id="trackName"
-                      placeholder="تعديل اسم المسار"
                       required
                     />
                   </div>
@@ -186,7 +185,6 @@
                       class="form-control"
                       id="trackDescription"
                       rows="4"
-                      placeholder="تعديل تفاصيل المسار"
                       required
                     ></textarea>
                   </div>
@@ -196,7 +194,6 @@
                       type="number"
                       class="form-control"
                       id="trackCost"
-                      placeholder="تعديل تكلفة المسار"
                       required
                     />
                   </div>
@@ -204,12 +201,13 @@
                     <label for="trackImage" class="form-label"
                       >صورة الإعلان</label
                     >
-                    <input
-                      type="file"
-                      class="form-control"
-                      id="trackImage"
-                      required
+                    <img
+                      src="صناعة الفخار.png"
+                      alt="صورة المسار"
+                      class="img-preview"
+                      id="courseImage"
                     />
+                    <input type="file" class="form-control" id="trackImage" />
                   </div>
                   <div class="mb-3">
                     <label for="startDate" class="form-label"
@@ -239,7 +237,6 @@
                       class="form-control"
                       id="curriculum"
                       rows="3"
-                      placeholder="تعديل المنهج"
                       required
                     ></textarea>
                   </div>
@@ -249,7 +246,6 @@
                       class="form-control"
                       id="tools"
                       rows="3"
-                      placeholder="تعديل الأدوات المطلوبة"
                       required
                     ></textarea>
                   </div>
@@ -261,7 +257,6 @@
                       type="number"
                       class="form-control"
                       id="lessonsCount"
-                      placeholder="تعديل عدد الدروس"
                       required
                     />
                   </div>
@@ -284,7 +279,100 @@
           </div>
         </div>
       </main>
+
+      <script>
+        // Extract courseId from the URL
+        const params = new URLSearchParams(window.location.search);
+        const courseId = params.get("id");
+
+        // Fetch course data and populate the form
+        fetch(`http://localhost:38146/api/Courses/${courseId}`)
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error("Network response was not ok");
+            }
+            return response.json();
+          })
+          .then((data) => {
+            console.log("Course data fetched successfully:", data); // Log fetched data
+            document.getElementById("trackName").value = data.title;
+            document.getElementById("trackDescription").value =
+              data.description;
+            document.getElementById("trackCost").value = data.price;
+            document.getElementById("startDate").value = data.startDate;
+            document.getElementById("endDate").value = data.endDate;
+            document.getElementById("curriculum").value = data.syllabus;
+            document.getElementById("tools").value = data.tools;
+            document.getElementById("lessonsCount").value = data.duration; // Ensure duration matches your API
+            document.getElementById("certificate").value = data.certificate
+              ? "yes"
+              : "no";
+          })
+          .catch((error) => {
+            console.error("Error fetching course data:", error);
+            alert("Failed to fetch course data. Please try again.");
+          });
+
+        // Handle form submission
+        document
+          .getElementById("courseForm")
+          .addEventListener("submit", function (event) {
+            event.preventDefault();
+
+            // Collect form data
+            const trackName = document.getElementById("trackName").value;
+            const trackDescription =
+              document.getElementById("trackDescription").value;
+            const trackCost = document.getElementById("trackCost").value;
+            const startDate = document.getElementById("startDate").value;
+            const endDate = document.getElementById("endDate").value;
+            const curriculum = document.getElementById("curriculum").value;
+            const tools = document.getElementById("tools").value;
+            const lessonsCount = document.getElementById("lessonsCount").value;
+            const certificate =
+              document.getElementById("certificate").value === "yes";
+
+            // Create an object to hold the data
+            const courseData = {
+              title: trackName,
+              description: trackDescription,
+              price: trackCost,
+              startDate: startDate,
+              endDate: endDate,
+              syllabus: curriculum,
+              tools: tools,
+              duration: lessonsCount, // Ensure this matches your API's expected structure
+              certificate: certificate,
+            };
+
+            console.log("Updating course with data:", courseData); // Log course data before submitting
+
+            // Send the PUT request to update the course
+            fetch(`http://localhost:38146/api/Courses/${courseId}`, {
+              method: "PUT",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify(courseData),
+            })
+              .then((response) => {
+                if (!response.ok) {
+                  throw new Error("Network response was not ok");
+                }
+                return response.json();
+              })
+              .then((data) => {
+                console.log("Course updated successfully:", data);
+                alert("Course updated successfully!");
+              })
+              .catch((error) => {
+                console.error("Error updating course:", error);
+                alert("Failed to update the course. Please try again.");
+              });
+          });
+      </script>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
@@ -302,48 +390,6 @@
       }
 
       // Chart.js code
-      const salesCtx = document.getElementById("salesChart").getContext("2d");
-      const salesChart = new Chart(salesCtx, {
-        type: "bar",
-        data: {
-          labels: ["يناير", "فبراير", "مارس", "أبريل", "مايو", "يونيو"],
-          datasets: [
-            {
-              label: "إجمالي المبيعات",
-              data: [5000, 7000, 8000, 6000, 9000, 10000],
-              backgroundColor: "rgba(54, 162, 235, 0.2)",
-              borderColor: "rgba(54, 162, 235, 1)",
-              borderWidth: 1,
-            },
-          ],
-        },
-        options: {
-          scales: {
-            y: {
-              beginAtZero: true,
-            },
-          },
-        },
-      });
-
-      const customersCtx = document
-        .getElementById("customersChart")
-        .getContext("2d");
-      const customersChart = new Chart(customersCtx, {
-        type: "pie",
-        data: {
-          labels: ["عملاء نشطون", "عملاء غير نشطين"],
-          datasets: [
-            {
-              label: "تحليل العملاء",
-              data: [300, 150],
-              backgroundColor: ["#36a2eb", "#ff6384"],
-              borderColor: "#fff",
-              borderWidth: 1,
-            },
-          ],
-        },
-      });
     </script>
 
     <script>

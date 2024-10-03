@@ -189,12 +189,10 @@
             >
               <tr>
                 <th scope="col">#</th>
-                <th scope="col">اختيار</th>
-                <th scope="col">المنتج</th>
+                <th scope="col">صوره المنتج</th>
                 <th scope="col">اسم المنتج</th>
                 <th scope="col">سعر الوحدة</th>
                 <th scope="col">الكمية</th>
-                <th scope="col">أضف إلى السلة</th>
                 <th scope="col">إغلاق</th>
               </tr>
             </thead>
@@ -309,279 +307,231 @@
     <!-- Bootstrap 5 Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"></script>
-    <script>
+    <!-- <script>
+      let totalPrice = 0;
       let couponApplied = false;
       let discountValue = 0;
 
-      // الكوبونات الصالحة
       const validCoupons = {
-        DISCOUNT10: 10, // كوبون يعطي خصم 10%
-        SAVE20: 20, // كوبون يعطي خصم 20%
+        DISCOUNT10: 10,
+        SAVE20: 20,
       };
 
-      // زيادة أو تقليل الكمية
-      $(document).on("click", ".plus-btn", function () {
-        let quantityInput = $(this).siblings(".quantity-input");
-        let newValue = parseInt(quantityInput.val()) + 1;
-        quantityInput.val(newValue);
-        updateTotalPrice($(this).closest("tr"));
-        calculateTotal();
-      });
-
-      $(document).on("click", ".minus-btn", function () {
-        let quantityInput = $(this).siblings(".quantity-input");
-        let currentValue = parseInt(quantityInput.val());
-        if (currentValue > 1) {
-          let newValue = currentValue - 1;
-          quantityInput.val(newValue);
-          updateTotalPrice($(this).closest("tr"));
-          calculateTotal();
-        }
-      });
-
-      // تحديث السعر الإجمالي بناءً على الكمية
-      function updateTotalPrice(row) {
-        let pricePerItem = parseFloat(
-          row.find(".product-checkbox").data("price")
-        );
-        let quantity = parseInt(row.find(".quantity-input").val());
-        let totalPrice = pricePerItem * quantity;
-        row.find(".total-price").text(`$${totalPrice}`);
-      }
-
-      // حذف المنتج
-      $(document).on("click", ".delete-btn", function () {
-        $(this).closest("tr").remove();
-        calculateTotal();
-      });
-
-      // حساب المجموع الإجمالي
-      function calculateTotal() {
-        let total = 0;
-        $("#productTable tbody tr").each(function () {
-          let totalPrice = parseFloat(
-            $(this).find(".total-price").text().replace("$", "")
-          );
-          total += totalPrice;
-        });
-
-        // إذا تم تطبيق كوبون خصم
-        if (couponApplied) {
-          let discount = total * (discountValue / 100);
-          total -= discount;
-          $("#coupon-feedback")
-            .text(`تم تطبيق خصم ${discountValue}%!`)
-            .removeClass("text-danger")
-            .addClass("text-success")
-            .show();
-        }
-
-        $("#total-price").text(`$${total.toFixed(2)}`);
-      }
-
-      // تطبيق الكوبون
-      $("#apply-coupon").on("click", function () {
-        let couponCode = $("#coupon-code").val().toUpperCase();
-        if (validCoupons[couponCode]) {
-          couponApplied = true;
-          discountValue = validCoupons[couponCode];
-          $("#coupon-feedback").hide();
-          calculateTotal();
-        } else {
-          $("#coupon-feedback")
-            .text("كود الكوبون غير صالح")
-            .removeClass("text-success")
-            .addClass("text-danger")
-            .show();
-        }
-      });
-
-      // تحديث المجموع الإجمالي عند تحميل الصفحة
-      calculateTotal();
-    </script>
-    <script>
-      document.addEventListener("DOMContentLoaded", function () {
-        const checkboxes = document.querySelectorAll(".product-checkbox");
-        const totalPriceElement = document.getElementById("total-price");
-
-        function updateTotalPrice() {
-          let total = 0;
-          checkboxes.forEach((checkbox) => {
-            if (checkbox.checked) {
-              total += parseFloat(checkbox.dataset.price);
-            }
-          });
-          totalPriceElement.textContent = `$${total}`;
-        }
-
-        checkboxes.forEach((checkbox) => {
-          checkbox.addEventListener("change", updateTotalPrice);
-        });
-      });
-    </script>
-    <!-- JavaScript للتحكم في المراحل -->
-    <script>
-      let totalPrice = 0;
-
-      // Fetch userId using email from the API
+      // استرجاع userID من API باستخدام email المخزن في localStorage
       async function fetchUserId() {
         try {
           const email = localStorage.getItem("email");
-          console.log("emailNajlaa", email); // Assuming the email is stored in localStorage
+          if (!email) return null; // إذا لم يكن هناك تسجيل دخول
           const response = await fetch(
             `http://localhost:38146/api/Users/email/${encodeURIComponent(
               email
             )}`
           );
           const data = await response.json();
-          console.log("data147852", data);
-          return data.userId; // Assuming the API returns the user object with an "id" property
+          return data.userId;
         } catch (error) {
           console.error("Error fetching user ID:", error);
           return null;
         }
       }
-      debugger;
-      // Fetch products using productId (e.g., 5 or 2)
-      async function fetchProductById(productId) {
+
+      // استرجاع المنتجات اليدوية من API باستخدام userID
+      async function fetchHandmadeProducts(userID) {
+        debugger;
+        try {
+          const response = await fetch(
+            `http://localhost:38146/api/CardItemHandmadeProduct/card/${userID}`
+          );
+          const products = await response.json();
+          return products;
+        } catch (error) {
+          console.error("Error fetching handmade products from API:", error);
+          return [];
+        }
+      }
+
+      // استرجاع المعدات التعليمية من API باستخدام userID
+      async function fetchLearningEquipment(userID) {
+        try {
+          const response = await fetch(
+            `http://localhost:38146/api/CardItemLearningEquipment/card/${userID}`
+          );
+          const products = await response.json();
+          return products;
+        } catch (error) {
+          console.error("Error fetching learning equipment from API:", error);
+          return [];
+        }
+      }
+
+      // استرجاع تفاصيل المنتج اليدوي باستخدام productId
+      async function fetchHandmadeProductDetails(productId) {
         try {
           const response = await fetch(
             `http://localhost:38146/api/Handmade_Products/${productId}`
           );
-          const product = await response.json();
-          return product;
+          const productDetails = await response.json();
+          return productDetails;
         } catch (error) {
-          console.error(`Error fetching product with ID ${productId}:`, error);
+          console.error("Error fetching handmade product details:", error);
           return null;
         }
       }
-      debugger;
-      // Fetch and display products
-      async function fetchProducts() {
-        try {
-          const userId = await fetchUserId();
-          if (!userId) {
-            console.error("User ID not found");
-            return;
-          }
 
+      // استرجاع تفاصيل المعدات التعليمية باستخدام equipmentId
+      async function fetchLearningEquipmentDetails(equipmentId) {
+        try {
           const response = await fetch(
-            `http://localhost:38146/api/CardItem/user/${userId}`
+            `http://localhost:38146/api/LearningEquipment/${equipmentId}`
           );
-          const products = await response.json();
-          displayProducts(products);
+          const productDetails = await response.json();
+          return productDetails;
         } catch (error) {
-          console.error("Error fetching products:", error);
+          console.error("Error fetching learning equipment details:", error);
+          return null;
         }
       }
 
-      // Function to display products in the table
-      function displayProducts(products) {
+      // عرض المنتجات في الجدول
+      async function displayProducts(products) {
         const tbody = document.getElementById("product-table-body");
-        tbody.innerHTML = ""; // Clear existing rows
+        tbody.innerHTML = ""; // تنظيف الجدول
 
-        products.forEach(async (product, index) => {
-          const productDetails = await fetchProductById(product.productId);
-          if (!productDetails) return;
+        for (let index = 0; index < products.length; index++) {
+          const product = products[index];
 
+          let productDetails;
+
+          // جلب تفاصيل المنتج بناءً على الفئة
+          if (product.category === "Handmade") {
+            productDetails = await fetchHandmadeProductDetails(
+              product.productId
+            );
+          } else if (product.category === "LearningEquipment") {
+            productDetails = await fetchLearningEquipmentDetails(
+              product.equipmentId
+            );
+          } else {
+            productDetails = product; // من localStorage
+          }
+
+          if (!productDetails) continue;
+
+          // بناء الصف لعرض المنتج
           const row = `
-            <tr>
-                <th scope="row">${index + 1}</th>
-                <td><input type="checkbox" name="product${
-                  index + 1
-                }" class="product-checkbox" data-price="${
-            product.price
-          }" /></td>
-            <td>
-  <img src="/backend/image/${productDetails.imageUrl1}" 
-       alt="${productDetails.name}" 
-       class="product-image" 
-       style="width: 100%; max-width: 150px; height: auto;" />
-</td>
-
-                <td>${productDetails.name}</td>
-                <td>${product.price}$</td>
-                <td>
-                    <div class="input-group">
-                        <button class="btn btn-light border quantity-decrease" data-index="${index}">-</button>
-                        <input type="text" class="form-control text-center product-quantity" value="${
-                          product.quantity
-                        }" style="width: 50px" />
-                        <button class="btn btn-light border quantity-increase" data-index="${index}">+</button>
-                    </div>
-                </td>
-                <td><button class="btn btn-warning add-to-cart" data-price="${
-                  product.price
-                }">أضف إلى السلة</button></td>
-                <td><button class="btn btn-danger remove-product"><i class="fa fa-times"></i></button></td>
-            </tr>
-          `;
+                  <tr>
+                      <th scope="row">${index + 1}</th>
+                      <td><img src="/backend/image/${
+                        productDetails.imageUrl
+                      }" alt="${
+            productDetails.productName
+          }" style="width: 100px; height: auto;" /></td>
+                      <td>${productDetails.productName}</td>
+                      <td class="unit-price">${product.price}JD</td>
+                      <td>${product.quantity}</td>
+                      <td><button class="btn btn-danger remove-product"><i class="fa fa-times"></i></button></td>
+                  </tr>
+              `;
           tbody.innerHTML += row;
-        });
-
+        }
         setupEventListeners();
       }
 
-      // Setup event listeners for buttons
+      // تحميل المنتجات عند فتح الصفحة
+      async function loadProducts() {
+        const userID = await fetchUserId();
+
+        let allProducts = [];
+
+        if (userID) {
+          const handmadeProducts = await fetchHandmadeProducts(userID);
+          const learningEquipment = await fetchLearningEquipment(userID);
+
+          // دمج المنتجات اليدوية والمعدات التعليمية في مصفوفة واحدة
+          allProducts = [
+            ...handmadeProducts.map((product) => ({
+              ...product,
+              category: "Handmade",
+            })),
+            ...learningEquipment.map((product) => ({
+              ...product,
+              category: "LearningEquipment",
+            })),
+          ];
+        }
+
+        // إضافة المنتجات من localStorage
+        const localStorageProducts =
+          JSON.parse(localStorage.getItem("cart")) || [];
+        allProducts = [
+          ...allProducts,
+          ...localStorageProducts.map((product) => ({
+            ...product,
+            category: "Local",
+          })),
+        ];
+
+        // عرض جميع المنتجات
+        await displayProducts(allProducts);
+
+        // تحديث السعر الإجمالي
+        updateTotalPrice();
+      }
+
+      // إعداد المستمعين للأحداث
       function setupEventListeners() {
-        const addToCartButtons = document.querySelectorAll(".add-to-cart");
-        const quantityIncreaseButtons =
-          document.querySelectorAll(".quantity-increase");
-        const quantityDecreaseButtons =
-          document.querySelectorAll(".quantity-decrease");
-
-        addToCartButtons.forEach((button) => {
-          button.addEventListener("click", function () {
-            const price = parseFloat(this.getAttribute("data-price"));
-            addToCart(price);
-          });
-        });
-
-        quantityIncreaseButtons.forEach((button) => {
-          button.addEventListener("click", function () {
-            const input = this.previousElementSibling;
-            input.value = parseInt(input.value) + 1;
-          });
-        });
-
-        quantityDecreaseButtons.forEach((button) => {
-          button.addEventListener("click", function () {
-            const input = this.nextElementSibling;
-            if (parseInt(input.value) > 1) {
-              input.value = parseInt(input.value) - 1;
-            }
+        document.querySelectorAll(".remove-product").forEach(function (btn) {
+          btn.addEventListener("click", function () {
+            this.closest("tr").remove();
+            updateTotalPrice();
           });
         });
       }
 
-      // Add item to cart and update total price
-      function addToCart(price) {
-        totalPrice += price;
-        document.getElementById(
-          "total-price"
-        ).innerText = `$${totalPrice.toFixed(2)}`;
+      // تحديث السعر الإجمالي
+      function updateTotalPrice() {
+        let total = 0;
+        document
+          .querySelectorAll(".unit-price")
+          .forEach(function (priceElement) {
+            total += parseFloat(priceElement.textContent.replace("JD", ""));
+          });
+
+        if (couponApplied) {
+          let discount = total * (discountValue / 100);
+          total -= discount;
+        }
+
+        document.getElementById("total-price").textContent = `$${total.toFixed(
+          2
+        )}`;
       }
 
-      // Coupon application logic
+      // تطبيق الكوبون
+      function applyCoupon(couponCode) {
+        const discount = validCoupons[couponCode.toUpperCase()];
+        if (discount) {
+          discountValue = discount;
+          couponApplied = true;
+          updateTotalPrice();
+          alert(`Coupon applied! You saved ${discount}%`);
+        } else {
+          alert("Invalid coupon code.");
+        }
+      }
+
+      // دالة لتطبيق الكوبون
       document
         .getElementById("apply-coupon")
         .addEventListener("click", function () {
           const couponCode = document.getElementById("coupon-code").value;
-
-          if (couponCode === "DISCOUNT10") {
-            totalPrice *= 0.9; // Apply 10% discount
-            document.getElementById(
-              "total-price"
-            ).innerText = `$${totalPrice.toFixed(2)}`;
-            document.getElementById("coupon-feedback").style.display = "none";
-          } else {
-            document.getElementById("coupon-feedback").style.display = "block";
-          }
+          applyCoupon(couponCode);
         });
 
-      // Load products on page load
-      window.onload = fetchProducts;
-    </script>
+      // تنفيذ دالة تحميل المنتجات عند تحميل الصفحة
+      window.onload = loadProducts;
+    </script> -->
+    <script src="/frontend/user/card.js"></script>
 
     <script src="/frontend/user/javascript/ordelogin.js"></script>
     <script src="/frontend/user/ALLCategories.js"></script>

@@ -110,15 +110,13 @@ function goToDetails3(equipmentId) {
   localStorage.setItem("equipmentId1", equipmentId);
   window.location.href = `/frontend/user/equipmentshopdetails.html?id=${equipmentId}`;
 }
-
 // إضافة المنتج إلى السلة
 document
   .getElementById("addToCartButton")
   .addEventListener("click", function (e) {
     e.preventDefault();
-    debugger;
-    const userEmail = localStorage.getItem("email");
-    const productId = id;
+    const userEmail = localStorage.getItem("email"); // Check if the user is logged in
+    const productId = id; // Assuming `id` is defined elsewhere in your code
     const productName = document.getElementById("productName").textContent;
     const productPrice = parseFloat(
       document
@@ -129,6 +127,7 @@ document
     const currentDate = new Date().toISOString();
 
     if (userEmail) {
+      // If logged in, add product to database
       fetchUserIdAndAddToCart(
         userEmail,
         productId,
@@ -138,6 +137,7 @@ document
         currentDate
       );
     } else {
+      // If not logged in, add product to localStorage
       addToLocalStorage(productId, productName, productPrice, productImage);
 
       Swal.fire({
@@ -150,7 +150,7 @@ document
         reverseButtons: true,
       }).then((result) => {
         if (result.isConfirmed) {
-          window.location.href = "/frontend/user/card.html";
+          window.location.href = "/frontend/user/card.html"; // Redirect to cart page
         }
       });
     }
@@ -158,20 +158,29 @@ document
 
 function addToLocalStorage(productId, productName, productPrice, productImage) {
   let cart = JSON.parse(localStorage.getItem("cart")) || [];
-  const userId = localStorage.getItem("userId") || 0; // Default to 0 if not logged in
-  cart.push({
-    cardId: userId, // Use userId or 0 as cardId
-    productId,
-    productName,
-    quantity: 1, // افتراض كمية واحدة عند إضافة المنتج للسلة
-    productPrice,
-    productImage,
-    addedAt: new Date().toISOString(),
-  });
+  const existingProductIndex = cart.findIndex(
+    (item) => item.productId === productId
+  );
+
+  if (existingProductIndex > -1) {
+    // Update quantity if product already exists in the cart
+    cart[existingProductIndex].quantity += 1;
+  } else {
+    // Add new product to the cart
+    cart.push({
+      productId,
+      productName,
+      quantity: 1, // Default quantity when adding product
+      productPrice,
+      productImage,
+      addedAt: new Date().toISOString(),
+    });
+  }
+
   localStorage.setItem("cart", JSON.stringify(cart));
 }
 
-// عند تسجيل الدخول
+// When logging in
 function handleLogin() {
   const userEmail = localStorage.getItem("email");
 
@@ -188,10 +197,8 @@ function handleLogin() {
       return response.json();
     })
     .then((userData) => {
-      debugger;
       const userId = userData.id || userData.userId;
       const cart = JSON.parse(localStorage.getItem("cart")) || [];
-      console.log("cart", cart);
       if (cart.length > 0) {
         cart.forEach((product) => {
           addToCartAPI(
@@ -204,7 +211,7 @@ function handleLogin() {
             userId
           );
         });
-        localStorage.removeItem("cart");
+        localStorage.removeItem("cart"); // Clear cart from localStorage after syncing with DB
       }
     })
     .catch((error) => {
@@ -234,7 +241,7 @@ function fetchUserIdAndAddToCart(
         productName,
         productPrice,
         productImage,
-        1,
+        1, // Default quantity
         addedAt,
         userId
       );
@@ -251,23 +258,36 @@ function addToCartAPI(
   productImage,
   quantity,
   addedAt,
-  userId
+  userId // Pass the userId as CardId
 ) {
-  fetch(`${API_BASE_URL}/CardItem`, {
+  const payload = {
+    cardId: userId, // Ensure userId is used as CardId
+    equipmentId: productId, // Change to the correct property name if needed
+    quantity: quantity,
+    price: productPrice,
+    addedAt: addedAt,
+  };
+
+  fetch(`http://localhost:38146/api/CardItemLearningEquipment`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({
-      cardId: userId, // Set cardId equal to userId
-      productId,
-      quantity,
-      price: productPrice,
-      addedAt: addedAt,
-      userId,
-    }),
+    body: JSON.stringify(payload),
   })
-    .then((cartItem) => {
+    .then((response) => {
+      if (!response.ok) {
+        return response.json().then((errorData) => {
+          throw new Error(
+            `HTTP error! status: ${response.status}, message: ${
+              errorData.message || "Unknown error"
+            }`
+          );
+        });
+      }
+      return response.json();
+    })
+    .then(() => {
       Swal.fire({
         title: "تمت إضافة المنتج إلى السلة!",
         text: "يمكنك الذهاب إلى السلة لإتمام عملية الشراء أو مواصلة التسوق.",
@@ -276,18 +296,14 @@ function addToCartAPI(
         confirmButtonText: "الذهاب إلى السلة",
         cancelButtonText: "مواصلة التسوق",
         reverseButtons: true,
-      }).then((result) => {
-        if (result.isConfirmed) {
-          window.location.href = "/frontend/user/card.html";
-        }
       });
     })
     .catch((error) => {
       Swal.fire({
         title: "خطأ",
-        text: "حدث خطأ أثناء استدعاء المنتجات ذات الصلة، يرجى المحاولة لاحقاً.",
+        text: `حدث خطأ أثناء إضافة المنتج للسلة: ${error.message}`,
         icon: "error",
       });
-      console.error("Error fetching related products:", error);
+      console.error("Error adding product to cart:", error);
     });
 }

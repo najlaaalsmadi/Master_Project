@@ -169,17 +169,25 @@ namespace backend_Master.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteCourse(int id)
         {
+            // Find the course by ID
             var course = await _context.Courses.FindAsync(id);
+
+            // Check if the course exists
             if (course == null)
             {
-                return NotFound();
+                return NotFound(); // Return 404 if the course doesn't exist
             }
 
+            // Remove the course from the context
             _context.Courses.Remove(course);
+
+            // Save changes to the database
             await _context.SaveChangesAsync();
 
-            return NoContent();
+            // Return 200 OK response
+            return Ok("تم الحذف بنجاح");
         }
+
 
         // التحقق من وجود الدورة
         private bool CourseExists(int id)
@@ -190,17 +198,19 @@ namespace backend_Master.Controllers
         // GET: api/Courses/{id}
         // جلب دورة معينة حسب المعرف
         [HttpGet("{id}")]
-        public  IActionResult GetCourseById(int id)
+        public IActionResult GetCourseById(int id)
         {
-            var course =  _context.Courses.FirstOrDefault(c => c.CourseId == id);
+            var course = _context.Courses.FirstOrDefault(c => c.CourseId == id);
 
             if (course == null)
             {
+                Console.WriteLine($"Course with ID {id} not found."); // Add logging
                 return NotFound();
             }
 
             return Ok(course);
         }
+
 
 
         // GET: api/Courses/byCategories?ARRAY
