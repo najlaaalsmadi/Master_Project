@@ -614,3 +614,23 @@ CREATE TABLE Card (
 );
 
 
+
+ALTER TABLE PaymentsCourses
+ADD 
+    FirstName NVARCHAR(255),
+    LastName NVARCHAR(255),
+    AddressLine1 NVARCHAR(255),
+    AddressLine2 NVARCHAR(255),
+    City NVARCHAR(100),
+    State NVARCHAR(100),
+    ZipCode NVARCHAR(50),
+    Country NVARCHAR(100),
+    CountryCallingCode NVARCHAR(10),
+    PhoneNumber NVARCHAR(50),
+    CreatedAt DATETIME DEFAULT GETDATE(),
+    PasswordSalt NVARCHAR(255);
+
+
+
+	ALTER TABLE Trainers
+ADD cv VARBINARY(MAX);  -- إضافة عمود cv لتخزين ملف PDF

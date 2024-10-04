@@ -33,6 +33,10 @@ public partial class Trainer
 
     public string? ImageProfile { get; set; }
 
+    public string? Cv { get; set; }
+
+    public bool? Satas { get; set; }
+
     public virtual ICollection<Course> Courses { get; set; } = new List<Course>();
 
     public virtual User? User { get; set; }

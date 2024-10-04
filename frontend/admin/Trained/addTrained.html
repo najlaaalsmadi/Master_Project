@@ -50,6 +50,27 @@
       </div>
       <div class="dropdown">
         <a href="#" class="dropdown-toggle" data-bs-toggle="dropdown"
+          >إدارة المدربين</a
+        >
+        <ul class="dropdown-menu">
+          <li>
+            <a
+              class="dropdown-item"
+              href="/frontend/admin/Trained/addTrained.html"
+              >إضافة مدرب
+            </a>
+          </li>
+          <li>
+            <a
+              class="dropdown-item"
+              href="/frontend/admin/Trained/viewTrained.html"
+              >عرض المدربين
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div class="dropdown">
+        <a href="#" class="dropdown-toggle" data-bs-toggle="dropdown"
           >إدارة المسارات</a
         >
         <ul class="dropdown-menu">
@@ -109,13 +130,14 @@
           </li>
         </ul>
       </div>
-      <a href="#"><i class="fas fa-tags"></i> الكوبونات</a>
-      <a href="#"><i class="fas fa-coins"></i> نقاط الأرباح</a>
-      <a href="#"><i class="fas fa-gift"></i> استبدال النقاط</a>
       <a href="#"><i class="fas fa-comments"></i> المحادثات</a>
       <a href="/frontend/admin/user.html"
         ><i class="fas fa-users"></i> المستخدمون</a
       >
+      <br /><br />
+      <br /><br />
+      <br /><br />
+      <br /><br />
       <button class="btn btn-danger mt-4">خروج</button>
     </div>
 
@@ -163,144 +185,162 @@
         <div class="container mt-5">
           <div class="row justify-content-center">
             <div class="col-md-6 form-container">
-              <h2 class="text-center mb-4">نموذج إضافة مسار</h2>
-              <form id="courseForm">
+              <h2 class="text-center mb-4">نموذج إضافة مدرب</h2>
+              <form id="trainerForm">
+                <!-- اسم المدرب -->
                 <div class="mb-3">
-                  <label for="trackName" class="form-label">اسم المسار</label>
+                  <label for="name" class="form-label">اسم المدرب</label>
                   <input
                     type="text"
                     class="form-control"
-                    id="trackName"
-                    placeholder="أدخل اسم المسار"
+                    id="name"
+                    placeholder="أدخل اسم المدرب"
                     required
                   />
                 </div>
+
+                <!-- السيرة الذاتية -->
                 <div class="mb-3">
-                  <label for="trackDescription" class="form-label"
-                    >التفاصيل</label
-                  >
+                  <label for="bio" class="form-label">السيرة الذاتية</label>
                   <textarea
                     class="form-control"
-                    id="trackDescription"
+                    id="bio"
                     rows="4"
-                    placeholder="أدخل تفاصيل المسار"
+                    placeholder="أدخل السيرة الذاتية"
                     required
                   ></textarea>
                 </div>
+
+                <!-- الخبرة -->
                 <div class="mb-3">
-                  <label for="trackCost" class="form-label">التكلفة</label>
-                  <input
-                    type="number"
-                    class="form-control"
-                    id="trackCost"
-                    placeholder="أدخل تكلفة المسار"
-                    required
-                  />
-                </div>
-                <div class="mb-3">
-                  <label for="trainer" class="form-label">اختر المدرب</label>
-                  <select class="form-select" id="trainer" required>
-                    <option value="">اختر المدرب</option>
-                  </select>
-                </div>
-                <div class="mb-3">
-                  <label for="category" class="form-label">الفئة</label>
-                  <select class="form-select" id="category" required>
-                    <option value="">اختر الفئة</option>
-                  </select>
-                </div>
-                <div class="mb-3">
-                  <label for="duration" class="form-label">المدة</label>
+                  <label for="experience" class="form-label">الخبرة</label>
                   <input
                     type="text"
                     class="form-control"
-                    id="duration"
-                    placeholder="أدخل مدة المسار"
+                    id="experience"
+                    placeholder="أدخل سنوات الخبرة"
                     required
                   />
                 </div>
+
+                <!-- التخصص -->
                 <div class="mb-3">
-                  <label for="allowedStudents" class="form-label"
-                    >عدد الطلاب المسموح بهم</label
+                  <label for="specialization" class="form-label">التخصص</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="specialization"
+                    placeholder="أدخل التخصص"
+                    required
+                  />
+                </div>
+
+                <!-- البريد الإلكتروني -->
+                <div class="mb-3">
+                  <label for="email" class="form-label"
+                    >البريد الإلكتروني</label
                   >
                   <input
-                    type="number"
+                    type="email"
                     class="form-control"
-                    id="allowedStudents"
-                    placeholder="أدخل عدد الطلاب المسموح بهم"
+                    id="email"
+                    placeholder="أدخل البريد الإلكتروني"
                     required
                   />
                 </div>
+
+                <!-- كلمة المرور -->
                 <div class="mb-3">
-                  <label for="startDate" class="form-label">تاريخ البدء</label>
+                  <label for="password" class="form-label">كلمة المرور</label>
                   <input
-                    type="date"
+                    type="password"
                     class="form-control"
-                    id="startDate"
+                    id="password"
+                    placeholder="أدخل كلمة المرور"
                     required
                   />
                 </div>
+
+                <!-- تأكيد كلمة المرور -->
                 <div class="mb-3">
-                  <label for="endDate" class="form-label">تاريخ الانتهاء</label>
+                  <label for="confirmPassword" class="form-label"
+                    >تأكيد كلمة المرور</label
+                  >
                   <input
-                    type="date"
+                    type="password"
                     class="form-control"
-                    id="endDate"
+                    id="confirmPassword"
+                    placeholder="أعد إدخال كلمة المرور"
                     required
                   />
                 </div>
+
+                <!-- رقم الهاتف -->
                 <div class="mb-3">
-                  <label for="curriculum" class="form-label">المنهج</label>
-                  <textarea
-                    class="form-control"
-                    id="curriculum"
-                    rows="3"
-                    placeholder="أدخل المنهج"
-                    required
-                  ></textarea>
-                </div>
-                <div class="mb-3">
-                  <label for="tools" class="form-label">الأدوات</label>
-                  <textarea
-                    class="form-control"
-                    id="tools"
-                    rows="3"
-                    placeholder="أدخل الأدوات المطلوبة"
-                    required
-                  ></textarea>
-                </div>
-                <div class="mb-3">
-                  <label for="rating" class="form-label">التقييم</label>
+                  <label for="phone" class="form-label">رقم الهاتف</label>
                   <input
-                    type="number"
+                    type="tel"
                     class="form-control"
-                    id="rating"
-                    placeholder="أدخل التقييم (1-5)"
-                    min="1"
-                    max="5"
+                    id="phone"
+                    placeholder="أدخل رقم الهاتف"
                     required
                   />
                 </div>
+
+                <!-- المسمى الوظيفي -->
                 <div class="mb-3">
-                  <label for="certificate" class="form-label">شهادة</label>
-                  <select class="form-select" id="certificate" required>
-                    <option value="">اختر</option>
-                    <option value="yes">نعم</option>
-                    <option value="no">لا</option>
-                  </select>
+                  <label for="jobTitle" class="form-label"
+                    >المسمى الوظيفي</label
+                  >
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="jobTitle"
+                    placeholder="أدخل المسمى الوظيفي"
+                    required
+                  />
                 </div>
+
+                <!-- الصورة الشخصية -->
                 <div class="mb-3">
-                  <label for="image" class="form-label">صورة المسار</label>
+                  <label for="imageProfile" class="form-label"
+                    >الصورة الشخصية</label
+                  >
                   <input
                     type="file"
                     class="form-control"
-                    id="image"
+                    id="imageProfile"
                     accept="image/*"
                   />
                 </div>
+
+                <!-- السيرة الذاتية (CV) -->
+                <div class="mb-3">
+                  <label for="cv" class="form-label"
+                    >تحميل السيرة الذاتية (CV)</label
+                  >
+                  <input
+                    type="file"
+                    class="form-control"
+                    id="cv"
+                    accept=".pdf,.doc,.docx"
+                    required
+                  />
+                </div>
+
+                <!-- دور المدرب -->
+                <div class="mb-3">
+                  <label for="role" class="form-label">الدور</label>
+                  <select class="form-select" id="role" required>
+                    <option value="">اختر الدور</option>
+                    <option value="مدرب">مدرب</option>
+                    <option value="مشرف">مشرف</option>
+                  </select>
+                </div>
+
                 <div class="d-grid">
                   <button type="submit" class="btn btn-primary">
-                    إضافة المسار
+                    إضافة المدرب
                   </button>
                 </div>
               </form>
