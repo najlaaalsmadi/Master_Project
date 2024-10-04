@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>عرض المسارات</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/frontend/admin/css/dashboardadmin.css" />
+    <link rel="stylesheet" href="/frontend/admin/css/viewcategory.css" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style></style>
+    <style>
+        .add-lesson-btn {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            font-size: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s ease;
+        }
+    
+        .add-lesson-btn:hover {
+            background-color: #3c0bea; /* تغيير لون الخلفية عند التمرير */
+        }
+    </style>
+    
+  </head>
+  <body class="light">
+    <!-- Toggle Sidebar Button for Mobile -->
+    <button class="btn toggle-sidebar-btn" onclick="toggleSidebar()">
+      <i class="fas fa-bars"></i>
+    </button>
+
+    <!-- Sidebar -->
+    <div class="sidebar" id="sidebar">
+      <h2>لوحة التحكم</h2>
+      <a href="/frontend/admin/dashboardadmin.html"> لوحة التحكم </a>
+      <div class="dropdown">
+        <a href="#" class="dropdown-toggle" data-bs-toggle="dropdown"
+          >إدارة تصنيفات</a
+        >
+        <ul class="dropdown-menu">
+          <li>
+            <a
+              class="dropdown-item"
+              href="/frontend/admin/category/addcategory.html"
+              >إضافة تصنيف جديد</a
+            >
+          </li>
+          <li>
+            <a
+              class="dropdown-item"
+              href="/frontend/admin/category/viewcategory.html"
+              >عرض تصنيفات</a
+            >
+          </li>
+        </ul>
+      </div>
+      <div class="dropdown">
+        <a href="#" class="dropdown-toggle" data-bs-toggle="dropdown"
+          >إدارة المسارات</a
+        >
+        <ul class="dropdown-menu">
+          <li><a class="dropdown-item" href="/frontend/admin/masaralmhne/add.html">إضافة مسار </a></li>
+          <li><a class="dropdown-item" href="/frontend/admin/masaralmhne/view.html">عرض المسارات</a></li>
+        </ul>
+      </div>
+      <div class="dropdown">
+        <a href="#" class="dropdown-toggle" data-bs-toggle="dropdown"
+          >إدارة المعدات</a
+        >
+        <ul class="dropdown-menu">
+          <li>
+            <a class="dropdown-item" href="/frontend/admin/equipments/addequipments.html"
+              >إضافة معدات جديد</a
+            >
+          </li>
+          <li>
+            <a
+              class="dropdown-item"
+              href="/frontend/admin/equipments/viewequipments.html"
+              >عرض المعدات</a
+            >
+          </li>
+        </ul>
+      </div>
+      <div class="dropdown">
+        <a href="#" class="dropdown-toggle" data-bs-toggle="dropdown"
+          >إدارة المشرفين</a
+        >
+        <ul class="dropdown-menu">
+          <li><a class="dropdown-item" href="/frontend/admin/adminTabl/AddAdmin.html">إضافة مشرف جديد</a></li>
+          <li><a class="dropdown-item" href="/frontend/admin/adminTabl/viewAdmin.html">عرض المشرفين</a></li>
+        </ul>
+      </div>
+      <a href="#"><i class="fas fa-tags"></i> الكوبونات</a>
+      <a href="#"><i class="fas fa-coins"></i> نقاط الأرباح</a>
+      <a href="#"><i class="fas fa-gift"></i> استبدال النقاط</a>
+      <a href="#"><i class="fas fa-comments"></i> المحادثات</a>
+      <a href="/frontend/admin/user.html"
+        ><i class="fas fa-users"></i> المستخدمون</a
+      >
+      <button class="btn btn-danger mt-4">خروج</button>
+    </div>
+
+    <!-- Main Dashboard Content -->
+    <div class="dashboard-content">
+      <!-- Header -->
+      <header
+        class="d-flex flex-column flex-md-row justify-content-between align-items-center p-3 bg-white shadow-sm"
+      >
+        <a href="#" class="btn btn-primary my-3">تقرير شهري جديد</a>
+        <div class="search-bar w-100 w-md-50 mx-md-3">
+          <form class="d-flex align-items-center border">
+            <input
+              type="email"
+              class="form-control rounded-0"
+              placeholder="ابحث هنا "
+              style="border: none; box-shadow: none; flex-grow: 1"
+              required
+            />
+            <button
+              type="submit"
+              class="btn"
+              style="
+                background-color: #ffaa33;
+                border: none;
+                padding: 0.5rem 1.5rem;
+              "
+            >
+              ابحث
+            </button>
+          </form>
+        </div>
+        <div class="profile-section">
+          <img src="/backend/image/نجلاء.jpg" alt="Profile" />
+          <span class="online-status"></span>
+          <div class="theme-switcher ms-3">
+            <select id="theme-selector" onchange="changeTheme()">
+              <option value="light">فاتح ☀️</option>
+              <option value="dark">داكن 🌙</option>
+            </select>
+          </div>
+        </div>
+      </header>
+    
+      <main class="p-3">
+        <div class="container mt-5">
+            <h2 class="text-center">قائمة الدروس للكورس: <span id="courseTitle"></span></h2>
+            <div class="d-flex justify-content-center align-items-center min-vh-60">
+                <table class="table tracks-table table-bordered">
+                    <thead>
+                    <tr>
+                        <th>اسم الدرس</th>
+                        <th>المحتوى</th>
+                        <th>رابط الفيديو</th>
+                        <th>العمليات</th>
+                    </tr>
+                    </thead>
+                    <tbody id="courseTableBody">
+                    <!-- سيتم إضافة الصفوف هنا بواسطة JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+    
+    <!-- نموذج إضافة درس -->
+    <div class="modal fade" id="addLessonModal" tabindex="-1" aria-labelledby="addLessonModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addLessonModalLabel">إضافة درس جديد</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="addLessonForm">
+                        <div class="mb-3">
+                            <label for="addLessonTitle" class="form-label">اسم الدرس</label>
+                            <input type="text" class="form-control" id="addLessonTitle" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="addLessonContent" class="form-label">المحتوى</label>
+                            <textarea class="form-control" id="addLessonContent" required></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label for="addLessonVideoUrl" class="form-label">رابط الفيديو</label>
+                            <input type="url" class="form-control" id="addLessonVideoUrl" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">إضافة</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- نموذج تعديل الدرس -->
+    <div class="modal fade" id="editLessonModal" tabindex="-1" aria-labelledby="editLessonModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editLessonModalLabel">تعديل الدرس</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="editLessonForm">
+                        <input type="hidden" id="editLessonId">
+                        <div class="mb-3">
+                            <label for="editLessonTitle" class="form-label">اسم الدرس</label>
+                            <input type="text" class="form-control" id="editLessonTitle" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="editLessonContent" class="form-label">المحتوى</label>
+                            <textarea class="form-control" id="editLessonContent" required></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label for="editLessonVideoUrl" class="form-label">رابط الفيديو</label>
+                            <input type="url" class="form-control" id="editLessonVideoUrl" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">تحديث</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- زر إضافة درس جديد -->
+    <button class="btn btn-primary add-lesson-btn" onclick="openAddLessonModal()">+</button>
+    
+    <script>
+        // الحصول على معرف الكورس من URL
+        const courseId = new URLSearchParams(window.location.search).get('id');
+    
+        // تحميل الدروس من API وعرضها في الجدول
+        function loadLessons() {
+            fetch(`http://localhost:38146/api/Lesson/${courseId}`)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    const tbody = document.getElementById('courseTableBody');
+                    tbody.innerHTML = ''; // مسح المحتوى الحالي
+    
+                    // تحقق من وجود دروس
+                    if (data.lessons.length > 0) {
+                        // إظهار عنوان الدورة
+                        document.getElementById('courseTitle').innerHTML = data.course.title;
+    
+                        data.lessons.forEach(lesson => {
+                            const tr = document.createElement('tr');
+                            tr.innerHTML = `
+                                <td>${lesson.title}</td>
+                                <td>${lesson.content}</td>
+                                <td><a href="javascript:void(0);" onclick="showYoutubeVideo('${lesson.videoUrl}')">مشاهدة الفيديو</a></td>
+                                <td>
+<button class="btn btn-warning btn-sm" onclick="openEditModal(${lesson.lessonId}, \`${lesson.title.replace(/'/g, "\\'")}\`, \`${lesson.content.replace(/'/g, "\\'")}\`, '${lesson.videoUrl}')">تعديل</button>
+                                    <br><br>
+                                    <button class="btn btn-danger btn-sm" onclick="confirmDeleteLesson(${lesson.lessonId})">حذف</button>
+                                </td>
+                            `;
+                            tbody.appendChild(tr);
+                        });
+                    } else {
+                        tbody.innerHTML = '<tr><td colspan="4" class="text-center">لا توجد دروس متاحة</td></tr>';
+                    }
+                })
+                .catch(error => console.error('Error:', error));
+        }
+    
+        // دالة عرض فيديو يوتيوب في SweetAlert
+        function showYoutubeVideo(videoUrl) {
+            let youtubeEmbedUrl = videoUrl;
+    
+            if (videoUrl.includes("youtu.be")) {
+                const videoId = videoUrl.split("/").pop().split("?")[0];
+                youtubeEmbedUrl = `https://www.youtube.com/embed/${videoId}`;
+            } else if (videoUrl.includes("watch?v=")) {
+                youtubeEmbedUrl = videoUrl.replace("watch?v=", "embed/");
+            }
+    
+            Swal.fire({
+                title: 'مشاهدة الفيديو',
+                html: `<iframe width="560" height="315" src="${youtubeEmbedUrl}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`,
+                showCloseButton: true,
+                focusConfirm: false,
+                confirmButtonText: 'إغلاق'
+            });
+        }
+    
+        // دالة فتح نموذج التعديل
+        function openEditModal(lessonId, title, content, videoUrl) {
+            console.log({ lessonId, title, content, videoUrl });  // تحقق من القيم هنا
+            document.getElementById('editLessonId').value = lessonId;
+            document.getElementById('editLessonTitle').value = title;
+            document.getElementById('editLessonContent').value = content;
+            document.getElementById('editLessonVideoUrl').value = videoUrl;
+    
+            var editModal = new bootstrap.Modal(document.getElementById('editLessonModal'));
+            editModal.show();
+        }
+    
+        // حدث عند تقديم نموذج التعديل
+        document.getElementById('editLessonForm').addEventListener('submit', function (event) {
+            event.preventDefault();
+    
+            const lessonId = document.getElementById('editLessonId').value;
+            const title = document.getElementById('editLessonTitle').value;
+            const content = document.getElementById('editLessonContent').value;
+            const videoUrl = document.getElementById('editLessonVideoUrl').value;
+    
+            // استدعاء دالة تحديث الدرس
+            updateLesson(lessonId, { title, content, videoUrl });
+        });
+    
+        // دالة تحديث الدرس
+        function updateLesson(lessonId, updatedData) {
+    // تحقق من أن updatedData يحتوي على LessonId الصحيح
+    updatedData.LessonId = lessonId; // تعيين LessonId من lessonId المتوفر
+
+    fetch(`http://localhost:38146/api/Lesson/${lessonId}`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(updatedData)
+    })
+    .then(response => {
+        if (!response.ok) {
+            return response.text().then(text => { 
+                throw new Error(text); // الحصول على نص الخطأ من الخادم
+            }); 
+        }
+        // إذا كانت الاستجابة ناجحة
+        Swal.fire(
+            'تم التحديث!',
+            'تم تحديث الدرس بنجاح.',
+            'success'
+        );
+        loadLessons(); // إعادة تحميل الدروس
+        var editModal = bootstrap.Modal.getInstance(document.getElementById('editLessonModal'));
+        editModal.hide(); // إغلاق نافذة التحرير
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        Swal.fire('خطأ', error.message, 'error'); // عرض الخطأ في واجهة المستخدم
+    });
+}
+
+        // دالة التأكيد على حذف الدرس
+        function confirmDeleteLesson(lessonId) {
+            Swal.fire({
+                title: 'هل أنت متأكد؟',
+                text: "لا يمكنك التراجع عن هذا!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'نعم، احذف!',
+                cancelButtonText: 'لا، إلغاء'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    deleteLesson(lessonId);
+                }
+            });
+        }
+    
+        // دالة حذف الدرس
+        function deleteLesson(lessonId) {
+            fetch(`http://localhost:38146/api/Lesson/${lessonId}`, {
+                method: 'DELETE'
+            })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Failed to delete lesson');
+                    }
+                    Swal.fire(
+                        'تم الحذف!',
+                        'تم حذف الدرس بنجاح.',
+                        'success'
+                    );
+                    loadLessons();
+                })
+                .catch(error => console.error('Error:', error));
+        }
+    
+        // دالة فتح نموذج إضافة درس جديد
+        function openAddLessonModal() {
+            var addModal = new bootstrap.Modal(document.getElementById('addLessonModal'));
+            addModal.show();
+        }
+    
+        // حدث عند تقديم نموذج الإضافة
+        document.getElementById('addLessonForm').addEventListener('submit', function (event) {
+            event.preventDefault();
+    
+            const title = document.getElementById('addLessonTitle').value;
+            const content = document.getElementById('addLessonContent').value;
+            const videoUrl = document.getElementById('addLessonVideoUrl').value;
+    
+            addLesson({ title, content, videoUrl });
+        });
+    
+        // دالة إضافة الدرس
+        function addLesson(newLesson) {
+            fetch(`http://localhost:38146/api/Lesson/${courseId}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(newLesson)
+            })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Failed to add lesson');
+                    }
+                    Swal.fire(
+                        'تمت الإضافة!',
+                        'تم إضافة الدرس بنجاح.',
+                        'success'
+                    );
+                    loadLessons();
+                    var addModal = bootstrap.Modal.getInstance(document.getElementById('addLessonModal'));
+                    addModal.hide();
+                })
+                .catch(error => console.error('Error:', error));
+        }
+    
+        // تحميل الدروس عند تحميل الصفحة
+        loadLessons();
+    </script>
+    
+    <!-- ربط مكتبة Bootstrap -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    
+
+
+    
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+        </div>
+      </main>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script> -->
+    <script>
+      // Function to toggle sidebar visibility
+      function toggleSidebar() {
+        const sidebar = document.getElementById("sidebar");
+        sidebar.classList.toggle("show");
+      }
+
+      // Function to change theme
+      function changeTheme() {
+        const theme = document.getElementById("theme-selector").value;
+        document.body.className = theme;
+      }
+
+      // Chart.js code
+      const salesCtx = document.getElementById("salesChart").getContext("2d");
+      const salesChart = new Chart(salesCtx, {
+        type: "bar",
+        data: {
+          labels: ["يناير", "فبراير", "مارس", "أبريل", "مايو", "يونيو"],
+          datasets: [
+            {
+              label: "إجمالي المبيعات",
+              data: [5000, 7000, 8000, 6000, 9000, 10000],
+              backgroundColor: "rgba(54, 162, 235, 0.2)",
+              borderColor: "rgba(54, 162, 235, 1)",
+              borderWidth: 1,
+            },
+          ],
+        },
+        options: {
+          scales: {
+            y: {
+              beginAtZero: true,
+            },
+          },
+        },
+      });
+
+      const customersCtx = document
+        .getElementById("customersChart")
+        .getContext("2d");
+      const customersChart = new Chart(customersCtx, {
+        type: "pie",
+        data: {
+          labels: ["عملاء نشطون", "عملاء غير نشطين"],
+          datasets: [
+            {
+              label: "تحليل العملاء",
+              data: [300, 150],
+              backgroundColor: ["#36a2eb", "#ff6384"],
+              borderColor: "#fff",
+              borderWidth: 1,
+            },
+          ],
+        },
+      });
+    </script>
+
+    <script>
+      // Function to change theme
+      function changeTheme() {
+        const theme = document.getElementById("theme-selector").value;
+        document.body.className = theme;
+
+        // Save the selected theme to localStorage
+        localStorage.setItem("theme", theme);
+      }
+
+      // Load the theme from localStorage when the page loads
+      window.onload = function () {
+        const savedTheme = localStorage.getItem("theme") || "light"; // Default to 'light' if nothing is saved
+        document.body.className = savedTheme;
+        document.getElementById("theme-selector").value = savedTheme;
+      };
+    </script>
+    
+  </body>
+</html>

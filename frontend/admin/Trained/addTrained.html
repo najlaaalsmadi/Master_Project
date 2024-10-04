@@ -3,9 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>عرض المسارات</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <title>لوحة التحكم</title>
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
       rel="stylesheet"
@@ -15,7 +13,7 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="/frontend/admin/css/dashboardadmin.css" />
-    <link rel="stylesheet" href="/frontend/admin/css/viewcategory.css" />
+    <link rel="stylesheet" href="/frontend/admin/css/addcategory.css" />
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style></style>
   </head>
@@ -55,8 +53,18 @@
           >إدارة المسارات</a
         >
         <ul class="dropdown-menu">
-          <li><a class="dropdown-item" href="/frontend/admin/masaralmhne/add.html">إضافة مسار </a></li>
-          <li><a class="dropdown-item" href="/frontend/admin/masaralmhne/view.html">عرض المسارات</a></li>
+          <li>
+            <a class="dropdown-item" href="/frontend/admin/masaralmhne/add.html"
+              >إضافة مسار
+            </a>
+          </li>
+          <li>
+            <a
+              class="dropdown-item"
+              href="/frontend/admin/masaralmhne/view.html"
+              >عرض المسارات</a
+            >
+          </li>
         </ul>
       </div>
       <div class="dropdown">
@@ -65,7 +73,9 @@
         >
         <ul class="dropdown-menu">
           <li>
-            <a class="dropdown-item" href="/frontend/admin/equipments/addequipments.html"
+            <a
+              class="dropdown-item"
+              href="/frontend/admin/equipments/addequipments.html"
               >إضافة معدات جديد</a
             >
           </li>
@@ -83,8 +93,20 @@
           >إدارة المشرفين</a
         >
         <ul class="dropdown-menu">
-          <li><a class="dropdown-item" href="/frontend/admin/adminTabl/AddAdmin.html">إضافة مشرف جديد</a></li>
-          <li><a class="dropdown-item" href="/frontend/admin/adminTabl/viewAdmin.html">عرض المشرفين</a></li>
+          <li>
+            <a
+              class="dropdown-item"
+              href="/frontend/admin/adminTabl/AddAdmin.html"
+              >إضافة مشرف جديد</a
+            >
+          </li>
+          <li>
+            <a
+              class="dropdown-item"
+              href="/frontend/admin/adminTabl/viewAdmin.html"
+              >عرض المشرفين</a
+            >
+          </li>
         </ul>
       </div>
       <a href="#"><i class="fas fa-tags"></i> الكوبونات</a>
@@ -138,36 +160,158 @@
         </div>
       </header>
       <main class="p-3">
-        <div class="row mb-3">
-          <div class="container mt-5">
-            <div
-              class="container d-flex justify-content-center align-items-center min-vh-60"
-            >
-                                   <table class="table tracks-table table-bordered">
-                            <thead>
-                                <tr>
-                                    <th>الاسم</th>
-                                    <th>التفاصيل</th>
-                                    <th>التكلفة</th>
-                                    <th>صورة الإعلان</th>
-                                    <th>تاريخ البدء</th>
-                                    <th>تاريخ الانتهاء</th>
-                                    <th>المنهج</th>
-                                    <th>الأدوات</th>
-                                    <th>شهادة</th>
-                                    <th>العمليات</th>
-                                </tr>
-                            </thead>
-                            <tbody id="courseTableBody">
-                              <!-- سيتم إضافة الصفوف هنا بواسطة JavaScript -->
-                          </tbody>
-                        </table>
-                    </div>
-                </main>
-             
+        <div class="container mt-5">
+          <div class="row justify-content-center">
+            <div class="col-md-6 form-container">
+              <h2 class="text-center mb-4">نموذج إضافة مسار</h2>
+              <form id="courseForm">
+                <div class="mb-3">
+                  <label for="trackName" class="form-label">اسم المسار</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="trackName"
+                    placeholder="أدخل اسم المسار"
+                    required
+                  />
+                </div>
+                <div class="mb-3">
+                  <label for="trackDescription" class="form-label"
+                    >التفاصيل</label
+                  >
+                  <textarea
+                    class="form-control"
+                    id="trackDescription"
+                    rows="4"
+                    placeholder="أدخل تفاصيل المسار"
+                    required
+                  ></textarea>
+                </div>
+                <div class="mb-3">
+                  <label for="trackCost" class="form-label">التكلفة</label>
+                  <input
+                    type="number"
+                    class="form-control"
+                    id="trackCost"
+                    placeholder="أدخل تكلفة المسار"
+                    required
+                  />
+                </div>
+                <div class="mb-3">
+                  <label for="trainer" class="form-label">اختر المدرب</label>
+                  <select class="form-select" id="trainer" required>
+                    <option value="">اختر المدرب</option>
+                  </select>
+                </div>
+                <div class="mb-3">
+                  <label for="category" class="form-label">الفئة</label>
+                  <select class="form-select" id="category" required>
+                    <option value="">اختر الفئة</option>
+                  </select>
+                </div>
+                <div class="mb-3">
+                  <label for="duration" class="form-label">المدة</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="duration"
+                    placeholder="أدخل مدة المسار"
+                    required
+                  />
+                </div>
+                <div class="mb-3">
+                  <label for="allowedStudents" class="form-label"
+                    >عدد الطلاب المسموح بهم</label
+                  >
+                  <input
+                    type="number"
+                    class="form-control"
+                    id="allowedStudents"
+                    placeholder="أدخل عدد الطلاب المسموح بهم"
+                    required
+                  />
+                </div>
+                <div class="mb-3">
+                  <label for="startDate" class="form-label">تاريخ البدء</label>
+                  <input
+                    type="date"
+                    class="form-control"
+                    id="startDate"
+                    required
+                  />
+                </div>
+                <div class="mb-3">
+                  <label for="endDate" class="form-label">تاريخ الانتهاء</label>
+                  <input
+                    type="date"
+                    class="form-control"
+                    id="endDate"
+                    required
+                  />
+                </div>
+                <div class="mb-3">
+                  <label for="curriculum" class="form-label">المنهج</label>
+                  <textarea
+                    class="form-control"
+                    id="curriculum"
+                    rows="3"
+                    placeholder="أدخل المنهج"
+                    required
+                  ></textarea>
+                </div>
+                <div class="mb-3">
+                  <label for="tools" class="form-label">الأدوات</label>
+                  <textarea
+                    class="form-control"
+                    id="tools"
+                    rows="3"
+                    placeholder="أدخل الأدوات المطلوبة"
+                    required
+                  ></textarea>
+                </div>
+                <div class="mb-3">
+                  <label for="rating" class="form-label">التقييم</label>
+                  <input
+                    type="number"
+                    class="form-control"
+                    id="rating"
+                    placeholder="أدخل التقييم (1-5)"
+                    min="1"
+                    max="5"
+                    required
+                  />
+                </div>
+                <div class="mb-3">
+                  <label for="certificate" class="form-label">شهادة</label>
+                  <select class="form-select" id="certificate" required>
+                    <option value="">اختر</option>
+                    <option value="yes">نعم</option>
+                    <option value="no">لا</option>
+                  </select>
+                </div>
+                <div class="mb-3">
+                  <label for="image" class="form-label">صورة المسار</label>
+                  <input
+                    type="file"
+                    class="form-control"
+                    id="image"
+                    accept="image/*"
+                  />
+                </div>
+                <div class="d-grid">
+                  <button type="submit" class="btn btn-primary">
+                    إضافة المسار
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
         </div>
       </main>
+
+      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
@@ -246,103 +390,5 @@
         document.getElementById("theme-selector").value = savedTheme;
       };
     </script>
-     <script>
-      
-      // تحميل البيانات من API وعرضها في الجدول
-      fetch('http://localhost:38146/api/Courses/all')
-          .then(response => {
-              if (!response.ok) {
-                  throw new Error('Network response was not ok');
-              }
-              return response.json();
-          })
-          .then(data => {
-              const tbody = document.getElementById('courseTableBody');
-              tbody.innerHTML = ''; // مسح المحتوى الحالي
-            console.log(data);
-            
-              data.forEach(course => {
-                  const tr = document.createElement('tr');
-                  tr.innerHTML = `
-                      <td>${course.title}</td>
-                      <td>${course.description}</td>
-                      <td>${course.price} دينار</td>
-                      <td><img src="/backend/image/${course.imageUrl}" alt="صورة الإعلان" width="100"></td>
-                      <td>${course.startDate}</td>
-                      <td>${course.endDate}</td>
-                      <td>${course.syllabus}</td>
-                      <td>${course.tools}</td>
-                      <td>${course.certificate ? 'نعم' : 'لا'}</td>
-                      <td>
-                          <a class="btn btn-edit btn-sm" href="/frontend/admin/masaralmhne/update.html?id=${course.courseId}">تعديل</a>
-
-                          <br><br>
-                          <button class="btn btn-danger" onclick="deleteCourse('${course.courseId}')">حذف</button>
-                     
-                           <br><br>
-                          <a class="btn btn-secondary" href="/frontend/admin/masaralmhne/Lessons.html?id=${course.courseId}">عرض الكورس</button>
-
-                          </td>
-                  `;
-                  tbody.appendChild(tr);
-              });
-          })
-          .catch(error => console.error('Error:', error));
-
-      // دالة حذف الدورة (تحتاج إلى تنفيذها)
-  
-  </script>
-  <script>
-    debugger;
-    // Delete Course Function using SweetAlert2
-    function deleteCourse(courseId) {
-      // SweetAlert2 confirmation dialog
-      Swal.fire({
-        title: 'هل أنت متأكد?',
-        text: "لن تتمكن من التراجع عن هذا!",
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'نعم, احذفه!',
-        cancelButtonText: 'إلغاء'
-      }).then((result) => {
-        if (result.isConfirmed) {
-          // Perform the DELETE request to remove the course
-          fetch(`http://localhost:38146/api/Courses/${courseId}`, {
-            method: "DELETE",
-            headers: {
-              "Content-Type": "application/json"
-            }
-          })
-          .then((response) => {
-            if (!response.ok) {
-              throw new Error("Network response was not ok");
-            }
-            return response.json();
-          })
-          .then((data) => {
-            console.log("Course deleted successfully:", data);
-            Swal.fire(
-              'تم الحذف!',
-              'تم حذف المسار بنجاح.',
-              'success'
-            ).then(() => {
-              // Redirect or refresh the page after deletion if necessary
-              window.location.href = '/courses.html'; // Example redirect after deletion
-            });
-          })
-          .catch((error) => {
-            console.error("Error deleting course:", error);
-            Swal.fire(
-              'فشل!',
-              'حدث خطأ أثناء محاولة حذف المسار.',
-              'error'
-            );
-          });
-        }
-      });
-    }
-  </script>
   </body>
 </html>
