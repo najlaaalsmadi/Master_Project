@@ -1,84 +1,81 @@
 let totalPrice = 0;
 let couponApplied = false;
 let discountValue = 0;
-//بدي اعمل انه فيه نوعين من الخصم اذا اول مره عم يشتري من عندي ف ف اله DISCOUNT بقيمه 20%
-//ام المره الثانيه قيمه الخصم 10بالمئه
 
+// Define valid coupons
 const validCoupons = {
   DISCOUNT10: 10,
   SAVE20: 20,
 };
 
-// استرجاع userID من API باستخدام email المخزن في localStorage
+// Fetch user ID from the API using the email stored in localStorage
 async function fetchUserId() {
   try {
     const email = localStorage.getItem("email");
-    if (!email) return null; // إذا لم يكن هناك تسجيل دخول
+    if (!email) return null; // If there's no login
     const response = await fetch(
       `http://localhost:38146/api/Users/email/${encodeURIComponent(email)}`
     );
     const data = await response.json();
-    return data.userId; // تأكد من أن userId موجود في البيانات
+    return data.userId; // Ensure userId exists in the data
   } catch (error) {
     console.error("Error fetching user ID:", error);
     return null;
   }
 }
 
-// استرجاع المنتجات اليدوية من API باستخدام userID
+// Fetch handmade products from the API using userID
 async function fetchHandmadeProducts(userID) {
   try {
     const response = await fetch(
       `http://localhost:38146/api/CardItemHandmadeProduct/card/${userID}`
     );
-    const products = await response.json();
-    return products;
+    return await response.json();
   } catch (error) {
     console.error("Error fetching handmade products from API:", error);
     return [];
   }
 }
 
-// استرجاع المعدات التعليمية من API باستخدام userID
+// Fetch learning equipment from the API using userID
 async function fetchLearningEquipment(userID) {
   try {
     const response = await fetch(
       `http://localhost:38146/api/CardItemLearningEquipment/card/${userID}`
     );
-    const products = await response.json();
-    return products;
+    return await response.json();
   } catch (error) {
     console.error("Error fetching learning equipment from API:", error);
     return [];
   }
 }
 
-// استرجاع التفاصيل الإضافية للمنتجات باستخدام productId أو equipmentId
+// Fetch additional product details using productId or equipmentId
 async function fetchProductDetails(productId, category) {
   const url =
     category === "Handmade"
       ? `http://localhost:38146/api/Handmade_Products/${productId}`
       : `http://localhost:38146/api/LearningEquipment/${productId}`;
 
+  return await fetchProduct(url);
+}
+
+// General function to fetch data from a given URL
+async function fetchProduct(url) {
   try {
     const response = await fetch(url);
-    const productDetails = await response.json();
-    return productDetails;
+    if (!response.ok) throw new Error("Network response was not ok");
+    return await response.json();
   } catch (error) {
     console.error("Error fetching product details:", error);
     return null;
   }
 }
 
-// Function to delete a product from localStorage
+// Remove a product from localStorage
 function removeFromLocalStorage(productId) {
-  // Get the current cart from localStorage
   let cart = JSON.parse(localStorage.getItem("cart")) || [];
-
-  // Filter out the product with the given productId
   cart = cart.filter((product) => product.productId !== productId);
-
-  // Update the localStorage with the new cart array
   localStorage.setItem("cart", JSON.stringify(cart));
 }
 
@@ -92,15 +89,14 @@ async function displayProducts(products) {
     const productId = product.equipmentId || product.productId;
     const category = product.category;
 
-    // If details are missing, fetch them from API
     let productName = product.productName || product.name;
-    let imageUrl = product.product?.image_url_1 || product.imageUrl;
+    let imageUrl = product.product?.imageUrl1 || product.imageUrl1;
 
     if (!productName || !imageUrl) {
       const productDetails = await fetchProductDetails(productId, category);
       if (productDetails) {
         productName = productDetails.name || productName;
-        imageUrl = productDetails.image_url_1 || "default-image.jpg";
+        imageUrl = productDetails.imageUrl1 || "default-image.jpg";
       } else {
         imageUrl = "default-image.jpg";
       }
@@ -109,9 +105,9 @@ async function displayProducts(products) {
     const productPrice = product.productPrice || product.price || 0;
 
     const row = `
-      <tr data-product-id="${productId}">
+      <tr data-product-id="${productId}" data-category="${category}">
         <td>${index + 1}</td>
-        <td><img src="${imageUrl}" alt="${productName}" style="width: 100px; height: auto;" /></td>
+        <td><img src="/backend/image/${imageUrl}" alt="${productName}" style="width: 100px; height: auto;" /></td>
         <td>${productName}</td>
         <td class="unit-price">${productPrice} JD</td>
         <td>${product.quantity}</td>
@@ -220,6 +216,41 @@ function updateTotalPrice() {
   }
 
   document.getElementById("total-price").textContent = `$${total.toFixed(2)}`;
+}
+
+// Apply coupon logic
+async function applyCoupon(couponCode) {
+  if (validCoupons[couponCode]) {
+    const userId = await fetchUserId();
+    const hasPurchased = await checkPurchaseHistory(userId);
+
+    // Set discount value based on purchase history
+    discountValue = hasPurchased
+      ? validCoupons[couponCode]
+      : validCoupons[couponCode];
+    couponApplied = true;
+    updateTotalPrice();
+  } else {
+    alert("Invalid coupon code.");
+  }
+}
+
+// Check if the user has made any purchases
+async function checkPurchaseHistory(userId) {
+  // Implement API call to check if the user has made any purchases
+  try {
+    const response = await fetch(
+      `http://localhost:38146/api/PurchaseHistory/${userId}`
+    );
+    if (response.ok) {
+      const purchases = await response.json();
+      return purchases.length > 0; // Return true if there are purchases
+    }
+    return false;
+  } catch (error) {
+    console.error("Error checking purchase history:", error);
+    return false;
+  }
 }
 
 // Load products when the page is loaded

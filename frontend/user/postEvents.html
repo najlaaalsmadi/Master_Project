@@ -187,76 +187,207 @@
         </div>
       </div>
     </nav>
+    <!-- Login Section -->
+    <main class="p-3">
+      <div class="container mt-5">
+        <div class="row justify-content-center">
+          <div class="col-md-6 form-container bg-white">
+            <h2 class="text-center mb-4">إضافة حدث</h2>
+            <form id="eventForm">
+              <!-- الجزء الأول من النموذج -->
+              <div id="eventPart1">
+                <div class="border rounded p-3 mb-4">
+                  <h4>المعلومات الأساسية</h4>
+                  <div class="mb-3">
+                    <label for="eventTitle" class="form-label"
+                      >عنوان الحدث</label
+                    >
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="eventTitle"
+                      name="eventTitle"
+                      placeholder="ورشة عمل: فنون الخياطة الأساسية"
+                      required
+                    />
+                  </div>
+                  <div class="mb-3">
+                    <label for="eventDate" class="form-label"
+                      >تاريخ الحدث</label
+                    >
+                    <input
+                      type="date"
+                      class="form-control"
+                      id="eventDate"
+                      name="eventDate"
+                      required
+                    />
+                  </div>
+                  <div class="mb-3">
+                    <label for="eventTime" class="form-label">وقت الحدث</label>
+                    <input
+                      type="time"
+                      class="form-control"
+                      id="eventTime"
+                      name="eventTime"
+                      required
+                    />
+                  </div>
+                  <div class="mb-3">
+                    <label for="location" class="form-label">الموقع</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="location"
+                      name="location"
+                      placeholder="أدخل الموقع"
+                      required
+                    />
+                  </div>
+                  <div class="mb-3">
+                    <label for="image" class="form-label">صورة الحدث</label>
+                    <input
+                      type="file"
+                      class="form-control"
+                      id="image"
+                      name="imagePath"
+                      accept="image/*"
+                    />
+                  </div>
+                  <div class="d-grid">
+                    <button
+                      type="button"
+                      class="btn btn-warning"
+                      onclick="showEventPart2()"
+                    >
+                      التالي
+                    </button>
+                  </div>
+                </div>
+              </div>
 
-    <ol class="breadcrumb">
-      <li><a href="/frontend/user/Index.html">الصفحة الرئيسية</a></li>
-      <li>&#10229;</li>
-      <li class="active">تسجيل الدخول</li>
-    </ol>
-    <div
-      class="container d-flex justify-content-center align-items-center"
-      style="min-height: 100vh"
-    >
-      <div
-        class="w-100"
-        style="max-width: 400px"
-        style="background-color: grey"
-      >
-        <!-- Login Section -->
-        <div class="login-container p-4 bg-light shadow rounded">
-          <h2 class="text-center mb-4">مرحباً بعودتك!</h2>
-          <p class="text-center">
-            أدخل اسم المستخدم وكلمة المرور أدناه لتسجيل الدخول.
-          </p>
-          <form id="loginForm" method="post" action="">
-            <div class="form-group mb-3">
-              <label for="Email">البريد الإلكتروني</label>
-              <input
-                type="email"
-                id="Email"
-                name="Email"
-                class="form-control"
-                required
-                autocomplete="username"
-              />
-            </div>
-            <div class="form-group mb-3">
-              <label for="Password">كلمة المرور</label>
-              <input
-                type="password"
-                id="Password"
-                name="Password"
-                class="form-control"
-                required
-                autocomplete="current-password"
-              />
-            </div>
-            <div class="form-group mb-3">
-              <label for="UserType">نوع المستخدم</label>
-              <select
-                id="UserType"
-                name="UserType"
-                class="form-control"
-                required
-              >
-                <option value="user">مستخدم</option>
-              </select>
-            </div>
-            <div class="form-group text-end mb-3">
-              <a href="/frontend/user/ForgotPassword.html">نسيت كلمة المرور؟</a>
-            </div>
-            <button type="submit" class="btn btn-warning w-100">
-              تسجيل الدخول
-            </button>
-          </form>
+              <!-- الجزء الثاني من النموذج -->
+              <div id="eventPart2" style="display: none">
+                <div class="border rounded p-3">
+                  <h4>التفاصيل</h4>
+                  <div class="mb-3">
+                    <label for="participants" class="form-label"
+                      >عدد المشاركين</label
+                    >
+                    <input
+                      type="number"
+                      class="form-control"
+                      id="participants"
+                      name="participants"
+                      required
+                    />
+                  </div>
+                  <div class="mb-3">
+                    <label for="speaker" class="form-label">المتحدث</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="speaker"
+                      name="speaker"
+                      placeholder="أحمد الخياط"
+                      required
+                    />
+                  </div>
+                  <div class="mb-3">
+                    <label for="summary" class="form-label">ملخص الحدث</label>
+                    <textarea
+                      class="form-control"
+                      id="summary"
+                      name="summary"
+                      rows="4"
+                      placeholder="ملخص الحدث"
+                      required
+                    ></textarea>
+                  </div>
+                  <div class="d-grid">
+                    <button type="submit" class="btn btn-warning">
+                      إضافة الحدث
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </form>
 
-          <p class="text-center mt-3">
-            ليس لديك حساب؟ <a href="/frontend/user/singup.html">تسجيل حساب</a>
-          </p>
+            <script>
+              function showEventPart2() {
+                document.getElementById("eventPart1").style.display = "none";
+                document.getElementById("eventPart2").style.display = "block";
+              }
+
+              document
+                .getElementById("eventForm")
+                .addEventListener("submit", function (e) {
+                  // Prevent the default form submission
+                  e.preventDefault();
+
+                  // Collect form data
+                  const formData = new FormData(this);
+
+                  // Validate event date and time
+                  const eventDate = new Date(
+                    document.getElementById("eventDate").value
+                  );
+                  const eventTime = document
+                    .getElementById("eventTime")
+                    .value.split(":");
+                  const eventDateTime = new Date(
+                    eventDate.setHours(eventTime[0], eventTime[1])
+                  );
+
+                  if (eventDateTime <= new Date()) {
+                    Swal.fire({
+                      title: "خطأ!",
+                      text: "يجب أن يكون تاريخ ووقت الحدث في المستقبل.",
+                      icon: "error",
+                      confirmButtonText: "حسنًا",
+                    });
+                    return;
+                  }
+
+                  // Post form data to the API
+                  fetch("http://localhost:38146/api/Event", {
+                    method: "POST",
+                    body: formData,
+                  })
+                    .then((response) => {
+                      if (response.ok) {
+                        // Show success alert
+                        Swal.fire({
+                          title: "تم بنجاح!",
+                          text: "تم إضافة الحدث بنجاح!",
+                          icon: "success",
+                          confirmButtonText: "رائع!",
+                        });
+                        // Optionally reset the form
+                        this.reset();
+                        document.getElementById("eventPart2").style.display =
+                          "none";
+                        document.getElementById("eventPart1").style.display =
+                          "block";
+                      } else {
+                        throw new Error("حدث خطأ ما");
+                      }
+                    })
+                    .catch((error) => {
+                      // Show error alert
+                      Swal.fire({
+                        title: "خطأ!",
+                        text: "حدثت مشكلة أثناء إضافة الحدث. يرجى المحاولة مرة أخرى.",
+                        icon: "error",
+                        confirmButtonText: "حسنًا",
+                      });
+                    });
+                });
+            </script>
+          </div>
         </div>
       </div>
-    </div>
-
+    </main>
     <!-- Footer -->
     <footer>
       <div class="container">

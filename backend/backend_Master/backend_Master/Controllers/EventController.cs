@@ -6,6 +6,8 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using System.Text;
 using System.Threading.Tasks;
+using backend_Master.DTO;
+using Path = System.IO.Path;
 
 namespace backend_Master.Controllers
 {
@@ -19,20 +21,168 @@ namespace backend_Master.Controllers
         {
             _context = context;
         }
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpdateEvent(int id, [FromForm] CreateEventDto updateEventDto)
+        {
+            // تحقق من وجود الفعالية
+            var existingEvent = await _context.Events.FindAsync(id);
+            if (existingEvent == null)
+            {
+                return NotFound("الفعالية غير موجودة.");
+            }
+
+            // تحديث بيانات الفعالية
+            existingEvent.EventTitle = updateEventDto.EventTitle;
+            existingEvent.EventDate = updateEventDto.EventDate.HasValue
+                ? DateOnly.FromDateTime(updateEventDto.EventDate.Value.ToDateTime(TimeOnly.MinValue))
+                : (DateOnly?)null;
+            existingEvent.EventTime = updateEventDto.EventTime;
+            existingEvent.Location = updateEventDto.Location;
+            existingEvent.Participants = updateEventDto.Participants;
+            existingEvent.Speaker = updateEventDto.Speaker;
+            existingEvent.Summary = updateEventDto.Summary;
+            existingEvent.Learnings = updateEventDto.Learnings;
+            existingEvent.Features = updateEventDto.Features;
+            existingEvent.SeatsAvailable = updateEventDto.SeatsAvailable;
+            existingEvent.Topics = updateEventDto.Topics;
+            existingEvent.Exams = updateEventDto.Exams;
+            existingEvent.Articles = updateEventDto.Articles;
+            existingEvent.Certificates = updateEventDto.Certificates;
+            existingEvent.MapUrl = updateEventDto.MapUrl;
+            existingEvent.ZoomLink = updateEventDto.ZoomLink;
+            existingEvent.ZoomPassword = updateEventDto.ZoomPassword;
+
+            var uploadsFolder = @"C:\Users\Orange\Desktop\Master_Project\backend\image";
+            if (!Directory.Exists(uploadsFolder))
+            {
+                Directory.CreateDirectory(uploadsFolder);
+            }
+
+            // تحديث الصورة إذا تم تقديمها
+            if (updateEventDto.ImagePath != null && updateEventDto.ImagePath.Length > 0)
+            {
+                var allowedExtensions = new List<string> { ".jpg", ".jpeg", ".png", ".gif" };
+                var extension = Path.GetExtension(updateEventDto.ImagePath.FileName).ToLowerInvariant();
+
+                if (!allowedExtensions.Contains(extension))
+                {
+                    return BadRequest("صيغة الصورة غير مدعومة. يُرجى استخدام jpg أو png أو gif.");
+                }
+
+                var imageFileName = Guid.NewGuid().ToString() + extension;
+                var imageFilePath = Path.Combine(uploadsFolder, imageFileName);
+
+                if (updateEventDto.ImagePath.Length > 2 * 1024 * 1024)
+                {
+                    return BadRequest("حجم الصورة كبير جداً. يجب أن يكون أقل من 2 ميجابايت.");
+                }
+
+                // حذف الصورة القديمة إذا وجدت
+                if (!string.IsNullOrEmpty(existingEvent.ImagePath))
+                {
+                    var oldImagePath = Path.Combine(uploadsFolder, existingEvent.ImagePath);
+                    if (System.IO.File.Exists(oldImagePath))
+                    {
+                        System.IO.File.Delete(oldImagePath);
+                    }
+                }
+
+                using (var stream = new FileStream(imageFilePath, FileMode.Create))
+                {
+                    await updateEventDto.ImagePath.CopyToAsync(stream);
+                }
+
+                existingEvent.ImagePath = imageFileName;
+            }
+
+            // حفظ التغييرات في قاعدة البيانات
+            await _context.SaveChangesAsync();
+
+            return Ok(existingEvent); // تعيد الفعالية المحدثة
+        }
 
         // إضافة فعالية جديدة
         [HttpPost]
-        public async Task<IActionResult> CreateEvent([FromBody] Event newEvent)
+        public async Task<IActionResult> CreateEvent([FromForm] CreateEventDto newEventDto)
         {
-            if (newEvent == null)
+            if (newEventDto == null)
             {
                 return BadRequest("بيانات الفعالية غير صالحة.");
+            }
+
+            var newEvent = new Event
+            {
+                EventTitle = newEventDto.EventTitle,
+                EventDate = newEventDto.EventDate.HasValue
+                    ? DateOnly.FromDateTime(newEventDto.EventDate.Value.ToDateTime(TimeOnly.MinValue))
+                    : (DateOnly?)null,
+                EventTime = newEventDto.EventTime,
+                Location = newEventDto.Location,
+                Participants = newEventDto.Participants,
+                Speaker = newEventDto.Speaker,
+                Summary = newEventDto.Summary,
+                Learnings = newEventDto.Learnings,
+                Features = newEventDto.Features,
+                SeatsAvailable = newEventDto.SeatsAvailable,
+                Topics = newEventDto.Topics,
+                Exams = newEventDto.Exams,
+                Articles = newEventDto.Articles,
+                Certificates = newEventDto.Certificates,
+                MapUrl = newEventDto.MapUrl,
+                ZoomLink = newEventDto.ZoomLink,
+                ZoomPassword = newEventDto.ZoomPassword
+            };
+
+            var uploadsFolder = @"C:\Users\Orange\Desktop\Master_Project\backend\image";
+            if (!Directory.Exists(uploadsFolder))
+            {
+                Directory.CreateDirectory(uploadsFolder);
+            }
+
+            // Handle image upload
+            if (newEventDto.ImagePath != null && newEventDto.ImagePath.Length > 0)
+            {
+                var allowedExtensions = new List<string> { ".jpg", ".jpeg", ".png", ".gif" };
+                var extension = Path.GetExtension(newEventDto.ImagePath.FileName).ToLowerInvariant(); // Now uses IFormFile's FileName
+
+                if (!allowedExtensions.Contains(extension))
+                {
+                    return BadRequest("صيغة الصورة غير مدعومة. يُرجى استخدام jpg أو png أو gif.");
+                }
+
+                var imageFileName = Guid.NewGuid().ToString() + extension;
+                var imageFilePath = Path.Combine(uploadsFolder, imageFileName);
+
+                if (newEventDto.ImagePath.Length > 2 * 1024 * 1024)
+                {
+                    return BadRequest("حجم الصورة كبير جداً. يجب أن يكون أقل من 2 ميجابايت.");
+                }
+
+                using (var stream = new FileStream(imageFilePath, FileMode.Create))
+                {
+                    await newEventDto.ImagePath.CopyToAsync(stream); // Now uses IFormFile's CopyToAsync
+                }
+
+                newEvent.ImagePath = imageFileName; // Store the filename
             }
 
             _context.Events.Add(newEvent);
             await _context.SaveChangesAsync();
 
             return CreatedAtAction(nameof(GetEventById), new { id = newEvent.EventId }, newEvent);
+        }
+
+
+        // You may have a method to get the event by ID
+        [HttpGet("/HttpGet/{id1}")]
+        public async Task<IActionResult> GetEventById1(int id)
+        {
+            var eventItem = await _context.Events.FindAsync(id);
+            if (eventItem == null)
+            {
+                return NotFound();
+            }
+            return Ok(eventItem);
         }
 
         // عرض كافة الفعاليات
@@ -67,45 +217,45 @@ namespace backend_Master.Controllers
         }
 
         // تعديل بيانات فعالية
-        [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateEvent(int id, [FromBody] Event updatedEvent)
-        {
-            if (id != updatedEvent.EventId)
-            {
-                return BadRequest("معرف الفعالية غير متطابق.");
-            }
+        //[HttpPut("{id}")]
+        //public async Task<IActionResult> UpdateEvent(int id, [FromBody] Event updatedEvent)
+        //{
+        //    if (id != updatedEvent.EventId)
+        //    {
+        //        return BadRequest("معرف الفعالية غير متطابق.");
+        //    }
 
-            var eventInDb = _context.Events.Find(id);
-            if (eventInDb == null)
-            {
-                return NotFound("الفعالية غير موجودة.");
-            }
+        //    var eventInDb = _context.Events.Find(id);
+        //    if (eventInDb == null)
+        //    {
+        //        return NotFound("الفعالية غير موجودة.");
+        //    }
 
-            // تعديل كافة الحقول
-            eventInDb.EventTitle = updatedEvent.EventTitle;
-            eventInDb.EventDate = updatedEvent.EventDate;
-            eventInDb.EventTime = updatedEvent.EventTime;
-            eventInDb.Location = updatedEvent.Location;
-            eventInDb.Participants = updatedEvent.Participants;
-            eventInDb.Speaker = updatedEvent.Speaker;
-            eventInDb.Summary = updatedEvent.Summary;
-            eventInDb.Learnings = updatedEvent.Learnings;
-            eventInDb.Features = updatedEvent.Features;
-            eventInDb.SeatsAvailable = updatedEvent.SeatsAvailable;
-            eventInDb.Topics = updatedEvent.Topics;
-            eventInDb.Exams = updatedEvent.Exams;
-            eventInDb.Articles = updatedEvent.Articles;
-            eventInDb.Certificates = updatedEvent.Certificates;
-            eventInDb.ImagePath = updatedEvent.ImagePath;
-            eventInDb.MapUrl = updatedEvent.MapUrl;
-            eventInDb.ZoomLink = updatedEvent.ZoomLink;
-            eventInDb.ZoomPassword = updatedEvent.ZoomPassword;
+        //    // تعديل كافة الحقول
+        //    eventInDb.EventTitle = updatedEvent.EventTitle;
+        //    eventInDb.EventDate = updatedEvent.EventDate;
+        //    eventInDb.EventTime = updatedEvent.EventTime;
+        //    eventInDb.Location = updatedEvent.Location;
+        //    eventInDb.Participants = updatedEvent.Participants;
+        //    eventInDb.Speaker = updatedEvent.Speaker;
+        //    eventInDb.Summary = updatedEvent.Summary;
+        //    eventInDb.Learnings = updatedEvent.Learnings;
+        //    eventInDb.Features = updatedEvent.Features;
+        //    eventInDb.SeatsAvailable = updatedEvent.SeatsAvailable;
+        //    eventInDb.Topics = updatedEvent.Topics;
+        //    eventInDb.Exams = updatedEvent.Exams;
+        //    eventInDb.Articles = updatedEvent.Articles;
+        //    eventInDb.Certificates = updatedEvent.Certificates;
+        //    eventInDb.ImagePath = updatedEvent.ImagePath;
+        //    eventInDb.MapUrl = updatedEvent.MapUrl;
+        //    eventInDb.ZoomLink = updatedEvent.ZoomLink;
+        //    eventInDb.ZoomPassword = updatedEvent.ZoomPassword;
 
-            _context.Events.Update(eventInDb);
-            await _context.SaveChangesAsync();
+        //    _context.Events.Update(eventInDb);
+        //    await _context.SaveChangesAsync();
 
-            return NoContent(); // تم التعديل بنجاح بدون إرجاع بيانات
-        }
+        //    return NoContent(); // تم التعديل بنجاح بدون إرجاع بيانات
+        //}
 
         // حذف فعالية
         [HttpDelete("{id}")]

@@ -111,6 +111,27 @@
           </div>
           <div class="dropdown">
             <a href="#" class="dropdown-toggle" data-bs-toggle="dropdown"
+              >إدارة الاحداث</a
+            >
+            <ul class="dropdown-menu">
+              <li>
+                <a
+                  class="dropdown-item"
+                  href="Events\Events.html"
+                  >إضافة احداث </a
+                >
+              </li>
+              <li>
+                <a
+                  class="dropdown-item"
+                  href="Events\GETALL.HTML"
+                  >عرض الاحداث</a
+                >
+              </li>
+            </ul>
+          </div>
+          <div class="dropdown">
+            <a href="#" class="dropdown-toggle" data-bs-toggle="dropdown"
               >إدارة المشرفين</a
             >
             <ul class="dropdown-menu">
@@ -225,7 +246,7 @@
                         <td>${user.email}</td>
                         <td><img src="/backend/image/${user.imageprofile}" alt="${user.firstName} ${user.lastName}" style="width: 50px; height: 50px; border-radius: 50%;" /></td>
                         <td>${user.phone}</td>
-                        <td>${user.biographicalDetailsCv ? user.biographicalDetailsCv : 'لا توجد بيانات'}</td>
+                        <td>${user.biographicaldetailsCv ? user.biographicaldetailsCv : 'لا توجد بيانات'}</td>
                         <td>
                             <button class="btn btn-info" onclick="showMoreData(${user.userId})">عرض المزيد</button>
                         </td>
@@ -234,9 +255,10 @@
             }
         
             function showMoreData(userId) {
-                // هنا يمكنك تنفيذ أي منطق لعرض المزيد من البيانات عن المستخدم
-                alert(`عرض المزيد من البيانات للمستخدم ID: ${userId}`);
-            }
+    // تحويل المستخدم إلى صفحة userdata.html مع تمرير userId في رابط الصفحة
+    window.location.href = `userdata.html?userId=${userId}`;
+}
+
         </script>
         
     </div>

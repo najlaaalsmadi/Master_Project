@@ -3,17 +3,19 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>عرض الفئات</title>
+    <title>لوحة التحكم</title>
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
       rel="stylesheet"
     />
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
     <link
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="/frontend/admin/css/dashboardadmin.css" />
-    <link rel="stylesheet" href="/frontend/admin/css/viewcategory.css" />
+    <link rel="stylesheet" href="/frontend/admin/css/addcategory.css" />
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style></style>
   </head>
@@ -115,10 +117,18 @@
         >
         <ul class="dropdown-menu">
           <li>
-            <a class="dropdown-item" href="Events\Events.html">إضافة احداث </a>
+            <a
+              class="dropdown-item"
+              href="Events.html"
+              >إضافة احداث </a
+            >
           </li>
           <li>
-            <a class="dropdown-item" href="Events\GETALL.HTML">عرض الاحداث</a>
+            <a
+              class="dropdown-item"
+              href="GETALL.HTML"
+              >عرض الاحداث</a
+            >
           </li>
         </ul>
       </div>
@@ -194,32 +204,149 @@
           </div>
         </div>
       </header>
-      <main class="p-3">
-        <div class="row mb-3">
-          <div class="container mt-5">
-            <div
-              class="container d-flex justify-content-center align-items-center min-vh-60"
-            >
-              <div class="col-md-8 form-container">
-                <h2 class="text-center my-4">جدول عرض الفئات</h2>
-                <table class="table category-table table-bordered">
-                  <thead>
+      <div class="container mt-5">
+        <h2 class="text-center mb-4">قائمة الأحداث</h2>
+        <table class="table table-bordered table-striped">
+            <thead>
+              <tr>
+                <th>صورة</th>
+                <th>عنوان الحدث</th>
+                <th>تاريخ الحدث</th>
+                <th>التفاصيل</th>
+              </tr>
+            </thead>
+            <tbody id="events-container">
+              <!-- الأحداث ستُضاف هنا -->
+            </tbody>
+          </table>
+          
+          <script>
+            // جلب الأحداث من API
+            fetch("http://localhost:38146/api/Event")
+              .then((response) => response.json())
+              .then((events) => {
+                const eventsContainer = document.getElementById("events-container");
+          
+                // تكرار الأحداث وإنشاء صفوف HTML ديناميكيًا
+                events.forEach((event) => {
+                  // إنشاء صف لكل حدث
+                  const eventRow = `
                     <tr>
-                      <th>الاسم</th>
-                      <th>الشرح</th>
-                      <th>العمليات</th>
+                      <td>
+                        <img
+                          src="/backend/image/${
+                            event.imagePath ? event.imagePath : "default.png"
+                          }"
+                          alt="${event.eventTitle}"
+                          class="img-thumbnail"
+                          style="width: 100px; height: auto;"
+                        />
+                      </td>
+                      <td>${event.eventTitle}</td>
+                      <td>${new Date(event.eventDate).toLocaleDateString("ar-SA", {
+                        day: "numeric",
+                        month: "long",
+                        year: "numeric",
+                      })}</td>
+                      <td>
+                        <button class="btn btn-info" onclick="goToEventDetails(${
+                          event.eventId
+                        })">
+                          عرض التفاصيل
+                        </button>
+                        <br><br>
+                        <button class="btn btn-danger" onclick="deleteEvent(${
+                          event.eventId
+                        })">
+                          حذف
+                        </button>
+                        <br><br>
+                        <button class="btn btn-secondary" onclick="goToEventupdate(${
+                          event.eventId
+                        })">
+                          تعديل
+                        </button>
+                      </td>
                     </tr>
-                  </thead>
-                  <tbody id="categoryTableBody">
-                    <!-- Categories will be populated here -->
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          </div>
-        </div>
-      </main>
+                  `;
+          
+                  // إضافة الصف إلى الـ Container
+                  eventsContainer.innerHTML += eventRow;
+                });
+              })
+              .catch((error) => {
+                console.error("Error fetching events:", error);
+              });
+          
+            // دالة لتحديث الحدث
+            function goToEventupdate(eventId) {
+              localStorage.setItem("EventID", eventId);
+              window.location.href = `Eventupdate.html?id=${eventId}`;
+            }
+            function goToEventDetails(eventId) {
+              localStorage.setItem("EventID", eventId);
+              window.location.href = `detailsevent.html?id=${eventId}`;
+            }
+          
+            // دالة لحذف الحدث مع تأكيد باستخدام SweetAlert2
+            function deleteEvent(eventId) {
+              Swal.fire({
+                title: "هل أنت متأكد؟",
+                text: "لن تتمكن من استرجاع هذا الحدث بعد الحذف!",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "نعم، احذف الحدث!",
+                cancelButtonText: "إلغاء",
+              }).then((result) => {
+                if (result.isConfirmed) {
+                  // إرسال طلب DELETE إلى API إذا تم التأكيد
+                  fetch(`http://localhost:38146/api/Event/${eventId}`, {
+                    method: "DELETE",
+                  })
+                    .then((response) => {
+                      if (response.ok) {
+                        // SweetAlert2 بعد نجاح الحذف
+                        Swal.fire({
+                          icon: "success",
+                          title: "تم الحذف",
+                          text: "تم حذف الحدث بنجاح!",
+                          confirmButtonText: "موافق",
+                        }).then(() => {
+                          // إعادة تحميل الصفحة لتحديث القائمة
+                          location.reload();
+                        });
+                      } else {
+                        Swal.fire({
+                          icon: "error",
+                          title: "خطأ",
+                          text: "حدث خطأ أثناء محاولة حذف الحدث.",
+                          confirmButtonText: "موافق",
+                        });
+                      }
+                    })
+                    .catch((error) => {
+                      console.error("Error deleting event:", error);
+                      Swal.fire({
+                        icon: "error",
+                        title: "خطأ",
+                        text: "تعذر الاتصال بالخادم.",
+                        confirmButtonText: "موافق",
+                      });
+                    });
+                }
+              });
+            }
+          </script>
+          
+          
     </div>
+<!-- SweetAlert CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+
+<!-- SweetAlert JS -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
@@ -298,9 +425,5 @@
         document.getElementById("theme-selector").value = savedTheme;
       };
     </script>
-    <script src="/frontend/admin/category/viewcategory.js"></script>
-    <!-- تضمين مكتبة SweetAlert2 -->
-    <!-- تضمين مكتبة SweetAlert2 -->
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   </body>
 </html>

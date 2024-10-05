@@ -15,6 +15,7 @@ using UglyToad.PdfPig;
 using Microsoft.AspNetCore.Identity;
 using System.ComponentModel.DataAnnotations;
 using System.Xml;
+using System.Net.Mail;
 
 namespace backend_Master.Controllers
 {
@@ -337,7 +338,47 @@ namespace backend_Master.Controllers
 
             return Ok(new { token, trainerId = trainer.TrainerId }); // Return the trainerId with the token
         }
+        [HttpPost("approve-or-reject/{id}")]
+        public IActionResult ApproveOrReject(int id, [FromBody] ApprovalRequest request)
+        {
+            var trainer = _context.Trainers.FirstOrDefault(t => t.TrainerId == id);
+            if (trainer == null)
+            {
+                return NotFound("المدرب غير موجود.");
+            }
 
+            // تحديث حالة المدرب
+            trainer.Satas = request.IsApproved ? (bool?)true : (bool?)false;
+
+            // إرسال بريد إلكتروني إذا كان البريد الإلكتروني متاحًا
+            if (!string.IsNullOrEmpty(trainer.Email))
+            {
+                SendEmail(trainer.Email, request.IsApproved);
+            }
+
+            return Ok("تم تحديث حالة المدرب بنجاح.");
+        }
+
+        private void SendEmail(string toEmail, bool isApproved)
+        {
+            string subject = isApproved ? "تمت الموافقة على طلبك" : "تم رفض طلبك";
+            string body = isApproved ? "نحن سعداء لإبلاغكم أنه تم الموافقة على طلبكم." : "نأسف لإبلاغكم أنه تم رفض طلبكم.";
+
+            using (var message = new MailMessage("your-email@example.com", toEmail))
+            {
+                message.Subject = subject;
+                message.Body = body;
+
+                using (var smtpClient = new SmtpClient("smtp.example.com"))
+                {
+                    smtpClient.Port = 587; // أو المنفذ المناسب
+                    smtpClient.Credentials = new System.Net.NetworkCredential("your-email@example.com", "your-password");
+                    smtpClient.EnableSsl = true;
+
+                    smtpClient.Send(message);
+                }
+            }
+        }
 
 
     }

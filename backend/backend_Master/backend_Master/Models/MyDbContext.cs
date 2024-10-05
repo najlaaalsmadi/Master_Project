@@ -519,9 +519,7 @@ public partial class MyDbContext : DbContext
                 .HasDefaultValueSql("(getdate())")
                 .HasColumnType("datetime")
                 .HasColumnName("created_at");
-            entity.Property(e => e.Cv)
-                .IsUnicode(false)
-                .HasColumnName("cv");
+            entity.Property(e => e.Cv).HasColumnName("cv");
             entity.Property(e => e.Email)
                 .HasMaxLength(255)
                 .HasColumnName("email");

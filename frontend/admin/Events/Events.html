@@ -8,6 +8,8 @@
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
       rel="stylesheet"
     />
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
     <link
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
       rel="stylesheet"
@@ -198,134 +200,159 @@
         <div class="container mt-5">
           <div class="row justify-content-center">
             <div class="col-md-6 form-container">
-              <h2 class="text-center mb-4">نموذج إضافة مسار</h2>
-              <form id="courseForm">
+              <h2 class="text-center mb-4">نموذج إضافة حدث</h2>
+              <form id="eventForm">
                 <div class="mb-3">
-                  <label for="trackName" class="form-label">اسم المسار</label>
+                  <label for="eventTitle" class="form-label">عنوان الحدث</label>
                   <input
                     type="text"
                     class="form-control"
-                    id="trackName"
-                    placeholder="أدخل اسم المسار"
+                    id="eventTitle"
+                    placeholder="ورشة عمل: فنون الخياطة الأساسية والتقنيات المتقدمة"
                     required
                   />
                 </div>
                 <div class="mb-3">
-                  <label for="trackDescription" class="form-label"
-                    >التفاصيل</label
+                  <label for="eventDate" class="form-label">تاريخ الحدث</label>
+                  <input
+                    type="date"
+                    class="form-control"
+                    id="eventDate"
+                    value="2024-10-05"
+                    required
+                  />
+                </div>
+                <div class="mb-3">
+                  <label for="eventTime" class="form-label">وقت الحدث</label>
+                  <input
+                    type="time"
+                    class="form-control"
+                    id="eventTime"
+                    value="10:00:00"
+                    required
+                  />
+                </div>
+                <div class="mb-3">
+                  <label for="location" class="form-label">الموقع</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="location"
+                    placeholder="أدخل الموقع"
+                    value="عمان، الأردن"
+                    required
+                  />
+                </div>
+                <div class="mb-3">
+                  <label for="participants" class="form-label"
+                    >عدد المشاركين</label
                   >
+                  <input
+                    type="number"
+                    class="form-control"
+                    id="participants"
+                    value="200"
+                    required
+                  />
+                </div>
+                <div class="mb-3">
+                  <label for="speaker" class="form-label">المتحدث</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="speaker"
+                    placeholder="أحمد الخياط"
+                    required
+                  />
+                </div>
+                <div class="mb-3">
+                  <label for="summary" class="form-label">ملخص الحدث</label>
                   <textarea
                     class="form-control"
-                    id="trackDescription"
+                    id="summary"
                     rows="4"
-                    placeholder="أدخل تفاصيل المسار"
+                    placeholder="ورشة عمل لتعليم فنون الخياطة الأساسية والتقنيات المتقدمة. "
                     required
                   ></textarea>
                 </div>
                 <div class="mb-3">
-                  <label for="trackCost" class="form-label">التكلفة</label>
-                  <input
-                    type="number"
+                  <label for="learnings" class="form-label"
+                    >ما سيتعلمه المشاركون</label
+                  >
+                  <textarea
                     class="form-control"
-                    id="trackCost"
-                    placeholder="أدخل تكلفة المسار"
+                    id="learnings"
+                    rows="3"
+                    placeholder="أساسيات الخياطة، تقنيات متقدمة، تصميم الملابس."
                     required
-                  />
+                  ></textarea>
                 </div>
                 <div class="mb-3">
-                  <label for="trainer" class="form-label">اختر المدرب</label>
-                  <select class="form-select" id="trainer" required>
-                    <option value="">اختر المدرب</option>
-                  </select>
-                </div>
-                <div class="mb-3">
-                  <label for="category" class="form-label">الفئة</label>
-                  <select class="form-select" id="category" required>
-                    <option value="">اختر الفئة</option>
-                  </select>
-                </div>
-                <div class="mb-3">
-                  <label for="duration" class="form-label">المدة</label>
-                  <input
-                    type="text"
+                  <label for="features" class="form-label">الميزات</label>
+                  <textarea
                     class="form-control"
-                    id="duration"
-                    placeholder="أدخل مدة المسار"
+                    id="features"
+                    rows="3"
+                    placeholder="إتقان الخياطة بدون أخطاء، اختصارات عملية، أفكار إبداعية في التصميم."
                     required
-                  />
+                  ></textarea>
                 </div>
                 <div class="mb-3">
-                  <label for="allowedStudents" class="form-label"
-                    >عدد الطلاب المسموح بهم</label
+                  <label for="seatsAvailable" class="form-label"
+                    >المقاعد المتاحة</label
                   >
                   <input
                     type="number"
                     class="form-control"
-                    id="allowedStudents"
-                    placeholder="أدخل عدد الطلاب المسموح بهم"
+                    id="seatsAvailable"
+                    value="50"
                     required
                   />
                 </div>
                 <div class="mb-3">
-                  <label for="startDate" class="form-label">تاريخ البدء</label>
-                  <input
-                    type="date"
-                    class="form-control"
-                    id="startDate"
-                    required
-                  />
-                </div>
-                <div class="mb-3">
-                  <label for="endDate" class="form-label">تاريخ الانتهاء</label>
-                  <input
-                    type="date"
-                    class="form-control"
-                    id="endDate"
-                    required
-                  />
-                </div>
-                <div class="mb-3">
-                  <label for="curriculum" class="form-label">المنهج</label>
-                  <textarea
-                    class="form-control"
-                    id="curriculum"
-                    rows="3"
-                    placeholder="أدخل المنهج"
-                    required
-                  ></textarea>
-                </div>
-                <div class="mb-3">
-                  <label for="tools" class="form-label">الأدوات</label>
-                  <textarea
-                    class="form-control"
-                    id="tools"
-                    rows="3"
-                    placeholder="أدخل الأدوات المطلوبة"
-                    required
-                  ></textarea>
-                </div>
-                <div class="mb-3">
-                  <label for="rating" class="form-label">التقييم</label>
+                  <label for="topics" class="form-label">عدد المواضيع</label>
                   <input
                     type="number"
                     class="form-control"
-                    id="rating"
-                    placeholder="أدخل التقييم (1-5)"
-                    min="1"
-                    max="5"
+                    id="topics"
+                    value="5"
                     required
                   />
                 </div>
                 <div class="mb-3">
-                  <label for="certificate" class="form-label">شهادة</label>
-                  <select class="form-select" id="certificate" required>
-                    <option value="">اختر</option>
-                    <option value="yes">نعم</option>
-                    <option value="no">لا</option>
-                  </select>
+                  <label for="exams" class="form-label">عدد الاختبارات</label>
+                  <input
+                    type="number"
+                    class="form-control"
+                    id="exams"
+                    value="2"
+                    required
+                  />
                 </div>
                 <div class="mb-3">
-                  <label for="image" class="form-label">صورة المسار</label>
+                  <label for="articles" class="form-label">عدد المقالات</label>
+                  <input
+                    type="number"
+                    class="form-control"
+                    id="articles"
+                    value="10"
+                    required
+                  />
+                </div>
+                <div class="mb-3">
+                  <label for="certificates" class="form-label"
+                    >عدد الشهادات</label
+                  >
+                  <input
+                    type="number"
+                    class="form-control"
+                    id="certificates"
+                    value="5"
+                    required
+                  />
+                </div>
+                <div class="mb-3">
+                  <label for="image" class="form-label">صورة الحدث</label>
                   <input
                     type="file"
                     class="form-control"
@@ -333,151 +360,114 @@
                     accept="image/*"
                   />
                 </div>
+                <div class="mb-3">
+                  <label for="mapUrl" class="form-label">رابط الخريطة</label>
+                  <input
+                    type="url"
+                    class="form-control"
+                    id="mapUrl"
+                    placeholder="https://maps.app.goo.gl/AFBfBeLMq3BTZD4R7"
+                    required
+                  />
+                </div>
+                <div class="mb-3">
+                  <label for="zoomLink" class="form-label">رابط Zoom</label>
+                  <input
+                    type="url"
+                    class="form-control"
+                    id="zoomLink"
+                    placeholder="https://meet.google.com/tdu-fofq-mcv?authuser=0"
+                    required
+                  />
+                </div>
+                <div class="mb-3">
+                  <label for="zoomPassword" class="form-label"
+                    >كلمة المرور لـ Zoom</label
+                  >
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="zoomPassword"
+                    placeholder="860311"
+                    required
+                  />
+                </div>
                 <div class="d-grid">
                   <button type="submit" class="btn btn-primary">
-                    إضافة المسار
+                    إضافة الحدث
                   </button>
                 </div>
               </form>
             </div>
+
+            <!-- JavaScript to handle form submission -->
+            <script>
+              document
+                .getElementById("eventForm")
+                .addEventListener("submit", function (e) {
+                  e.preventDefault(); // Prevent the default form submission
+
+                  // Collect form data
+                  const formData = new FormData(this);
+                  const newEventDto = {
+                    eventTitle: formData.get("eventTitle"),
+                    eventDate: formData.get("eventDate"),
+                    eventTime: formData.get("eventTime"),
+                    location: formData.get("location"),
+                    participants: formData.get("participants"),
+                    speaker: formData.get("speaker"),
+                    summary: formData.get("summary"),
+                    learnings: formData.get("learnings"),
+                    features: formData.get("features"),
+                    seatsAvailable: formData.get("seatsAvailable"),
+                    topics: formData.get("topics"),
+                    exams: formData.get("exams"),
+                    articles: formData.get("articles"),
+                    certificates: formData.get("certificates"),
+                    mapUrl: formData.get("mapUrl"),
+                    zoomLink: formData.get("zoomLink"),
+                    zoomPassword: formData.get("zoomPassword"),
+                  };
+
+                  // Post form data to the API
+                  fetch("http://localhost:38146/api/Event", {
+                    method: "POST",
+                    body: JSON.stringify(newEventDto),
+                    headers: {
+                      "Content-Type": "application/json",
+                    },
+                  })
+                    .then((response) => {
+                      if (response.ok) {
+                        // Show success alert
+                        Swal.fire({
+                          title: "تم بنجاح!",
+                          text: "تم تعديل الحدث بنجاح!",
+                          icon: "success",
+                          confirmButtonText: "رائع!",
+                        }).then((result) => {
+                          if (result.isConfirmed) {
+                            window.location.href = "GetAll.html"; // إعادة التوجيه إلى صفحة GetAll.html
+                          }
+                        });
+                      } else {
+                        throw new Error("Something went wrong");
+                      }
+                    })
+                    .catch((error) => {
+                      // Show error alert
+                      Swal.fire({
+                        title: "خطأ!",
+                        text: "حدثت مشكلة أثناء إضافة الحدث. يرجى المحاولة مرة أخرى.",
+                        icon: "خطأ",
+                        confirmButtonText: "حسنًا",
+                      });
+                    });
+                });
+            </script>
           </div>
         </div>
       </main>
-
-      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-      <script>
-        document.addEventListener("DOMContentLoaded", function () {
-          // Fetch categories from the API
-          fetch("http://localhost:38146/api/Category/Categories")
-            .then((response) => {
-              if (!response.ok) {
-                throw new Error("Failed to fetch categories");
-              }
-              return response.json();
-            })
-            .then((data) => {
-              const categorySelect = document.getElementById("category");
-              // Populate the dropdown with categories
-              data.forEach((category) => {
-                const option = document.createElement("option");
-                option.value = category.categoryId;
-                option.text = category.name;
-                categorySelect.appendChild(option);
-              });
-            })
-            .catch((error) => {
-              console.error("Error fetching categories:", error);
-              alert("فشل في تحميل الفئات. حاول مرة أخرى.");
-            });
-
-          // Fetch trainers from the API
-          fetch("http://localhost:38146/api/Trainer/all")
-            .then((response) => {
-              if (!response.ok) {
-                throw new Error("Failed to fetch trainers");
-              }
-              return response.json();
-            })
-            .then((data) => {
-              const trainerSelect = document.getElementById("trainer");
-              // Populate the dropdown with trainer names
-              data.forEach((trainer) => {
-                const option = document.createElement("option");
-                option.value = trainer.trainerId; // Use the trainer_id as value
-                option.text = trainer.name; // Display the trainer's name
-                trainerSelect.appendChild(option);
-              });
-            })
-            .catch((error) => {
-              console.error("Error fetching trainers:", error);
-              alert("فشل في تحميل المدربين. حاول مرة أخرى.");
-            });
-
-          // Handle form submission
-          document
-            .getElementById("courseForm")
-            .addEventListener("submit", function (event) {
-              event.preventDefault();
-
-              // Collect form data
-              const trackName = document.getElementById("trackName").value;
-              const trackDescription =
-                document.getElementById("trackDescription").value;
-              const trackCost = document.getElementById("trackCost").value;
-              const trainerId = document.getElementById("trainer").value; // Get selected trainer ID
-              const duration = document.getElementById("duration").value;
-              const allowedStudents =
-                document.getElementById("allowedStudents").value;
-              const startDate = document.getElementById("startDate").value;
-              const endDate = document.getElementById("endDate").value;
-              const curriculum = document.getElementById("curriculum").value;
-              const tools = document.getElementById("tools").value;
-              const rating = document.getElementById("rating").value;
-              const certificate =
-                document.getElementById("certificate").value === "yes";
-              const categoryId = document.getElementById("category").value;
-
-              // Image handling
-              const imageInput = document.getElementById("image");
-              const imageUrl =
-                imageInput.files.length > 0
-                  ? imageInput.files[0].name
-                  : "string"; // Placeholder for URL if needed
-
-              // Create an object to hold the data
-              const courseData = {
-                title: trackName,
-                description: trackDescription,
-                price: trackCost,
-                trainer_id: trainerId, // Include trainer_id
-                category_id: categoryId,
-                duration: duration,
-                allowed_students: allowedStudents,
-                syllabus: curriculum,
-                tools: tools,
-                startDate: startDate,
-                endDate: endDate,
-                imageUrl: imageUrl,
-                Rating: rating,
-              };
-
-              console.log("Adding course with data:", courseData);
-
-              // Send the POST request to add the course
-              fetch("http://localhost:38146/api/Courses", {
-                method: "POST",
-                headers: {
-                  "Content-Type": "application/json",
-                },
-                body: JSON.stringify(courseData),
-              })
-                .then((response) => {
-                  if (!response.ok) {
-                    throw new Error("Network response was not ok");
-                  }
-                  return response.json();
-                })
-                .then((data) => {
-                  console.log("Course added successfully:", data);
-                  Swal.fire({
-                    icon: "success",
-                    title: "تم إضافة المسار بنجاح!",
-                    text: "يمكنك مشاهدة المسار في القائمة.",
-                  }).then(() => {
-                    window.location.href = "view.html"; // Adjust the path if necessary
-                  });
-                })
-                .catch((error) => {
-                  console.error("Error adding course:", error);
-                  Swal.fire({
-                    icon: "error",
-                    title: "فشل!",
-                    text: "حدث خطأ أثناء إضافة المسار. حاول مرة أخرى.",
-                  });
-                });
-            });
-        });
-      </script>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 

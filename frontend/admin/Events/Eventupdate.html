@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>لوحة التحكم</title>
+    <title>تعديل المسار</title>
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
       rel="stylesheet"
@@ -115,10 +115,10 @@
         >
         <ul class="dropdown-menu">
           <li>
-            <a class="dropdown-item" href="Events.html">إضافة احداث </a>
+            <a class="dropdown-item" href="Events\Events.html">إضافة احداث </a>
           </li>
           <li>
-            <a class="dropdown-item" href="GETALL.HTML">عرض الاحداث</a>
+            <a class="dropdown-item" href="Events\GETALL.HTML">عرض الاحداث</a>
           </li>
         </ul>
       </div>
@@ -198,134 +198,144 @@
         <div class="container mt-5">
           <div class="row justify-content-center">
             <div class="col-md-6 form-container">
-              <h2 class="text-center mb-4">نموذج إضافة مسار</h2>
-              <form id="courseForm">
+              <h2 class="text-center mb-4">نموذج تعديل حدث</h2>
+              <form id="eventForm">
                 <div class="mb-3">
-                  <label for="trackName" class="form-label">اسم المسار</label>
+                  <label for="eventTitle" class="form-label">عنوان الحدث</label>
                   <input
                     type="text"
                     class="form-control"
-                    id="trackName"
-                    placeholder="أدخل اسم المسار"
+                    id="eventTitle"
                     required
                   />
                 </div>
                 <div class="mb-3">
-                  <label for="trackDescription" class="form-label"
-                    >التفاصيل</label
+                  <label for="eventDate" class="form-label">تاريخ الحدث</label>
+                  <input
+                    type="date"
+                    class="form-control"
+                    id="eventDate"
+                    required
+                  />
+                </div>
+                <div class="mb-3">
+                  <label for="eventTime" class="form-label">وقت الحدث</label>
+                  <input
+                    type="time"
+                    class="form-control"
+                    id="eventTime"
+                    required
+                  />
+                </div>
+                <div class="mb-3">
+                  <label for="location" class="form-label">الموقع</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="location"
+                    required
+                  />
+                </div>
+                <div class="mb-3">
+                  <label for="participants" class="form-label"
+                    >عدد المشاركين</label
                   >
+                  <input
+                    type="number"
+                    class="form-control"
+                    id="participants"
+                    required
+                  />
+                </div>
+                <div class="mb-3">
+                  <label for="speaker" class="form-label">المتحدث</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="speaker"
+                    required
+                  />
+                </div>
+                <div class="mb-3">
+                  <label for="summary" class="form-label">ملخص الحدث</label>
                   <textarea
                     class="form-control"
-                    id="trackDescription"
+                    id="summary"
                     rows="4"
-                    placeholder="أدخل تفاصيل المسار"
                     required
                   ></textarea>
                 </div>
                 <div class="mb-3">
-                  <label for="trackCost" class="form-label">التكلفة</label>
-                  <input
-                    type="number"
+                  <label for="learnings" class="form-label"
+                    >ما سيتعلمه المشاركون</label
+                  >
+                  <textarea
                     class="form-control"
-                    id="trackCost"
-                    placeholder="أدخل تكلفة المسار"
+                    id="learnings"
+                    rows="3"
                     required
-                  />
+                  ></textarea>
                 </div>
                 <div class="mb-3">
-                  <label for="trainer" class="form-label">اختر المدرب</label>
-                  <select class="form-select" id="trainer" required>
-                    <option value="">اختر المدرب</option>
-                  </select>
-                </div>
-                <div class="mb-3">
-                  <label for="category" class="form-label">الفئة</label>
-                  <select class="form-select" id="category" required>
-                    <option value="">اختر الفئة</option>
-                  </select>
-                </div>
-                <div class="mb-3">
-                  <label for="duration" class="form-label">المدة</label>
-                  <input
-                    type="text"
+                  <label for="features" class="form-label">الميزات</label>
+                  <textarea
                     class="form-control"
-                    id="duration"
-                    placeholder="أدخل مدة المسار"
+                    id="features"
+                    rows="3"
                     required
-                  />
+                  ></textarea>
                 </div>
                 <div class="mb-3">
-                  <label for="allowedStudents" class="form-label"
-                    >عدد الطلاب المسموح بهم</label
+                  <label for="seatsAvailable" class="form-label"
+                    >المقاعد المتاحة</label
                   >
                   <input
                     type="number"
                     class="form-control"
-                    id="allowedStudents"
-                    placeholder="أدخل عدد الطلاب المسموح بهم"
+                    id="seatsAvailable"
                     required
                   />
                 </div>
                 <div class="mb-3">
-                  <label for="startDate" class="form-label">تاريخ البدء</label>
-                  <input
-                    type="date"
-                    class="form-control"
-                    id="startDate"
-                    required
-                  />
-                </div>
-                <div class="mb-3">
-                  <label for="endDate" class="form-label">تاريخ الانتهاء</label>
-                  <input
-                    type="date"
-                    class="form-control"
-                    id="endDate"
-                    required
-                  />
-                </div>
-                <div class="mb-3">
-                  <label for="curriculum" class="form-label">المنهج</label>
-                  <textarea
-                    class="form-control"
-                    id="curriculum"
-                    rows="3"
-                    placeholder="أدخل المنهج"
-                    required
-                  ></textarea>
-                </div>
-                <div class="mb-3">
-                  <label for="tools" class="form-label">الأدوات</label>
-                  <textarea
-                    class="form-control"
-                    id="tools"
-                    rows="3"
-                    placeholder="أدخل الأدوات المطلوبة"
-                    required
-                  ></textarea>
-                </div>
-                <div class="mb-3">
-                  <label for="rating" class="form-label">التقييم</label>
+                  <label for="topics" class="form-label">عدد المواضيع</label>
                   <input
                     type="number"
                     class="form-control"
-                    id="rating"
-                    placeholder="أدخل التقييم (1-5)"
-                    min="1"
-                    max="5"
+                    id="topics"
                     required
                   />
                 </div>
                 <div class="mb-3">
-                  <label for="certificate" class="form-label">شهادة</label>
-                  <select class="form-select" id="certificate" required>
-                    <option value="">اختر</option>
-                    <option value="yes">نعم</option>
-                    <option value="no">لا</option>
-                  </select>
+                  <label for="exams" class="form-label">عدد الاختبارات</label>
+                  <input
+                    type="number"
+                    class="form-control"
+                    id="exams"
+                    required
+                  />
                 </div>
                 <div class="mb-3">
-                  <label for="image" class="form-label">صورة المسار</label>
+                  <label for="articles" class="form-label">عدد المقالات</label>
+                  <input
+                    type="number"
+                    class="form-control"
+                    id="articles"
+                    required
+                  />
+                </div>
+                <div class="mb-3">
+                  <label for="certificates" class="form-label"
+                    >عدد الشهادات</label
+                  >
+                  <input
+                    type="number"
+                    class="form-control"
+                    id="certificates"
+                    required
+                  />
+                </div>
+                <div class="mb-3">
+                  <label for="image" class="form-label">صورة الحدث</label>
                   <input
                     type="file"
                     class="form-control"
@@ -333,9 +343,33 @@
                     accept="image/*"
                   />
                 </div>
+                <div class="mb-3">
+                  <label for="mapUrl" class="form-label">رابط الخريطة</label>
+                  <input type="url" class="form-control" id="mapUrl" required />
+                </div>
+                <div class="mb-3">
+                  <label for="zoomLink" class="form-label">رابط Zoom</label>
+                  <input
+                    type="url"
+                    class="form-control"
+                    id="zoomLink"
+                    required
+                  />
+                </div>
+                <div class="mb-3">
+                  <label for="zoomPassword" class="form-label"
+                    >كلمة المرور لـ Zoom</label
+                  >
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="zoomPassword"
+                    required
+                  />
+                </div>
                 <div class="d-grid">
                   <button type="submit" class="btn btn-primary">
-                    إضافة المسار
+                    تعديل الحدث
                   </button>
                 </div>
               </form>
@@ -344,135 +378,104 @@
         </div>
       </main>
 
-      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+      <!-- JavaScript to handle form submission and fetching old event data -->
       <script>
         document.addEventListener("DOMContentLoaded", function () {
-          // Fetch categories from the API
-          fetch("http://localhost:38146/api/Category/Categories")
-            .then((response) => {
-              if (!response.ok) {
-                throw new Error("Failed to fetch categories");
-              }
-              return response.json();
-            })
-            .then((data) => {
-              const categorySelect = document.getElementById("category");
-              // Populate the dropdown with categories
-              data.forEach((category) => {
-                const option = document.createElement("option");
-                option.value = category.categoryId;
-                option.text = category.name;
-                categorySelect.appendChild(option);
-              });
+          // استخراج المعرّف من الرابط
+          const urlParams = new URLSearchParams(window.location.search);
+          const eventId = urlParams.get("id");
+
+          // جلب بيانات الحدث القديمة وعرضها في النموذج
+          fetch(`http://localhost:38146/api/Event/${eventId}`)
+            .then((response) => response.json())
+            .then((event) => {
+              // تعيين القيم القديمة للحقل
+              document.getElementById("eventTitle").value = event.eventTitle;
+              document.getElementById("eventDate").value = event.eventDate;
+              document.getElementById("eventTime").value = event.eventTime;
+              document.getElementById("location").value = event.location;
+              document.getElementById("participants").value =
+                event.participants;
+              document.getElementById("speaker").value = event.speaker;
+              document.getElementById("summary").value = event.summary;
+              document.getElementById("learnings").value = event.learnings;
+              document.getElementById("features").value = event.features;
+              document.getElementById("seatsAvailable").value =
+                event.seatsAvailable;
+              document.getElementById("topics").value = event.topics;
+              document.getElementById("exams").value = event.exams;
+              document.getElementById("articles").value = event.articles;
+              document.getElementById("certificates").value =
+                event.certificates;
+              document.getElementById("mapUrl").value = event.mapUrl;
+              document.getElementById("zoomLink").value = event.zoomLink;
+              document.getElementById("zoomPassword").value =
+                event.zoomPassword;
             })
             .catch((error) => {
-              console.error("Error fetching categories:", error);
-              alert("فشل في تحميل الفئات. حاول مرة أخرى.");
+              console.error("Error fetching event data:", error);
+              alert("فشل في تحميل بيانات الحدث.");
             });
 
-          // Fetch trainers from the API
-          fetch("http://localhost:38146/api/Trainer/all")
-            .then((response) => {
-              if (!response.ok) {
-                throw new Error("Failed to fetch trainers");
-              }
-              return response.json();
-            })
-            .then((data) => {
-              const trainerSelect = document.getElementById("trainer");
-              // Populate the dropdown with trainer names
-              data.forEach((trainer) => {
-                const option = document.createElement("option");
-                option.value = trainer.trainerId; // Use the trainer_id as value
-                option.text = trainer.name; // Display the trainer's name
-                trainerSelect.appendChild(option);
-              });
-            })
-            .catch((error) => {
-              console.error("Error fetching trainers:", error);
-              alert("فشل في تحميل المدربين. حاول مرة أخرى.");
-            });
-
-          // Handle form submission
+          // Handle form submission for updating event
           document
-            .getElementById("courseForm")
-            .addEventListener("submit", function (event) {
-              event.preventDefault();
+            .getElementById("eventForm")
+            .addEventListener("submit", function (e) {
+              e.preventDefault(); // منع الإرسال الافتراضي
 
-              // Collect form data
-              const trackName = document.getElementById("trackName").value;
-              const trackDescription =
-                document.getElementById("trackDescription").value;
-              const trackCost = document.getElementById("trackCost").value;
-              const trainerId = document.getElementById("trainer").value; // Get selected trainer ID
-              const duration = document.getElementById("duration").value;
-              const allowedStudents =
-                document.getElementById("allowedStudents").value;
-              const startDate = document.getElementById("startDate").value;
-              const endDate = document.getElementById("endDate").value;
-              const curriculum = document.getElementById("curriculum").value;
-              const tools = document.getElementById("tools").value;
-              const rating = document.getElementById("rating").value;
-              const certificate =
-                document.getElementById("certificate").value === "yes";
-              const categoryId = document.getElementById("category").value;
-
-              // Image handling
-              const imageInput = document.getElementById("image");
-              const imageUrl =
-                imageInput.files.length > 0
-                  ? imageInput.files[0].name
-                  : "string"; // Placeholder for URL if needed
-
-              // Create an object to hold the data
-              const courseData = {
-                title: trackName,
-                description: trackDescription,
-                price: trackCost,
-                trainer_id: trainerId, // Include trainer_id
-                category_id: categoryId,
-                duration: duration,
-                allowed_students: allowedStudents,
-                syllabus: curriculum,
-                tools: tools,
-                startDate: startDate,
-                endDate: endDate,
-                imageUrl: imageUrl,
-                Rating: rating,
+              // جمع بيانات النموذج
+              const formData = new FormData(this);
+              const updateEventDto = {
+                eventTitle: formData.get("eventTitle"),
+                eventDate: formData.get("eventDate"),
+                eventTime: formData.get("eventTime"),
+                location: formData.get("location"),
+                participants: formData.get("participants"),
+                speaker: formData.get("speaker"),
+                summary: formData.get("summary"),
+                learnings: formData.get("learnings"),
+                features: formData.get("features"),
+                seatsAvailable: formData.get("seatsAvailable"),
+                topics: formData.get("topics"),
+                exams: formData.get("exams"),
+                articles: formData.get("articles"),
+                certificates: formData.get("certificates"),
+                mapUrl: formData.get("mapUrl"),
+                zoomLink: formData.get("zoomLink"),
+                zoomPassword: formData.get("zoomPassword"),
               };
 
-              console.log("Adding course with data:", courseData);
-
-              // Send the POST request to add the course
-              fetch("http://localhost:38146/api/Courses", {
-                method: "POST",
+              // إرسال البيانات المحدثة إلى API
+              fetch(`http://localhost:38146/api/Event/${eventId}`, {
+                method: "PUT",
+                body: JSON.stringify(updateEventDto),
                 headers: {
                   "Content-Type": "application/json",
                 },
-                body: JSON.stringify(courseData),
               })
                 .then((response) => {
-                  if (!response.ok) {
-                    throw new Error("Network response was not ok");
+                  if (response.ok) {
+                    Swal.fire({
+                      title: "تم بنجاح!",
+                      text: "تم تعديل الحدث بنجاح!",
+                      icon: "success",
+                      confirmButtonText: "رائع!",
+                    }).then((result) => {
+                      if (result.isConfirmed) {
+                        window.location.href = "GetAll.html"; // إعادة التوجيه إلى صفحة GetAll.html
+                      }
+                    });
+                  } else {
+                    throw new Error("Something went wrong");
                   }
-                  return response.json();
-                })
-                .then((data) => {
-                  console.log("Course added successfully:", data);
-                  Swal.fire({
-                    icon: "success",
-                    title: "تم إضافة المسار بنجاح!",
-                    text: "يمكنك مشاهدة المسار في القائمة.",
-                  }).then(() => {
-                    window.location.href = "view.html"; // Adjust the path if necessary
-                  });
                 })
                 .catch((error) => {
-                  console.error("Error adding course:", error);
+                  console.error("Error updating event:", error);
                   Swal.fire({
+                    title: "خطأ!",
+                    text: "حدثت مشكلة أثناء تعديل الحدث. يرجى المحاولة مرة أخرى.",
                     icon: "error",
-                    title: "فشل!",
-                    text: "حدث خطأ أثناء إضافة المسار. حاول مرة أخرى.",
+                    confirmButtonText: "حسنًا",
                   });
                 });
             });
@@ -497,48 +500,6 @@
       }
 
       // Chart.js code
-      const salesCtx = document.getElementById("salesChart").getContext("2d");
-      const salesChart = new Chart(salesCtx, {
-        type: "bar",
-        data: {
-          labels: ["يناير", "فبراير", "مارس", "أبريل", "مايو", "يونيو"],
-          datasets: [
-            {
-              label: "إجمالي المبيعات",
-              data: [5000, 7000, 8000, 6000, 9000, 10000],
-              backgroundColor: "rgba(54, 162, 235, 0.2)",
-              borderColor: "rgba(54, 162, 235, 1)",
-              borderWidth: 1,
-            },
-          ],
-        },
-        options: {
-          scales: {
-            y: {
-              beginAtZero: true,
-            },
-          },
-        },
-      });
-
-      const customersCtx = document
-        .getElementById("customersChart")
-        .getContext("2d");
-      const customersChart = new Chart(customersCtx, {
-        type: "pie",
-        data: {
-          labels: ["عملاء نشطون", "عملاء غير نشطين"],
-          datasets: [
-            {
-              label: "تحليل العملاء",
-              data: [300, 150],
-              backgroundColor: ["#36a2eb", "#ff6384"],
-              borderColor: "#fff",
-              borderWidth: 1,
-            },
-          ],
-        },
-      });
     </script>
 
     <script>

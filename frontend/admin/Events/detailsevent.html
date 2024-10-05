@@ -1,24 +1,103 @@
+<!-- <div class="container mt-5">
+  <h2>تفاصيل الحدث</h2>
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>المعلومات</th>
+        <th>القيمة</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>عنوان الحدث</td>
+        <td id="eventTitle">جاري التحميل...</td>
+      </tr>
+      <tr>
+        <td>ملخص الحدث</td>
+        <td id="eventSummary">جاري التحميل...</td>
+      </tr>
+      <tr>
+        <td>تاريخ الحدث</td>
+        <td id="eventDate">جاري التحميل...</td>
+      </tr>
+      <tr>
+        <td>موقع الحدث</td>
+        <td id="eventLocation">جاري التحميل...</td>
+      </tr>
+      <tr>
+        <td>تعلم في هذا الحدث</td>
+        <td id="eventLearnings">جاري التحميل...</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const urlParams = new URLSearchParams(window.location.search);
+    const eventId = urlParams.get("id");
+
+    if (eventId) {
+      fetch(`http://localhost:38146/api/Event/${eventId}`)
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error(
+              `فشل في جلب تفاصيل الحدث، الحالة: ${response.status}`
+            );
+          }
+          return response.json();
+        })
+        .then((event) => {
+          const eventTitle = document.getElementById("eventTitle");
+          if (eventTitle) {
+            eventTitle.textContent = event.eventTitle || "عنوان غير متوفر";
+          }
+          const eventSummary = document.getElementById("eventSummary");
+          if (eventSummary) {
+            eventSummary.textContent = event.summary || "ملخص غير متوفر";
+          }
+          const eventDate = document.getElementById("eventDate");
+          if (eventDate) {
+            eventDate.textContent =
+              new Date(event.eventDate).toLocaleDateString("ar-SA") ||
+              "تاريخ غير متوفر";
+          }
+          const eventLocation = document.getElementById("eventLocation");
+          if (eventLocation) {
+            eventLocation.textContent = event.location || "موقع غير متوفر";
+          }
+          const eventLearnings = document.getElementById("eventLearnings");
+          if (eventLearnings) {
+            const learnings = event.learnings.join(", ") || "لا توجد معلومات";
+            eventLearnings.textContent = learnings;
+          }
+        })
+        .catch((error) => {
+          console.error("خطأ في جلب تفاصيل الحدث:", error);
+        });
+    } else {
+      console.error("لم يتم العثور على EventID في التخزين المحلي.");
+    }
+  });
+</script> -->
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>عرض المسارات</title>
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css"
-    />
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <title>لوحة التحكم</title>
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
       rel="stylesheet"
     />
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
     <link
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="/frontend/admin/css/dashboardadmin.css" />
-    <link rel="stylesheet" href="/frontend/admin/css/viewcategory.css" />
+    <link rel="stylesheet" href="/frontend/admin/css/addcategory.css" />
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style></style>
   </head>
@@ -200,45 +279,154 @@
         </div>
       </header>
       <div class="container mt-5">
-        <h1 class="mb-4">ارسال الرد</h1>
+        <h2 class="text-center mb-4">تفاصيل الحدث</h2>
 
-        <div class="col-md-8">
-          <h2>أرسل لنا رسالة</h2>
-          <form id="emailForm">
-            <div class="mb-3">
-              <textarea
-                class="form-control"
-                rows="5"
-                placeholder="رسالتك"
-                name="Message"
-                required
-              ></textarea>
-            </div>
-            <div class="row">
-              <div class="col-md-6 mb-3">
-                <input
-                  type="text"
-                  class="form-control"
-                  placeholder="الاسم"
-                  name="Name"
-                  required
-                />
-              </div>
-              <div class="col-md-6 mb-3">
-                <input
-                  type="email"
-                  class="form-control"
-                  placeholder="البريد الإلكتروني"
-                  name="Email"
-                  required
-                />
-              </div>
-            </div>
-            <button type="submit" class="btn btn-warning">إرسال</button>
-          </form>
+        <!-- Event Image -->
+        <div class="text-center mb-4">
+          <img
+            id="eventImage"
+            src=""
+            alt="Event Image"
+            class="img-fluid"
+            style="max-width: 100%; height: auto"
+          />
         </div>
+
+        <!-- Event Details Table -->
+        <table class="table table-bordered table-hover">
+          <thead class="table-primary">
+            <tr>
+              <th>المعلومات</th>
+              <th>القيمة</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>عنوان الحدث</td>
+              <td id="eventTitle">جاري التحميل...</td>
+            </tr>
+            <tr>
+              <td>ملخص الحدث</td>
+              <td id="eventSummary">جاري التحميل...</td>
+            </tr>
+            <tr>
+              <td>تاريخ الحدث</td>
+              <td id="eventDate">جاري التحميل...</td>
+            </tr>
+            <tr>
+              <td>موقع الحدث</td>
+              <td id="eventLocation">جاري التحميل...</td>
+            </tr>
+            <tr>
+              <td>تعلم في هذا الحدث</td>
+              <td id="eventLearnings">جاري التحميل...</td>
+            </tr>
+            <tr>
+              <td>عدد المشاركين</td>
+              <td id="eventParticipants">جاري التحميل...</td>
+            </tr>
+            <tr>
+              <td>المتحدث</td>
+              <td id="eventSpeaker">جاري التحميل...</td>
+            </tr>
+            <tr>
+              <td>المقاعد المتاحة</td>
+              <td id="eventSeatsAvailable">جاري التحميل...</td>
+            </tr>
+            <tr>
+              <td>رابط الخريطة</td>
+              <td>
+                <a id="eventMap" href="#" target="_blank">عرض الخريطة</a>
+              </td>
+            </tr>
+            <tr>
+              <td>رابط زووم</td>
+              <td>
+                <a id="eventZoom" href="#" target="_blank">الانضمام إلى زووم</a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
       </div>
+
+      <script>
+        document.addEventListener("DOMContentLoaded", function () {
+          const urlParams = new URLSearchParams(window.location.search);
+          const eventId = urlParams.get("id");
+
+          if (eventId) {
+            fetch(`http://localhost:38146/api/Event/${eventId}`)
+              .then((response) => {
+                if (!response.ok) {
+                  throw new Error(
+                    `فشل في جلب تفاصيل الحدث، الحالة: ${response.status}`
+                  );
+                }
+                return response.json();
+              })
+              .then((event) => {
+                // Set Event Image
+                const eventImage = document.getElementById("eventImage");
+
+                eventImage.src =
+                  `/backend/image/${event.imagePath}` || "/default-image.png"; // Default image if not available
+
+                // Populate Event Details
+                const eventTitle = document.getElementById("eventTitle");
+                eventTitle.textContent = event.eventTitle || "عنوان غير متوفر";
+
+                const eventSummary = document.getElementById("eventSummary");
+                eventSummary.textContent = event.summary || "ملخص غير متوفر";
+
+                const eventDate = document.getElementById("eventDate");
+                eventDate.textContent =
+                  new Date(event.eventDate).toLocaleDateString("ar-SA") ||
+                  "تاريخ غير متوفر";
+
+                const eventLocation = document.getElementById("eventLocation");
+                eventLocation.textContent = event.location || "موقع غير متوفر";
+
+                const eventLearnings =
+                  document.getElementById("eventLearnings");
+                eventLearnings.textContent =
+                  event.learnings || "لا توجد معلومات";
+
+                const eventParticipants =
+                  document.getElementById("eventParticipants");
+                eventParticipants.textContent =
+                  event.participants || "عدد غير متوفر";
+
+                const eventSpeaker = document.getElementById("eventSpeaker");
+                eventSpeaker.textContent = event.speaker || "متحدث غير متوفر";
+
+                const eventSeatsAvailable = document.getElementById(
+                  "eventSeatsAvailable"
+                );
+                eventSeatsAvailable.textContent =
+                  event.seatsAvailable || "عدد المقاعد غير متوفر";
+
+                const eventMap = document.getElementById("eventMap");
+                eventMap.href = event.mapUrl || "#"; // Default to "#" if no URL
+                eventMap.textContent = event.mapUrl
+                  ? "عرض الخريطة"
+                  : "رابط غير متوفر";
+
+                const eventZoom = document.getElementById("eventZoom");
+                eventZoom.href = event.zoomLink || "#"; // Default to "#" if no URL
+                eventZoom.textContent = event.zoomLink
+                  ? "الانضمام إلى زووم"
+                  : "رابط غير متوفر";
+              })
+              .catch((error) => {
+                console.error("خطأ في جلب تفاصيل الحدث:", error);
+              });
+          } else {
+            console.error("لم يتم العثور على EventID في التخزين المحلي.");
+          }
+        });
+      </script>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>

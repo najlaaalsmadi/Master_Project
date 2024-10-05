@@ -114,10 +114,29 @@
                 </li>
               </ul>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/frontend/user/AllEvents.html"
-                >كل الأحداث</a
+            <li class="nav-item dropdown">
+              <a
+                class="nav-link dropdown-toggle"
+                href="#"
+                id="storeDropdown"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
               >
+                اداره الاحداث
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="storeDropdown">
+                <li>
+                  <a class="dropdown-item" href="/frontend/user/postEvents.html"
+                    >اضافة أحداث
+                  </a>
+                </li>
+                <li>
+                  <a class="dropdown-item" href="/frontend/user/AllEvents.html"
+                    >كل الأحداث</a
+                  >
+                </li>
+              </ul>
             </li>
             <li class="nav-item dropdown">
               <a
@@ -180,8 +199,9 @@
     <div class="container mt-5">
       <h1>سلة المشتريات</h1>
       <div class="d-flex one">
-        <!-- Products Table (60%) -->
+        <!-- Handmade Products Table -->
         <div class="container mt-5">
+          <h3>منتجات مصنوعة يدويًا</h3>
           <table class="table table-bordered" dir="rtl">
             <thead
               class="thead-dark"
@@ -189,83 +209,238 @@
             >
               <tr>
                 <th scope="col">#</th>
-                <th scope="col">صوره المنتج</th>
+                <th scope="col">صورة المنتج</th>
                 <th scope="col">اسم المنتج</th>
                 <th scope="col">سعر الوحدة</th>
                 <th scope="col">الكمية</th>
                 <th scope="col">إغلاق</th>
               </tr>
             </thead>
-            <tbody id="product-table-body">
-              <!-- Dynamic Product Rows Go Here -->
+            <tbody id="handmade-product-table-body">
+              <!-- Handmade Products Rows Go Here -->
             </tbody>
           </table>
         </div>
 
-        <!-- مراحل الدفع -->
+        <!-- Learning Equipment Products Table -->
+        <div class="container mt-5">
+          <h3>معدات التعليم</h3>
+          <table class="table table-bordered" dir="rtl">
+            <thead
+              class="thead-dark"
+              style="background-color: navy; color: white"
+            >
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">صورة المنتج</th>
+                <th scope="col">اسم المنتج</th>
+                <th scope="col">سعر الوحدة</th>
+                <th scope="col">الكمية</th>
+                <th scope="col">إغلاق</th>
+              </tr>
+            </thead>
+            <tbody id="learning-equipment-table-body">
+              <!-- Learning Equipment Rows Go Here -->
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Local Products Table -->
+        <div class="container mt-5">
+          <h3>المنتجات المحلية</h3>
+          <table class="table table-bordered" dir="rtl">
+            <thead
+              class="thead-dark"
+              style="background-color: navy; color: white"
+            >
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">صورة المنتج</th>
+                <th scope="col">اسم المنتج</th>
+                <th scope="col">سعر الوحدة</th>
+                <th scope="col">الكمية</th>
+                <th scope="col">إغلاق</th>
+              </tr>
+            </thead>
+            <tbody id="local-product-table-body">
+              <!-- Local Products Rows Go Here -->
+            </tbody>
+          </table>
+        </div>
+
+        <!-- المجموع الكلي -->
         <div class="ml-5 p-3 border rounded" style="flex-basis: 40%">
           <h4 class="text-right font-weight-bold">
             المجموع الإجمالي: <span id="total-price">$0</span>
           </h4>
-
-          <!-- المرحلة 1: إدخال الكوبون -->
-          <div id="step-1">
-            <div class="form-group">
-              <label for="coupon-code">أدخل الكوبون:</label>
-              <input
-                type="text"
-                id="coupon-code"
-                class="form-control"
-                placeholder="اكتب الكوبون هنا"
-              />
-              <button id="apply-coupon" class="btn btn-success mt-2 w-100">
-                تطبيق الكوبون
-              </button>
-              <p
-                id="coupon-feedback"
-                class="text-danger mt-2"
-                style="display: none"
-              >
-                كود الكوبون غير صالح
-              </p>
-            </div>
-          </div>
-
-          <!-- المرحلة 2: اختيار طريقة الدفع (مخفية افتراضياً) -->
-          <div id="step-2" style="display: none">
-            <h5 class="text-center">اختر طريقة الدفع</h5>
-            <button class="btn btn-primary w-100 mb-2">
-              <img
-                src="https://img.icons8.com/color/24/paypal.png"
-                alt="Paypal"
-              />
-              PayPal
-            </button>
-            <button class="btn btn-secondary w-100 mb-2">
-              <img src="https://img.icons8.com/color/24/visa.png" alt="Visa" />
-              بطاقة
-            </button>
-            <button class="btn btn-dark w-100 mb-2">
-              <img
-                src="https://img.icons8.com/color/24/mastercard.png"
-                alt="MasterCard"
-              />
-              ماستر كارد
-            </button>
-          </div>
-
-          <!-- المرحلة 3: تأكيد الطلب (مخفية افتراضياً) -->
-          <div id="step-3" style="display: none">
-            <h5 class="text-center">تأكيد الطلب</h5>
-            <p>
-              تم تطبيق الكوبون بنجاح! اخترت طريقة الدفع:
-              <span id="selected-payment-method"></span>
-            </p>
-            <button class="btn btn-success w-100">تأكيد الطلب</button>
-          </div>
         </div>
       </div>
     </div>
+
+    <script>
+      let totalPrice = 0;
+      let couponApplied = false;
+      let discountValue = 0;
+
+      // Define valid coupons
+      const validCoupons = {
+        DISCOUNT10: 10,
+        SAVE20: 20,
+      };
+
+      // Fetch user ID from the API using the email stored in localStorage
+      async function fetchUserId() {
+        try {
+          const email = localStorage.getItem("email");
+          if (!email) return null;
+          const response = await fetch(
+            `http://localhost:38146/api/Users/email/${encodeURIComponent(
+              email
+            )}`
+          );
+          const data = await response.json();
+          return data.userId;
+        } catch (error) {
+          console.error("Error fetching user ID:", error);
+          return null;
+        }
+      }
+
+      // Fetch handmade products
+      async function fetchHandmadeProducts(userID) {
+        try {
+          const response = await fetch(
+            `http://localhost:38146/api/CardItemHandmadeProduct/card/${userID}`
+          );
+          return await response.json();
+        } catch (error) {
+          console.error("Error fetching handmade products:", error);
+          return [];
+        }
+      }
+
+      // Fetch learning equipment
+      async function fetchLearningEquipment(userID) {
+        try {
+          const response = await fetch(
+            `http://localhost:38146/api/CardItemLearningEquipment/card/${userID}`
+          );
+          return await response.json();
+        } catch (error) {
+          console.error("Error fetching learning equipment:", error);
+          return [];
+        }
+      }
+
+      // Fetch additional product details
+      async function fetchProductDetails(productId, category) {
+        const url =
+          category === "Handmade"
+            ? `http://localhost:38146/api/Handmade_Products/${productId}`
+            : `http://localhost:38146/api/LearningEquipment/${productId}`;
+
+        return await fetchProduct(url);
+      }
+
+      // General fetch function
+      async function fetchProduct(url) {
+        try {
+          const response = await fetch(url);
+          if (!response.ok) throw new Error("Network response was not ok");
+          return await response.json();
+        } catch (error) {
+          console.error("Error fetching product details:", error);
+          return null;
+        }
+      }
+
+      // Display products in a specific table
+      async function displayProducts(products, tableBodyId) {
+        const tbody = document.getElementById(tableBodyId);
+        tbody.innerHTML = ""; // Clear table
+
+        for (let index = 0; index < products.length; index++) {
+          const product = products[index];
+          const productId = product.equipmentId || product.productId;
+          const category = product.category;
+          let productName = product.productName || product.name;
+          let imageUrl = product.product?.imageUrl1 || product.imageUrl1;
+
+          if (!productName || !imageUrl) {
+            const productDetails = await fetchProductDetails(
+              productId,
+              category
+            );
+            if (productDetails) {
+              productName = productDetails.name || productName;
+              imageUrl = productDetails.imageUrl1 || "default-image.jpg";
+            } else {
+              imageUrl = "default-image.jpg";
+            }
+          }
+
+          const productPrice = product.productPrice || product.price || 0;
+          const row = `
+            <tr data-product-id="${productId}" data-category="${category}">
+              <td>${index + 1}</td>
+              <td><img src="/backend/image/${imageUrl}" alt="${productName}" style="width: 100px; height: auto;" /></td>
+              <td>${productName}</td>
+              <td class="unit-price">${productPrice} JD</td>
+              <td>${product.quantity}</td>
+              <td><button class="btn btn-danger remove-product"><i class="fa fa-times"></i></button></td>
+            </tr>
+          `;
+          tbody.innerHTML += row;
+        }
+      }
+
+      // Load products from both APIs and localStorage
+      async function loadProducts() {
+        const userID = await fetchUserId(); // Get userID if logged in
+
+        let handmadeProducts = [],
+          learningEquipment = [],
+          localStorageProducts = [];
+
+        if (userID) {
+          handmadeProducts = await fetchHandmadeProducts(userID);
+          learningEquipment = await fetchLearningEquipment(userID);
+        }
+
+        // Get products from localStorage
+        localStorageProducts = JSON.parse(localStorage.getItem("cart")) || [];
+
+        // Display Handmade Products
+        await displayProducts(handmadeProducts, "handmade-product-table-body");
+        // Display Learning Equipment
+        await displayProducts(
+          learningEquipment,
+          "learning-equipment-table-body"
+        );
+        // Display Local Products
+        await displayProducts(localStorageProducts, "local-product-table-body");
+
+        // Update total price
+        updateTotalPrice();
+      }
+
+      // Update total price calculation
+      function updateTotalPrice() {
+        let total = 0;
+        document
+          .querySelectorAll(".unit-price")
+          .forEach(function (priceElement) {
+            total += parseFloat(priceElement.textContent.replace(" JD", ""));
+          });
+
+        document.getElementById("total-price").textContent = `$${total.toFixed(
+          2
+        )}`;
+      }
+
+      // Load products when the page is loaded
+      window.onload = loadProducts;
+    </script>
 
     <br />
     <footer>
@@ -531,7 +706,7 @@
       // تنفيذ دالة تحميل المنتجات عند تحميل الصفحة
       window.onload = loadProducts;
     </script> -->
-    <script src="/frontend/user/card.js"></script>
+    <!-- <script src="/frontend/user/card.js"></script> -->
 
     <script src="/frontend/user/javascript/ordelogin.js"></script>
     <script src="/frontend/user/ALLCategories.js"></script>
