@@ -193,6 +193,20 @@ namespace backend_Master.Controllers
 
             return Ok(course);
         }
+        [HttpGet("trainerId/{trainerId}")]
+        public IActionResult GetTrainerById(int trainerId) // تغيير الاسم هنا
+        {
+            // Retrieve courses for a specific trainer using TrainerId
+            var courses = _context.Courses.Where(c => c.TrainerId == trainerId).ToList();
+
+            if (courses == null)
+            {
+                Console.WriteLine($"Trainer with ID {trainerId} not found."); // Add logging
+                return NotFound();
+            }
+
+            return Ok(courses);
+        }
 
 
 

@@ -173,92 +173,111 @@
   
 
     <body dir="rtl">
-        <div class="container mt-5">
-            <div class="row">
-                <div class="col-md-8">
-                    <div class="profile-header text-center p-4 mb-4 rounded">
-                        <img src="/backend/image/instructor1.png" alt="صورة المدرب" class="mb-3" />
-                        <h2>أمين الخياط
-                        </h2>
-                        <p>مدرب خياطة و تطريز </p>
-                        <p><i class="fas fa-envelope"></i> rf@gmail.com &nbsp;|&nbsp; <i class="fas fa-phone"></i> +123 9500 600</p>
-                        <div class="d-flex justify-content-center">
-                            <a href="#" class="text-white mx-2"><i class="fab fa-facebook"></i></a>
-                            <a href="#" class="text-white mx-2"><i class="fab fa-twitter"></i></a>
-                            <a href="#" class="text-white mx-2"><i class="fab fa-instagram"></i></a>
-                            <a href="#" class="text-white mx-2"><i class="fab fa-linkedin"></i></a>
-                        </div>
-                    </div>
-    
-                    <div class="bg-light p-4 rounded mb-4">
-                        <h4>السيرة الذاتية</h4>
-                        <p>خياطة الملابس هي مهنة فنية تتطلب مهارات دقيقة في تصميم وتفصيل الملابس. يتقن الخياط صناعة الملابس وتشكيل الأقمشة بأشكال فريدة وجذابة تناسب الأذواق المختلفة. يتمتع الخياط بالقدرة على التعامل مع الأقمشة المتنوعة وإنتاج منتجات عالية الجودة وجذابة من الناحية الجمالية. يقدم الخياط ورش عمل تدريبية ودورات عبر الإنترنت لمساعدة الآخرين على اكتساب المهارات اللازمة للبدء في مشاريعهم الخاصة في مجال خياطة الملابس.</p>
-                    </div>
-    
-                    <div>
-                        <h4>دوراتي</h4>
-                        <div class="row">
-                            <div class="col-lg-3 col-md-6 mb-6">
-                                <div class="card h-100 text-center">
-                                    <img src="/backend/image/sewing-clothes.png" class="card-img-top" alt="صورة الدورة" />
-                                    <div class="card-body">
-                                        <h5 class="card-title">خياطة الملابس</h5>
-                                        <p class="card-text">أمين الخياط</p>
-                                    </div>
-                                    <div class="card-footer">
-                                        <p class="font-weight-bold">$15.00</p>
-                                        <a href="/frontend/user/CourseDetailsadd.html" class="btn btn-warning">اشترك الآن</a>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <div class="col-lg-3 col-md-6 mb-6">
-                                <div class="card h-100 text-center">
-                                    <img src="/backend/image/التطريز.png" class="card-img-top" alt="صورة الدورة" />
-                                    <div class="card-body">
-                                        <h5 class="card-title">تطريز</h5>
-                                        <p class="card-text">  أمين الخياط</p>
-                                    </div>
-                                    <div class="card-footer">
-                                        <p class="font-weight-bold">$18.00</p>
-                                        <a href="#" class="btn btn-warning">اشترك الآن</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-3 col-md-6 mb-6">
-                                <div class="card h-100 text-center">
-                                    <img src="/backend/image/_تصميم الأزياء.png" class="card-img-top" alt="صورة الدورة" />
-                                    <div class="card-body">
-                                        <h5 class="card-title">
-                                            تصميم الأزياء
-
-                                        </h5>
-                                        <p class="card-text">أمين الخياط  </p>
-                                    </div>
-                                    <div class="card-footer">
-                                        <p class="font-weight-bold">$24.00</p>
-                                        <a href="#" class="btn btn-warning">اشترك الآن</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-3 col-md-6 mb-6">
-                                <div class="card h-100 text-center">
-                                    <img src="/backend/image/Pink Brush Feminine  Logo (4).png" class="card-img-top" alt="صورة الدورة" />
-                                    <div class="card-body">
-                                        <h5 class="card-title">حقائب، مجوهرات وملابس مطرزة</h5>
-                                        <p class="card-text">أمين الخياط
-
-                                        </p>
-                                    </div>
-                                    <div class="card-footer">
-                                        <p class="font-weight-bold">$12.00</p>
-                                        <a href="#" class="btn btn-warning">اشترك الآن</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+        
+      <div class="container mt-5">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="profile-header text-center p-4 mb-4 rounded">
+                    <img id="trainerImage" src="/backend/image/instructor1.png" alt="صورة المدرب" class="mb-3" />
+                    <h2 id="trainerName">الاسم</h2>
+                    <p id="trainerJobTitle">المسمى الوظيفي</p>
+                    <p id="trainerContact"><i class="fas fa-envelope"></i> البريد الإلكتروني &nbsp;|&nbsp; <i class="fas fa-phone"></i> رقم الهاتف</p>
+                    <div class="d-flex justify-content-center">
+                        <a href="#" class="text-white mx-2"><i class="fab fa-facebook"></i></a>
+                        <a href="#" class="text-white mx-2"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-white mx-2"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-white mx-2"><i class="fab fa-linkedin"></i></a>
                     </div>
                 </div>
+    
+                <div class="bg-light p-4 rounded mb-4">
+                    <h4>السيرة الذاتية</h4>
+                    <p id="trainerBio">سيتم ملء السيرة الذاتية هنا.</p>
+                </div>
+    
+                <div>
+                    <h4>دوراتي</h4>
+                    <div class="row" id="coursesContainer">
+                        <!-- سيتم إضافة بطاقات الدورات هنا عبر JavaScript -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const urlParams = new URLSearchParams(window.location.search);
+            const trainerId = urlParams.get('trainerId'); // الحصول على قيمة trainerId
+    
+            if (trainerId) {
+                fetch(`http://localhost:38146/api/Trainer/${trainerId}`)
+                    .then(response => response.json())
+                    .then(trainer => {
+                        document.getElementById('trainerImage').src = `/backend/image/${trainer.imageProfile}`;
+                        document.getElementById('trainerName').innerText = trainer.name;
+                        document.getElementById('trainerJobTitle').innerText = trainer.jobTitle;
+                        document.getElementById('trainerContact').innerText = `${trainer.email} | ${trainer.phone}`;
+                        document.getElementById('trainerBio').innerText = trainer.bio;
+    
+                        // جلب الدورات الخاصة بالمدرب
+                        return fetch(`http://localhost:38146/api/Courses/trainerId/${trainerId}`);
+                    })
+                    .then(response => response.json())
+                    .then(courses => {
+                        console.log(courses); 
+    
+                        const coursesContainer = document.getElementById('coursesContainer');
+                        coursesContainer.innerHTML = '';
+    
+                        // Check if the response is an array
+                        if (Array.isArray(courses) && courses.length > 0) {
+                            courses.forEach(course => {
+                                const courseCard = createCourseCard(course);
+                                coursesContainer.innerHTML += courseCard;
+                            });
+                        } else if (typeof courses === 'object') {
+                            // Handle the case where courses is a single object
+                            const courseCard = createCourseCard(courses);
+                            coursesContainer.innerHTML += courseCard;
+                        } else {
+                            coursesContainer.innerHTML = '<p>لا توجد دورات متاحة</p>';
+                        }
+                    })
+                    .catch(error => console.error("Error fetching trainer or courses data:", error));
+            } else {
+                console.error("trainerId not found in URL");
+            }
+        });
+    
+        function createCourseCard(course) {
+            return `
+                <div class="col-lg-3 col-md-4 mb-4"> <!-- Adjusted column size to 3 for larger screens -->
+                    <a href="javascript:void(0);" onclick="goToDetails(${course.courseId})" style="text-decoration: none">
+                        <div class="card h-100 text-center">
+                            <img src="/backend/image/${course.imageUrl}" class="card-img-top" alt="${course.title}" />
+                            <div class="card-body">
+                                <h5 class="card-title">${course.title}</h5>
+                                <p class="card-text">${course.trainer ? course.trainer.name : ''}</p>
+                            </div>
+                            <div class="card-footer">
+                                <p class="font-weight-bold">${course.price} DJ</p>
+                                <a href="javascript:void(0);" onclick="goToDetails(${course.courseId})" class="btn btn-warning">اشترك الآن</a>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            `;
+        }
+    
+        function goToDetails(courseId) {
+            localStorage.setItem("course_id", courseId);
+            window.location.href = `/frontend/user/CourseDetails.html?id=${courseId}`;
+        }
+    </script>
+    
+        
+        
     
                
     <br>

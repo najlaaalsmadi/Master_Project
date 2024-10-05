@@ -181,36 +181,64 @@
               </div>
             </div>
           </header>
-      <main class="p-3">
-        <div class="row mb-3">
-          <table class="user-table">
-            <thead>
-              <tr>
-                <th>الاسم الأول</th>
-                <th>الاسم الثاني</th>
-                <th>الإيميل</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>أحمد</td>
-                <td>خالد</td>
-                <td>ahmed@example.com</td>
-              </tr>
-              <tr>
-                <td>سارة</td>
-                <td>علي</td>
-                <td>sara@example.com</td>
-              </tr>
-              <tr>
-                <td>محمد</td>
-                <td>يوسف</td>
-                <td>mohamed@example.com</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </main>
+          <main class="p-3">
+            <div class="row mb-3">
+                <table class="user-table table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>الاسم </th>
+                            <th>الإيميل</th>
+                            <th>الصورة</th>
+                            <th>رقم الهاتف</th>
+                            <th>السيرة الذاتية</th>
+                            <th>إجراء</th>
+                        </tr>
+                    </thead>
+                    <tbody id="userTableBody">
+                        <!-- بيانات المستخدمين ستتم إضافتها هنا عبر JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+        </main>
+        
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                // جلب بيانات المستخدمين من API
+                fetch("http://localhost:38146/api/Users/all")
+                    .then(response => response.json())
+                    .then(users => {
+                        const userTableBody = document.getElementById("userTableBody");
+                        userTableBody.innerHTML = ''; // مسح البيانات السابقة
+        
+                        users.forEach(user => {
+                            const userRow = createUserRow(user);
+                            userTableBody.innerHTML += userRow;
+                        });
+                    })
+                    .catch(error => console.error("Error fetching users:", error));
+            });
+        
+            function createUserRow(user) {
+                return `
+                    <tr>
+                        <td>${user.name}</td>
+                        <td>${user.email}</td>
+                        <td><img src="/backend/image/${user.imageprofile}" alt="${user.firstName} ${user.lastName}" style="width: 50px; height: 50px; border-radius: 50%;" /></td>
+                        <td>${user.phone}</td>
+                        <td>${user.biographicalDetailsCv ? user.biographicalDetailsCv : 'لا توجد بيانات'}</td>
+                        <td>
+                            <button class="btn btn-info" onclick="showMoreData(${user.userId})">عرض المزيد</button>
+                        </td>
+                    </tr>
+                `;
+            }
+        
+            function showMoreData(userId) {
+                // هنا يمكنك تنفيذ أي منطق لعرض المزيد من البيانات عن المستخدم
+                alert(`عرض المزيد من البيانات للمستخدم ID: ${userId}`);
+            }
+        </script>
+        
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>

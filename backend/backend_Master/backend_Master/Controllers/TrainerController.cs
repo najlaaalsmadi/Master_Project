@@ -268,7 +268,7 @@ namespace backend_Master.Controllers
             }
 
             // Validate the role
-            if (!new[] { "trainer", "admin" }.Contains(request.Role))
+            if (!new[] { "trainer" }.Contains(request.Role))
             {
                 return BadRequest(new { message = "Invalid role." });
             }

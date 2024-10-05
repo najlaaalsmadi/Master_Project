@@ -202,6 +202,13 @@ namespace backend_Master.Controllers
 
             return new JwtSecurityTokenHandler().WriteToken(token);
         }
+        // عرض جميع المدربين
+        [HttpGet("all")]
+        public async Task<ActionResult<IEnumerable<Trainer>>> GetAllUsers()
+        {
+            var Users = await _myDbContext.Users.ToListAsync();
+            return Ok(Users);
+        }
 
 
         [Authorize]

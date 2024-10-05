@@ -634,3 +634,153 @@ ADD
 
 	ALTER TABLE Trainers
 ADD cv VARBINARY(MAX);  -- إضافة عمود cv لتخزين ملف PDF
+
+
+ALTER TABLE Trainers
+ADD satas BIT DEFAULT 0;  -- تعيين القيمة الافتراضية إلى 0
+-- إدراج المدرب أمين الخياط
+
+-- إدراج المدرب أمين الخياط
+-- إدراج المدرب أمين الخياط
+INSERT INTO Trainers (bio, experience, specialization, name, email, role, phone, job_title, image_profile, cv)
+VALUES 
+(
+    N'أمين الخياط، مدرب ذو خبرة طويلة في الخياطة.',
+    10,
+    N'خياطة',
+    N'أمين الخياط',
+    'amin.al-khayat@example.com',
+   N'Instructor',
+    '123456789',
+    N'مدرب خياطة',
+    'instructor1.png',
+    'rajaa_khayata_cv.pdf'
+);
+
+-- إدراج المدربة فاطمة الجمالي
+INSERT INTO Trainers (bio, experience, specialization, name, email,  role, phone, job_title, image_profile, cv)
+VALUES 
+(
+    N'فاطمة الجمالي، خبيرة تجميل محترفة ولديها خبرة واسعة في مجال العناية بالبشرة.',
+    8,
+    N'تجميل',
+    N'فاطمة الجمالي',
+    'fatima.aljamali@example.com',
+   N'Instructor',
+    '987654321',
+    N'خبيرة تجميل',
+    'instructor2.png',
+    'rajaa_khayata_cv.pdf'
+);
+
+-- إدراج المدرب رأفت الجمالي
+INSERT INTO Trainers (bio, experience, specialization, name, email,  role, phone, job_title, image_profile, cv)
+VALUES 
+(
+    N'رافت الجمالي، فنان متمكن في صناعة الفخار.',
+    15,
+    N'صناعة الفخار',
+    N'رافت الجمالي',
+    'raft.jamali@example.com',
+    N'Instructor',
+    '123123123',
+    N'حرفي في صناعة الفخار',
+    'instructor6.png',
+    'rajaa_khayata_cv.pdf'
+);
+
+-- إدراج المدربة فتحي الخراز
+INSERT INTO Trainers (bio, experience, specialization, name, email, role, phone, job_title, image_profile, cv)
+VALUES 
+(
+    N'فتحي الخراز، مدربة متخصصة في صناعة الخرز.',
+    12,
+    N'صناعة الخرز',
+    N'فتحي الخراز',
+    'fathi.kharaz@example.com',
+    N'Instructor',
+    '123987654',
+    N'مدربة صناعة الخرز',
+    'instructor4.png',
+    'rajaa_khayata_cv.pdf'
+);
+
+-- إدراج المدرب حامد الشقيرات
+INSERT INTO Trainers (bio, experience, specialization, name, email, role, phone, job_title, image_profile, cv)
+VALUES 
+(
+    N'حامد الشقيرات، مدرب خياطة محترف.',
+    9,
+    N'خياطة',
+    N'حامد الشقيرات',
+    'hamid.shuqirat@example.com',
+     N'Instructor',
+    '789456123',
+    N'مدرب خياطة',
+    'instructor5.png',
+    'rajaa_khayata_cv.pdf'
+);
+
+-- إدراج المدربة فرح الخراز
+INSERT INTO Trainers (bio, experience, specialization, name, email,  role, phone, job_title, image_profile, cv)
+VALUES 
+(
+    N'فرح الخراز، خبيرة تجميل محترفة.',
+    7,
+    N'تجميل',
+    N'فرح الخراز',
+    'farah.kharaz@example.com',
+    N'Instructor',
+    '456789123',
+    N'خبيرة تجميل',
+    'instructor3.png',
+    'rajaa_khayata_cv.pdf'
+);
+
+-- إدراج المدرب يوسف الفخاري
+INSERT INTO Trainers (bio, experience, specialization, name, email, role, phone, job_title, image_profile, cv)
+VALUES 
+(
+    N'يوسف الفخاري، فنان متخصص في صناعة الفخار.',
+    20,
+    N'صناعة الفخار',
+    N'يوسف الفخاري',
+    'yousef.alfakhari@example.com',
+    N'Instructor',
+    '741852963',
+    N'حرفي في صناعة الفخار',
+    'instructor7.png',
+    'rajaa_khayata_cv.pdf'
+);
+
+-- إدراج المدربة نادية الخراز
+INSERT INTO Trainers (bio, experience, specialization, name, email, role, phone, job_title, image_profile, cv)
+VALUES 
+(
+    N'نادية الخراز، خبيرة في صناعة الخرز.',
+    6,
+    N'صناعة الخرز',
+    N'نادية الخراز',
+    'nadia.kharaz@example.com',
+     N'Instructor',
+    '963852741',
+    N'متخصصة في صناعة الخرز',
+    'instructor8.png',
+    'rajaa_khayata_cv.pdf'
+);
+
+-- إدراج المدربة رجاء الخياطة
+INSERT INTO Trainers (bio, experience, specialization, name, email,  role, phone, job_title, image_profile, cv)
+VALUES 
+(
+    N'رجاء الخياطة، مدربة محترفة في فن الخياطة.',
+    11,
+    N'خياطة',
+    N'رجاء الخياطة',
+    'rajaa.khayata@example.com',
+    N'Instructor',
+    '123321123',
+    N'مدربة خياطة',
+    'instructor9.png',
+    'rajaa_khayata_cv.pdf'
+);
