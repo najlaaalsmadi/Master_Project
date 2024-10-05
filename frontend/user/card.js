@@ -96,7 +96,7 @@ async function displayProducts(products) {
       const productDetails = await fetchProductDetails(productId, category);
       if (productDetails) {
         productName = productDetails.name || productName;
-        imageUrl = productDetails.imageUrl1 || "default-image.jpg";
+        imageUrl = productDetails.imageUrl1;
       } else {
         imageUrl = "default-image.jpg";
       }
