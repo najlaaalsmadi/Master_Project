@@ -2,8 +2,10 @@
 using Microsoft.EntityFrameworkCore;
 using backend_Master.Models; // Adjust namespace as needed
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using backend_Master.DTO;
+using System;
 
 namespace backend_Master.Controllers
 {
@@ -17,7 +19,6 @@ namespace backend_Master.Controllers
         {
             _context = context;
         }
-      
 
         // GET: api/CardItemLearningEquipment
         [HttpGet]
@@ -25,6 +26,8 @@ namespace backend_Master.Controllers
         {
             return await _context.CardItemLearningEquipments.ToListAsync();
         }
+
+        // GET: api/CardItemLearningEquipment/card/1
         [HttpGet("card/{cardId}")]
         public async Task<ActionResult<IEnumerable<CardItemLearningEquipment>>> GetCardItemsByCardId(int cardId)
         {
@@ -34,7 +37,7 @@ namespace backend_Master.Controllers
 
             if (cardItems == null || cardItems.Count == 0)
             {
-                return NotFound();
+                return NotFound(new { message = "لا توجد عناصر في السلة لهذا الكارت" });
             }
 
             return Ok(cardItems);
@@ -48,47 +51,22 @@ namespace backend_Master.Controllers
 
             if (cardItem == null)
             {
-                return NotFound();
+                return NotFound(new { message = "العنصر غير موجود" });
             }
 
-            return cardItem;
+            return Ok(cardItem);
         }
 
         // POST: api/CardItemLearningEquipment
-        // POST: api/CardItemLearningEquipment
-        //[HttpPost]
-        //public async Task<ActionResult<CardItemLearningEquipment>> PostCardItemLearningEquipment([FromBody] CardItemLearningEquipmentDTO dto)
-        //{
-        //    if (!ModelState.IsValid)
-        //    {
-        //        return BadRequest(ModelState);
-        //    }
-
-        //    // Map DTO to the entity model
-        //    var cardItem = new CardItemLearningEquipment
-        //    {
-        //        CardId = dto.CardId,
-        //        EquipmentId = dto.EquipmentId,
-        //        Quantity = dto.Quantity,
-        //        Price = dto.Price,
-        //        AddedAt = dto.AddedAt ?? DateTime.UtcNow // Set to current time if not provided
-        //    };
-
-        //    _context.CardItemLearningEquipments.Add(cardItem);
-        //    await _context.SaveChangesAsync();
-
-        //    return CreatedAtAction(nameof(GetCardItem), new { id = cardItem.CardItemId }, cardItem);
-        //}
-
         [HttpPost]
-        public async Task<ActionResult<CardItemLearningEquipment>> PostCardItemLearningEquipment([FromBody] CardItemLearningEquipmentDTO dto)
+        public async Task<ActionResult> PostCardItemLearningEquipment([FromBody] CardItemLearningEquipmentDTO dto)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            // التحقق مما إذا كان العنصر موجودًا مسبقًا
+            // التحقق مما إذا كان العنصر موجودًا مسبقًا في السلة
             var existingItem = await _context.CardItemLearningEquipments
                 .FirstOrDefaultAsync(ci => ci.CardId == dto.CardId && ci.EquipmentId == dto.EquipmentId);
 
@@ -96,6 +74,7 @@ namespace backend_Master.Controllers
             {
                 // إذا كان العنصر موجودًا، قم بزيادة الكمية
                 existingItem.Quantity += dto.Quantity;
+                existingItem.Price = dto.Price * existingItem.Quantity; // تحديث السعر بناءً على الكمية الجديدة
                 _context.Entry(existingItem).State = EntityState.Modified;
             }
             else
@@ -106,8 +85,8 @@ namespace backend_Master.Controllers
                     CardId = dto.CardId,
                     EquipmentId = dto.EquipmentId,
                     Quantity = dto.Quantity,
-                    Price = dto.Price,
-                    AddedAt = dto.AddedAt ?? DateTime.UtcNow // تعيين الوقت الحالي إذا لم يكن موجودًا
+                    Price = dto.Price * dto.Quantity, // السعر يساوي السعر الأساسي × الكمية
+                    AddedAt = dto.AddedAt ?? DateTime.UtcNow // تعيين الوقت الحالي إذا لم يكن محددًا
                 };
 
                 _context.CardItemLearningEquipments.Add(cardItem);
@@ -116,31 +95,42 @@ namespace backend_Master.Controllers
             // حفظ التغييرات في قاعدة البيانات
             await _context.SaveChangesAsync();
 
-            return Ok(new { message = "Item added to cart successfully" });
+            return Ok(new { message = "تم إضافة العنصر إلى السلة بنجاح" });
         }
 
-
-
         // PUT: api/CardItemLearningEquipment/5
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutCardItemLearningEquipment(int id, CardItemLearningEquipment dto)
+        // PUT: api/CardItemLearningEquipment/5
+        // PUT: api/CardItemLearningEquipment/5
+        [HttpPut("{EquipmentId}")]
+        public async Task<IActionResult> PutCardItemLearningEquipment(int EquipmentId, [FromBody] UpdateQuantityDto updateQuantityDto)
         {
-            if (id != dto.CardItemId)
+            // البحث عن العنصر في قاعدة البيانات باستخدام المعرّف
+            var cardItem = await _context.CardItemLearningEquipments
+                                              .Where(item => item.EquipmentId == EquipmentId)
+                                              .FirstOrDefaultAsync();
+
+            if (cardItem == null)
             {
-                return BadRequest();
+                return NotFound(new { message = "العنصر غير موجود" });
             }
 
-            _context.Entry(dto).State = EntityState.Modified;
+            // تعديل الكمية فقط
+            cardItem.Quantity = updateQuantityDto.Quantity;
+
+            // وضع الحالة على "Modified" لإخبار الـ DbContext بأن هذا الكيان تم تعديله
+            _context.Entry(cardItem).State = EntityState.Modified;
 
             try
             {
+                // حفظ التغييرات في قاعدة البيانات
                 await _context.SaveChangesAsync();
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!CardItemLearningEquipmentExists(id))
+                // في حالة وجود خطأ متعلق بتزامن البيانات
+                if (!CardItemLearningEquipmentExists(EquipmentId))
                 {
-                    return NotFound();
+                    return NotFound(new { message = "العنصر غير موجود عند التحديث" });
                 }
                 else
                 {
@@ -148,17 +138,26 @@ namespace backend_Master.Controllers
                 }
             }
 
+            // إرجاع حالة "NoContent" للدلالة على نجاح العملية دون أي بيانات إضافية
             return NoContent();
         }
+
+        // دالة تحقق من وجود العنصر
+        private bool CardItemLearningEquipmentExists(int id)
+        {
+            return _context.CardItemLearningEquipments.Any(e => e.EquipmentId == id);
+        }
+
+       
 
         // DELETE: api/CardItemLearningEquipment/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteCardItemLearningEquipment(int id)
         {
-            var cardItem = await _context.CardItemLearningEquipments.FindAsync(id);
+            var cardItem = await _context.CardItemLearningEquipments.FirstOrDefaultAsync(i => i.EquipmentId == id);
             if (cardItem == null)
             {
-                return NotFound();
+                return NotFound(new { message = "العنصر غير موجود" });
             }
 
             _context.CardItemLearningEquipments.Remove(cardItem);
@@ -167,9 +166,6 @@ namespace backend_Master.Controllers
             return NoContent();
         }
 
-        private bool CardItemLearningEquipmentExists(int id)
-        {
-            return _context.CardItemLearningEquipments.Any(e => e.CardItemId == id);
-        }
+       
     }
 }

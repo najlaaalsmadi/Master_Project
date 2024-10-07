@@ -123,25 +123,36 @@ namespace backend_Master.Controllers
 
 
         // PUT: api/CardItemHandmadeProduct/5
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutCardItemHandmadeProduct(int id, [FromBody] CardItemHandmadeProduct cardItemHandmadeProduct)
+        [HttpPut("{ProductId}")]
+        public async Task<IActionResult> PutCardItemHandmadeProduct(int ProductId, [FromBody] UpdateQuantityDto updateQuantityDto)
         {
-            if (id != cardItemHandmadeProduct.CardItemId)
+            // البحث عن العنصر في قاعدة البيانات باستخدام المعرّف
+            var cardItem = await _context.CardItemHandmadeProducts
+                                    .Where(item => item.ProductId == ProductId)
+                                    .FirstOrDefaultAsync();
+
+            if (cardItem == null)
             {
-                return BadRequest();
+                return NotFound(new { message = "العنصر غير موجود" });
             }
 
-            _context.Entry(cardItemHandmadeProduct).State = EntityState.Modified;
+            // تعديل الكمية فقط
+            cardItem.Quantity = updateQuantityDto.Quantity;
+
+            // وضع الحالة على "Modified" لإخبار الـ DbContext بأن هذا الكيان تم تعديله
+            _context.Entry(cardItem).State = EntityState.Modified;
 
             try
             {
+                // حفظ التغييرات في قاعدة البيانات
                 await _context.SaveChangesAsync();
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!CardItemHandmadeProductExists(id))
+                // في حالة وجود خطأ متعلق بتزامن البيانات
+                if (!CardItemHandmadeProductExists(ProductId))
                 {
-                    return NotFound();
+                    return NotFound(new { message = "العنصر غير موجود عند التحديث" });
                 }
                 else
                 {
@@ -149,28 +160,35 @@ namespace backend_Master.Controllers
                 }
             }
 
+            // إرجاع حالة "NoContent" للدلالة على نجاح العملية دون أي بيانات إضافية
             return NoContent();
         }
+
+        // دالة تحقق من وجود العنصر
+        private bool CardItemHandmadeProductExists(int id)
+        {
+            return _context.CardItemHandmadeProducts.Any(e => e.ProductId == id);
+        }
+
 
         // DELETE: api/CardItemHandmadeProduct/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteCardItemHandmadeProduct(int id)
         {
-            var cardItemHandmadeProduct = await _context.CardItemHandmadeProducts.FindAsync(id);
+            var cardItemHandmadeProduct = await _context.CardItemHandmadeProducts
+                .FirstOrDefaultAsync(item => item.ProductId == id); // استخدام FirstOrDefaultAsync للبحث عن المنتج
+
             if (cardItemHandmadeProduct == null)
             {
-                return NotFound();
+                return NotFound(); // إذا لم يتم العثور على المنتج
             }
 
             _context.CardItemHandmadeProducts.Remove(cardItemHandmadeProduct);
             await _context.SaveChangesAsync();
 
-            return NoContent();
+            return NoContent(); // إرجاع حالة 204 بعد الحذف الناجح
         }
 
-        private bool CardItemHandmadeProductExists(int id)
-        {
-            return _context.CardItemHandmadeProducts.Any(e => e.CardItemId == id);
-        }
+     
     }
 }

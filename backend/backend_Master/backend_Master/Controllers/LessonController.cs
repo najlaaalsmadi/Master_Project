@@ -36,6 +36,7 @@ namespace backend_Master.Controllers
                 {
                     courseWithLessons.CourseId,
                     courseWithLessons.Title,
+                    courseWithLessons.ImageUrl,
                 },
                 lessons = courseWithLessons.Lessons.Select(lesson => new
                 {

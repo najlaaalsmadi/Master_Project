@@ -296,6 +296,11 @@ function addToCartAPI(
         confirmButtonText: "الذهاب إلى السلة",
         cancelButtonText: "مواصلة التسوق",
         reverseButtons: true,
+      }).then((result) => {
+        if (result.isConfirmed) {
+          // Redirect to cart page
+          window.location.href = "card.html"; // Change '/cart' to your actual cart page URL
+        }
       });
     })
     .catch((error) => {

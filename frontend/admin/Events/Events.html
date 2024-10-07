@@ -199,272 +199,301 @@
       <main class="p-3">
         <div class="container mt-5">
           <div class="row justify-content-center">
-            <div class="col-md-6 form-container">
-              <h2 class="text-center mb-4">نموذج إضافة حدث</h2>
-              <form id="eventForm">
-                <div class="mb-3">
-                  <label for="eventTitle" class="form-label">عنوان الحدث</label>
-                  <input
-                    type="text"
-                    class="form-control"
-                    id="eventTitle"
-                    placeholder="ورشة عمل: فنون الخياطة الأساسية والتقنيات المتقدمة"
-                    required
-                  />
+            <div class="col-md-6 form-container bg-white">
+              <h2 class="text-center mb-4">إضافة حدث</h2>
+              <form id="eventForm" enctype="multipart/form-data">
+                <!-- الجزء الأول من النموذج -->
+                <div id="eventPart1">
+                  <div class="border rounded p-3 mb-4">
+                    <h4>المعلومات الأساسية</h4>
+                    <div class="mb-3">
+                      <label for="eventTitle" class="form-label"
+                        >عنوان الحدث</label
+                      >
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="eventTitle"
+                        name="EventTitle"
+                        placeholder="ورشة عمل: فنون الخياطة الأساسية"
+                        required
+                      />
+                    </div>
+                    <div class="mb-3">
+                      <label for="eventDate" class="form-label"
+                        >تاريخ الحدث</label
+                      >
+                      <input
+                        type="date"
+                        class="form-control"
+                        id="eventDate"
+                        name="EventDate"
+                        required
+                      />
+                    </div>
+                    <div class="mb-3">
+                      <label for="eventTime" class="form-label"
+                        >وقت الحدث</label
+                      >
+                      <input
+                        type="time"
+                        class="form-control"
+                        id="eventTime"
+                        name="EventTime"
+                        required
+                      />
+                    </div>
+                    <div class="mb-3">
+                      <label for="location" class="form-label">الموقع</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="location"
+                        name="Location"
+                        placeholder="أدخل الموقع"
+                        required
+                      />
+                    </div>
+                    <div class="mb-3">
+                      <label for="image" class="form-label">صورة الحدث</label>
+                      <input
+                        type="file"
+                        class="form-control"
+                        id="image"
+                        name="ImagePath"
+                        accept="image/*"
+                      />
+                    </div>
+                    <div class="d-grid">
+                      <button
+                        type="button"
+                        class="btn btn-warning"
+                        onclick="showEventPart2()"
+                      >
+                        التالي
+                      </button>
+                    </div>
+                  </div>
                 </div>
-                <div class="mb-3">
-                  <label for="eventDate" class="form-label">تاريخ الحدث</label>
-                  <input
-                    type="date"
-                    class="form-control"
-                    id="eventDate"
-                    value="2024-10-05"
-                    required
-                  />
-                </div>
-                <div class="mb-3">
-                  <label for="eventTime" class="form-label">وقت الحدث</label>
-                  <input
-                    type="time"
-                    class="form-control"
-                    id="eventTime"
-                    value="10:00:00"
-                    required
-                  />
-                </div>
-                <div class="mb-3">
-                  <label for="location" class="form-label">الموقع</label>
-                  <input
-                    type="text"
-                    class="form-control"
-                    id="location"
-                    placeholder="أدخل الموقع"
-                    value="عمان، الأردن"
-                    required
-                  />
-                </div>
-                <div class="mb-3">
-                  <label for="participants" class="form-label"
-                    >عدد المشاركين</label
-                  >
-                  <input
-                    type="number"
-                    class="form-control"
-                    id="participants"
-                    value="200"
-                    required
-                  />
-                </div>
-                <div class="mb-3">
-                  <label for="speaker" class="form-label">المتحدث</label>
-                  <input
-                    type="text"
-                    class="form-control"
-                    id="speaker"
-                    placeholder="أحمد الخياط"
-                    required
-                  />
-                </div>
-                <div class="mb-3">
-                  <label for="summary" class="form-label">ملخص الحدث</label>
-                  <textarea
-                    class="form-control"
-                    id="summary"
-                    rows="4"
-                    placeholder="ورشة عمل لتعليم فنون الخياطة الأساسية والتقنيات المتقدمة. "
-                    required
-                  ></textarea>
-                </div>
-                <div class="mb-3">
-                  <label for="learnings" class="form-label"
-                    >ما سيتعلمه المشاركون</label
-                  >
-                  <textarea
-                    class="form-control"
-                    id="learnings"
-                    rows="3"
-                    placeholder="أساسيات الخياطة، تقنيات متقدمة، تصميم الملابس."
-                    required
-                  ></textarea>
-                </div>
-                <div class="mb-3">
-                  <label for="features" class="form-label">الميزات</label>
-                  <textarea
-                    class="form-control"
-                    id="features"
-                    rows="3"
-                    placeholder="إتقان الخياطة بدون أخطاء، اختصارات عملية، أفكار إبداعية في التصميم."
-                    required
-                  ></textarea>
-                </div>
-                <div class="mb-3">
-                  <label for="seatsAvailable" class="form-label"
-                    >المقاعد المتاحة</label
-                  >
-                  <input
-                    type="number"
-                    class="form-control"
-                    id="seatsAvailable"
-                    value="50"
-                    required
-                  />
-                </div>
-                <div class="mb-3">
-                  <label for="topics" class="form-label">عدد المواضيع</label>
-                  <input
-                    type="number"
-                    class="form-control"
-                    id="topics"
-                    value="5"
-                    required
-                  />
-                </div>
-                <div class="mb-3">
-                  <label for="exams" class="form-label">عدد الاختبارات</label>
-                  <input
-                    type="number"
-                    class="form-control"
-                    id="exams"
-                    value="2"
-                    required
-                  />
-                </div>
-                <div class="mb-3">
-                  <label for="articles" class="form-label">عدد المقالات</label>
-                  <input
-                    type="number"
-                    class="form-control"
-                    id="articles"
-                    value="10"
-                    required
-                  />
-                </div>
-                <div class="mb-3">
-                  <label for="certificates" class="form-label"
-                    >عدد الشهادات</label
-                  >
-                  <input
-                    type="number"
-                    class="form-control"
-                    id="certificates"
-                    value="5"
-                    required
-                  />
-                </div>
-                <div class="mb-3">
-                  <label for="image" class="form-label">صورة الحدث</label>
-                  <input
-                    type="file"
-                    class="form-control"
-                    id="image"
-                    accept="image/*"
-                  />
-                </div>
-                <div class="mb-3">
-                  <label for="mapUrl" class="form-label">رابط الخريطة</label>
-                  <input
-                    type="url"
-                    class="form-control"
-                    id="mapUrl"
-                    placeholder="https://maps.app.goo.gl/AFBfBeLMq3BTZD4R7"
-                    required
-                  />
-                </div>
-                <div class="mb-3">
-                  <label for="zoomLink" class="form-label">رابط Zoom</label>
-                  <input
-                    type="url"
-                    class="form-control"
-                    id="zoomLink"
-                    placeholder="https://meet.google.com/tdu-fofq-mcv?authuser=0"
-                    required
-                  />
-                </div>
-                <div class="mb-3">
-                  <label for="zoomPassword" class="form-label"
-                    >كلمة المرور لـ Zoom</label
-                  >
-                  <input
-                    type="text"
-                    class="form-control"
-                    id="zoomPassword"
-                    placeholder="860311"
-                    required
-                  />
-                </div>
-                <div class="d-grid">
-                  <button type="submit" class="btn btn-primary">
-                    إضافة الحدث
-                  </button>
+
+                <!-- الجزء الثاني من النموذج -->
+                <div id="eventPart2" style="display: none">
+                  <div class="border rounded p-3">
+                    <h4>التفاصيل</h4>
+                    <div class="mb-3">
+                      <label for="participants" class="form-label"
+                        >عدد المشاركين</label
+                      >
+                      <input
+                        type="number"
+                        class="form-control"
+                        id="participants"
+                        name="Participants"
+                        required
+                      />
+                    </div>
+                    <div class="mb-3">
+                      <label for="speaker" class="form-label">المتحدث</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="speaker"
+                        name="Speaker"
+                        placeholder="أحمد الخياط"
+                        required
+                      />
+                    </div>
+                    <div class="mb-3">
+                      <label for="summary" class="form-label">ملخص الحدث</label>
+                      <textarea
+                        class="form-control"
+                        id="summary"
+                        name="Summary"
+                        rows="4"
+                        placeholder="ملخص الحدث"
+                        required
+                      ></textarea>
+                    </div>
+                    <!-- Additional fields -->
+                    <div class="mb-3">
+                      <label for="learnings" class="form-label"
+                        >التعلميات</label
+                      >
+                      <textarea
+                        class="form-control"
+                        id="learnings"
+                        name="Learnings"
+                        rows="2"
+                        placeholder="أبرز التعلميات"
+                      ></textarea>
+                    </div>
+                    <div class="mb-3">
+                      <label for="features" class="form-label">الميزات</label>
+                      <textarea
+                        class="form-control"
+                        id="features"
+                        name="Features"
+                        rows="2"
+                        placeholder="ميزات إضافية"
+                      ></textarea>
+                    </div>
+                    <div class="mb-3">
+                      <label for="seatsAvailable" class="form-label"
+                        >المقاعد المتاحة</label
+                      >
+                      <input
+                        type="number"
+                        class="form-control"
+                        id="seatsAvailable"
+                        name="SeatsAvailable"
+                      />
+                    </div>
+                    <div class="mb-3">
+                      <label for="topics" class="form-label">المواضيع</label>
+                      <input
+                        type="number"
+                        class="form-control"
+                        id="topics"
+                        name="Topics"
+                      />
+                    </div>
+                    <div class="mb-3">
+                      <label for="exams" class="form-label">الاختبارات</label>
+                      <input
+                        type="number"
+                        class="form-control"
+                        id="exams"
+                        name="Exams"
+                      />
+                    </div>
+                    <div class="mb-3">
+                      <label for="articles" class="form-label">المقالات</label>
+                      <input
+                        type="number"
+                        class="form-control"
+                        id="articles"
+                        name="Articles"
+                      />
+                    </div>
+                    <div class="mb-3">
+                      <label for="certificates" class="form-label"
+                        >الشهادات</label
+                      >
+                      <input
+                        type="number"
+                        class="form-control"
+                        id="certificates"
+                        name="Certificates"
+                      />
+                    </div>
+                    <div class="mb-3">
+                      <label for="mapUrl" class="form-label"
+                        >رابط الخريطة</label
+                      >
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="mapUrl"
+                        name="MapUrl"
+                        placeholder="أدخل رابط الموقع الجغرافي"
+                      />
+                    </div>
+                    <div class="mb-3">
+                      <label for="zoomLink" class="form-label">رابط Zoom</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="zoomLink"
+                        name="ZoomLink"
+                        placeholder="أدخل رابط الاجتماع"
+                      />
+                    </div>
+                    <div class="mb-3">
+                      <label for="zoomPassword" class="form-label"
+                        >كلمة مرور Zoom</label
+                      >
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="zoomPassword"
+                        name="ZoomPassword"
+                        placeholder="أدخل كلمة المرور"
+                      />
+                    </div>
+                    <div class="d-grid">
+                      <button type="submit" class="btn btn-warning">
+                        إضافة الحدث
+                      </button>
+                    </div>
+                  </div>
                 </div>
               </form>
-            </div>
 
-            <!-- JavaScript to handle form submission -->
-            <script>
-              document
-                .getElementById("eventForm")
-                .addEventListener("submit", function (e) {
-                  e.preventDefault(); // Prevent the default form submission
+              <script>
+                function showEventPart2() {
+                  document.getElementById("eventPart1").style.display = "none";
+                  document.getElementById("eventPart2").style.display = "block";
+                }
 
-                  // Collect form data
-                  const formData = new FormData(this);
-                  const newEventDto = {
-                    eventTitle: formData.get("eventTitle"),
-                    eventDate: formData.get("eventDate"),
-                    eventTime: formData.get("eventTime"),
-                    location: formData.get("location"),
-                    participants: formData.get("participants"),
-                    speaker: formData.get("speaker"),
-                    summary: formData.get("summary"),
-                    learnings: formData.get("learnings"),
-                    features: formData.get("features"),
-                    seatsAvailable: formData.get("seatsAvailable"),
-                    topics: formData.get("topics"),
-                    exams: formData.get("exams"),
-                    articles: formData.get("articles"),
-                    certificates: formData.get("certificates"),
-                    mapUrl: formData.get("mapUrl"),
-                    zoomLink: formData.get("zoomLink"),
-                    zoomPassword: formData.get("zoomPassword"),
-                  };
+                document
+                  .getElementById("eventForm")
+                  .addEventListener("submit", function (e) {
+                    e.preventDefault();
 
-                  // Post form data to the API
-                  fetch("http://localhost:38146/api/Event", {
-                    method: "POST",
-                    body: JSON.stringify(newEventDto),
-                    headers: {
-                      "Content-Type": "application/json",
-                    },
-                  })
-                    .then((response) => {
-                      if (response.ok) {
-                        // Show success alert
-                        Swal.fire({
-                          title: "تم بنجاح!",
-                          text: "تم تعديل الحدث بنجاح!",
-                          icon: "success",
-                          confirmButtonText: "رائع!",
-                        }).then((result) => {
-                          if (result.isConfirmed) {
-                            window.location.href = "GetAll.html"; // إعادة التوجيه إلى صفحة GetAll.html
-                          }
-                        });
-                      } else {
-                        throw new Error("Something went wrong");
-                      }
-                    })
-                    .catch((error) => {
-                      // Show error alert
+                    const formData = new FormData(this);
+
+                    const eventDate = new Date(
+                      document.getElementById("eventDate").value
+                    );
+                    const eventTime = document
+                      .getElementById("eventTime")
+                      .value.split(":");
+                    const eventDateTime = new Date(
+                      eventDate.setHours(eventTime[0], eventTime[1])
+                    );
+
+                    if (eventDateTime <= new Date()) {
                       Swal.fire({
                         title: "خطأ!",
-                        text: "حدثت مشكلة أثناء إضافة الحدث. يرجى المحاولة مرة أخرى.",
-                        icon: "خطأ",
+                        text: "يجب أن يكون تاريخ ووقت الحدث في المستقبل.",
+                        icon: "error",
                         confirmButtonText: "حسنًا",
                       });
-                    });
-                });
-            </script>
+                      return;
+                    }
+
+                    fetch("http://localhost:38146/api/Event", {
+                      method: "POST",
+                      body: formData,
+                    })
+                      .then((response) => {
+                        if (response.ok) {
+                          Swal.fire({
+                            title: "تم بنجاح!",
+                            text: "تم إضافة الحدث بنجاح!",
+                            icon: "success",
+                            confirmButtonText: "رائع!",
+                          });
+                          this.reset();
+                          document.getElementById("eventPart2").style.display =
+                            "none";
+                          document.getElementById("eventPart1").style.display =
+                            "block";
+                        } else {
+                          throw new Error("حدث خطأ ما");
+                        }
+                      })
+                      .catch((error) => {
+                        Swal.fire({
+                          title: "خطأ!",
+                          text: "حدثت مشكلة أثناء إضافة الحدث. يرجى المحاولة مرة أخرى.",
+                          icon: "error",
+                          confirmButtonText: "حسنًا",
+                        });
+                      });
+                  });
+              </script>
+            </div>
           </div>
         </div>
       </main>

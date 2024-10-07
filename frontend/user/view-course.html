@@ -4,23 +4,32 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>عرض الدورة</title>
+    <!-- jQuery مكتبة -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+<!-- Raty مكتبة -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-raty/2.7.0/jquery.raty.min.js"></script>
+
     <!-- Bootstrap 5 -->
     <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-    />
-    <!-- Font Awesome -->
-    <link
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
-      rel="stylesheet"
-    />
-    <link
-      rel="stylesheet"
-      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
-    />
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+  />
+  <!-- Font Awesome -->
+  <link
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    rel="stylesheet"
+  />
+  <link
+    rel="stylesheet"
+    href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+  />
     <link rel="stylesheet" href="css/index.css" />
     <link rel="stylesheet" href="css/about.css" />
     <link rel="stylesheet" href="css/view-course.css" />
+    <link rel="stylesheet" href="css/lesson.css" />
+    <link rel="stylesheet" href="css/courseDetails.css" />
+
   </head>
   <body dir="rtl">
     <div class="top-bar">
@@ -194,197 +203,183 @@
    
 
         <br />
-      
-          
-        
-        <div class="container">
-          <div class="container course-container">
-            <div class="row">
-              <div class="col-lg-6">
-                <div class="video-thumbnail">
-                  <img src="image/sewing-clothes.png" alt="صورة الدورة" />
-                  <i class="fas fa-play-circle play-button"></i>
-                </div>
-              </div>
-              <div class="col-lg-6 course-details">
-                <h2>دورة خياطة الملابس مع شهادة</h2>
-                <div class="rating">
-                  <i class="fas fa-star"></i>
-                  <i class="fas fa-star"></i>
-                  <i class="fas fa-star"></i>
-                  <i class="fas fa-star"></i>
-                  <i class="fas fa-star"></i>
-                </div>
-                <p><i class="fas fa-graduation-cap"></i> الفئة: دورات الخياطة</p>
-                <p><i class="fas fa-book"></i> عدد الدروس: 12</p>
-                <p><i class="fas fa-certificate"></i> شهادة معتمدة بعد إتمام الدورة</p>
-                <a href="#" class="btn btn-primary">
-                  <i class="fas fa-play-circle"></i> اضغط هنا لمشاهدة مقدمة الدورة
-                </a>
-              </div>
-            </div>
-          </div>
-        
+        <div class="container mt-4">
           <div class="row">
-            <!-- Repeated course cards for all 12 lessons -->
-        
-            <div class="col-6 col-md-4 col-lg-3 course-card">
-              <a href="/frontend/user/Lesson.html" class="text-decoration-none text-dark">
-                <div class="card">
-                  <img src="/backend/image/sewing-clothes.png" class="card-img-top" alt="صورة الدورة" />
-                  <div class="card-body text-center">
-                    <p class="course-title">خياطة الملابس</p>
-                    <p>تعلم كيفية خياطة الملابس بشكل احترافي</p>
-                  </div>
-                  <div class="course-number">1</div>
+            <div class="col-lg-12">
+              <div class="card">
+                <!-- عنصر الفيديو -->
+                <div class="card-body text-center">
+                  <iframe id="videoFrame" width="560" height="315" src="" frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen></iframe>
+                  <h2 class="card-title" id="courseTitle">دورة خياطة الملابس مع شهادة</h2>
                 </div>
-              </a>
-            </div>
         
-            <div class="col-6 col-md-4 col-lg-3 course-card">
-                <a href="/frontend/user/Lesson.html" class="text-decoration-none text-dark">
-                    <div class="card">
-                      <img src="/backend/image/sewing-clothes.png" class="card-img-top" alt="صورة الدورة" />
-                    <div class="card-body text-center">
-                    <p class="course-title">خياطة الملابس</p>
-                    <p>تعلم كيفية خياطة الملابس بشكل احترافي</p>
-                  </div>
-                  <div class="course-number">2</div>
+                <!-- أزرار التصفح -->
+                <div class="card-body text-center">
+                  <a href="#courseCardsContainer" class="btn btn-primary mb-2"><i class="fas fa-video"></i> الدروس</a>
+                  <a href="#Questions" class="btn btn-secondary mb-2"><i class="fas fa-question-circle"></i> الأسئلة والتعليقات</a>
+                  <a href="#Reviews" class="btn btn-info mb-2"><i class="fas fa-comments"></i> المراجعات</a>
+                  <button id="toggleMeeting" class="btn btn-success mb-2"><i class="fas fa-calendar-alt"></i> تفاصيل الاجتماعات</button>
                 </div>
-              </a>
-            </div>
         
-            <div class="col-6 col-md-4 col-lg-3 course-card">
-                <a href="/frontend/user/Lesson.html" class="text-decoration-none text-dark">
-                    <div class="card">
-                      <img src="/backend/image/sewing-clothes.png" class="card-img-top" alt="صورة الدورة" />
-                    <div class="card-body text-center">
-                    <p class="course-title">خياطة الملابس</p>
-                    <p>تعلم كيفية خياطة الملابس بشكل احترافي</p>
+                <div id="meeting" class="card-body bg-light p-4 rounded mb-3" style="display: none;">
+                  <!-- قسم اجتماع Zoom -->
+                  <div class="text-center mb-3">
+                    <h4 class="card-title text-success"><i class="fas fa-video"></i> اجتماع عبر Zoom</h4>
+                    <p><strong>موعد الاجتماع:</strong> الأربعاء 4:00 مساءً</p>
+                    <a href="ZOOM_MEETING_LINK" class="btn btn-outline-success"><i class="fas fa-link"></i> انضم إلى الاجتماع</a>
                   </div>
-                  <div class="course-number">3</div>
-                </div>
-              </a>
-            </div>
-        
-            <div class="col-6 col-md-4 col-lg-3 course-card">
-                <a href="/frontend/user/Lesson.html" class="text-decoration-none text-dark">
-                    <div class="card">
-                      <img src="/backend/image/sewing-clothes.png" class="card-img-top" alt="صورة الدورة" />
-                       <div class="card-body text-center">
-                    <p class="course-title">خياطة الملابس</p>
-                    <p>تعلم كيفية خياطة الملابس بشكل احترافي</p>
+                  <div class="text-center">
+                    <h4 class="card-title text-primary"><i class="fas fa-building"></i> اللقاء الأسبوعي في مركز زها الثقافي</h4>
+                    <p><strong>موعد اللقاء:</strong> كل سبت 10:00 صباحًا</p>
+                    <p><strong>العنوان:</strong> شارع الملكة رانيا، عمان</p>
                   </div>
-                  <div class="course-number">4</div>
                 </div>
-              </a>
+              </div>
             </div>
-        
-            <div class="col-6 col-md-4 col-lg-3 course-card">
-                <a href="/frontend/user/Lesson.html" class="text-decoration-none text-dark">
-                    <div class="card">
-                      <img src="/backend/image/sewing-clothes.png" class="card-img-top" alt="صورة الدورة" />
-                      <div class="card-body text-center">
-                    <p class="course-title">خياطة الملابس</p>
-                    <p>تعلم كيفية خياطة الملابس بشكل احترافي</p>
-                  </div>
-                  <div class="course-number">5</div>
-                </div>
-              </a>
-            </div>
-        
-            <div class="col-6 col-md-4 col-lg-3 course-card">
-                <a href="/frontend/user/Lesson.html" class="text-decoration-none text-dark">
-                    <div class="card">
-                      <img src="/backend/image/sewing-clothes.png" class="card-img-top" alt="صورة الدورة" />
-                     <div class="card-body text-center">
-                    <p class="course-title">خياطة الملابس</p>
-                    <p>تعلم كيفية خياطة الملابس بشكل احترافي</p>
-                  </div>
-                  <div class="course-number">6</div>
-                </div>
-              </a>
-            </div>
-        
-            <div class="col-6 col-md-4 col-lg-3 course-card">
-                <a href="/frontend/user/Lesson.html" class="text-decoration-none text-dark">
-                    <div class="card">
-                      <img src="/backend/image/sewing-clothes.png" class="card-img-top" alt="صورة الدورة" />
-                       <div class="card-body text-center">
-                    <p class="course-title">خياطة الملابس</p>
-                    <p>تعلم كيفية خياطة الملابس بشكل احترافي</p>
-                  </div>
-                  <div class="course-number">7</div>
-                </div>
-              </a>
-            </div>
-        
-            <div class="col-6 col-md-4 col-lg-3 course-card">
-                <a href="/frontend/user/Lesson.html" class="text-decoration-none text-dark">
-                    <div class="card">
-                      <img src="/backend/image/sewing-clothes.png" class="card-img-top" alt="صورة الدورة" />
-                     <div class="card-body text-center">
-                    <p class="course-title">خياطة الملابس</p>
-                    <p>تعلم كيفية خياطة الملابس بشكل احترافي</p>
-                  </div>
-                  <div class="course-number">8</div>
-                </div>
-              </a>
-            </div>
-        
-            <div class="col-6 col-md-4 col-lg-3 course-card">
-                <a href="/frontend/user/Lesson.html" class="text-decoration-none text-dark">
-                    <div class="card">
-                      <img src="/backend/image/sewing-clothes.png" class="card-img-top" alt="صورة الدورة" />
-                      <div class="card-body text-center">
-                    <p class="course-title">خياطة الملابس</p>
-                    <p>تعلم كيفية خياطة الملابس بشكل احترافي</p>
-                  </div>
-                  <div class="course-number">9</div>
-                </div>
-              </a>
-            </div>
-        
-            <div class="col-6 col-md-4 col-lg-3 course-card">
-                <a href="/frontend/user/Lesson.html" class="text-decoration-none text-dark">
-                    <div class="card">
-                      <img src="/backend/image/sewing-clothes.png" class="card-img-top" alt="صورة الدورة" />
-                      <div class="card-body text-center">
-                    <p class="course-title">خياطة الملابس</p>
-                    <p>تعلم كيفية خياطة الملابس بشكل احترافي</p>
-                  </div>
-                  <div class="course-number">10</div>
-                </div>
-              </a>
-            </div>
-        
-            <div class="col-6 col-md-4 col-lg-3 course-card">
-                <a href="/frontend/user/Lesson.html" class="text-decoration-none text-dark">
-                    <div class="card">
-                      <img src="/backend/image/sewing-clothes.png" class="card-img-top" alt="صورة الدورة" />
-                      <div class="card-body text-center">
-                    <p class="course-title">خياطة الملابس</p>
-                    <p>تعلم كيفية خياطة الملابس بشكل احترافي</p>
-                  </div>
-                  <div class="course-number">11</div>
-                </div>
-              </a>
-            </div>
-        
-            <div class="col-6 col-md-4 col-lg-3 course-card">
-                <a href="/frontend/user/Lesson.html" class="text-decoration-none text-dark">
-                    <div class="card">
-                      <img src="/backend/image/sewing-clothes.png" class="card-img-top" alt="صورة الدورة" />
-                       <div class="card-body text-center">
-                    <p class="course-title">خياطة الملابس</p>
-                    <p>تعلم كيفية خياطة الملابس بشكل احترافي</p>
-                  </div>
-                  <div class="course-number">12</div>
-                </div>
-              </a>
-            </div>
-            
           </div>
+        
+          <main class="p-3">
+            <div class="container mt-5">
+              <div class="row" id="courseCardsContainer">
+                <!-- سيتم إضافة بطاقات الدروس هنا بواسطة JavaScript -->
+              </div>
+            </div>
+          </main>
+        
+          <script>
+            const courseId = new URLSearchParams(window.location.search).get('id');
+        
+            // تحميل الدروس من API وعرضها كبطاقات
+            function loadLessons() {
+              fetch(`http://localhost:38146/api/Lesson/${courseId}`)
+                .then(response => {
+                  if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                  }
+                  return response.json();
+                })
+                .then(data => {
+                  const courseCardsContainer = document.getElementById('courseCardsContainer');
+                  courseCardsContainer.innerHTML = ''; // مسح المحتوى الحالي
+        
+                  // تحقق من وجود دروس
+                  if (data.lessons.length > 0) {
+                    // إظهار عنوان الدورة
+                    document.getElementById('courseTitle').innerHTML = data.course.title;
+        
+                    // إنشاء البطاقات ديناميكيًا
+                    data.lessons.forEach((lesson, index) => {
+                      const card = document.createElement('div');
+                      card.classList.add('col-6', 'col-md-4', 'col-lg-3', 'course-card');
+                      card.innerHTML = `
+                                          <a href="javascript:void(0)" class="text-decoration-none text-dark" onclick="changeVideo('${lesson.videoUrl}')">
+                                              <div class="card">
+                                                  <img src="/backend/image/${data.course.imageUrl}" class="card-img-top" alt="صورة الدورة" />
+                                                  <div class="card-body text-center">
+                                                      <p class="course-title">${lesson.title}</p>
+                                                      <p>${lesson.content}</p>
+                                                  </div>
+                                                  <div class="course-number">${lesson.lessonId}</div>
+                                              </div>
+                                          </a>
+                                      `;
+                      courseCardsContainer.appendChild(card);
+        
+                      // عرض الفيديو الأول افتراضيًا
+                      if (index === 0) {
+                        changeVideo(lesson.videoUrl);
+                      }
+                    });
+                  } else {
+                    courseCardsContainer.innerHTML = '<div class="col-12 text-center">لا توجد دروس متاحة</div>';
+                  }
+                })
+                .catch(error => console.error('Error:', error));
+            }
+        
+            // تغيير الفيديو المعروض
+            function changeVideo(videoUrl) {
+              let youtubeEmbedUrl = videoUrl;
+        
+              if (videoUrl.includes("youtu.be")) {
+                const videoId = videoUrl.split("/").pop().split("?")[0];
+                youtubeEmbedUrl = `https://www.youtube.com/embed/${videoId}`;
+              } else if (videoUrl.includes("watch?v=")) {
+                youtubeEmbedUrl = videoUrl.replace("watch?v=", "embed/");
+              }
+        
+              document.getElementById('videoFrame').src = youtubeEmbedUrl;
+            }
+        
+            // تحميل الدروس عند تحميل الصفحة
+            document.addEventListener('DOMContentLoaded', loadLessons);
+          </script>
+        
+          <!-- قسم الأسئلة والتعليقات -->
+          <div class="container mt-4" id="Questions">
+            <div class="card">
+              <div class="card-body">
+                <form>
+                  <div class="mb-3">
+                    <input type="text" class="form-control" placeholder="اكتب تعليقك...">
+                  </div>
+                  <button type="submit" class="btn btn-warning">نشر التعليق</button>
+                </form>
+              </div>
+            </div>
+        
+            <!-- قسم المراجعات -->
+            <div class="card mt-3" id="Reviews">
+              <div class="card-body">
+                <div class="d-flex justify-content-between">
+                  <strong>ENG/ HISHAM HAMDAN AL-GHAITHI</strong>
+                  <span class="text-muted">منذ شهرين</span>
+                </div>
+                <p class="mt-2">تعليم جيد</p>
+                <div class="d-flex justify-content-end">
+                  <button class="btn btn-outline-secondary btn-sm me-2">أعجبني</button>
+                  <button class="btn btn-outline-secondary btn-sm" id="replyBtn" onclick="toggleReplyForm()">رد</button>
+                </div>
+        
+                <!-- Reply Form -->
+                <div id="replyForm" class="mt-3" style="display: none;">
+                  <form>
+                    <div class="mb-3">
+                      <textarea class="form-control" placeholder="اكتب ردك هنا..." rows="3"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-sm">إرسال</button>
+                    <button type="button" class="btn btn-secondary btn-sm" onclick="toggleReplyForm()">إلغاء</button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        
+          <!-- قسم التقييمات -->
+          <div class="col-lg-12 mt-4">
+            <h2>التقييمات</h2>
+            <div class="reviews">
+              <div id="ratingSummary">
+                <!-- هنا سيتم إدراج التقييم النهائي -->
+              </div>
+            </div>
+          </div>
+        
+          <!-- تقييم النجوم -->
+          <div class="col-lg-12 mt-4">
+            <h4>أضف تقييمك</h4>
+            <form id="ratingForm">
+              <div class="mb-3">
+                <label for="starRating" class="form-label">اختر تقييمك:</label>
+                <div id="starRating" class="star-rating"></div>
+              </div>
+              <button type="submit" class="btn btn-primary">إرسال التقييم</button>
+            </form>
+            <div id="ratingResult" class="mt-3"></div>
+          </div>
+          
         </div>
         
         <footer>
@@ -428,7 +423,93 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"></script>
         <script src="/frontend/user/javascript/ordelogin.js"></script>
         <script src="/frontend/user/ALLCategories.js"></script>
+        
+    
+        <script>
+          $(document).ready(function() {
+            let ratingValue = 0;
+            
+            // عند الضغط على نجمة معينة، قم بتعيين التقييم
+            $('#starRating').on('click', '.fa-star', function() {
+              ratingValue = $(this).data('rating');
+              $('#starRating .fa-star').removeClass('checked');
+              $(this).addClass('checked').prevAll().addClass('checked');
+            });
+            
+            // عند إرسال التقييم
+            $('#ratingForm').on('submit', function(e) {
+              e.preventDefault();
+              if (ratingValue > 0) {
+                $('#ratingResult').html(`<p>تم إرسال تقييمك: ${ratingValue} نجوم</p>`);
+                // هنا يمكنك إرسال التقييم إلى السيرفر باستخدام AJAX أو غيره
+              } else {
+                $('#ratingResult').html(`<p>يرجى اختيار تقييم قبل الإرسال</p>`);
+              }
+            });
+            
+            // إنشاء النجوم
+            for (let i = 1; i <= 5; i++) {
+              $('#starRating').append(`<i class="fa fa-star" data-rating="${i}"></i>`);
+            }
+          });
+          </script>
+                    <script>
+                      // تجميع التقييمات
+                      const ratings = [5, 4]; // تقييمات بدون أسماء
+                      const totalRatings = ratings.reduce((acc, rating) => acc + rating, 0);
+                      const averageRating = totalRatings / ratings.length;
+                      const stars = '⭐'.repeat(Math.round(averageRating)); // عرض النجوم بناءً على المتوسط
+            
+                      document.getElementById('ratingSummary').innerHTML = `مجموع التقييمات: ${stars} (${averageRating.toFixed(1)}/5)`;
+                    </script>
+      <!-- Bootstrap 5 Scripts -->
 
+
+      <script>
+        function toggleReplyForm() {
+            var form = document.getElementById("replyForm");
+            if (form.style.display === "none") {
+                form.style.display = "block";
+            } else {
+                form.style.display = "none";
+            }
+        }
+
+        // تفعيل مكتبة Raty لتقييم النجوم
+$(document).ready(function() {
+  $('#starRating').raty({
+    scoreName: 'rating', // اسم الحقل المخفي الذي سيحتوي على قيمة التقييم
+    number: 5, // عدد النجوم
+    hints: ['ضعيف', 'مقبول', 'جيد', 'جيد جدًا', 'ممتاز'], // نصوص التلميحات عند التمرير على النجوم
+    starOff: 'https://cdnjs.cloudflare.com/ajax/libs/jquery-raty/2.7.0/images/star-off.png', // صورة النجمة غير المختارة
+    starOn: 'https://cdnjs.cloudflare.com/ajax/libs/jquery-raty/2.7.0/images/star-on.png' // صورة النجمة المختارة
+  });
+  
+  // عندما يتم إرسال النموذج
+  $('#ratingForm').submit(function(e) {
+    e.preventDefault(); // منع إرسال النموذج التقليدي
+    const rating = $('input[name="rating"]').val(); // الحصول على قيمة التقييم
+
+    $('#ratingResult').html(`تم تسجيل تقييمك: ${rating} من 5`);
+  });
+});
+
+    </script>
+      <script>
+        document.getElementById("toggleMeeting").addEventListener("click", function() {
+            var meetingSection = document.getElementById("meeting");
+            if (meetingSection.style.display === "none") {
+                meetingSection.style.display = "block"; // إظهار القسم
+            } else {
+                meetingSection.style.display = "none"; // إخفاء القسم
+            }
+        });
+    </script>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js"></script>
+     
+        <!-- Bootstrap 5 Scripts -->
+     
       </body>
     </html>
   </body>

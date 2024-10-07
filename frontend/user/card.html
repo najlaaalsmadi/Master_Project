@@ -197,22 +197,19 @@
     </ol>
     <!-- Container -->
     <div class="container mt-5">
-      <h1>سلة المشتريات</h1>
-      <div class="d-flex one">
-        <!-- Products Table (60%) -->
-        <div class="container mt-5">
-          <table class="table table-bordered" dir="rtl">
-            <thead
-              class="thead-dark"
-              style="background-color: navy; color: white"
-            >
+      <h1 class="text-center mb-4">سلة المشتريات</h1>
+      <div class="row">
+        <!-- Products Table (70%) -->
+        <div class="col-md-8">
+          <table class="table table-hover table-striped">
+            <thead class="thead-light">
               <tr>
                 <th scope="col">#</th>
-                <th scope="col">صوره المنتج</th>
+                <th scope="col">صورة المنتج</th>
                 <th scope="col">اسم المنتج</th>
                 <th scope="col">سعر الوحدة</th>
                 <th scope="col">الكمية</th>
-                <th scope="col">إغلاق</th>
+                <th scope="col">حذف</th>
               </tr>
             </thead>
             <tbody id="product-table-body">
@@ -221,70 +218,76 @@
           </table>
         </div>
 
-        <!-- مراحل الدفع -->
-        <div class="ml-5 p-3 border rounded" style="flex-basis: 40%">
-          <h4 class="text-right font-weight-bold">
-            المجموع الإجمالي: <span id="total-price">$0</span>
-          </h4>
+        <!-- Payment Section (30%) -->
+        <div class="col-md-4">
+          <div class="border p-3 rounded">
+            <h4 class="text-center font-weight-bold">
+              المجموع الإجمالي: <span id="total-price">$0</span>
+            </h4>
 
-          <!-- المرحلة 1: إدخال الكوبون -->
-          <div id="step-1">
-            <div class="form-group">
-              <label for="coupon-code">أدخل الكوبون:</label>
-              <input
-                type="text"
-                id="coupon-code"
-                class="form-control"
-                placeholder="اكتب الكوبون هنا"
-              />
-              <button id="apply-coupon" class="btn btn-success mt-2 w-100">
-                تطبيق الكوبون
-              </button>
-              <p
-                id="coupon-feedback"
-                class="text-danger mt-2"
-                style="display: none"
-              >
-                كود الكوبون غير صالح
-              </p>
-            </div>
-          </div>
-
-          <!-- المرحلة 2: اختيار طريقة الدفع (مخفية افتراضياً) -->
-          <div id="step-2" style="display: none">
-            <h5 class="text-center">اختر طريقة الدفع</h5>
-            <button class="btn btn-primary w-100 mb-2">
+            <h5 class="mt-4">اختر طريقة الدفع</h5>
+            <button class="btn btn-outline-primary w-100 mb-2">
               <img
                 src="https://img.icons8.com/color/24/paypal.png"
                 alt="Paypal"
               />
               PayPal
             </button>
-            <button class="btn btn-secondary w-100 mb-2">
+            <button class="btn btn-outline-secondary w-100 mb-2">
               <img src="https://img.icons8.com/color/24/visa.png" alt="Visa" />
-              بطاقة
+              بطاقة ائتمان
             </button>
-            <button class="btn btn-dark w-100 mb-2">
+            <button class="btn btn-outline-dark w-100 mb-2">
               <img
                 src="https://img.icons8.com/color/24/mastercard.png"
                 alt="MasterCard"
               />
               ماستر كارد
             </button>
-          </div>
-
-          <!-- المرحلة 3: تأكيد الطلب (مخفية افتراضياً) -->
-          <div id="step-3" style="display: none">
-            <h5 class="text-center">تأكيد الطلب</h5>
-            <p>
-              تم تطبيق الكوبون بنجاح! اخترت طريقة الدفع:
-              <span id="selected-payment-method"></span>
-            </p>
-            <button class="btn btn-success w-100">تأكيد الطلب</button>
+            <button class="btn btn-success w-100 mb-2">
+              الدفع عند الاستلام
+            </button>
+            <button class="btn btn-primary w-100">تأكيد الطلب</button>
           </div>
         </div>
       </div>
     </div>
+
+    <!-- Add some custom CSS for styling -->
+    <style>
+      .table-hover tbody tr:hover {
+        background-color: #f2f2f2;
+      }
+
+      .border {
+        border: 1px solid #dcdcdc;
+      }
+
+      .rounded {
+        border-radius: 10px;
+      }
+
+      h1,
+      h4,
+      h5 {
+        font-family: "Arial", sans-serif;
+      }
+
+      .btn-outline-primary {
+        border: 2px solid navy;
+        color: navy;
+      }
+
+      .btn-outline-secondary {
+        border: 2px solid #6c757d;
+        color: #6c757d;
+      }
+
+      .btn-outline-dark {
+        border: 2px solid #343a40;
+        color: #343a40;
+      }
+    </style>
 
     <br />
     <footer>
@@ -551,6 +554,12 @@
       window.onload = loadProducts;
     </script> -->
     <script src="/frontend/user/card.js"></script>
+    <!-- إضافة مكتبة SweetAlert CSS و JS -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
 
     <script src="/frontend/user/javascript/ordelogin.js"></script>
     <script src="/frontend/user/ALLCategories.js"></script>

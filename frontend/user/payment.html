@@ -304,7 +304,13 @@
                     icon: "success",
                     title: "نجاح",
                     text: "تمت عملية الدفع بنجاح.",
+                  }).then(() => {
+                    // إعادة التوجيه إلى صفحة الملف الشخصي بعد 2 ثانية (2000 مللي ثانية)
+                    setTimeout(() => {
+                      window.location.href = "profile.html"; // تأكد من تعديل هذا المسار حسب موقع صفحة الملف الشخصي لديك
+                    }, 2000);
                   });
+
                   console.log("Payment successful:", result);
                 })
                 .catch((error) => {
