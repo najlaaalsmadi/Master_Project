@@ -43,7 +43,7 @@ document.addEventListener("DOMContentLoaded", function () {
         // السعر
         document.getElementById(
           "coursePrice"
-        ).textContent = `السعر: ${data.price} دولار`;
+        ).textContent = `السعر: ${data.price} دينار`;
 
         // نظرة عامة (وصف الدورة)
         document.getElementById("courseOverview").textContent =

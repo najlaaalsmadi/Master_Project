@@ -156,7 +156,7 @@
           </li>
         </ul>
       </div>
-      <a href="#"><i class="fas fa-comments"></i> المحادثات</a>
+      <a href="/frontend/admin/contactus/contactus.html"><i class="fas fa-comments"></i> المحادثات</a>
       <a href="/frontend/admin/user.html"
         ><i class="fas fa-users"></i> المستخدمون</a
       >
@@ -218,6 +218,7 @@
                                 <th>البريد الإلكتروني</th>
                                 <th>التخصص</th>
                                 <th>رقم الهاتف</th>
+                                <th>الحالة</th> <!-- New Column for satas -->
                                 <th>العمليات</th>
                             </tr>
                         </thead>
@@ -229,9 +230,6 @@
             </div>
         </div>
     </main>
-    
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    
     <script>
         document.addEventListener("DOMContentLoaded", async function () {
             try {
@@ -251,6 +249,7 @@
                         <td>${trainer.email}</td>
                         <td>${trainer.specialization}</td>
                         <td>${trainer.phone}</td>
+                        <td>${trainer.satas ? 'true' : 'false'}</td> <!-- Display satas as true or false -->
                         <td>
                             <button class="btn btn-info" onclick="showTrainerDetails(
                                 '${trainer.trainerId}',
@@ -273,38 +272,46 @@
             }
         });
     
-        // عرض تفاصيل المدرب باستخدام SweetAlert
-        function showTrainerDetails(trainerId, name, bio, experience, email, specialization, phone, imageUrl, cvUrl) {
-            Swal.fire({
-                title: name,
-                html: `
-                    <div style="display: flex; align-items: flex-start; max-width: 600px;">
-                        <img src="${imageUrl}" alt="${name}" style="width: 150px; border-radius: 8px; margin-right: 20px;">
-                        <div style="flex: 1;">
-                            <p><strong>السيرة الذاتية:</strong> ${bio}</p>
-                            <p><strong>التجربة:</strong> ${experience} سنوات</p>
-                            <p><strong>البريد الإلكتروني:</strong> ${email}</p>
-                            <p><strong>التخصص:</strong> ${specialization}</p>
-                            <p><strong>رقم الهاتف:</strong> ${phone}</p>
-                            <p>
-                                <strong>السيرة الذاتية (CV):</strong>
-<a href="${cvUrl}" target="_blank" class="text-primary">تحميل السيرة الذاتية</a>
-                            </p>
-                            <div>
-                           <a class="text-success" href="#" onclick="sendEmail('${trainerId}')">ارسال ايميل الموافقة او الرفض</a>
-                            </div>
-                        </div>
-                    </div>
-                `,
-                icon: "info",
-                confirmButtonText: "موافق",
-                customClass: {
-                    popup: "custom-popup",
-                },
-            });
-        }
+        // Display trainer details using SweetAlert
+        function showTrainerDetails(trainerId, name, bio, experience, email, specialization, phone, imageUrl, cvUrl, satas) {
     
-        // تعديل أسلوب العرض
+          console.log(satas);
+          Swal.fire({
+      
+        title: name,
+        html: `
+            <div style="display: flex; align-items: flex-start; max-width: 600px;">
+                <img src="${imageUrl}" alt="${name}" style="width: 150px; border-radius: 8px; margin-right: 20px;">
+                <div style="flex: 1;">
+                    <p><strong>السيرة الذاتية:</strong> ${bio}</p>
+                    <p><strong>التجربة:</strong> ${experience} سنوات</p>
+                    <p><strong>البريد الإلكتروني:</strong> ${email}</p>
+                    <p><strong>التخصص:</strong> ${specialization}</p>
+                    <p><strong>رقم الهاتف:</strong> ${phone}</p>
+                    <p>
+                        <strong>السيرة الذاتية (CV):</strong>
+                        <a href="${cvUrl}" target="_blank" class="text-primary">تحميل السيرة الذاتية</a>
+                    </p>
+                  
+                        <div>
+                            <a class="text-success" href="#" onclick="sendEmail('${trainerId}')">ارسال ايميل الموافقة او الرفض</a>
+                        </div>
+                 
+                </div>
+            </div>
+        `,
+        icon: "info",
+        confirmButtonText: "موافق",
+        customClass: {
+            popup: "custom-popup",
+        },
+    });
+}
+
+
+
+    
+        // Custom style for SweetAlert
         const style = document.createElement("style");
         style.innerHTML = `
             .custom-popup {
@@ -314,11 +321,16 @@
         `;
         document.head.appendChild(style);
     
-        // دالة إعادة التوجيه مع تمرير ID المدرب
+        // Redirect to email page with trainer ID
         function sendEmail(trainerId) {
             window.location.href = `approve-email.html?trainerId=${encodeURIComponent(trainerId)}`;
         }
     </script>
+    
+    
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    
+  
     
 
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>

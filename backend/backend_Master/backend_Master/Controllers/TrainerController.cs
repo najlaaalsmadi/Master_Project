@@ -16,6 +16,7 @@ using Microsoft.AspNetCore.Identity;
 using System.ComponentModel.DataAnnotations;
 using System.Xml;
 using System.Net.Mail;
+using NETCore.MailKit.Core;
 
 namespace backend_Master.Controllers
 {
@@ -25,11 +26,24 @@ namespace backend_Master.Controllers
     {
         private readonly MyDbContext _context;
         private readonly IConfiguration _configuration;
+        private readonly EmailService _emailService;
 
-        public TrainerController(MyDbContext context, IConfiguration configuration)
+        public TrainerController(MyDbContext context, IConfiguration configuration, EmailService emailService)
         {
             _context = context;
+            _emailService = emailService;
+
             _configuration = configuration;
+        }
+        [HttpGet("{id}")]
+        public async Task<ActionResult<Trainer>> GetTrainerById(int id)
+        {
+            var trainer = await _context.Trainers.FirstOrDefaultAsync(t => t.TrainerId == id);
+            if (trainer == null)
+            {
+                return NotFound($"Trainer with ID {id} not found.");
+            }
+            return Ok(trainer);
         }
 
         // عرض جميع المدربين
@@ -41,16 +55,75 @@ namespace backend_Master.Controllers
         }
 
         // جلب مدرب بناءً على معرف
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Trainer>> GetTrainerById(int id)
+      
+        // تحقق من وجود المدرب
+        private bool TrainerExists(int id)
         {
-            var trainer = await _context.Trainers.FirstOrDefaultAsync(t => t.TrainerId == id);
-            if (trainer == null)
+            return _context.Trainers.Any(e => e.TrainerId == id);
+        }
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpdateTrainer(int id, [FromBody] Trainer trainer)
+        {
+            if (id != trainer.TrainerId)
+            {
+                return BadRequest("Trainer ID mismatch.");
+            }
+
+            var existingTrainer = await _context.Trainers.FindAsync(id);
+            if (existingTrainer == null)
             {
                 return NotFound($"Trainer with ID {id} not found.");
             }
-            return Ok(trainer);
+
+            // تحديث تفاصيل المدرب بما في ذلك الحالة
+            existingTrainer.Bio = trainer.Bio;
+            existingTrainer.Experience = trainer.Experience;
+            existingTrainer.Specialization = trainer.Specialization;
+            existingTrainer.Satas = trainer.Satas; // الحقل الجديد
+
+            _context.Entry(existingTrainer).State = EntityState.Modified;
+
+            try
+            {
+                await _context.SaveChangesAsync();
+
+                // إرسال البريد الإلكتروني بناءً على حالة المدرب
+                string subject;
+                string body;
+
+                if (trainer.Satas.HasValue && trainer.Satas.Value)
+                {
+                    // إذا كانت الحالة موافقة (Satas == true)
+                    subject = "Approval Notification";
+                    body = $"Dear {trainer.Name},\n\nYour profile has been approved. Welcome to the platform!";
+                }
+                else
+                {
+                    // إذا كانت الحالة رفض (Satas == false)
+                    subject = "Rejection Notification";
+                    body = $"Dear {trainer.Name},\n\nUnfortunately, your profile was not approved at this time.";
+                }
+                await _emailService.SendEmailAsync("najlaakalsmadi@gmail.com", subject, body);
+
+                // إرسال البريد الإلكتروني
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!TrainerExists(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return NoContent();
         }
+
+       
+       
 
         // رفع ملف PDF واستخراج البيانات منه
         [HttpPost("upload")]
@@ -198,45 +271,7 @@ namespace backend_Master.Controllers
         }
 
         // تعديل بيانات المدرب بناءً على ID
-        [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateTrainer(int id, [FromBody] Trainer trainer)
-        {
-            if (id != trainer.TrainerId)
-            {
-                return BadRequest("Trainer ID mismatch.");
-            }
-
-            var existingTrainer = await _context.Trainers.FindAsync(id);
-            if (existingTrainer == null)
-            {
-                return NotFound($"Trainer with ID {id} not found.");
-            }
-
-            existingTrainer.Bio = trainer.Bio;
-            existingTrainer.Experience = trainer.Experience;
-            existingTrainer.Specialization = trainer.Specialization;
-
-            _context.Entry(existingTrainer).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!TrainerExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return NoContent();
-        }
-
+      
         // حذف مدرب بناءً على ID
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteTrainer(int id)
@@ -253,10 +288,7 @@ namespace backend_Master.Controllers
             return Ok($"Trainer with ID {id} deleted.");
         }
 
-        private bool TrainerExists(int id)
-        {
-            return _context.Trainers.Any(e => e.TrainerId == id);
-        }
+       
 
         // تسجيل مدرب جديد باستخدام بيانات POST مباشرة
         [HttpPost("signup")]

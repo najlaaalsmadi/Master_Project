@@ -110,7 +110,6 @@ CREATE TABLE CardItem (
 	FOREIGN KEY (productID) REFERENCES Handmade_Products(product_id) ON DELETE CASCADE,  -- ربط العنصر بالسلة وحذف العناصر عند حذف السلة
    FOREIGN KEY (equipmentID) REFERENCES Learning_Equipment(equipment_id) ON DELETE CASCADE,  -- ربط العنصر بالسلة وحذف العناصر عند حذف السلة
 );
-
 INSERT INTO CardItem (CardId, productID, Quantity, Price, AddedAt)
 VALUES (15, 5, 2, 29.99, GETDATE());
 INSERT INTO CardItem (CardId, equipmentID, Quantity, Price, AddedAt)
@@ -126,6 +125,21 @@ CREATE TABLE Orders (
     created_at DATETIME DEFAULT GETDATE(),
     FOREIGN KEY (user_id) REFERENCES Users(user_id)
 );
+
+CREATE TABLE OrderItems (
+    order_item_id INT PRIMARY KEY IDENTITY(1,1),
+    order_id INT,
+    CardItemId1 INT,
+	CardItemId2 INT,
+
+    quantity INT CHECK (quantity > 0),
+    price DECIMAL(10, 2),
+    FOREIGN KEY (order_id) REFERENCES Orders(order_id),
+    FOREIGN KEY (CardItemId1) REFERENCES CardItem_Handmade_Products(CardItemId),
+	FOREIGN KEY (CardItemId2) REFERENCES CardItem_Learning_Equipment(CardItemId),
+
+);
+
 drop TABLE Events;
 drop TABLE Newsletter;
 -- 9. Events Table (الأحداث)
@@ -783,4 +797,34 @@ VALUES
     N'مدربة خياطة',
     'instructor9.png',
     'rajaa_khayata_cv.pdf'
+);
+CREATE TABLE Payments (
+    PaymentId INT PRIMARY KEY IDENTITY(1,1),
+    Amount DECIMAL(10, 2),
+    PaymentMethod NVARCHAR(50),
+    UserId INT,
+    OrderId INT,  -- إضافة OrderId هنا
+    FirstName NVARCHAR(50),
+    LastName NVARCHAR(50),
+    AddressLine1 NVARCHAR(255),
+    AddressLine2 NVARCHAR(255) NULL,
+    City NVARCHAR(50),
+    State NVARCHAR(50),
+    ZipCode NVARCHAR(20),
+    Country NVARCHAR(50),
+    CountryCallingCode NVARCHAR(10),
+    PhoneNumber NVARCHAR(20),
+    CreatedAt DATETIME DEFAULT GETDATE(),
+    FOREIGN KEY (UserId) REFERENCES Users(user_id),
+    FOREIGN KEY (OrderId) REFERENCES Orders(order_id)  -- علاقة مع جدول Orders
+);
+
+
+
+CREATE TABLE EmailReplies (
+    Id INT PRIMARY KEY IDENTITY(1,1),
+    EmailMessageId INT NOT NULL,
+    ReplyBody NVARCHAR(MAX),
+    ReplyDate DATETIME,
+    FOREIGN KEY (EmailMessageId) REFERENCES EmailMessage(Id) ON DELETE CASCADE
 );

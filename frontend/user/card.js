@@ -494,7 +494,7 @@ async function displayProducts(products) {
         productName = productDetails.name || productName;
         imageUrl = productDetails.imageUrl1;
       } else {
-        imageUrl = "default-image.jpg"; // Default image if not found
+        imageUrl = "backend/image/default-image.jpg"; // Default image if not found
       }
     }
 
@@ -637,52 +637,22 @@ function updateTotalPrice() {
 
   document.getElementById("total-price").innerText = `${totalPrice.toFixed(
     2
-  )} JD`; // Update the total price display
+  )} JD`;
+  localStorage.setItem("pricecard", totalPrice);
+  // Update the total price display
 }
 
-// Coupon application
-
-// تطبيق خصم الكوبون
-// document.getElementById("apply-coupon").addEventListener("click", function () {
-//   const couponInput = document.getElementById("coupon-code").value.trim(); // الحصول على قيمة الكوبون المدخلة
-
-//   // التحقق من وجود البريد الإلكتروني في localStorage
-//   const userEmail = localStorage.getItem("email");
-
-//   if (!userEmail) {
-//     // إذا لم يكن هناك بريد إلكتروني، إعادة توجيه المستخدم إلى صفحة تسجيل الدخول
-//     window.location.href = "login.html"; // تأكد من تغيير هذا إلى رابط صفحة تسجيل الدخول الخاصة بك
-//     return;
-//   }
-
-//   if (validCoupons[couponInput] && !couponApplied) {
-//     discountValue = validCoupons[couponInput]; // تحديد قيمة الخصم
-//     totalPrice -= (totalPrice * discountValue) / 100; // تطبيق الخصم
-//     document.getElementById("total-price").innerText = `${totalPrice.toFixed(
-//       2
-//     )} JD`; // تحديث السعر الإجمالي
-//     couponApplied = true; // تعيين الكوبون كمطبق
-//     appliedCouponCode = couponInput; // حفظ الكوبون المطبق
-
-//     // استخدام SweetAlert لعرض رسالة النجاح
-//     Swal.fire({
-//       icon: "success",
-//       title: "تم تطبيق الكوبون!",
-//       text: `لقد وفرت ${discountValue}% باستخدام الكوبون ${appliedCouponCode}.`,
-//       confirmButtonText: "حسناً",
-//     });
-
-//     // مسح حقل الكوبون
-//     document.getElementById("coupon-code").value = "";
-//   } else {
-//     // عرض رسالة خطأ باستخدام SweetAlert
-//     Swal.fire({
-//       icon: "error",
-//       title: "كوبون غير صالح",
-//       text: "هذا الكوبون غير صالح أو تم تطبيقه بالفعل.",
-//       confirmButtonText: "حسناً",
-//     });
-//   }
-// });
-// Load products on page load
 document.addEventListener("DOMContentLoaded", loadProducts);
+document
+  .getElementById("paypalButton")
+  .addEventListener("click", async function () {
+    const isLoggedIn = localStorage.getItem("email"); // افتراض وجود البريد الإلكتروني في الـ LocalStorage كدليل لتسجيل الدخول
+
+    if (!isLoggedIn) {
+      // توجيه المستخدم إلى صفحة تسجيل الدخول إذا لم يكن مسجلًا
+      window.location.href = "/frontend/user/login.html"; // استبدل هذا بالرابط الصحيح لصفحة تسجيل الدخول
+    } else {
+      // التحقق من تفاصيل تسجيل الدخول والانتقال إلى صفحة الدفع
+      window.location.href = "/frontend/user/paymentcard.html"; // صفحة الدفع تشبه PayPal
+    }
+  });

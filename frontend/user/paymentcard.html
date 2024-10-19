@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Make Payment</title>
+  </head>
+  <body>
+    <h1>Make a Payment</h1>
+
+    <form id="paymentForm">
+      <label for="firstName">First Name:</label>
+      <input type="text" id="firstName" name="firstName" required /><br />
+
+      <label for="lastName">Last Name:</label>
+      <input type="text" id="lastName" name="lastName" required /><br />
+
+      <label for="addressLine1">Address Line 1:</label>
+      <input type="text" id="addressLine1" name="addressLine1" required /><br />
+
+      <label for="addressLine2">Address Line 2:</label>
+      <input type="text" id="addressLine2" name="addressLine2" /><br />
+
+      <label for="city">City:</label>
+      <input type="text" id="city" name="city" required /><br />
+
+      <label for="state">State:</label>
+      <input type="text" id="state" name="state" /><br />
+
+      <label for="zipCode">Zip Code:</label>
+      <input type="text" id="zipCode" name="zipCode" required /><br />
+
+      <label for="country">Country:</label>
+      <input type="text" id="country" name="country" required /><br />
+
+      <label for="countryCallingCode">Country Calling Code:</label>
+      <input
+        type="text"
+        id="countryCallingCode"
+        name="countryCallingCode"
+        required
+      /><br />
+
+      <label for="phoneNumber">Phone Number:</label>
+      <input type="text" id="phoneNumber" name="phoneNumber" required /><br />
+
+      <label for="paymentMethod">Payment Method:</label>
+      <select id="paymentMethod" name="paymentMethod" required>
+        <option value="creditCard">Credit Card</option>
+        <option value="paypal">PayPal</option>
+        <option value="bankTransfer">Bank Transfer</option></select
+      ><br />
+
+      <button type="submit">Submit Payment</button>
+    </form>
+
+    <script>
+      document
+        .getElementById("paymentForm")
+        .addEventListener("submit", async function (event) {
+          event.preventDefault();
+
+          const userEmail = localStorage.getItem("email");
+
+          if (!userEmail) {
+            alert("User email not found in localStorage.");
+            return;
+          }
+
+          try {
+            // Fetch the UserId based on the email
+            const response = await fetch(
+              `http://localhost:38146/api/Users/email/${encodeURIComponent(
+                userEmail
+              )}`
+            );
+
+            if (!response.ok) {
+              throw new Error("Failed to fetch UserId from email.");
+            }
+
+            const userData = await response.json();
+            const userId = userData.userId;
+
+            // Prepare payment data
+            const paymentData = {
+              userId: userId,
+              firstName: document.getElementById("firstName").value,
+              lastName: document.getElementById("lastName").value,
+              addressLine1: document.getElementById("addressLine1").value,
+              addressLine2:
+                document.getElementById("addressLine2").value || null,
+              city: document.getElementById("city").value,
+              state: document.getElementById("state").value || null,
+              zipCode: document.getElementById("zipCode").value,
+              country: document.getElementById("country").value,
+              countryCallingCode:
+                document.getElementById("countryCallingCode").value,
+              phoneNumber: document.getElementById("phoneNumber").value,
+              paymentMethod: document.getElementById("paymentMethod").value,
+            };
+
+            // Send payment request
+            const paymentResponse = await fetch(
+              "http://localhost:38146/api/Payment/MakePayment",
+              {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify(paymentData),
+              }
+            );
+
+            if (!paymentResponse.ok) {
+              throw new Error("Payment failed.");
+            }
+
+            const paymentResult = await paymentResponse.json();
+            alert("Payment successful! Order ID: " + paymentResult.orderId);
+          } catch (error) {
+            console.error("Error during payment process:", error);
+            alert("Payment process failed: " + error.message);
+          }
+        });
+    </script>
+  </body>
+</html>

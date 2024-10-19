@@ -19,5 +19,7 @@ public partial class CardItemHandmadeProduct
 
     public virtual Card? Card { get; set; }
 
+    public virtual ICollection<OrderItem> OrderItems { get; set; } = new List<OrderItem>();
+
     public virtual HandmadeProduct? Product { get; set; }
 }

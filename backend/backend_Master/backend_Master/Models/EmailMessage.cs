@@ -14,4 +14,6 @@ public partial class EmailMessage
     public string Message { get; set; } = null!;
 
     public DateTime DateSent { get; set; }
+
+    public virtual ICollection<EmailReply> EmailReplies { get; set; } = new List<EmailReply>();
 }

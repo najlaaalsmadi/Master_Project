@@ -35,6 +35,8 @@ public partial class MyDbContext : DbContext
 
     public virtual DbSet<EmailMessage> EmailMessages { get; set; }
 
+    public virtual DbSet<EmailReply> EmailReplies { get; set; }
+
     public virtual DbSet<Event> Events { get; set; }
 
     public virtual DbSet<HandmadeProduct> HandmadeProducts { get; set; }
@@ -46,6 +48,10 @@ public partial class MyDbContext : DbContext
     public virtual DbSet<Newsletter> Newsletters { get; set; }
 
     public virtual DbSet<Order> Orders { get; set; }
+
+    public virtual DbSet<OrderItem> OrderItems { get; set; }
+
+    public virtual DbSet<Payment> Payments { get; set; }
 
     public virtual DbSet<PaymentsCourse> PaymentsCourses { get; set; }
 
@@ -275,6 +281,17 @@ public partial class MyDbContext : DbContext
             entity.Property(e => e.Name).HasMaxLength(100);
         });
 
+        modelBuilder.Entity<EmailReply>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PK__EmailRep__3214EC07FE922D7D");
+
+            entity.Property(e => e.ReplyDate).HasColumnType("datetime");
+
+            entity.HasOne(d => d.EmailMessage).WithMany(p => p.EmailReplies)
+                .HasForeignKey(d => d.EmailMessageId)
+                .HasConstraintName("FK__EmailRepl__Email__7DCDAAA2");
+        });
+
         modelBuilder.Entity<Event>(entity =>
         {
             entity.HasKey(e => e.EventId).HasName("PK__Events__7944C87053C7EFCD");
@@ -438,6 +455,59 @@ public partial class MyDbContext : DbContext
                 .HasConstraintName("FK__Orders__user_id__571DF1D5");
         });
 
+        modelBuilder.Entity<OrderItem>(entity =>
+        {
+            entity.HasKey(e => e.OrderItemId).HasName("PK__OrderIte__3764B6BCF1A99D01");
+
+            entity.Property(e => e.OrderItemId).HasColumnName("order_item_id");
+            entity.Property(e => e.OrderId).HasColumnName("order_id");
+            entity.Property(e => e.Price)
+                .HasColumnType("decimal(10, 2)")
+                .HasColumnName("price");
+            entity.Property(e => e.Quantity).HasColumnName("quantity");
+
+            entity.HasOne(d => d.CardItemId1Navigation).WithMany(p => p.OrderItems)
+                .HasForeignKey(d => d.CardItemId1)
+                .HasConstraintName("FK__OrderItem__CardI__69C6B1F5");
+
+            entity.HasOne(d => d.CardItemId2Navigation).WithMany(p => p.OrderItems)
+                .HasForeignKey(d => d.CardItemId2)
+                .HasConstraintName("FK__OrderItem__CardI__6ABAD62E");
+
+            entity.HasOne(d => d.Order).WithMany(p => p.OrderItems)
+                .HasForeignKey(d => d.OrderId)
+                .HasConstraintName("FK__OrderItem__order__68D28DBC");
+        });
+
+        modelBuilder.Entity<Payment>(entity =>
+        {
+            entity.HasKey(e => e.PaymentId).HasName("PK__Payments__9B556A387A59C1F2");
+
+            entity.Property(e => e.AddressLine1).HasMaxLength(255);
+            entity.Property(e => e.AddressLine2).HasMaxLength(255);
+            entity.Property(e => e.Amount).HasColumnType("decimal(10, 2)");
+            entity.Property(e => e.City).HasMaxLength(50);
+            entity.Property(e => e.Country).HasMaxLength(50);
+            entity.Property(e => e.CountryCallingCode).HasMaxLength(10);
+            entity.Property(e => e.CreatedAt)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime");
+            entity.Property(e => e.FirstName).HasMaxLength(50);
+            entity.Property(e => e.LastName).HasMaxLength(50);
+            entity.Property(e => e.PaymentMethod).HasMaxLength(50);
+            entity.Property(e => e.PhoneNumber).HasMaxLength(20);
+            entity.Property(e => e.State).HasMaxLength(50);
+            entity.Property(e => e.ZipCode).HasMaxLength(20);
+
+            entity.HasOne(d => d.Order).WithMany(p => p.Payments)
+                .HasForeignKey(d => d.OrderId)
+                .HasConstraintName("FK__Payments__OrderI__6F7F8B4B");
+
+            entity.HasOne(d => d.User).WithMany(p => p.Payments)
+                .HasForeignKey(d => d.UserId)
+                .HasConstraintName("FK__Payments__UserId__6E8B6712");
+        });
+
         modelBuilder.Entity<PaymentsCourse>(entity =>
         {
             entity.HasKey(e => e.PaymentId).HasName("PK__Payments__9B556A380E23BE56");
@@ -519,7 +589,9 @@ public partial class MyDbContext : DbContext
                 .HasDefaultValueSql("(getdate())")
                 .HasColumnType("datetime")
                 .HasColumnName("created_at");
-            entity.Property(e => e.Cv).HasColumnName("cv");
+            entity.Property(e => e.Cv)
+                .IsUnicode(false)
+                .HasColumnName("cv");
             entity.Property(e => e.Email)
                 .HasMaxLength(255)
                 .HasColumnName("email");

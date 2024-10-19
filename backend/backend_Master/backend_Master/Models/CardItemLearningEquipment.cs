@@ -20,4 +20,6 @@ public partial class CardItemLearningEquipment
     public virtual Card? Card { get; set; }
 
     public virtual LearningEquipment? Equipment { get; set; }
+
+    public virtual ICollection<OrderItem> OrderItems { get; set; } = new List<OrderItem>();
 }

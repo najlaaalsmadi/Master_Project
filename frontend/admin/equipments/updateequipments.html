@@ -147,7 +147,9 @@
           </li>
         </ul>
       </div>
-      <a href="#"><i class="fas fa-comments"></i> المحادثات</a>
+      <a href="/frontend/admin/contactus/contactus.html"
+        ><i class="fas fa-comments"></i> المحادثات</a
+      >
       <a href="/frontend/admin/user.html"
         ><i class="fas fa-users"></i> المستخدمون</a
       >
@@ -197,91 +199,204 @@
           </div>
         </div>
       </header>
-      <main class="p-3">
-        <div class="row mb-3">
-          <div class="container mt-5">
-            <div
-              class="container d-flex justify-content-center align-items-center min-vh-95"
-            >
-              <div class="col-md-6 form-container">
-                <h2 class="text-center mb-4">نموذج تعديل معدات</h2>
-                <form>
-                  <div class="mb-3">
-                    <label for="itemName" class="form-label"
-                      >تعديل الاسم
-                    </label>
-                    <input
-                      type="text"
-                      class="form-control"
-                      id="itemName"
-                      placeholder="تعديل اسم المعدات"
-                      required
-                    />
+        <body>
+          <!DOCTYPE html>
+          <html lang="ar">
+          <head>
+              <meta charset="UTF-8">
+              <meta name="viewport" content="width=device-width, initial-scale=1.0">
+              <title>نموذج تعديل المعدات</title>
+              <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/5.3.0/css/bootstrap.min.css">
+              <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+          </head>
+          <body>
+         
+            <main class="container py-5">
+              <div class="row justify-content-center">
+                  <div class="col-md-6">
+                      <div class="card shadow-sm">
+                          <div class="card-body">
+                              <h2 class="text-center mb-4" style="color: navy">نموذج تعديل المعدات</h2>
+                              <form id="update-equipment-form" enctype="multipart/form-data">
+                                  <div class="mb-3">
+                                      <label for="name" class="form-label">الاسم:</label>
+                                      <input type="text" id="name" name="name" class="form-control" required />
+                                  </div>
+                                  <div class="mb-3">
+                                      <label for="description" class="form-label">الوصف:</label>
+                                      <input type="text" id="description" name="description" class="form-control" required />
+                                  </div>
+                                  <div class="mb-3">
+                                      <label for="price" class="form-label">السعر:</label>
+                                      <input type="number" id="price" name="price" class="form-control" step="0.01" required />
+                                  </div>
+                                  <div class="mb-3">
+                                      <label for="categoryId" class="form-label">الفئة:</label>
+                                      <select id="categoryId" name="categoryId" class="form-select" required></select>
+                                  </div>
+                                  <div class="mb-3">
+                                      <label for="courseId" class="form-label">الدورة:</label>
+                                      <select id="courseId" name="courseId" class="form-select" required></select>
+                                  </div>
+          
+                                  <!-- عرض الصور الحالية -->
+                                  <div class="mb-3">
+                                      <label class="form-label">الصور الحالية:</label>
+                                      <div id="current-images" class="d-flex flex-wrap gap-2"></div>
+                                  </div>
+          
+                                  <!-- حقول لتحديث الصور -->
+                                  <div class="mb-3">
+                                      <label for="image1" class="form-label">الصورة 1:</label>
+                                      <input type="file" id="image1" name="image1" class="form-control" />
+                                  </div>
+                                  <div class="mb-3">
+                                      <label for="image2" class="form-label">الصورة 2:</label>
+                                      <input type="file" id="image2" name="image2" class="form-control" />
+                                  </div>
+                                  <div class="mb-3">
+                                      <label for="image3" class="form-label">الصورة 3:</label>
+                                      <input type="file" id="image3" name="image3" class="form-control" />
+                                  </div>
+          
+                                  <div class="d-grid">
+                                      <button type="submit" class="btn btn-primary">تحديث المعدات</button>
+                                  </div>
+                              </form>
+                          </div>
+                      </div>
                   </div>
-
-                  <div class="mb-3">
-                    <label for="itemDescription" class="form-label">
-                      تعديل التفاصيل
-                    </label>
-                    <textarea
-                      class="form-control"
-                      id="itemDescription"
-                      rows="4"
-                      placeholder="تعديل تفاصيل المعدات"
-                      required
-                    ></textarea>
-                  </div>
-
-                  <div class="mb-3">
-                    <label for="itemPrice" class="form-label">
-                      تعديل السعر
-                    </label>
-                    <input
-                      type="number"
-                      class="form-control"
-                      id="itemPrice"
-                      placeholder="تعديل السعر"
-                      required
-                    />
-                  </div>
-
-                  <div class="mb-3">
-                    <label for="itemImage" class="form-label">
-                      تعديل صور المعدات</label
-                    >
-                    <input
-                      type="file"
-                      class="form-control"
-                      id="itemImage"
-                      accept="image/*"
-                      required
-                    />
-                  </div>
-
-                  <div class="mb-3">
-                    <label for="itemCategory" class="form-label"
-                      >المسار تابع له</label
-                    >
-                    <select class="form-select" id="itemCategory" required>
-                      <option value="" disabled selected>اختر المسار</option>
-                      <option value="category1">مسار 1</option>
-                      <option value="category2">مسار 2</option>
-                      <option value="category3">مسار 3</option>
-                      <!-- يمكنك إضافة المزيد من المسارات هنا -->
-                    </select>
-                  </div>
-
-                  <div class="d-grid">
-                    <button type="submit" class="btn btn-primary">
-                      تعديل المعدات
-                    </button>
-                  </div>
-                </form>
               </div>
-            </div>
-          </div>
-        </div>
-      </main>
+          </main>
+          
+          <script>
+            debugger;
+          document.addEventListener("DOMContentLoaded", function () {
+              const urlParams = new URLSearchParams(window.location.search);
+              const equipmentId = urlParams.get("id");
+          
+              if (!equipmentId) {
+                  console.error("Equipment ID غير موجود في الرابط");
+                  return;
+              }
+          
+              const apiUrl = `http://localhost:38146/api/LearningEquipment/${equipmentId}`;
+              let existingImage1 = null, existingImage2 = null, existingImage3 = null;
+          
+              // Fetch and display equipment details
+              fetch(apiUrl)
+                  .then((response) => response.json())
+                  .then((data) => {
+                      document.getElementById("name").value = data.name;
+                      document.getElementById("description").value = data.description;
+                      document.getElementById("price").value = data.price;
+                      document.getElementById("categoryId").value = data.categoryId;
+                      document.getElementById("courseId").value = data.courseId;
+            debugger;
+                      existingImage1 = data.imageUrl1;
+                      existingImage2 = data.imageUrl2;
+                      existingImage3 = data.imageUrl3;
+          
+                      const currentImagesDiv = document.getElementById("current-images");
+                      const imageUrls = [data.imageUrl1, data.imageUrl2, data.imageUrl3];
+                      imageUrls.forEach((imageName, index) => {
+                          if (imageName) {
+                              const img = document.createElement("img");
+                              img.src = `/backend/image/${imageName}`;
+                              img.alt = `صورة ${index + 1}`;
+                              img.classList.add("img-thumbnail");
+                              currentImagesDiv.appendChild(img);
+                          }
+                      });
+                  })
+                  .catch((error) => console.error("Error fetching equipment data:", error));
+          
+              // Handle form submission
+              document.getElementById("update-equipment-form").addEventListener("submit", function (event) {
+                  event.preventDefault();
+          
+                  const formData = new FormData();
+                  formData.append("name", document.getElementById("name").value);
+                  formData.append("description", document.getElementById("description").value);
+                  formData.append("price", document.getElementById("price").value);
+                  formData.append("categoryId", document.getElementById("categoryId").value);
+                  formData.append("courseId", document.getElementById("courseId").value);
+          
+                  const image1 = document.getElementById("image1").files[0] || existingImage1;
+                  const image2 = document.getElementById("image2").files[0] || existingImage2;
+                  const image3 = document.getElementById("image3").files[0] || existingImage3;
+          
+                  if (document.getElementById("image1").files[0]) formData.append("image1", image1);
+                  if (document.getElementById("image2").files[0]) formData.append("image2", image2);
+                  if (document.getElementById("image3").files[0]) formData.append("image3", image3);
+          
+                  fetch(apiUrl, {
+                      method: "PUT",
+                      body: formData,
+                  })
+                      .then((response) => {
+                          if (!response.ok) {
+                              return response.json().then((err) => {
+                                  Swal.fire({
+                                      icon: "error",
+                                      title: "خطأ",
+                                      text: "حدث خطأ أثناء تحديث المعدات. يرجى التحقق من الحقول.",
+                                  });
+                              });
+                          }
+                          return response.json();
+                      })
+                      .then(() => {
+                          Swal.fire({
+                              icon: "success",
+                              title: "تم بنجاح",
+                              text: "تم تحديث المعدات بنجاح.",
+                          }).then(() => {
+                              window.location.href = "viewequipments.html";
+                          });
+                      })
+                      .catch((error) => {
+                          console.error("Error:", error);
+                          Swal.fire({
+                              icon: "error",
+                              title: "خطأ",
+                              text: "حدث خطأ أثناء معالجة الطلب.",
+                          });
+                      });
+              });
+          
+              // Fetch categories
+              fetch("http://localhost:38146/api/Category/Categories")
+                  .then((response) => response.json())
+                  .then((data) => {
+                      const categorySelect = document.getElementById("categoryId");
+                      data.forEach((category) => {
+                          const option = document.createElement("option");
+                          option.value = category.categoryId;
+                          option.textContent = category.name;
+                          categorySelect.appendChild(option);
+                      });
+                  });
+          
+              // Fetch courses
+              fetch("http://localhost:38146/api/Courses/all")
+                  .then((response) => response.json())
+                  .then((data) => {
+                      const courseSelect = document.getElementById("courseId");
+                      data.forEach((course) => {
+                          const option = document.createElement("option");
+                          option.value = course.courseId;
+                          option.textContent = course.title;
+                          courseSelect.appendChild(option);
+                      });
+                  });
+          });
+          </script>
+          
+         
+          
+          
+      
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>

@@ -226,14 +226,13 @@
             </h4>
 
             <h5 class="mt-4">اختر طريقة الدفع</h5>
-            <button class="btn btn-outline-primary w-100 mb-2">
-              <img
-                src="https://img.icons8.com/color/24/paypal.png"
-                alt="Paypal"
-              />
-              PayPal
+            <button class="btn btn-primary w-100 mb-2 btn-sm" id="paypalButton">
+              <i class="fab fa-paypal"></i> PayPal
             </button>
-            <button class="btn btn-outline-secondary w-100 mb-2">
+            <button
+              class="btn btn-outline-secondary w-100 mb-2"
+              id="paypalButton"
+            >
               <img src="https://img.icons8.com/color/24/visa.png" alt="Visa" />
               بطاقة ائتمان
             </button>
@@ -244,10 +243,92 @@
               />
               ماستر كارد
             </button>
-            <button class="btn btn-success w-100 mb-2">
-              الدفع عند الاستلام
-            </button>
-            <button class="btn btn-primary w-100">تأكيد الطلب</button>
+            <button id="checkout-button">دفع الآن</button>
+            <script src="https://js.stripe.com/v3/"></script>
+
+            <script>
+              var stripe = Stripe(
+                "pk_test_51Q4LWELckn2GUta60uSMLjQ9RZIZEPGizV40UZwjcrZigIsxAcsIG0A7upBoqXEeJEXFG3YeqODEQDMhDiHAHc7y00DzabCSQr"
+              );
+
+              var checkoutButton = document.getElementById("checkout-button");
+
+              // Fetch the UserID based on the logged-in email
+              async function fetchUserId() {
+                try {
+                  const email = localStorage.getItem("email");
+                  if (!email) return null;
+
+                  const response = await fetch(
+                    `http://localhost:38146/api/Users/email/${encodeURIComponent(
+                      email
+                    )}`
+                  );
+                  if (!response.ok) {
+                    throw new Error("Failed to fetch user ID");
+                  }
+
+                  const data = await response.json();
+                  console.log("Fetched UserID:", data.userId);
+                  return data.userId;
+                } catch (error) {
+                  console.error("Error fetching user ID:", error);
+                  return null;
+                }
+              }
+
+              // Event listener for the checkout button
+              checkoutButton.addEventListener("click", async function () {
+                const userID = await fetchUserId(); // Get user ID if logged in
+
+                if (!userID) {
+                  alert("User not logged in or user ID not found.");
+                  return;
+                }
+
+                // Log the user ID for debugging
+                console.log("User ID for payment:", userID);
+
+                // Call the server to create a checkout session
+                fetch(
+                  "http://localhost:38146/api/Payment/create-checkout-session",
+                  {
+                    method: "POST",
+                    headers: {
+                      "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({ UserId: userID }), // Pass the actual userId
+                  }
+                )
+                  .then(function (response) {
+                    if (!response.ok) {
+                      return response.json().then((err) => {
+                        console.error("Error details:", err);
+                        alert("Error in network response.");
+                        throw new Error("Network response was not ok");
+                      });
+                    }
+                    return response.json();
+                  })
+                  .then(function (data) {
+                    console.log("Session ID:", data.sessionId);
+
+                    // Redirect to Stripe payment page
+                    return stripe.redirectToCheckout({
+                      sessionId: data.sessionId,
+                    });
+                  })
+                  .then(function (result) {
+                    if (result.error) {
+                      alert(result.error.message);
+                    }
+                  })
+                  .catch(function (error) {
+                    console.error("Error:", error);
+                    alert("An error occurred during the payment process.");
+                  });
+              });
+            </script>
           </div>
         </div>
       </div>
@@ -325,7 +406,10 @@
         </div>
       </div>
     </footer>
+    <script src="https://js.stripe.com/v3/"></script>
 
+    <!-- إضافة مكتبة Stripe -->
+    <script src="https://js.stripe.com/v3/"></script>
     <!-- Bootstrap 5 Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"></script>

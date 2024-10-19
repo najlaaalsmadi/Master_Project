@@ -1,4 +1,5 @@
-﻿using backend_Master.Models;
+﻿using backend_Master.DTO;
+using backend_Master.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -36,7 +37,12 @@ namespace backend_Master.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<LearningEquipment>>> GetAll()
         {
-            return await _context.LearningEquipments.ToListAsync();
+            var equipments = await _context.LearningEquipments.ToListAsync();
+            if (equipments == null || equipments.Count == 0)
+            {
+                return NotFound(); // Return 404 if no data found
+            }
+            return Ok(equipments); // Return the list of equipments
         }
 
         // GET: api/LearningEquipment/{id}
@@ -62,46 +68,154 @@ namespace backend_Master.Controllers
                 .Take(3)
                 .ToListAsync();
         }
-
-        // POST: api/LearningEquipment
         [HttpPost]
-        public async Task<ActionResult<LearningEquipment>> Post(LearningEquipment equipment)
+        public async Task<IActionResult> CreateLearningEquipment([FromForm] LearningEquipmentDto dto)
         {
+            // التحقق من صلاحية النموذج
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var equipment = new LearningEquipment
+            {
+                Name = dto.Name,
+                Description = dto.Description,
+                Price = dto.Price,
+                CategoryId = dto.CategoryId,
+                CourseId = dto.CourseId,
+                CreatedAt = DateTime.UtcNow
+            };
+
+            // مسار تخزين الصور
+            string imageDirectory = @"C:\Users\Orange\Desktop\Master_Project\backend\image";
+            if (!Directory.Exists(imageDirectory))
+            {
+                Directory.CreateDirectory(imageDirectory);
+            }
+
+            // حفظ الصور إذا كانت موجودة وتخزين اسم الملف فقط في قاعدة البيانات
+            if (dto.Image1 != null)
+            {
+                var imageFileName1 = Guid.NewGuid().ToString() + Path.GetExtension(dto.Image1.FileName);
+                var imagePath1 = Path.Combine(imageDirectory, imageFileName1);
+                using (var stream = new FileStream(imagePath1, FileMode.Create))
+                {
+                    await dto.Image1.CopyToAsync(stream);
+                }
+                equipment.ImageUrl1 = imageFileName1; // حفظ اسم الصورة فقط
+            }
+
+            if (dto.Image2 != null)
+            {
+                var imageFileName2 = Guid.NewGuid().ToString() + Path.GetExtension(dto.Image2.FileName);
+                var imagePath2 = Path.Combine(imageDirectory, imageFileName2);
+                using (var stream = new FileStream(imagePath2, FileMode.Create))
+                {
+                    await dto.Image2.CopyToAsync(stream);
+                }
+                equipment.ImageUrl2 = imageFileName2; // حفظ اسم الصورة فقط
+            }
+
+            if (dto.Image3 != null)
+            {
+                var imageFileName3 = Guid.NewGuid().ToString() + Path.GetExtension(dto.Image3.FileName);
+                var imagePath3 = Path.Combine(imageDirectory, imageFileName3);
+                using (var stream = new FileStream(imagePath3, FileMode.Create))
+                {
+                    await dto.Image3.CopyToAsync(stream);
+                }
+                equipment.ImageUrl3 = imageFileName3; // حفظ اسم الصورة فقط
+            }
+
+            // حفظ المعلومات في قاعدة البيانات
             _context.LearningEquipments.Add(equipment);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction(nameof(GetById), new { id = equipment.EquipmentId }, equipment);
+            return Ok(equipment);
         }
 
-        // PUT: api/LearningEquipment/{id}
+
         [HttpPut("{id}")]
-        public async Task<IActionResult> Put(int id, LearningEquipment equipment)
+        public async Task<IActionResult> UpdateLearningEquipment(int id, [FromForm] LearningEquipmentDto dto)
         {
-            if (id != equipment.EquipmentId)
+            // Validate the model state
+            if (!ModelState.IsValid)
             {
-                return BadRequest();
+                return BadRequest(ModelState);
             }
 
-            _context.Entry(equipment).State = EntityState.Modified;
-
-            try
+            var equipment = await _context.LearningEquipments.FindAsync(id);
+            if (equipment == null)
             {
-                await _context.SaveChangesAsync();
+                return NotFound();
             }
-            catch (DbUpdateConcurrencyException)
+
+            // Update equipment details
+            equipment.Name = dto.Name;
+            equipment.Description = dto.Description;
+            equipment.Price = dto.Price;
+            equipment.CategoryId = dto.CategoryId;
+            equipment.CourseId = dto.CourseId;
+
+            // Directory for images
+            string imageDirectory = @"C:\Users\Orange\Desktop\Master_Project\backend\image";
+            if (!Directory.Exists(imageDirectory))
             {
-                if (!EquipmentExists(id))
+                Directory.CreateDirectory(imageDirectory);
+            }
+
+            // Update image 1 if a new image is uploaded
+            if (dto.Image1 != null)
+            {
+                var newImage1 = $"{Guid.NewGuid()}{Path.GetExtension(dto.Image1.FileName)}";
+                var newPath1 = Path.Combine(imageDirectory, newImage1);
+                using (var stream = new FileStream(newPath1, FileMode.Create))
                 {
-                    return NotFound();
+                    await dto.Image1.CopyToAsync(stream);
                 }
-                else
-                {
-                    throw;
-                }
+                equipment.ImageUrl1 = newImage1;  // Update the image URL only if a new image is uploaded
             }
 
-            return NoContent();
+            // Update image 2 if a new image is uploaded
+            if (dto.Image2 != null)
+            {
+                var newImage2 = $"{Guid.NewGuid()}{Path.GetExtension(dto.Image2.FileName)}";
+                var newPath2 = Path.Combine(imageDirectory, newImage2);
+                using (var stream = new FileStream(newPath2, FileMode.Create))
+                {
+                    await dto.Image2.CopyToAsync(stream);
+                }
+                equipment.ImageUrl2 = newImage2;  // Update the image URL only if a new image is uploaded
+            }
+
+            // Update image 3 if a new image is uploaded
+            if (dto.Image3 != null)
+            {
+                var newImage3 = $"{Guid.NewGuid()}{Path.GetExtension(dto.Image3.FileName)}";
+                var newPath3 = Path.Combine(imageDirectory, newImage3);
+                using (var stream = new FileStream(newPath3, FileMode.Create))
+                {
+                    await dto.Image3.CopyToAsync(stream);
+                }
+                equipment.ImageUrl3 = newImage3;  // Update the image URL only if a new image is uploaded
+            }
+
+            // Save updated equipment
+            _context.LearningEquipments.Update(equipment);
+            await _context.SaveChangesAsync();
+
+            return Ok();
         }
+
+
+
+
+        private bool EquipmentExists(int id)
+        {
+            return _context.LearningEquipments.Any(e => e.EquipmentId == id);
+        }
+
 
         // DELETE: api/LearningEquipment/{id}
         [HttpDelete("{id}")]
@@ -119,10 +233,7 @@ namespace backend_Master.Controllers
             return NoContent();
         }
 
-        private bool EquipmentExists(int id)
-        {
-            return _context.LearningEquipments.Any(e => e.EquipmentId == id);
-        }
+   
 
 
 

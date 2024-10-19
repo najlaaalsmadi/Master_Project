@@ -147,7 +147,9 @@
           </li>
         </ul>
       </div>
-      <a href="#"><i class="fas fa-comments"></i> المحادثات</a>
+      <a href="/frontend/admin/contactus/contactus.html"
+        ><i class="fas fa-comments"></i> المحادثات</a
+      >
       <a href="/frontend/admin/user.html"
         ><i class="fas fa-users"></i> المستخدمون</a
       >
@@ -204,110 +206,110 @@
             <div
               class="container d-flex justify-content-center align-items-center min-vh-60"
             >
-            <table class="table equipment-table table-bordered">
+              <table class="table equipment-table table-bordered">
                 <thead>
                   <tr>
                     <th>الاسم</th>
                     <th>السعر</th>
                     <th>التفاصيل</th>
-                    <th>
-                      صور المعدات
-                    </th>
-                    <th>
-                      المسار تابع له
-                    </th>
+                    <th>صور المعدات</th>
+                    <th>المسار تابع له</th>
                     <th>التقييم</th>
                     <th>العمليات</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td>جهاز حفر خشب</td>
-                    <td>150 دينار</td>
-                    <td>جهاز كهربائي يستخدم في حفر وتشكيل الخشب بدقة عالية.</td>
-                    <td><img src="https://via.placeholder.com/150" alt="جها�� حفر خشب"></td>
-                    <td>النجارة</td>
-                    <td>4.5 من 5</td>
-                    <td>
-                      <a class="btn btn-edit" href="/frontend/admin/equipment/updateequipments.html">تعديل</a>
-                      <br><br>
-                      <button class="btn btn-delete">حذف</button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>مثقاب كهربائي</td>
-                    <td>75 دينار</td>
-                    <td>أداة متعددة الاستخدامات لتثقيب الأسطح المختلفة بدقة عالية.</td>
-                    <td><img src="https://via.placeholder.com/150" alt="مثقاب كهربا��ي"></td>
-                    <td>النجارة</td>
-                    <td>4.2 من 5</td>
-                    <td>
-                      <a class="btn btn-edit" href="/frontend/admin/equipment/update.html">تعديل</a>
-                      <br><br>
-                      <button class="btn btn-delete">حذف</button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>أداة تقطيع معادن</td>
-                    <td>200 دينار</td>
-                    <td>آلة صناعية تستخدم لتقطيع المعادن بدقة وسرعة.</td>
-                    <td><img src="https://via.placeholder.com/150" alt="أدا�� تقطيع معادن"></td>
-                    <td>النجارة</td>
-                    <td>4.8 من 5</td>
-
-                    <td>
-                      <a class="btn btn-edit" href="/frontend/admin/equipment/update.html">تعديل</a>
-                      <br><br>
-                      <button class="btn btn-delete">حذف</button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>ماكينة خياطة صناعية</td>
-                    <td>300 دينار</td>
-                    <td>ماكينة احترافية للخياطة الثقيلة والسريعة للمشاريع الصناعية.</td>
-                    <td><img src="https://via.placeholder.com/150" alt="ماكينة خيا��ة ��نا��ية"></td>
-                    <td>خياطه</td>
-                    <td>4.7 من 5</td>
-                    <td>
-                      <a class="btn btn-edit" href="/frontend/admin/equipment/update.html">تعديل</a>
-                      <br><br>
-                      <button class="btn btn-delete">حذف</button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>مطرقة كهربائية</td>
-                    <td>120 دينار</td>
-                    <td>أداة قوية لثقب وتكسير المواد الصلبة مثل الخرسانة.</td>
-                    <td><img src="https://via.placeholder.com/150" alt="مطرقة كهربا��ية"></td>
-                    <td>النجارة</td>
-                    <td>4.4 من 5</td>
-                    <td>
-                      <a class="btn btn-edit" href="/frontend/admin/equipment/update.html">تعديل</a>
-                      <br><br>
-                      <button class="btn btn-delete">حذف</button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>آلة لحام كهربائية</td>
-                    <td>180 دينار</td>
-                    <td>جهاز كهربائي يستخدم للحام المعادن بسهولة ودقة.</td>
-                    <td><img src="https://via.placeholder.com/150" alt="��لة لحام كهربا��ية"></td>
-                    <td>النجارة</td>
-                    <td>4.6 من 5</td>
-                    <td>
-                      <a class="btn btn-edit" href="/frontend/admin/equipment/update.html">تعديل</a>
-                      <br><br>
-                      <button class="btn btn-delete">حذف</button>
-                    </td>
-                  </tr>
+                  <!-- سيتم تعبئة البيانات هنا بواسطة الجافاسكريبت -->
                 </tbody>
               </table>
-              
-                    </div>
-                </main>
-             
+            </div>
+          </div>
         </div>
       </main>
+
+      <script>
+        // جلب وعرض المعدات من قاعدة البيانات
+        function loadLearningEquipment() {
+          fetch("http://localhost:38146/api/LearningEquipment")
+            .then((response) => {
+              if (!response.ok) {
+                throw new Error(
+                  "Network response was not ok " + response.statusText
+                );
+              }
+              return response.json();
+            })
+            .then((data) => {
+              const tableBody = document.querySelector(
+                ".equipment-table tbody"
+              );
+              tableBody.innerHTML = ""; // تفريغ الجدول قبل إضافة المحتوى الجديد
+
+              // إنشاء صفوف الجدول
+              data.forEach((equipment) => {
+                const tableRow = `
+          <tr>
+            <td>${equipment.name}</td>
+            <td>${equipment.price} دينار</td>
+            <td>${equipment.description}</td>
+            <td><img src="/backend/image/${equipment.imageUrl1}" alt="${equipment.name}" style="width: 150px;" /></td>
+            <td>${equipment.category}</td>
+            <td>${equipment.rating} من 5</td>
+            <td>
+              <a class="btn btn-edit" href="updateequipments.html?id=${equipment.equipmentId}">تعديل</a>
+              <br><br>
+              <button class="btn btn-delete" onclick="deleteEquipment(${equipment.equipmentId})">حذف</button>
+            </td>
+          </tr>`;
+                tableBody.innerHTML += tableRow;
+              });
+            })
+            .catch((error) =>
+              console.error("Error fetching equipment:", error)
+            );
+        }
+
+        // حذف المعدات باستخدام SweetAlert2
+        function deleteEquipment(equipmentId) {
+          Swal.fire({
+            title: "هل أنت متأكد؟",
+            text: "لن تتمكن من التراجع عن هذا!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "نعم، احذفه!",
+            cancelButtonText: "إلغاء",
+          }).then((result) => {
+            if (result.isConfirmed) {
+              fetch(
+                `http://localhost:38146/api/LearningEquipment/${equipmentId}`,
+                {
+                  method: "DELETE",
+                }
+              )
+                .then((response) => {
+                  if (!response.ok) {
+                    throw new Error(
+                      "Network response was not ok " + response.statusText
+                    );
+                  }
+                  // إعادة تحميل البيانات بعد الحذف
+                  loadLearningEquipment();
+                  Swal.fire("تم الحذف!", "تم حذف العنصر بنجاح.", "success");
+                })
+                .catch((error) => {
+                  console.error("Error deleting equipment:", error);
+                  Swal.fire("خطأ!", "حدث خطأ أثناء حذف العنصر.", "error");
+                });
+            }
+          });
+        }
+
+        // تحميل البيانات عند تحميل الصفحة
+        document.addEventListener("DOMContentLoaded", loadLearningEquipment);
+      </script>
+      <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
