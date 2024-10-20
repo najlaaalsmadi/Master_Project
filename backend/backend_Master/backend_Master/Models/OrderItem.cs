@@ -17,6 +17,10 @@ public partial class OrderItem
 
     public decimal? Price { get; set; }
 
+    public int? ProductId { get; set; }
+
+    public int? EquipmentId { get; set; }
+
     public virtual CardItemHandmadeProduct? CardItemId1Navigation { get; set; }
 
     public virtual CardItemLearningEquipment? CardItemId2Navigation { get; set; }

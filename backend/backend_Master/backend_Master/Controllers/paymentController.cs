@@ -132,7 +132,6 @@ public class PaymentController : ControllerBase
     //}
 
 
-
     private readonly MyDbContext _context;
     private readonly string _secretKey;
     private readonly ILogger<PaymentController> _logger;
@@ -153,10 +152,10 @@ public class PaymentController : ControllerBase
             return BadRequest("Payment information is required.");
         }
 
-        // Log the incoming request
+        // سجل الطلب
         _logger.LogInformation($"Creating checkout session for user {paymentDto.UserId}");
 
-        // Step 1: Get the user's cart items
+        // خطوة 1: الحصول على عناصر السلة للمستخدم
         var handmadeItems = await _context.CardItemHandmadeProducts
             .Where(ci => ci.CardId == paymentDto.UserId)
             .ToListAsync();
@@ -170,11 +169,11 @@ public class PaymentController : ControllerBase
             return BadRequest("No items in the cart.");
         }
 
-        // Step 2: Create a list of line items for payment
+        // خطوة 2: إنشاء قائمة العناصر للمدفوعات
         var lineItems = new List<SessionLineItemOptions>();
         var orderItems = new List<OrderItem>();
 
-        // Add handmade items to the payment list
+        // إضافة العناصر اليدوية إلى قائمة الدفع
         foreach (var item in handmadeItems)
         {
             var product = await _context.HandmadeProducts.SingleOrDefaultAsync(a => a.ProductId == item.ProductId);
@@ -196,13 +195,14 @@ public class PaymentController : ControllerBase
 
             orderItems.Add(new OrderItem
             {
-                CardItemId1 = item.CardItemId,
+                CardItemId1 = item.CardItemId, // استخدام CardItemId الصحيح
+                ProductId = item.ProductId,    // إضافة ProductId
                 Quantity = item.Quantity,
                 Price = item.Price ?? 0
             });
         }
 
-        // Add learning equipment items to the payment list
+        // إضافة عناصر معدات التعلم إلى قائمة الدفع
         foreach (var item in learningItems)
         {
             var product = await _context.LearningEquipments.SingleOrDefaultAsync(a => a.EquipmentId == item.EquipmentId);
@@ -224,16 +224,17 @@ public class PaymentController : ControllerBase
 
             orderItems.Add(new OrderItem
             {
-                CardItemId2 = item.CardItemId,
+                CardItemId2 = item.CardItemId,  // استخدام CardItemId الصحيح
+                EquipmentId = item.EquipmentId, // إضافة EquipmentId
                 Quantity = item.Quantity,
                 Price = item.Price ?? 0
             });
         }
 
-        // Calculate total amount
+        // حساب المبلغ الإجمالي
         long totalAmountInCents = (long)lineItems.Sum(item => item.Quantity * item.PriceData.UnitAmount);
 
-        // Step 3: Setup Stripe session options
+        // خطوة 3: إعداد خيارات جلسة Stripe
         var options = new SessionCreateOptions
         {
             PaymentMethodTypes = new List<string> { "card" },
@@ -255,7 +256,7 @@ public class PaymentController : ControllerBase
             return BadRequest("Failed to create Stripe session.");
         }
 
-        // Step 4: Create order in the database
+        // خطوة 4: إنشاء طلب في قاعدة البيانات
         var order = new backend_Master.Models.Order
         {
             UserId = paymentDto.UserId,
@@ -267,7 +268,7 @@ public class PaymentController : ControllerBase
         await _context.Orders.AddAsync(order);
         await _context.SaveChangesAsync();
 
-        // Step 5: Add order items to the database
+        // خطوة 5: إضافة عناصر الطلب إلى قاعدة البيانات
         foreach (var orderItem in orderItems)
         {
             orderItem.OrderId = order.OrderId;
@@ -275,15 +276,28 @@ public class PaymentController : ControllerBase
         }
         await _context.SaveChangesAsync();
 
-        // Step 6: Remove items from the cart after successful payment
+        // خطوة 6: إزالة العناصر من السلة بعد الدفع الناجح
         _context.CardItemHandmadeProducts.RemoveRange(handmadeItems);
         _context.CardItemLearningEquipments.RemoveRange(learningItems);
         await _context.SaveChangesAsync();
 
-        // Step 7: Return session ID for Stripe checkout
+        // خطوة 7: إضافة معلومات الدفع إلى قاعدة البيانات
+        var payment = new Payment
+        {
+            UserId = paymentDto.UserId,
+            OrderId = order.OrderId,
+            State = "completed",
+            PaymentMethod = "Stripe",
+            Amount = totalAmountInCents / 100,
+            CreatedAt = DateTime.UtcNow
+        };
+
+        await _context.Payments.AddAsync(payment);
+        await _context.SaveChangesAsync();
+
+        // خطوة 8: إرجاع معرف الجلسة لجلسة الدفع في Stripe
         return Ok(new { sessionId = session.Id });
     }
-
     //[HttpPost("create-checkout-session")]
     //public async Task<IActionResult> CreateCheckoutSession([FromBody] PaymentDto paymentDto)
     //{
